@@ -2,3 +2,4 @@
 
 # Authors:
 - Zaidi Mehdi
+- Lecointe Loïc
