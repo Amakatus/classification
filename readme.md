@@ -1,4 +1,6 @@
 # SAE 302 - Groupe J5
+📅 Début : 03/10/2022 - Fin : 04/12/2022
+🚀 Groupes de 4
 
 # ❓ Problématique
 La problématique professionnelle est de mettre en place l'organisation du projet et de créer, en équipe, une application en suivant une démarche de développement itérative et incrémentale. En partant d'un besoin décrit de manière imprécise ou incomplète par un client, l'objectif est de clarifier, compléter, collecter et formaliser le besoin, puis de développer une application communicante intégrant la manipulation des données et respectant les paradigmes de qualité (ergonomie des IHM, qualité logicielle…).
@@ -30,10 +32,12 @@ Cette SAÉ permet, après avoir collecté et formalisé les besoins d'un client,
 </p>
 
 # 🔗 Links
-- Trello : https://trello.com/b/mfKQH5ar/sae302-groupe-j5
+- [Trello](https://trello.com/b/mfKQH5ar/sae302-groupe-j5)
+- [Gitlab](https://gitlab.univ-lille.fr/sae302/2022/equipe-J5)
+- [Moodle](https://moodle.univ-lille.fr/course/view.php?id=35684)
 
 # 👥 Authors
-- Zaidi Mehdi
+- [Zaidi Mehdi](https://hidoyat.fr/)
 - Lecointe Loïc
 - Misplon Benoît
 - Bouton Sacha
