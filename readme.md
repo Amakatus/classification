@@ -1,6 +1,14 @@
 # SAE 302 - Groupe J5
-📅 Début : 03/10/2022 - Fin : 04/12/2022  
-🚀 Groupes de 4
+📅 Début : 03/10/2022 - Fin : 04/12/2022
+
+# 🚀 Lancer le projet :
+## Depuis les sources :
+1. `git clone https://gitlab.univ-lille.fr/sae302/2022/equipe-J5`
+2. `cd equipe-J5`
+3. `mvn clean javafx:run`  
+
+## Depuis le [jar]() (Not working yet, SOON™) :
+1. java -jar equipe-J5.jar
 
 # ❓ Problématique
 La problématique professionnelle est de mettre en place l'organisation du projet et de créer, en équipe, une application en suivant une démarche de développement itérative et incrémentale. En partant d'un besoin décrit de manière imprécise ou incomplète par un client, l'objectif est de clarifier, compléter, collecter et formaliser le besoin, puis de développer une application communicante intégrant la manipulation des données et respectant les paradigmes de qualité (ergonomie des IHM, qualité logicielle…).
