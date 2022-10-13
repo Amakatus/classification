@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressBar?>
+<?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
+<?import io.github.palexdev.materialfx.controls.MFXSlider?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="25.0" BorderPane.alignment="CENTER">
+         <children>
+            <MFXLegacyComboBox prefHeight="23.0" prefWidth="145.0" promptText="Select something" unfocusedLineColor="#4a4a4a" />
+            <MFXButton buttonType="RAISED" rippleColor="WHITE" text="Charger des données" />
+            <MFXTextField alignment="CENTER" floatingText="What you name" prefHeight="29.0" prefWidth="155.0" promptText="Enter da name" textLimit="255" />
+         </children>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+      </HBox>
+   </top>
+   <center>
+      <MFXProgressBar BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <MFXProgressSpinner prefHeight="50.0" prefWidth="74.0" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <MFXSlider decimalPrecision="1" />
+            <MFXToggleButton text="Toggle me !" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
