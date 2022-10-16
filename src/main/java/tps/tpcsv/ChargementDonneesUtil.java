@@ -20,4 +20,8 @@ public class ChargementDonneesUtil {
 				.build()
 				.parse();
 	}
+	
+	public static Personne genereatePersonneFromData(FormatDonneeBrut data) {
+		return new Personne(data);
+	}
 }

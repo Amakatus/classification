@@ -5,28 +5,58 @@ import java.time.LocalDate;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 
+import lombok.Getter;
+
 public class FormatDonneeBrut {
 	@CsvBindByName(column = "Nom")
-	private String nom;
+	@Getter private String nom;
 	
 	@CsvBindByName(column = "Prénom")
-	private String prenom;
+	@Getter private String prenom;
 	
 	@CsvBindByName(column = "Date de naissance")
 	@CsvDate("yyyy-MM-dd")
-	private LocalDate dateNaissance;
+	@Getter private LocalDate dateNaissance;
 	
 	@CsvBindByName(column = "Genre")
-	private GenderType genre;
+	@Getter private GenderType genre;
 	
+	public String getNom() {
+		return nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public LocalDate getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public GenderType getGenre() {
+		return genre;
+	}
+
+	public double getTaille() {
+		return taille;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public SubscribeType getSouscription() {
+		return souscription;
+	}
+
 	@CsvBindByName(column = "Taille")
-	private double taille;
+	@Getter private double taille;
 	
 	@CsvBindByName(column = "Score")
-	private int score;
+	@Getter private int score;
 	
 	@CsvBindByName(column = "Souscription")
-	private SubscribeType souscription;
+	@Getter private SubscribeType souscription;
 	
 	@Override
 	public String toString() {
