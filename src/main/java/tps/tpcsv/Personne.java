@@ -12,7 +12,12 @@ public class Personne {
     private boolean souscription;  // le oui/non devient un boolean
 
     public Personne(FormatDonneeBrut data) {
-    	
+    	this.prenomNom = String.format("%s %s", data.getPrenom(), data.getNom());
+    	this.dateNaissance = data.getDateNaissance();
+    	this.genre = data.getGenre();
+    	this.taille = (int) (data.getTaille()*100);
+    	this.scoreNormalise = (double) Math.round((data.getScore()-2)/(291-2) * 100) / 100;
+    	this.souscription = data.getSouscription() == SubscribeType.OUI ? true : false;
     }
     
     public Personne() { }
@@ -63,5 +68,11 @@ public class Personne {
 
 	public void setSouscription(boolean souscription) {
 		this.souscription = souscription;
+	}
+
+	@Override
+	public String toString() {
+		return "Personne [prenomNom=" + prenomNom + ", dateNaissance=" + dateNaissance + ", genre=" + genre
+				+ ", taille=" + taille + ", scoreNormalise=" + scoreNormalise + ", souscription=" + souscription + "]";
 	}
 }

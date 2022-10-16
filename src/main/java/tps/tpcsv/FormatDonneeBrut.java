@@ -20,6 +20,15 @@ public class FormatDonneeBrut {
 	
 	@CsvBindByName(column = "Genre")
 	@Getter private GenderType genre;
+
+	@CsvBindByName(column = "Taille")
+	@Getter private double taille;
+	
+	@CsvBindByName(column = "Score")
+	@Getter private double score;
+	
+	@CsvBindByName(column = "Souscription")
+	@Getter private SubscribeType souscription;
 	
 	public String getNom() {
 		return nom;
@@ -41,22 +50,13 @@ public class FormatDonneeBrut {
 		return taille;
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
 	public SubscribeType getSouscription() {
 		return souscription;
 	}
-
-	@CsvBindByName(column = "Taille")
-	@Getter private double taille;
-	
-	@CsvBindByName(column = "Score")
-	@Getter private int score;
-	
-	@CsvBindByName(column = "Souscription")
-	@Getter private SubscribeType souscription;
 	
 	@Override
 	public String toString() {

@@ -18,14 +18,14 @@ class ChargementDonneesUtilTest {
 	@Test
 	void testGenereatePersonne() {
 		Personne personne = new Personne();
-		personne.setPrenomNom("Vincent Chevalier");
+		personne.setPrenomNom("Vincent Chevallier");
 		personne.setDateNaissance(LocalDate.of(1978, 05, 18));
 		personne.setGenre(GenderType.HOMME);
 		personne.setTaille(176);
-		personne.setScoreNormalise(0.26643598615);
+		personne.setScoreNormalise(0.27);
 		personne.setSouscription(true);
 		try {
-			List<FormatDonneeBrut> datas = ChargementDonneesUtil.charger("data/personnes.csv");
+			List<FormatDonneeBrut> datas = ChargementDonneesUtil.charger("/data/personnes.csv");
 			assertEquals(personne.toString(), new Personne(datas.get(0)).toString());
 		} catch (IOException e) { e.printStackTrace(); }
 	}
