@@ -26,7 +26,7 @@ class ChargementDonneesUtilTest {
 		personne.setSouscription(true);
 		try {
 			List<FormatDonneeBrut> datas = ChargementDonneesUtil.charger("/data/personnes.csv");
-			assertEquals(personne.toString(), new Personne(datas.get(0)).toString());
+			assertEquals(personne.toString(), ChargementDonneesUtil.genereatePersonneFromData(datas.get(0), datas).toString());
 		} catch (IOException e) { e.printStackTrace(); }
 	}
 

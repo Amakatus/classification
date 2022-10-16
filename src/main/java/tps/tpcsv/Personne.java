@@ -11,12 +11,12 @@ public class Personne {
     private double scoreNormalise;
     private boolean souscription;  // le oui/non devient un boolean
 
-    public Personne(FormatDonneeBrut data) {
+    public Personne(FormatDonneeBrut data, double score) {
     	this.prenomNom = String.format("%s %s", data.getPrenom(), data.getNom());
     	this.dateNaissance = data.getDateNaissance();
     	this.genre = data.getGenre();
     	this.taille = (int) (data.getTaille()*100);
-    	this.scoreNormalise = (double) Math.round((data.getScore()-2)/(291-2) * 100) / 100;
+    	this.scoreNormalise = score;
     	this.souscription = data.getSouscription() == SubscribeType.OUI ? true : false;
     }
     
