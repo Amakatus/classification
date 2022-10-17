@@ -1,4 +1,4 @@
-package main.java.app.graphics.views;
+package app.graphics.views;
 
 
 import java.io.IOException;
@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.java.app.graphics.controllers.Controller;
+import app.graphics.controllers.Controller;
 
 
 public class View {

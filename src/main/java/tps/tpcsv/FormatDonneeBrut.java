@@ -1,4 +1,4 @@
-package main.java.tps.tpcsv;
+package tps.tpcsv;
 
 import java.time.LocalDate;
 
@@ -18,15 +18,43 @@ public class FormatDonneeBrut {
 	
 	@CsvBindByName(column = "Genre")
 	private GenderType genre;
-	
+
 	@CsvBindByName(column = "Taille")
 	private double taille;
 	
 	@CsvBindByName(column = "Score")
-	private int score;
+	private double score;
 	
 	@CsvBindByName(column = "Souscription")
 	private SubscribeType souscription;
+	
+	public String getNom() {
+		return nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public LocalDate getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public GenderType getGenre() {
+		return genre;
+	}
+
+	public double getTaille() {
+		return taille;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public SubscribeType getSouscription() {
+		return souscription;
+	}
 	
 	@Override
 	public String toString() {
