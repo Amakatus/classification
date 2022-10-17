@@ -1,7 +1,6 @@
-package main.java.app.graphics.controllers;
+package app.graphics.controllers;
 
-import javafx.stage.Stage;
-import main.java.app.graphics.views.View;
+import app.graphics.views.View;
 
 public abstract class Controller {
 	

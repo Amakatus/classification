@@ -1,4 +1,4 @@
-package main.java.tps.tpcsv;
+package tps.tpcsv;
 
 import java.time.LocalDate;
 
@@ -6,31 +6,58 @@ import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 
 public class FormatDonneeBrut {
-
 	@CsvBindByName(column = "Nom")
-    private String nom;
+	private String nom;
 	
 	@CsvBindByName(column = "Prénom")
-    private String prenom;
+	private String prenom;
 	
 	@CsvBindByName(column = "Date de naissance")
 	@CsvDate("yyyy-MM-dd")
-    private LocalDate dateNaissance;
+	private LocalDate dateNaissance;
 	
 	@CsvBindByName(column = "Genre")
-    private Genre genre;
-	
+	private GenderType genre;
+
 	@CsvBindByName(column = "Taille")
-    private double taille;
+	private double taille;
 	
 	@CsvBindByName(column = "Score")
-    private int score;
+	private double score;
 	
 	@CsvBindByName(column = "Souscription")
-    private OuiNon souscription; // OuiNon est un type énuméré à créer
+	private SubscribeType souscription;
+	
+	public String getNom() {
+		return nom;
+	}
 
-    @Override
-    public String toString () {
-        return "Forename :" + this.nom + "Name :" + this.prenom + "Date of Birth :" + this.dateNaissance + "Type :" + this.genre + "Size :" + this.taille + "Score :" + this.score + "Sub :" + this.souscription;
-    }
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public LocalDate getDateNaissance() {
+		return dateNaissance;
+	}
+
+	public GenderType getGenre() {
+		return genre;
+	}
+
+	public double getTaille() {
+		return taille;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public SubscribeType getSouscription() {
+		return souscription;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s %s %s %s %s %s %s", this.nom, this.prenom, this.dateNaissance, this.genre, this.taille, this.score, this.souscription);
+	}
 }
