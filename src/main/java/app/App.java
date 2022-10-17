@@ -1,6 +1,6 @@
-package main.java.app;
+package app;
 
-import main.java.core.Utils;
+import core.Utils;
 
 public class App {
 	public static void main(String[] args) {

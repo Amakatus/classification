@@ -1,4 +1,4 @@
-package main.java.tps.tpcsv;
+package tps.tpcsv;
 
 import java.io.IOException;
 import java.util.List;
