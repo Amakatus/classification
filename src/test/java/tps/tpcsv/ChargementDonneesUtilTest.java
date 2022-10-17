@@ -1,4 +1,4 @@
-package test.java.tps.tpcsv;
+package tps.tpcsv;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,10 +9,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import main.java.tps.tpcsv.ChargementDonneesUtil;
-import main.java.tps.tpcsv.FormatDonneeBrut;
-import main.java.tps.tpcsv.GenderType;
-import main.java.tps.tpcsv.Personne;
+import tps.tpcsv.ChargementDonneesUtil;
+import tps.tpcsv.FormatDonneeBrut;
+import tps.tpcsv.GenderType;
+import tps.tpcsv.Personne;
 
 class ChargementDonneesUtilTest {
 	static List<FormatDonneeBrut> datas;

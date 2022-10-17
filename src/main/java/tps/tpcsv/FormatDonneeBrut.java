@@ -1,34 +1,32 @@
-package main.java.tps.tpcsv;
+package tps.tpcsv;
 
 import java.time.LocalDate;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvDate;
 
-import lombok.Getter;
-
 public class FormatDonneeBrut {
 	@CsvBindByName(column = "Nom")
-	@Getter private String nom;
+	private String nom;
 	
 	@CsvBindByName(column = "Prénom")
-	@Getter private String prenom;
+	private String prenom;
 	
 	@CsvBindByName(column = "Date de naissance")
 	@CsvDate("yyyy-MM-dd")
-	@Getter private LocalDate dateNaissance;
+	private LocalDate dateNaissance;
 	
 	@CsvBindByName(column = "Genre")
-	@Getter private GenderType genre;
+	private GenderType genre;
 
 	@CsvBindByName(column = "Taille")
-	@Getter private double taille;
+	private double taille;
 	
 	@CsvBindByName(column = "Score")
-	@Getter private double score;
+	private double score;
 	
 	@CsvBindByName(column = "Souscription")
-	@Getter private SubscribeType souscription;
+	private SubscribeType souscription;
 	
 	public String getNom() {
 		return nom;

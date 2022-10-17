@@ -1,8 +1,8 @@
-package main.java.app;
+package app;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import main.java.app.graphics.views.View;
+import app.graphics.views.View;
  
 public class AppFX extends Application {
     public static void main(String[] args) {
