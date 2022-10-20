@@ -9,7 +9,7 @@ public class FormatDonneeBrut {
 	@CsvBindByName(column = "Nom")
 	private String nom;
 	
-	@CsvBindByName(column = "Prénom")
+	@CsvBindByName(column = "Prenom")
 	private String prenom;
 	
 	@CsvBindByName(column = "Date de naissance")
