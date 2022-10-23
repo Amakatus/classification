@@ -15,13 +15,14 @@ public class View {
 	
 	protected Stage stage;
 	protected Controller controller;
+	protected Parent loadedResource;
 	
 	public View(String viewName, String windowName, int width, int height) throws NoControllerException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/index.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/"+viewName+".fxml"));
 		try {
-			Parent root = loader.load();
+			this.loadedResource = loader.load();
 			if(this.setupController(loader)) {
-				setupStage(windowName, width, height, root);
+				setupStage(windowName, width, height, loadedResource);
 			} else { throw new NoControllerException("Please, register a valid controler for " + viewName); }
 		} catch (IOException e) { e.printStackTrace();}
 	}
@@ -60,6 +61,10 @@ public class View {
 	
 	public Controller getController() {
 		return this.controller;
+	}
+	
+	public Parent getLoadedResource() {
+		return this.loadedResource;
 	}
 	
 	public void show() {
