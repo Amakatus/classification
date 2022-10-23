@@ -1,4 +1,4 @@
-package app.graphics.exceptions;
+package app.exceptions;
 
 public class NoControllerException extends Exception {
 	private String errorMessage;

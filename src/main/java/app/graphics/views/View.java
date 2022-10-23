@@ -3,8 +3,8 @@ package app.graphics.views;
 
 import java.io.IOException;
 
+import app.exceptions.NoControllerException;
 import app.graphics.controllers.Controller;
-import app.graphics.exceptions.NoControllerException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

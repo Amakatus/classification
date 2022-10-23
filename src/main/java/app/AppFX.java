@@ -2,7 +2,7 @@ package app;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import app.graphics.exceptions.NoControllerException;
+import app.exceptions.NoControllerException;
 import app.graphics.views.View;
  
 public class AppFX extends Application {
