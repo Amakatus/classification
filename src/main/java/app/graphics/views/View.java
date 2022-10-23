@@ -54,18 +54,9 @@ public class View {
 		this(viewPath, viewPath);
 	}
 	
-
-	public Stage getStage() {
-		return this.stage;
-	}
-	
-	public Controller getController() {
-		return this.controller;
-	}
-	
-	public Parent getLoadedResource() {
-		return this.loadedResource;
-	}
+	public Stage getStage() { return this.stage; }
+	public Controller getController() { return this.controller; }
+	public Parent getLoadedResource() { return this.loadedResource; }
 	
 	public void show() {
 		this.stage.show();
