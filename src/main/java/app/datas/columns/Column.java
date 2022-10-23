@@ -6,11 +6,13 @@ import app.datas.points.IPoint;
 import app.graphics.models.DataSet;
 
 public class Column<T extends Data> implements IColumn {
-
+	protected IColumnNormalizer normalizer;
+	protected String name;
+	protected DataSet<T> dataSet;
+	
 	@Override
 	public void setNormalizer(IColumnNormalizer valueNormalizer) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -32,7 +34,7 @@ public class Column<T extends Data> implements IColumn {
 	}
 
 	@Override
-	public DataSet getDataset() {
+	public DataSet<T> getDataset() {
 		// TODO Auto-generated method stub
 		return null;
 	}

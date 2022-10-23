@@ -1,9 +1,10 @@
 package app.graphics.controllers;
 
+import app.graphics.models.Model;
 import app.graphics.views.View;
 
 public abstract class Controller {
-	
+	protected Model model;
 	protected View view;
 	
 	public Controller(View view) {
@@ -22,9 +23,17 @@ public abstract class Controller {
 		this.view = view;
 	}
 	
+	public void setModel(Model model) {
+		this.model = model;
+	}
+	
+	public Model getModel() {
+		return this.model;
+	}
+	
 	public void closeView() {
-		if(this.getView().getStage() != null) {			
-			this.getView().getStage().close();
+		if(this.view.getStage() != null) {			
+			this.view.closeStage();
 		}
 	}
 }

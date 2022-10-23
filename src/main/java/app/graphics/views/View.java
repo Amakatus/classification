@@ -2,27 +2,31 @@ package app.graphics.views;
 
 
 import java.io.IOException;
-import java.net.URL;
 
+import app.graphics.controllers.Controller;
+import app.graphics.exceptions.NoControllerException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import app.graphics.controllers.Controller;
 
 
 public class View {
 	
-	private Stage stage;
-	private Controller controller;
+	protected Stage stage;
+	protected Controller controller;
 	
-	public View(String viewName, String windowName, int width, int height) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/test.fxml"));
-		Parent root;
-		try { root = loader.load(); } catch (IOException e) { e.printStackTrace(); return; }
-		this.controller = loader.getController();
+	public View(String viewName, String windowName, int width, int height) throws NoControllerException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/index.fxml"));
+		try {
+			Parent root = loader.load();
+			if(this.setupController(loader)) {
+				setupStage(windowName, width, height, root);
+			} else { throw new NoControllerException("Please, register a valid controler for " + viewName); }
+		} catch (IOException e) { e.printStackTrace();}
+	}
+
+	private void setupStage(String windowName, int width, int height, Parent root) {
 		this.stage = new Stage();
 		this.stage.setTitle(windowName);
 		if(width > 0 && height > 0) {			
@@ -31,14 +35,21 @@ public class View {
 			this.stage.setScene(new Scene(root));
 		}
 		this.stage.setResizable(false);
-		//this.controller.setView(this);
 	}
 	
-	public View(String viewPath, String windowName) {
+	private boolean setupController(FXMLLoader loader) {
+		Controller controller = loader.getController();
+		if(controller == null) return false;
+		this.controller = controller;
+		this.controller.setView(this);
+		return true;
+	}
+
+	public View(String viewPath, String windowName) throws NoControllerException {
 		this(viewPath, windowName,0,0);
 	}
 	
-	public View(String viewPath) {
+	public View(String viewPath) throws NoControllerException {
 		this(viewPath, viewPath);
 	}
 	
@@ -52,7 +63,11 @@ public class View {
 	}
 	
 	public void show() {
-		this.getStage().show();
+		this.stage.show();
+	}
+
+	public void closeStage() {
+		this.stage.close();
 	}
 }
 

@@ -9,6 +9,6 @@ public interface IColumn {
 	public double getNormalizedValue(IPoint point);
 	public Object getDenormalizedValue(double value);
 	public String getName();
-	public DataSet getDataset();
+	public DataSet<?> getDataset();
 	public boolean isNormalizable();
 }
