@@ -14,9 +14,8 @@ public class IndexController extends Controller {
 	@FXML MFXButton newTabButton;
 	@FXML TabPane tabPane;
 	
-	void init() {
-		System.out.println("Test");
-	}
+	@Override
+	public void initialize() {}
 	
 	@FXML void createNewTab(MouseEvent mouseEvent) {
 		Tab newTab;

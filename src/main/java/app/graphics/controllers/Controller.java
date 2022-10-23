@@ -3,7 +3,7 @@ package app.graphics.controllers;
 import app.graphics.models.Model;
 import app.graphics.views.View;
 
-public abstract class Controller {
+public abstract class Controller implements IFXController {
 	protected Model model;
 	protected View view;
 	
