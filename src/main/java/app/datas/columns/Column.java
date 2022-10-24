@@ -3,12 +3,12 @@ package app.datas.columns;
 import app.algorithm.normalizers.IColumnNormalizer;
 import app.datas.data.Data;
 import app.datas.points.IPoint;
-import app.graphics.models.DataSet;
+import app.graphics.models.Dataset;
 
 public class Column<T extends Data> implements IColumn {
 	protected IColumnNormalizer normalizer;
 	protected String name;
-	protected DataSet<T> dataSet;
+	protected Dataset<T> dataSet;
 	
 	@Override
 	public void setNormalizer(IColumnNormalizer valueNormalizer) {
@@ -34,7 +34,7 @@ public class Column<T extends Data> implements IColumn {
 	}
 
 	@Override
-	public DataSet<T> getDataset() {
+	public Dataset<T> getDataset() {
 		// TODO Auto-generated method stub
 		return null;
 	}
