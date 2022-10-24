@@ -3,7 +3,6 @@ package app.graphics.views;
 
 import java.io.IOException;
 
-import app.exceptions.NoControllerException;
 import app.graphics.controllers.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,13 +16,13 @@ public class View {
 	protected Controller controller;
 	protected Parent loadedResource;
 	
-	public View(String viewName, String windowName, int width, int height) throws NoControllerException {
+	public View(String viewName, String windowName, int width, int height) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/"+viewName+".fxml"));
 		try {
 			this.loadedResource = loader.load();
 			if(this.setupController(loader)) {
 				setupStage(windowName, width, height, loadedResource);
-			} else { throw new NoControllerException("Please, register a valid controler for " + viewName); }
+			}
 		} catch (IOException e) { e.printStackTrace();}
 	}
 
@@ -46,11 +45,11 @@ public class View {
 		return true;
 	}
 
-	public View(String viewPath, String windowName) throws NoControllerException {
+	public View(String viewPath, String windowName) {
 		this(viewPath, windowName,0,0);
 	}
 	
-	public View(String viewPath) throws NoControllerException {
+	public View(String viewPath) {
 		this(viewPath, viewPath);
 	}
 	
