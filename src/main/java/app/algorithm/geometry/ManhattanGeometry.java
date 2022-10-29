@@ -1,6 +1,6 @@
 package app.algorithm.geometry;
 
-import app.datas.data.Data;
+import app.graphics.models.datas.data.Data;
 
 public class ManhattanGeometry<T extends Data> implements IGeometryCalculator<T>{
 

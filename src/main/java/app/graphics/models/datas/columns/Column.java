@@ -1,9 +1,9 @@
-package app.datas.columns;
+package app.graphics.models.datas.columns;
 
 import app.algorithm.normalizers.IColumnNormalizer;
-import app.datas.data.Data;
-import app.datas.points.IPoint;
-import app.graphics.models.Dataset;
+import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.points.IPoint;
 
 public class Column<T extends Data> implements IColumn {
 	protected IColumnNormalizer normalizer;

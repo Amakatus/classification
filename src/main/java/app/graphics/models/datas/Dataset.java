@@ -1,11 +1,12 @@
-package app.graphics.models;
+package app.graphics.models.datas;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import app.algorithm.KNNAlgorithm;
-import app.datas.columns.Column;
-import app.datas.data.Data;
+import app.graphics.models.Model;
+import app.graphics.models.datas.columns.Column;
+import app.graphics.models.datas.data.Data;
 
 public class Dataset<T extends Data> implements Model {
 	protected List<Column<T>> columns;
@@ -21,12 +22,18 @@ public class Dataset<T extends Data> implements Model {
 	}
 
 	public String getTitle() { return this.title; }
+	
 	public List<KNNAlgorithm<T>> getAlgorithms() {
 		return this.algorithms;
 	}
 	
-	public void addKNNAlgorithm(KNNAlgorithm<T> algorithm) {
+	public void addAlgorithm(KNNAlgorithm<T> algorithm) {
 		this.algorithms.add(algorithm);
+		System.out.println("adding algorithm");
+	}
+	
+	public List<T> getDatas() {
+		return this.datas;
 	}
 	
 	public void addData(T data) {

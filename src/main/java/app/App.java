@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.algorithm.KNNAlgorithm;
-import app.datas.data.Data;
-import app.graphics.models.Dataset;
+import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.data.Data;
 
 public class App {
 	// Singleton

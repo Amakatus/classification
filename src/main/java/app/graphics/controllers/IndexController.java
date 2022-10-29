@@ -2,8 +2,8 @@ package app.graphics.controllers;
 
 import app.App;
 import app.algorithm.KNNAlgorithm;
-import app.datas.data.Data;
-import app.graphics.models.Dataset;
+import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.data.Data;
 import app.graphics.views.View;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.fxml.FXML;

@@ -1,6 +1,6 @@
 package app.algorithm.geometry;
 
-import app.datas.data.Data;
+import app.graphics.models.datas.data.Data;
 
 public class EuclideanGeometry<T extends Data> implements IGeometryCalculator<T> {
 

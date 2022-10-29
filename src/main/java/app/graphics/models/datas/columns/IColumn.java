@@ -1,8 +1,8 @@
-package app.datas.columns;
+package app.graphics.models.datas.columns;
 
 import app.algorithm.normalizers.IColumnNormalizer;
-import app.datas.points.IPoint;
-import app.graphics.models.Dataset;
+import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.points.IPoint;
 
 public interface IColumn {
 	public void setNormalizer(IColumnNormalizer valueNormalizer);

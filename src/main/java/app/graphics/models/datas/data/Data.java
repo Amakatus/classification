@@ -1,4 +1,4 @@
-package app.datas.data;
+package app.graphics.models.datas.data;
 
 import java.lang.reflect.Field;
 import java.util.List;

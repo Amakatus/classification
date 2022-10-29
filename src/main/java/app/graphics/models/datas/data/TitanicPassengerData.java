@@ -1,4 +1,4 @@
-package app.datas.data;
+package app.graphics.models.datas.data;
 
 import com.opencsv.bean.CsvBindByName;
 

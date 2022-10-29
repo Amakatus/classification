@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import app.datas.data.IrisData;
-import app.graphics.models.Dataset;
+import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.data.IrisData;
 
 class AppTest {
 	App app = null;
