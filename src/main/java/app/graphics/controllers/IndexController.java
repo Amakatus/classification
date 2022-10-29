@@ -29,7 +29,7 @@ public class IndexController extends Controller {
 		rootItem.setExpanded(true);
 		TreeItem<Object> childItem;
 		TreeItem<Object> childOfChild;
-		for(Dataset<? extends Data> dataset : app.getDatasets()) {
+		for(Dataset<? extends Data> dataset : app.getWorkingDatasets()) {
 			childItem = new TreeItem<>(dataset);
 			rootItem.getChildren().add(childItem);
 			for(KNNAlgorithm<? extends Data> algo : dataset.getAlgorithms()) {

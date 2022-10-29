@@ -18,34 +18,35 @@ public class App {
 	}
 	
 	// Classe
-	protected List<Dataset<? extends Data>> dataset;
+	protected List<Dataset<? extends Data>> workingDatasets;
+	protected List<Dataset<? extends Data>> referenceDatasets;
 	
 	private App() {
-		this.dataset = new ArrayList<>();
-		this.initTestsDatasets();
+		this.workingDatasets = new ArrayList<>();
+		this.referenceDatasets = new ArrayList<>();
 	}
 	
-	public List<Dataset<? extends Data>> getDatasets(){
-		return this.dataset;
+	public List<Dataset<? extends Data>> getWorkingDatasets(){
+		return this.workingDatasets;
 	}
 	
-	public void addDataset(Dataset<? extends Data> dataset) {
-		this.dataset.add(dataset);
+	public void addWorkingDataset(Dataset<? extends Data> dataset) {
+		this.workingDatasets.add(dataset);
 	}
-
-	private void initTestsDatasets() {
-		Dataset<?> d1 = new Dataset<>("Iris");
-		Dataset<?> d2 = new Dataset<>("TitanicPassengers");
-		
-		new KNNAlgorithm<>(d1, 2);
-		new KNNAlgorithm<>(d1, 3);
-		new KNNAlgorithm<>(d1, 4);
-		new KNNAlgorithm<>(d1, 5);
-		new KNNAlgorithm<>(d2, 4);
-		new KNNAlgorithm<>(d2, 5);
-		new KNNAlgorithm<>(d2, 6);
-		
-		this.dataset.add(d1);
-		this.dataset.add(d2);
+	
+	public List<Dataset<? extends Data>> getReferenceDatasets() {
+		return this.referenceDatasets;
+	}
+	
+	public void addReferenceDataset(Dataset<? extends Data> dataset) {
+		this.referenceDatasets.add(dataset);
+	}
+	
+	public void clearWorkingDatasets() {
+		this.workingDatasets.clear();
+	}
+	
+	public void clearReferenceDatasets() {
+		this.referenceDatasets.clear();
 	}
 }
