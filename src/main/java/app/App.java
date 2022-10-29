@@ -55,6 +55,8 @@ public class App {
 	public void loadReferenceDatasets() {
 		try {
 			this.addReferenceDataset(new Dataset<IrisData>("IrisReferenceDataset", CSVUtils.loadIrisCSV()));
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

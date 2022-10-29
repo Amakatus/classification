@@ -5,10 +5,10 @@ import app.graphics.models.datas.Dataset;
 import app.graphics.models.datas.points.IPoint;
 
 public interface IColumn {
-	public void setNormalizer(IColumnNormalizer valueNormalizer);
-	public double getNormalizedValue(IPoint point);
-	public Object getDenormalizedValue(double value);
-	public String getName();
-	public Dataset<?> getDataset();
-	public boolean isNormalizable();
+	void setNormalizer(IColumnNormalizer valueNormalizer);
+	double getNormalizedValue(IPoint point);
+	Object getDenormalizedValue(double value);
+	String getName();
+	Dataset<?> getDataset();
+	boolean isNormalizable();
 }

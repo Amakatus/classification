@@ -4,5 +4,5 @@ import javafx.fxml.FXML;
 
 public interface IFXController {
 	@FXML
-    public void initialize();
+    void initialize();
 }

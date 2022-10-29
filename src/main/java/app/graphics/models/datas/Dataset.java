@@ -20,7 +20,7 @@ public class Dataset<T extends Data> implements Model {
 		this.title = title;
 		this.columns = new ArrayList<Column<T>>();
 		this.algorithms = new ArrayList<KNNAlgorithm<T>>();
-		this.datas = new ArrayList<>();
+		this.datas = datas;
 		this.distanceFields = distanceFields;
 		this.categoryField = categoryField;
 	}
