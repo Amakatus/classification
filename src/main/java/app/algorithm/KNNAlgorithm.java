@@ -20,6 +20,10 @@ public class KNNAlgorithm<T extends Data> {
 		this.workingDataset.addAlgorithm(this);
 	}
 	
+	public int getK() {
+		return this.kNeighbours;
+	}
+	
 	public MyScatterChart<T> generateScatterChart() {
 		return null;
 	}
