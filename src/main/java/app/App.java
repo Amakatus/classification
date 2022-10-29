@@ -1,11 +1,13 @@
 package app;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.Dataset;
 import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.IrisData;
+import app.utils.CSVUtils;
 
 public class App {
 	// Singleton
@@ -48,5 +50,11 @@ public class App {
 	
 	public void clearReferenceDatasets() {
 		this.referenceDatasets.clear();
+	}
+	
+	public void loadReferenceDatasets() {
+		try {
+			this.addReferenceDataset(new Dataset<IrisData>("IrisReferenceDataset", CSVUtils.loadIrisCSV()));
+		} catch (IOException e) {}
 	}
 }

@@ -17,4 +17,8 @@ public class IrisData extends Data {
 	
 	@CsvBindByName(column = "variety")
 	protected IrisVariety variety;
+	
+	public IrisVariety getVariety() {
+		return this.variety;
+	}
 }

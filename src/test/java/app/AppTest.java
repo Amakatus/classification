@@ -1,6 +1,7 @@
 package app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -50,5 +51,10 @@ class AppTest {
 		assertEquals("TestPurposeReferenceDataset", app.getReferenceDatasets().get(0).getTitle());
 	}
 
-
+	@Test
+	void testLoadReferenceDatasets() {
+		assertTrue(app.getReferenceDatasets().isEmpty());
+		app.loadReferenceDatasets();
+		assertFalse(app.getReferenceDatasets().isEmpty());
+	}
 }
