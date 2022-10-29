@@ -7,15 +7,17 @@ import app.graphics.models.datas.data.Data;
 
 public class KNNAlgorithm<T extends Data> {
 	protected IGeometryCalculator<T> calculator;
-	protected Dataset<T> dataSet;
+	protected Dataset<T> workingDataset;
+	protected Dataset<T> referenceDataset;
 	protected double strength;
 	protected int kNeighbours;
 	
-	public KNNAlgorithm(Dataset<T> dataSet, int k) {
-		this.dataSet = dataSet;
+	public KNNAlgorithm(Dataset<T> workingDataset, Dataset<T> referenceDataset, int k) {
+		this.workingDataset = workingDataset;
+		this.referenceDataset = referenceDataset;
 		this.kNeighbours = k;
 		this.strength = Math.round(Math.random()*100);
-		this.dataSet.addAlgorithm(this);
+		this.workingDataset.addAlgorithm(this);
 	}
 	
 	public MyScatterChart<T> generateScatterChart() {

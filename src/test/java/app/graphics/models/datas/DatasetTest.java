@@ -37,7 +37,7 @@ class DatasetTest {
 	@Test
 	void testAddKNNAlgorithm() {
 		assertTrue(this.testDataset.getAlgorithms().isEmpty());
-		new KNNAlgorithm<IrisData>(this.testDataset, 5);
+		new KNNAlgorithm<IrisData>(this.testDataset,this.testDataset, 5);
 		assertEquals(1, this.testDataset.getAlgorithms().size());
 	}
 

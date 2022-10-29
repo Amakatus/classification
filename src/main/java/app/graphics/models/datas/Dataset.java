@@ -27,6 +27,7 @@ public class Dataset<T extends Data> implements Model {
 		return this.algorithms;
 	}
 	
+	// Should not be called somewhere else than in KNNAlgorithm's constructor
 	public void addAlgorithm(KNNAlgorithm<T> algorithm) {
 		this.algorithms.add(algorithm);
 		System.out.println("adding algorithm");
