@@ -17,7 +17,6 @@ public class KNNAlgorithm<T extends Data> {
 		this.referenceDataset = referenceDataset;
 		this.kNeighbours = k;
 		this.strength = Math.round(Math.random()*100);
-		this.workingDataset.addAlgorithm(this);
 	}
 	
 	public int getK() {

@@ -8,7 +8,7 @@ public abstract class AlgorithmFactory {
 	public static <T extends Data> boolean createAlgorithm(Dataset<T> workingDataset, Dataset<T> referenceDataset, int k) {
 		if (workingDataset.getType() != DatasetType.WORKING || referenceDataset.getType() != DatasetType.REFERENCE)
 			return false;
-		new KNNAlgorithm<T>(workingDataset, referenceDataset, k);
+		workingDataset.addAlgorithm(new KNNAlgorithm<T>(workingDataset, referenceDataset, k));
 		return true;
 	}
 }
