@@ -15,21 +15,24 @@ import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
-import app.utils.CSVUtils;
 
 class EuclideanGeometryTest {
 
 	@Test
 	void testDistance() {
-		IrisData irisOne = new IrisData();
-		IrisData irisTwo = new IrisData();
-		int kNeighbours = 3;
+		IrisData wIrisOne = new IrisData();
+		IrisData wIrisTwo = new IrisData();
+		IrisData rIrisOne = new IrisData();
+		IrisData rIrisTwo = new IrisData();
+		int kNeighbours = 1;
 		
-		irisOne.setPetalLength(5);
-		irisTwo.setPetalLength(10);
+		wIrisOne.setPetalLength(5);
+		rIrisOne.setPetalLength(6);
+		wIrisTwo.setPetalLength(10);
+		rIrisTwo.setPetalLength(9);
 		
-		ReferenceDataset<IrisData> rDS = new ReferenceDataset<IrisData>("rDS", CSVUtils.loadIrisCSV());
-		WorkingDataset<IrisData> wDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(irisOne, irisTwo));
+		ReferenceDataset<IrisData> rDS = new ReferenceDataset<IrisData>("rDS", Arrays.asList(rIrisOne, rIrisTwo));
+		WorkingDataset<IrisData> wDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo));
 		AlgorithmFactory.createAlgorithm(wDS, rDS, kNeighbours);
 		wDS.addDistanceFieldString("petalLength");
 		KNNAlgorithm<IrisData> algo = wDS.getAlgorithms().get(0);
@@ -38,9 +41,12 @@ class EuclideanGeometryTest {
 		assertFalse(algo.getDataWithDistances().isEmpty());
 		assertEquals(2, algo.getDataWithDistances().size());
 		assertEquals(2, irisDatas.size());
-		assertEquals(irisOne, irisDatas.get(0).getKey());
-		assertEquals(irisTwo, irisDatas.get(1).getKey());
+		assertEquals(wIrisOne, irisDatas.get(0).getKey());
+		assertEquals(wIrisTwo, irisDatas.get(1).getKey());
 		assertEquals(kNeighbours, irisDatas.get(0).getValue().size());
+		
+		assertEquals(rIrisOne, irisDatas.get(0).getValue().get(0));
+		assertEquals(rIrisTwo, irisDatas.get(1).getValue().get(0));
 	}
 
 }

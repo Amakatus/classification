@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import app.algorithm.geometry.EuclideanGeometry;
 import app.algorithm.geometry.IGeometryCalculator;
-import app.graphics.components.MyScatterChart;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
@@ -32,10 +31,6 @@ public class KNNAlgorithm<T extends Data> {
 
 	public int getK() {
 		return this.kNeighbours;
-	}
-
-	public MyScatterChart<T> generateScatterChart() {
-		return null;
 	}
 
 	public IGeometryCalculator<T> getCalculator() {
@@ -88,19 +83,22 @@ public class KNNAlgorithm<T extends Data> {
 	public List<Entry<T, List<T>>> getDatasKNN() {
 		this.launchDistancesCalcul();
 		List<Entry<T, List<T>>> res = new ArrayList<>();
+		this.generateKNNResults(res);
+		return res;
+	}
+
+	private void generateKNNResults(List<Entry<T, List<T>>> res) {
 		for (Map<T, Double> dataDistMap : this.dataWithDistances) {
 			List<Entry<T, Double>> sortedDatasEntries = dataDistMap.entrySet().stream()
 					.sorted(Map.Entry.comparingByValue())
 					.limit(kNeighbours+1)
 					.collect(Collectors.toList());
+			
 			List<T> neighbours = new ArrayList<>();
-			for (int i = 1; i < sortedDatasEntries.size(); i++) {
+			for (int i = 1; i < sortedDatasEntries.size(); i++)
 				neighbours.add(sortedDatasEntries.get(i).getKey());
-			}
-			Entry<T, List<T>> oneDataMap = Map.entry(sortedDatasEntries.get(0).getKey(), neighbours);
-			res.add(oneDataMap);
+			res.add(Map.entry(sortedDatasEntries.get(0).getKey(), neighbours));
 		}
-		return res;
 	}
 
 	public String toString() {
