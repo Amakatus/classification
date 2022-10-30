@@ -1,6 +1,5 @@
 package app;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +53,6 @@ public class App {
 	}
 	
 	public void loadReferenceDatasets() {
-		try {
-			this.addReferenceDataset(new ReferenceDataset<IrisData>("IrisReferenceDataset", CSVUtils.loadIrisCSV()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		this.addReferenceDataset(new ReferenceDataset<IrisData>("IrisReferenceDataset", CSVUtils.loadIrisCSV()));
 	}
 }
