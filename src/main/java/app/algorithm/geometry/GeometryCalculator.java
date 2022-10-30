@@ -11,7 +11,7 @@ public abstract class GeometryCalculator<T extends Data> implements IGeometryCal
 		this.fieldsNames = fieldsNames;
 	}
 
-	public abstract double distance(T data1, T data2);
+	public abstract double distance(T workingData, T referenceData);
 	
 	public void addField(String fieldName) {
 		this.fieldsNames.add(fieldName);
