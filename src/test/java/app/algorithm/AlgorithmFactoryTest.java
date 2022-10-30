@@ -1,7 +1,6 @@
 package app.algorithm;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -21,7 +20,7 @@ class AlgorithmFactoryTest {
 			ReferenceDataset<IrisData> reference = new ReferenceDataset<IrisData>("ReferenceDS", CSVUtils.loadIrisCSV());
 			IrisData toClassify = new IrisData();
 			WorkingDataset<IrisData> working = new WorkingDataset<IrisData>("WorkingDS", Arrays.asList(toClassify));
-			assertTrue(AlgorithmFactory.createAlgorithm(working, reference, 5));
+			AlgorithmFactory.createAlgorithm(working, reference, 5);
 			assertEquals(1, working.getAlgorithms().size());
 			assertEquals(5, working.getAlgorithms().get(0).getK());
 		} catch (IOException e) { e.printStackTrace(); }
