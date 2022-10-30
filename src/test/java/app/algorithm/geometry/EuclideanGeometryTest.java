@@ -14,7 +14,6 @@ class EuclideanGeometryTest {
 		irisOne.setPetalLength(5);
 		irisTwo.setPetalLength(10);
 		
-		EuclideanGeometry<IrisData> gEucli = new EuclideanGeometry<>();
 	}
 
 }

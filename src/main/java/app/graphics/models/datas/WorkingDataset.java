@@ -33,6 +33,14 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 	public List<KNNAlgorithm<T>> getAlgorithms() {
 		return this.algorithms;
 	}
+	
+	public String getCategoryField() {
+		return categoryField;
+	}
+
+	public List<String> getDistanceFields() {
+		return distanceFields;
+	}
 
 	public void addAlgorithm(KNNAlgorithm<T> algorithm) {
 		this.algorithms.add(algorithm);
