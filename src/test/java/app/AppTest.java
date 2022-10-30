@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
 
 class AppTest {
@@ -28,26 +30,26 @@ class AppTest {
 	@Test
 	void testAddWorkingDataset() {
 		assertTrue(app.getWorkingDatasets().isEmpty());
-		app.addWorkingDataset(new Dataset<IrisData>("RandomDataset"));
+		app.addWorkingDataset(new WorkingDataset<IrisData>("RandomDataset"));
 		assertEquals(1, app.getWorkingDatasets().size());
 	}
 
 	@Test
 	void testGetWorkingDatasets() {
-		app.addWorkingDataset(new Dataset<IrisData>("TestPurposeWorkingDataset"));
+		app.addWorkingDataset(new WorkingDataset<IrisData>("TestPurposeWorkingDataset"));
 		assertEquals("TestPurposeWorkingDataset",app.getWorkingDatasets().get(0).getTitle());
 	}
 
 	@Test
 	void testAddReferenceDataset() {
 		assertTrue(app.getReferenceDatasets().isEmpty());
-		app.addWorkingDataset(new Dataset<IrisData>("RandomDataset"));
+		app.addWorkingDataset(new ReferenceDataset<IrisData>("RandomDataset"));
 		assertEquals(1, app.getWorkingDatasets().size());
 	}
 	
 	@Test
 	void testGetReferenceDatasets() {
-		app.addReferenceDataset(new Dataset<IrisData>("TestPurposeReferenceDataset"));
+		app.addReferenceDataset(new ReferenceDataset<IrisData>("TestPurposeReferenceDataset"));
 		assertEquals("TestPurposeReferenceDataset", app.getReferenceDatasets().get(0).getTitle());
 	}
 

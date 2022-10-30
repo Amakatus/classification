@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.data.Data;
 import app.graphics.models.datas.data.IrisData;
 import app.utils.CSVUtils;
@@ -54,7 +55,7 @@ public class App {
 	
 	public void loadReferenceDatasets() {
 		try {
-			this.addReferenceDataset(new Dataset<IrisData>("IrisReferenceDataset", CSVUtils.loadIrisCSV()));
+			this.addReferenceDataset(new ReferenceDataset<IrisData>("IrisReferenceDataset", CSVUtils.loadIrisCSV()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

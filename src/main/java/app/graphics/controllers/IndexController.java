@@ -3,6 +3,8 @@ package app.graphics.controllers;
 import app.App;
 import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
 import app.graphics.views.View;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -25,16 +27,19 @@ public class IndexController extends Controller {
 	@Override
 	public void initialize() {
 		App app = App.getInstance();
-		TreeItem<Object> rootItem = new TreeItem<>(new Dataset("Datasets"));
+		TreeItem<Object> rootItem = new TreeItem<>(new ReferenceDataset("Datasets"));
 		rootItem.setExpanded(true);
 		TreeItem<Object> childItem;
 		TreeItem<Object> childOfChild;
 		for(Dataset<? extends Data> dataset : app.getWorkingDatasets()) {
 			childItem = new TreeItem<>(dataset);
 			rootItem.getChildren().add(childItem);
-			for(KNNAlgorithm<? extends Data> algo : dataset.getAlgorithms()) {
-				childOfChild = new TreeItem<>(algo);
-				childItem.getChildren().add(childOfChild);
+			if(dataset instanceof WorkingDataset<?>) {
+				WorkingDataset<?> workingDataset = (WorkingDataset<?>) dataset;
+				for(KNNAlgorithm<? extends Data> algo : workingDataset.getAlgorithms()) {
+					childOfChild = new TreeItem<>(algo);
+					childItem.getChildren().add(childOfChild);
+				}
 			}
 		}
 		TreeView<Object> treeView = new TreeView<>(rootItem);

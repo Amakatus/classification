@@ -6,15 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import app.algorithm.AlgorithmFactory;
 import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.data.IrisData;
 
 class DatasetTest {
-	Dataset<IrisData> testDataset = null;
+	WorkingDataset<IrisData> testDataset = null;
 	
 	@BeforeEach
 	void initDataset() {
-		this.testDataset = new Dataset<>("testDataset");
+		this.testDataset = new WorkingDataset<>("testDataset");
 	}
 	
 	@Test
@@ -37,7 +38,7 @@ class DatasetTest {
 	@Test
 	void testAddKNNAlgorithm() {
 		assertTrue(this.testDataset.getAlgorithms().isEmpty());
-		new KNNAlgorithm<IrisData>(this.testDataset,this.testDataset, 5);
+		AlgorithmFactory.createAlgorithm(this.testDataset, new ReferenceDataset<IrisData>("WorkingDS"), 5);
 		assertEquals(1, this.testDataset.getAlgorithms().size());
 	}
 
