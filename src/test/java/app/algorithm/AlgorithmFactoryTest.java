@@ -16,14 +16,12 @@ class AlgorithmFactoryTest {
 
 	@Test
 	void testCreateAlgorithm() {
-		try {
-			ReferenceDataset<IrisData> reference = new ReferenceDataset<IrisData>("ReferenceDS", CSVUtils.loadIrisCSV());
-			IrisData toClassify = new IrisData();
-			WorkingDataset<IrisData> working = new WorkingDataset<IrisData>("WorkingDS", Arrays.asList(toClassify));
-			AlgorithmFactory.createAlgorithm(working, reference, 5);
-			assertEquals(1, working.getAlgorithms().size());
-			assertEquals(5, working.getAlgorithms().get(0).getK());
-		} catch (IOException e) { e.printStackTrace(); }
+		ReferenceDataset<IrisData> reference = new ReferenceDataset<IrisData>("ReferenceDS", CSVUtils.loadIrisCSV());
+		IrisData toClassify = new IrisData();
+		WorkingDataset<IrisData> working = new WorkingDataset<IrisData>("WorkingDS", Arrays.asList(toClassify));
+		AlgorithmFactory.createAlgorithm(working, reference, 5);
+		assertEquals(1, working.getAlgorithms().size());
+		assertEquals(5, working.getAlgorithms().get(0).getK());
 	}
 
 }
