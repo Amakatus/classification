@@ -54,4 +54,13 @@ class TitanicPassengerDataTest {
 		passenger.setSibSp(2);
 		assertEquals(2,passenger.getSibSp());
 	}
+	
+	@Test
+	void should_get_passenger_parch() {
+		TitanicPassengerData passenger = new TitanicPassengerData();
+		passenger.setParch(4);
+		assertEquals(4,passenger.getParch());
+	}
+	
+	
 }
