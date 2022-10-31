@@ -17,12 +17,6 @@ public class ManhattanGeometry<T extends Data> extends GeometryCalculator<T> {
 
 	@Override
 	public double distance(T workingData, T referenceData) {
-		double sumToPow = 0;
-		for (String fieldName : this.fieldsNames) {
-			sumToPow += Math.pow(
-					workingData.getValueFromFieldName(fieldName) - referenceData.getValueFromFieldName(fieldName),
-					POWER);
-		}
-		return Math.sqrt(sumToPow);
+		return 0;
 	}
 }
