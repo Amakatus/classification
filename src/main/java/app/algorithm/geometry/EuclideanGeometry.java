@@ -2,6 +2,7 @@ package app.algorithm.geometry;
 
 import java.util.List;
 
+import app.exceptions.RequestedFieldNotDouble;
 import app.graphics.models.datas.data.Data;
 
 public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
@@ -18,19 +19,26 @@ public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 	@Override
 	public double distance(T workingData, T referenceData) {
 		double sumToPow = 0;
-		double workingFieldValue;
-		double referenceFieldValue;
+		double distance;
 		for (String fieldName : this.fieldsNames) {
-			workingFieldValue = workingData.getValueFromFieldName(fieldName);
-			referenceFieldValue = referenceData.getValueFromFieldName(fieldName);
-			if(workingFieldValue < 0 || referenceFieldValue < 0) {
-				System.err.println(String.format("Couldn't transform field '%s' to double, ignoring.", fieldName));
-				continue;
-			}
-			sumToPow += Math.pow(
-					workingData.getValueFromFieldName(fieldName) - referenceData.getValueFromFieldName(fieldName),
-					POWER);
+			distance = findDistanceForField(workingData, referenceData, fieldName);
+			if(distance >= 0)
+				sumToPow += distance;
+			else
+				System.err.println("Ignoring " + fieldName + " because cant find "+fieldName+"ToDistance method that return a valid distance.");
 		}
 		return Math.sqrt(sumToPow);
+	}
+
+	private double findDistanceForField(T workingData, T referenceData, String fieldName) {
+		double distance;
+		try {
+			distance = Math.pow(
+					workingData.getValueFromFieldName(fieldName) - referenceData.getValueFromFieldName(fieldName),
+					POWER);
+		} catch (RequestedFieldNotDouble e1) {
+			distance = workingData.getValueFromFieldByMethod(fieldName, referenceData);
+		}
+		return distance;
 	}
 }

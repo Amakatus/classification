@@ -33,10 +33,12 @@ class EuclideanGeometryTest {
 	}
 	
 	@Test
-	void test_distance_with_not_double_fields() {
+	void test_distance_with_not_originally_double_fields() {
 		this.eucliGeometry.addField("variety");
 		this.irisRef.setVariety(IrisVariety.SETOSA);
 		this.irisWork.setVariety(IrisVariety.VIRGINICA);
-		assertEquals(3.0, this.eucliGeometry.distance(irisWork, irisRef));
+		assertEquals(1.0, this.eucliGeometry.distance(irisWork, irisRef));
+		assertEquals(0, this.eucliGeometry.distance(irisWork, irisWork));
+		assertEquals(0, this.eucliGeometry.distance(irisRef, irisRef));
 	}
 }

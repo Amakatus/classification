@@ -65,7 +65,8 @@ public class IrisData extends Data {
 		return this.variety;
 	}
 	
-	public double varietyToDouble() {
-		return this.variety.toString().length();
+	public double varietyToDouble(Data other) {
+		IrisData otherIris = (IrisData) other;
+		return this.variety == otherIris.getVariety() ? 0 : 1;
 	}
 }
