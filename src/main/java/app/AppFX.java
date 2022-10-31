@@ -1,8 +1,8 @@
 package app;
 
+import app.graphics.views.View;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import app.graphics.views.View;
  
 public class AppFX extends Application {
     public static void main(String[] args) {
@@ -11,7 +11,6 @@ public class AppFX extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-    	View view = new View("test", "Test App");
-    	view.getStage().show();
+    	new View("index", "CloudyClass").show();
     }
 }
