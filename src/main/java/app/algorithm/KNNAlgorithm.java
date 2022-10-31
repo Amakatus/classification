@@ -62,6 +62,7 @@ public class KNNAlgorithm<T extends Data> {
 	}
 
 	private void launchDistancesCalcul() {
+		this.dataWithDistances.clear();
 		this.createCalculator();
 		this.getDistancesFromCalculator();
 	}
@@ -75,7 +76,7 @@ public class KNNAlgorithm<T extends Data> {
 			for (T refData : this.referenceDataset.getDatas()) {
 				dataDistancesMap.put(refData, this.calculator.distance(workingData, refData));
 			}
-			this.getDataWithDistances().add(dataDistancesMap);
+			this.dataWithDistances.add(dataDistancesMap);
 		}
 	}
 

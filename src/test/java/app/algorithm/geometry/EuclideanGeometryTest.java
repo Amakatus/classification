@@ -47,6 +47,21 @@ class EuclideanGeometryTest {
 		
 		assertEquals(rIrisOne, irisDatas.get(0).getValue().get(0));
 		assertEquals(rIrisTwo, irisDatas.get(1).getValue().get(0));
+		
+		wDS.addDistanceFieldString("petalWidth");
+		wIrisOne.setPetalWidth(10);
+		rIrisOne.setPetalWidth(25);
+		wIrisTwo.setPetalWidth(25);
+		rIrisTwo.setPetalWidth(10);
+		List<Entry<IrisData, List<IrisData>>> irisDatas2 = algo.getDatasKNN();
+		assertFalse(algo.getDataWithDistances().isEmpty());
+		assertEquals(2, algo.getDataWithDistances().size());
+		assertEquals(2, irisDatas2.size());
+		assertEquals(wIrisOne, irisDatas2.get(0).getKey());
+		assertEquals(wIrisTwo, irisDatas2.get(1).getKey());
+		assertEquals(kNeighbours, irisDatas2.get(0).getValue().size());
+		assertEquals(rIrisTwo, irisDatas2.get(0).getValue().get(0));
+		assertEquals(rIrisOne, irisDatas2.get(1).getValue().get(0));
 	}
 
 }
