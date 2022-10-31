@@ -78,14 +78,11 @@ class EuclideanGeometryTest {
 	
 	@Test
 	void test_distance_with_width() {
-		wDS.addDistanceFieldString("petalWidth");
 		List<Entry<IrisData, List<IrisData>>> irisDatas2 = algo.getDatasKNN();
 		assertFalse(algo.getDataWithDistances().isEmpty());
 		assertEquals(2, algo.getDataWithDistances().size());
 		assertEquals(2, irisDatas2.size());
 		assertEquals(kNeighbours, irisDatas2.get(0).getValue().size());
-		assertEquals(rIrisTwo, irisDatas2.get(0).getValue().get(0));
-		assertEquals(rIrisOne, irisDatas2.get(1).getValue().get(0));
 	}
 	
 	@Test
@@ -93,6 +90,14 @@ class EuclideanGeometryTest {
 		List<Entry<IrisData, List<IrisData>>> irisDatas2 = algo.getDatasKNN();
 		assertEquals(wIrisOne, irisDatas2.get(0).getKey());
 		assertEquals(wIrisTwo, irisDatas2.get(1).getKey());
+	}
+	
+	@Test
+	void test_value_width() {
+		wDS.addDistanceFieldString("petalWidth");
+		List<Entry<IrisData, List<IrisData>>> irisDatas2 = algo.getDatasKNN();
+		assertEquals(rIrisTwo, irisDatas2.get(0).getValue().get(0));
+		assertEquals(rIrisOne, irisDatas2.get(1).getValue().get(0));
 	}
 	
 	
