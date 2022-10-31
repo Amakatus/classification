@@ -9,15 +9,20 @@ class IrisDataTest {
 	@Test
 	void should_get_sepal_length() {
 		IrisData iris = new IrisData();
-		iris.setPetalLength(22.7);
+		iris.setSepalLength(22.7);
 		assertEquals(22.7,iris.getPetalLength());
 	}
 	
 	@Test
 	void should_get_sepal_width() {
 		IrisData iris = new IrisData();
-		iris.setPetalWidth(3.09);
+		iris.setSepalWidth(3.09);
 		assertEquals(3.09,iris.getPetalWidth());
+	}
+	
+	@Test
+	void should_get_petal_width() {
+		
 	}
 
 }
