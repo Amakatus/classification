@@ -57,7 +57,7 @@ public abstract class Data {
 				return (double) fieldToDoubleMethod.invoke(this, other);
 			} catch (Exception e) { e.printStackTrace(); }
 		}
-		return -1;
+		return Double.MIN_VALUE;
 	}
 
 

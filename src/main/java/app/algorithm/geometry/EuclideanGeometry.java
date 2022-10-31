@@ -19,23 +19,19 @@ public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 
 	@Override
 	public double distance(T workingData, T referenceData) throws FieldToDistanceException {
-		double sumToPow = 0;
+		double sumPow = 0;
 		double distance;
 		for (String fieldName : this.fieldsNames) {
 			distance = findDistanceForField(workingData, referenceData, fieldName);
-			if(distance >= 0)
-				sumToPow += distance;
-			else
-				throw new FieldToDistanceException("Ignoring " + fieldName + " because cant find "+fieldName+"ToDistance method that return a valid distance.");
+			if(distance == Double.MIN_VALUE) throw new FieldToDistanceException(fieldName);
+			else sumPow += Math.pow(distance, POWER);
 		}
-		return Math.sqrt(sumToPow);
+		return Math.sqrt(sumPow);
 	}
 
 	private double findDistanceForField(T workingData, T referenceData, String fieldName) {
 		try {
-			return Math.pow(
-					workingData.getValueFromFieldName(fieldName) - referenceData.getValueFromFieldName(fieldName),
-					POWER);
+			return workingData.getValueFromFieldName(fieldName) - referenceData.getValueFromFieldName(fieldName);
 		} catch (FieldNotDoubleException e1) {
 			return workingData.getValueFromFieldByMethod(fieldName, referenceData);
 		}
