@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import app.graphics.models.datas.data.IrisData;
+import app.graphics.models.datas.data.IrisVariety;
 
 class EuclideanGeometryTest {
 	IrisData irisRef;
@@ -29,5 +30,13 @@ class EuclideanGeometryTest {
 		assertEquals(0, this.eucliGeometry.distance(irisWork, irisWork));
 		assertEquals(0, this.eucliGeometry.distance(irisRef, irisRef));
 		assertEquals(5.0, this.eucliGeometry.distance(irisWork, irisRef));
+	}
+	
+	@Test
+	void test_distance_with_not_double_fields() {
+		this.eucliGeometry.addField("variety");
+		this.irisRef.setVariety(IrisVariety.SETOSA);
+		this.irisWork.setVariety(IrisVariety.VIRGINICA);
+		assertEquals(3.0, this.eucliGeometry.distance(irisWork, irisRef));
 	}
 }

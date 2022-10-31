@@ -22,6 +22,7 @@ public class IrisData extends Data {
 	protected double petalWidth;
 	
 	@CsvBindByName(column = "variety")
+	@CalculableField
 	protected IrisVariety variety;
 	
 	public double getSepalLength() {
@@ -62,5 +63,9 @@ public class IrisData extends Data {
 
 	public IrisVariety getVariety() {
 		return this.variety;
+	}
+	
+	public double varietyToDouble() {
+		return this.variety.toString().length();
 	}
 }
