@@ -9,29 +9,29 @@ class IrisDataTest {
 	@Test
 	void should_get_sepal_length() {
 		IrisData iris = new IrisData();
-		iris.setSepalLength(22.7);
-		assertEquals(22.7,iris.getPetalLength());
+		iris.setSepalLength(22.04);
+		assertEquals(22.04,iris.getSepalLength());
 	}
 	
 	@Test
 	void should_get_sepal_width() {
 		IrisData iris = new IrisData();
-		iris.setSepalWidth(3.09);
-		assertEquals(3.09,iris.getPetalWidth());
+		iris.setSepalWidth(3.04);
+		assertEquals(3.04,iris.getSepalWidth());
 	}
 	
 	@Test
 	void should_get_petal_length() {
 		IrisData iris = new IrisData();
-		iris.setPetalLength(3);
-		assertEquals(3,iris.getPetalLength());
+		iris.setPetalLength(3.03);
+		assertEquals(3.03,iris.getPetalLength());
 	}
 
 	@Test
 	void should_get_petal_width() {
 		IrisData iris = new IrisData();
-		iris.setPetalWidth(4);
-		assertEquals(4,iris.getPetalWidth());
+		iris.setPetalWidth(4.21);
+		assertEquals(4.21,iris.getPetalWidth());
 	}
 
 }
