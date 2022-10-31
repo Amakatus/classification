@@ -69,4 +69,11 @@ class TitanicPassengerDataTest {
 		assertEquals("marseille",passenger.getTicket());
 	}
 	
+	@Test
+	void should_get_passenger_fare() {
+		TitanicPassengerData passenger = new TitanicPassengerData();
+		passenger.setFare(334);
+		assertEquals(334,passenger.getFare());
+	}
+	
 }
