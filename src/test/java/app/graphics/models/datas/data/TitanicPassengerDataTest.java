@@ -76,4 +76,11 @@ class TitanicPassengerDataTest {
 		assertEquals(334,passenger.getFare());
 	}
 	
+	@Test
+	void should_get_passenger_cabin() {
+		TitanicPassengerData passenger = new TitanicPassengerData();
+		passenger.setCabin("cabine jacoco");
+		assertEquals("cabine jacoco",passenger.getCabin());
+	}
+	
 }
