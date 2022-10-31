@@ -20,4 +20,8 @@ public abstract class GeometryCalculator<T extends Data> implements IGeometryCal
 	public void removeFieldName(String fieldName) {
 		this.fieldsNames.remove(fieldName);
 	}
+	
+	public List<String> getFieldsNames(){
+		return this.fieldsNames;
+	}
 }
