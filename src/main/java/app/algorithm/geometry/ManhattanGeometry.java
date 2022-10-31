@@ -10,6 +10,10 @@ public class ManhattanGeometry<T extends Data> extends GeometryCalculator<T> {
 	public ManhattanGeometry(List<String> fieldsNames) {
 		super(fieldsNames);
 	}
+	
+	public ManhattanGeometry() {
+		super();
+	}
 
 	@Override
 	public double distance(T workingData, T referenceData) {

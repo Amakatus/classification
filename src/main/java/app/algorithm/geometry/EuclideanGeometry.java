@@ -10,6 +10,10 @@ public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 	public EuclideanGeometry(List<String> fieldsNames) {
 		super(fieldsNames);
 	}
+	
+	public EuclideanGeometry() {
+		super();
+	}
 
 	@Override
 	public double distance(T workingData, T referenceData) {
