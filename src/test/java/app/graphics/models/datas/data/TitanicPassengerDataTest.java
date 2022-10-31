@@ -13,4 +13,10 @@ class TitanicPassengerDataTest {
 		assertEquals(23,passenger.getId());
 	}
 	
+	@Test
+	void should_know_if_passenger_survived_or_not() {
+		TitanicPassengerData passenger = new TitanicPassengerData();
+		passenger.setSurvived(true);
+		assertTrue(passenger.isSurvived());
+	}
 }
