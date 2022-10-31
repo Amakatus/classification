@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import app.algorithm.geometry.EuclideanGeometry;
 import app.algorithm.geometry.IGeometryCalculator;
+import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
@@ -80,7 +81,11 @@ public class KNNAlgorithm<T extends Data> {
 			dataDistancesMap = new HashMap<T, Double>();
 			dataDistancesMap.put(workingData, -1.); // 600 IQ
 			for (T refData : this.getReferenceDataset().getDatas()) {
-				dataDistancesMap.put(refData, this.calculator.distance(workingData, refData));
+				try {
+					dataDistancesMap.put(refData, this.calculator.distance(workingData, refData));
+				} catch (FieldToDistanceException e) {
+					e.printStackTrace();
+				}
 			}
 			this.dataWithDistances.add(dataDistancesMap);
 		}

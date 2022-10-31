@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.annotations.CalculableField;
-import app.exceptions.RequestedFieldNotDouble;
+import app.exceptions.FieldNotDoubleException;
 
 public abstract class Data {
 	public Field[] getFields() {
@@ -38,15 +38,14 @@ public abstract class Data {
 		return res;
 	}
 
-	public double getValueFromField(Field field) throws RequestedFieldNotDouble {
+	public double getValueFromField(Field field) throws FieldNotDoubleException {
 		if (field.getType() != double.class)
-			throw new RequestedFieldNotDouble();
+			throw new FieldNotDoubleException();
 
 		try {
 			return field.getDouble(this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) { e.printStackTrace(); }
+		
 		return -1;
 	}
 	
@@ -62,8 +61,8 @@ public abstract class Data {
 	}
 
 
-	public double getValueFromFieldName(String name) throws RequestedFieldNotDouble {
-		for (Field field : this.getCalculableFields()) {
+	public double getValueFromFieldName(String name) throws FieldNotDoubleException {
+		for (Field field : this.getFields()) {
 			if (field.getName().equalsIgnoreCase(name)) {
 				return this.getValueFromField(field);
 			}
