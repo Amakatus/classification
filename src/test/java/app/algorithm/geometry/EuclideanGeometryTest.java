@@ -39,16 +39,20 @@ class EuclideanGeometryTest {
 		wDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo));
 		AlgorithmFactory.createAlgorithm(wDS, rDS, kNeighbours);
 		algo = wDS.getAlgorithms().get(0);
+		wIrisOne.setPetalLength(5);
+		rIrisOne.setPetalLength(6);
+		wIrisTwo.setPetalLength(10);
+		rIrisTwo.setPetalLength(9);
+		wIrisOne.setPetalWidth(10);
+		rIrisOne.setPetalWidth(25);
+		wIrisTwo.setPetalWidth(25);
+		rIrisTwo.setPetalWidth(10);
+		wDS.addDistanceFieldString("petalLength");
 	}
 	
 	
 	@Test
 	void test_distance_with_length() {
-		wIrisOne.setPetalLength(5);
-		rIrisOne.setPetalLength(6);
-		wIrisTwo.setPetalLength(10);
-		rIrisTwo.setPetalLength(9);
-		wDS.addDistanceFieldString("petalLength");
 		assertTrue(algo.getDataWithDistances().isEmpty());
 		List<Entry<IrisData, List<IrisData>>> irisDatas = algo.getDatasKNN();
 		assertFalse(algo.getDataWithDistances().isEmpty());
@@ -64,10 +68,6 @@ class EuclideanGeometryTest {
 	@Test
 	void test_distance_with_width() {
 		wDS.addDistanceFieldString("petalWidth");
-		wIrisOne.setPetalWidth(10);
-		rIrisOne.setPetalWidth(25);
-		wIrisTwo.setPetalWidth(25);
-		rIrisTwo.setPetalWidth(10);
 		List<Entry<IrisData, List<IrisData>>> irisDatas2 = algo.getDatasKNN();
 		assertFalse(algo.getDataWithDistances().isEmpty());
 		assertEquals(2, algo.getDataWithDistances().size());
