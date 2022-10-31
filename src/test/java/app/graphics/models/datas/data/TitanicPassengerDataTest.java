@@ -47,4 +47,11 @@ class TitanicPassengerDataTest {
 		passenger.setAge(34);
 		assertEquals(34,passenger.getAge());
 	}
+	
+	@Test
+	void should_get_passenger_sibsp() {
+		TitanicPassengerData passenger = new TitanicPassengerData();
+		passenger.setSibSp(2);
+		assertEquals(2,passenger.getSibSp());
+	}
 }
