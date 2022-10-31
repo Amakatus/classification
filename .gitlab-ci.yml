@@ -14,4 +14,4 @@ test:
   coverage: '/Total.*?([0-9]{1,3})%/'
   script:
     - mvn $MAVEN_OPTS test jacoco:report
-    - cat target/site/jacoco/index.html
+    - cat target/site/jacoco-ut/index.html
