@@ -52,15 +52,13 @@ class EuclideanGeometryTest {
 	
 	@Test
 	void test_distance_with_length() {
-		wDS.addDistanceFieldString("petalLength");
+		
 		assertTrue(algo.getDataWithDistances().isEmpty());
 		List<Entry<IrisData, List<IrisData>>> irisDatas = algo.getDatasKNN();
 		assertFalse(algo.getDataWithDistances().isEmpty());
 		assertEquals(2, algo.getDataWithDistances().size());
 		assertEquals(2, irisDatas.size());
 		assertEquals(kNeighbours, irisDatas.get(0).getValue().size());
-		assertEquals(rIrisOne, irisDatas.get(0).getValue().get(0));
-		assertEquals(rIrisTwo, irisDatas.get(1).getValue().get(0));
 	}
 	
 	@Test
@@ -68,6 +66,14 @@ class EuclideanGeometryTest {
 		List<Entry<IrisData, List<IrisData>>> irisDatas = algo.getDatasKNN();
 		assertEquals(wIrisOne, irisDatas.get(0).getKey());
 		assertEquals(wIrisTwo, irisDatas.get(1).getKey());
+	}
+	
+	@Test
+	void test_value() {
+		wDS.addDistanceFieldString("petalLength");
+		List<Entry<IrisData, List<IrisData>>> irisDatas = algo.getDatasKNN();
+		assertEquals(rIrisOne, irisDatas.get(0).getValue().get(0));
+		assertEquals(rIrisTwo, irisDatas.get(1).getValue().get(0));
 	}
 	
 	
