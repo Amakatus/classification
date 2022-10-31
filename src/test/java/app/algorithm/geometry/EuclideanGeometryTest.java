@@ -94,6 +94,7 @@ class EuclideanGeometryTest {
 	
 	@Test
 	void test_value_width() {
+		workingDS.addDistanceFieldString("petalLength");
 		workingDS.addDistanceFieldString("petalWidth");
 		List<Entry<IrisData, List<IrisData>>> irisDatas2 = euclideanAlgo.getDatasKNN();
 		assertEquals(rIrisTwo, irisDatas2.get(0).getValue().get(0));
