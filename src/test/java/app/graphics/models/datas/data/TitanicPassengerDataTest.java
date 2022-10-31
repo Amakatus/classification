@@ -19,4 +19,11 @@ class TitanicPassengerDataTest {
 		passenger.setSurvived(true);
 		assertTrue(passenger.isSurvived());
 	}
+	
+	@Test
+	void should_get_passenger_pclass() {
+		TitanicPassengerData passenger = new TitanicPassengerData();
+		passenger.setpClass(3);
+		assertEquals(3,passenger.getpClass());
+	}
 }
