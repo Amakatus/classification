@@ -40,4 +40,11 @@ class TitanicPassengerDataTest {
 		passenger.setMale(true);
 		assertTrue(passenger.isMale());
 	}
+	
+	@Test
+	void should_get_passenger_age() {
+		TitanicPassengerData passenger = new TitanicPassengerData();
+		passenger.setAge(34);
+		assertEquals(34,passenger.getAge());
+	}
 }
