@@ -68,6 +68,14 @@ public class KNNAlgorithm<T extends Data> {
 	}
 
 	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
+	public List<Entry<T, List<T>>> getDatasKNN() {
+		this.launchDistancesCalcul();
+		List<Entry<T, List<T>>> res = new ArrayList<>();
+		this.generateKNNResults(res);
+		return res;
+	}
+
+	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
 	private void getDistancesFromCalculator() {
 		Map<T, Double> dataDistancesMap;
 		for (T workingData : this.workingDataset.getDatas()) {
@@ -81,13 +89,6 @@ public class KNNAlgorithm<T extends Data> {
 	}
 
 	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
-	public List<Entry<T, List<T>>> getDatasKNN() {
-		this.launchDistancesCalcul();
-		List<Entry<T, List<T>>> res = new ArrayList<>();
-		this.generateKNNResults(res);
-		return res;
-	}
-
 	private void generateKNNResults(List<Entry<T, List<T>>> res) {
 		for (Map<T, Double> dataDistMap : this.dataWithDistances) {
 			List<Entry<T, Double>> sortedDatasEntries = dataDistMap.entrySet().stream()
