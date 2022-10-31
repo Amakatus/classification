@@ -15,7 +15,7 @@ class DatasetTest {
 	
 	@BeforeEach
 	void initDataset() {
-		this.testDataset = new WorkingDataset<>("testDataset");
+		this.testDataset = new WorkingDataset<>("testDataset", new ReferenceDataset<IrisData>("WorkingDS"));
 	}
 	
 	@Test
@@ -38,7 +38,7 @@ class DatasetTest {
 	@Test
 	void testAddKNNAlgorithm() {
 		assertTrue(this.testDataset.getAlgorithms().isEmpty());
-		AlgorithmFactory.createAlgorithm(this.testDataset, new ReferenceDataset<IrisData>("WorkingDS"), 5);
+		AlgorithmFactory.createAlgorithm(this.testDataset, 5);
 		assertEquals(1, this.testDataset.getAlgorithms().size());
 	}
 

@@ -14,6 +14,7 @@ import app.graphics.models.datas.data.IrisData;
 
 class AppTest {
 	App app = null;
+	ReferenceDataset<IrisData> referenceDS = new ReferenceDataset<>("refDS");
 	
 	@BeforeEach
 	void initApp() {
@@ -30,13 +31,13 @@ class AppTest {
 	@Test
 	void testAddWorkingDataset() {
 		assertTrue(app.getWorkingDatasets().isEmpty());
-		app.addWorkingDataset(new WorkingDataset<IrisData>("RandomDataset"));
+		app.addWorkingDataset(new WorkingDataset<IrisData>("RandomDataset", referenceDS));
 		assertEquals(1, app.getWorkingDatasets().size());
 	}
 
 	@Test
 	void testGetWorkingDatasets() {
-		app.addWorkingDataset(new WorkingDataset<IrisData>("TestPurposeWorkingDataset"));
+		app.addWorkingDataset(new WorkingDataset<IrisData>("TestPurposeWorkingDataset", referenceDS));
 		assertEquals("TestPurposeWorkingDataset",app.getWorkingDatasets().get(0).getTitle());
 	}
 

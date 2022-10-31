@@ -36,8 +36,8 @@ class EuclideanGeometryTest {
 		rIrisTwo = new IrisData();
 		kNeighbours = 1;
 		referenceDS = new ReferenceDataset<IrisData>("rDS", Arrays.asList(rIrisOne, rIrisTwo));
-		workingDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo));
-		AlgorithmFactory.createAlgorithm(workingDS, referenceDS, kNeighbours);
+		workingDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo), referenceDS);
+		AlgorithmFactory.createAlgorithm(workingDS, kNeighbours);
 		euclideanAlgo = workingDS.getAlgorithms().get(0);
 		wIrisOne.setPetalLength(5);
 		rIrisOne.setPetalLength(6);

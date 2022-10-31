@@ -16,14 +16,12 @@ import app.graphics.models.datas.data.Data;
 public class KNNAlgorithm<T extends Data> {
 	protected IGeometryCalculator<T> calculator;
 	protected WorkingDataset<T> workingDataset;
-	protected ReferenceDataset<T> referenceDataset;
 	protected List<Map<T, Double>> dataWithDistances;
 	protected double strength;
 	protected int kNeighbours;
 
-	public KNNAlgorithm(WorkingDataset<T> workingDataset, ReferenceDataset<T> referenceDataset, int k) {
+	public KNNAlgorithm(WorkingDataset<T> workingDataset, int k) {
 		this.workingDataset = workingDataset;
-		this.referenceDataset = referenceDataset;
 		this.kNeighbours = k;
 		this.strength = Math.round(Math.random() * 100);
 		this.dataWithDistances = new ArrayList<>();
@@ -42,7 +40,7 @@ public class KNNAlgorithm<T extends Data> {
 	}
 
 	public ReferenceDataset<T> getReferenceDataset() {
-		return referenceDataset;
+		return workingDataset.getReferenceDataset();
 	}
 
 	public List<Map<T, Double>> getDataWithDistances() {
@@ -81,7 +79,7 @@ public class KNNAlgorithm<T extends Data> {
 		for (T workingData : this.workingDataset.getDatas()) {
 			dataDistancesMap = new HashMap<T, Double>();
 			dataDistancesMap.put(workingData, -1.); // 600 IQ
-			for (T refData : this.referenceDataset.getDatas()) {
+			for (T refData : this.getReferenceDataset().getDatas()) {
 				dataDistancesMap.put(refData, this.calculator.distance(workingData, refData));
 			}
 			this.dataWithDistances.add(dataDistancesMap);
