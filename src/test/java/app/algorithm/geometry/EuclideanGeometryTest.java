@@ -61,7 +61,7 @@ class EuclideanGeometryTest {
 	}
 	
 	@Test
-	void test_key_length() {
+	void test_key_for_length() {
 		List<Entry<IrisData, List<IrisData>>> irisDatas = euclideanAlgo.getDatasKNN();
 		assertEquals(wIrisOne, irisDatas.get(0).getKey());
 		assertEquals(wIrisTwo, irisDatas.get(1).getKey());
@@ -86,14 +86,14 @@ class EuclideanGeometryTest {
 	}
 	
 	@Test
-	void test_key_width() {
+	void test_key_for_width_and_length() {
 		List<Entry<IrisData, List<IrisData>>> irisDatas2 = euclideanAlgo.getDatasKNN();
 		assertEquals(wIrisOne, irisDatas2.get(0).getKey());
 		assertEquals(wIrisTwo, irisDatas2.get(1).getKey());
 	}
 	
 	@Test
-	void test_value_width() {
+	void test_value_width_and_length() {
 		workingDS.addDistanceFieldString("petalLength");
 		workingDS.addDistanceFieldString("petalWidth");
 		List<Entry<IrisData, List<IrisData>>> irisDatas2 = euclideanAlgo.getDatasKNN();
