@@ -55,6 +55,10 @@ public class KNNAlgorithm<T extends Data> {
 	public int getkNeighbours() {
 		return kNeighbours;
 	}
+	
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
 
 	private void createCalculator() {
 		this.calculator = new EuclideanGeometry<T>(this.workingDataset.getDistanceFields());

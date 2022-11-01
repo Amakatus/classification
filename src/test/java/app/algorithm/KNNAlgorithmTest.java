@@ -23,7 +23,7 @@ class KNNAlgorithmTest {
 	int kNeighbours;
 	ReferenceDataset<IrisData> referenceDS;
 	WorkingDataset<IrisData> workingDS;
-	KNNAlgorithm<IrisData> euclideanGeometry;
+	KNNAlgorithm<IrisData> knnAlgorithm;
 	
 	
 	@BeforeEach
@@ -36,7 +36,7 @@ class KNNAlgorithmTest {
 		referenceDS = new ReferenceDataset<IrisData>("rDS", Arrays.asList(rIrisOne, rIrisTwo));
 		workingDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo), referenceDS);
 		AlgorithmFactory.createAlgorithm(workingDS, kNeighbours);
-		euclideanGeometry = workingDS.getAlgorithms().get(0);
+		knnAlgorithm = workingDS.getAlgorithms().get(0);
 		wIrisOne.setPetalLength(5);
 		rIrisOne.setPetalLength(6);
 		wIrisTwo.setPetalLength(10);
@@ -47,20 +47,38 @@ class KNNAlgorithmTest {
 		rIrisTwo.setPetalWidth(10);
 	}
 	
+	@Test
+	void test_get_strength() {
+		this.knnAlgorithm.setStrength(100);
+		assertEquals(100, this.knnAlgorithm.getStrength());
+	}
+	
+	@Test
+	void test_get_kneighbours() {
+		assertEquals(1,this.knnAlgorithm.getK());
+	}
+	
+	@Test
+	void test_get_calculator() {
+		assertEquals(null, this.knnAlgorithm.getCalculator());
+		this.knnAlgorithm.getDatasKNN();
+		assertFalse(this.knnAlgorithm.getCalculator() == null);
+	}
+	
 	
 	@Test
 	void test_distance_with_length() {
-		assertTrue(euclideanGeometry.getDataWithDistances().isEmpty());
-		List<Entry<IrisData, List<IrisData>>> irisDatas = euclideanGeometry.getDatasKNN();
-		assertFalse(euclideanGeometry.getDataWithDistances().isEmpty());
-		assertEquals(2, euclideanGeometry.getDataWithDistances().size());
+		assertTrue(knnAlgorithm.getDataWithDistances().isEmpty());
+		List<Entry<IrisData, List<IrisData>>> irisDatas = knnAlgorithm.getDatasKNN();
+		assertFalse(knnAlgorithm.getDataWithDistances().isEmpty());
+		assertEquals(2, knnAlgorithm.getDataWithDistances().size());
 		assertEquals(2, irisDatas.size());
 		assertEquals(kNeighbours, irisDatas.get(0).getValue().size());
 	}
 	
 	@Test
 	void test_key_for_length() {
-		List<Entry<IrisData, List<IrisData>>> irisDatas = euclideanGeometry.getDatasKNN();
+		List<Entry<IrisData, List<IrisData>>> irisDatas = knnAlgorithm.getDatasKNN();
 		assertEquals(wIrisOne, irisDatas.get(0).getKey());
 		assertEquals(wIrisTwo, irisDatas.get(1).getKey());
 	}
@@ -68,7 +86,7 @@ class KNNAlgorithmTest {
 	@Test
 	void test_value_length() {
 		workingDS.addDistanceFieldString("petalLength");
-		List<Entry<IrisData, List<IrisData>>> irisDatas = euclideanGeometry.getDatasKNN();
+		List<Entry<IrisData, List<IrisData>>> irisDatas = knnAlgorithm.getDatasKNN();
 		assertEquals(rIrisOne, irisDatas.get(0).getValue().get(0));
 		assertEquals(rIrisTwo, irisDatas.get(1).getValue().get(0));
 	}
@@ -76,16 +94,16 @@ class KNNAlgorithmTest {
 	
 	@Test
 	void test_distance_with_width() {
-		List<Entry<IrisData, List<IrisData>>> irisDatas = euclideanGeometry.getDatasKNN();
-		assertFalse(euclideanGeometry.getDataWithDistances().isEmpty());
-		assertEquals(2, euclideanGeometry.getDataWithDistances().size());
+		List<Entry<IrisData, List<IrisData>>> irisDatas = knnAlgorithm.getDatasKNN();
+		assertFalse(knnAlgorithm.getDataWithDistances().isEmpty());
+		assertEquals(2, knnAlgorithm.getDataWithDistances().size());
 		assertEquals(2, irisDatas.size());
 		assertEquals(kNeighbours, irisDatas.get(0).getValue().size());
 	}
 	
 	@Test
 	void test_key_for_width_and_length() {
-		List<Entry<IrisData, List<IrisData>>> irisDatas = euclideanGeometry.getDatasKNN();
+		List<Entry<IrisData, List<IrisData>>> irisDatas = knnAlgorithm.getDatasKNN();
 		assertEquals(wIrisOne, irisDatas.get(0).getKey());
 		assertEquals(wIrisTwo, irisDatas.get(1).getKey());
 	}
@@ -94,7 +112,7 @@ class KNNAlgorithmTest {
 	void test_value_width_and_length() {
 		workingDS.addDistanceFieldString("petalLength");
 		workingDS.addDistanceFieldString("petalWidth");
-		List<Entry<IrisData, List<IrisData>>> irisDatas = euclideanGeometry.getDatasKNN();
+		List<Entry<IrisData, List<IrisData>>> irisDatas = knnAlgorithm.getDatasKNN();
 		assertEquals(rIrisTwo, irisDatas.get(0).getValue().get(0));
 		assertEquals(rIrisOne, irisDatas.get(1).getValue().get(0));
 	}
