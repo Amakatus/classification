@@ -56,26 +56,27 @@ public class KNNAlgorithm<T extends Data> {
 		this.strength = strength;
 	}
 
-	private void createCalculator() {
-		this.calculator = new EuclideanGeometry<T>(this.workingDataset.getDistanceFields());
-	}
-
-	private void launchDistancesCalcul() {
-		this.dataWithDistances.clear();
-		this.createCalculator();
-		this.getDistancesFromCalculator();
-	}
-
 	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
+	/**
+	 * Return for each working datas an Entry
+	 * The key of this entry is the working data
+	 * The value of this entry is a List containing is k nearest reference neighbours.
+	 * @return List<Entry<T, List<T>>> knn
+	 */
 	public List<Entry<T, List<T>>> getDatasKNN() {
-		this.launchDistancesCalcul();
-		List<Entry<T, List<T>>> res = new ArrayList<>();
-		this.generateKNNResults(res);
-		return res;
+		this.dataWithDistances.clear();
+		this.calculator = new EuclideanGeometry<T>(this.workingDataset.getDistanceFields());
+		this.setupDistances();
+		return this.generateKNNResults();
 	}
 
 	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
-	private void getDistancesFromCalculator() {
+	/**
+	 * Construct one map per working data
+	 * This map contains all the reference values and the working data for which
+	 * we are currently calculating the distances.
+	 */
+	private void setupDistances() {
 		Map<T, Double> dataDistancesMap;
 		for (T workingData : this.workingDataset.getDatas()) {
 			dataDistancesMap = new HashMap<T, Double>();
@@ -92,7 +93,12 @@ public class KNNAlgorithm<T extends Data> {
 	}
 
 	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
-	private void generateKNNResults(List<Entry<T, List<T>>> res) {
+	/**
+	 * 
+	 * @return
+	 */
+	private List<Entry<T, List<T>>> generateKNNResults() {
+		List<Entry<T, List<T>>> res = new ArrayList<>();
 		for (Map<T, Double> dataDistMap : this.dataWithDistances) {
 			List<Entry<T, Double>> sortedDatasEntries = dataDistMap.entrySet().stream()
 					.sorted(Map.Entry.comparingByValue())
@@ -104,6 +110,7 @@ public class KNNAlgorithm<T extends Data> {
 				neighbours.add(sortedDatasEntries.get(i).getKey());
 			res.add(Map.entry(sortedDatasEntries.get(0).getKey(), neighbours));
 		}
+		return res;
 	}
 
 	public String toString() {

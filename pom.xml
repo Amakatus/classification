@@ -99,6 +99,8 @@
 						<exclude>app/graphics/views/**/*.class</exclude>
 						<exclude>app/graphics/components/**/*.class</exclude>
 						<exclude>app/exceptions/**/*.class</exclude>
+						<exclude>app/AppFX.class</exclude>
+						<exclude>app/WindowApp.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>
