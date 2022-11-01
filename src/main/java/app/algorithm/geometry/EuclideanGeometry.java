@@ -23,18 +23,10 @@ public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 		double sumPow = 0;
 		double distance;
 		for (String fieldName : this.fieldsNames) {
-			distance = findDistanceForField(workingData, referenceData, fieldName);
+			distance = this.findDistanceForField(workingData, referenceData, fieldName);
 			if(distance == Double.MIN_VALUE) throw new FieldToDistanceException(fieldName);
 			else sumPow += Math.pow(distance, POWER);
 		}
 		return Math.sqrt(sumPow);
-	}
-
-	private double findDistanceForField(T workingData, T referenceData, String fieldName) {
-		try {
-			return ClassUtils.getDoubleFromField(workingData,fieldName) - ClassUtils.getDoubleFromField(referenceData, fieldName);
-		} catch (FieldNotDoubleException e1) {
-			return ClassUtils.getValueFromFieldByMethod(workingData, fieldName, referenceData);
-		}
 	}
 }
