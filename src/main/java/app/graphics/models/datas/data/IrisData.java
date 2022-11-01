@@ -2,27 +2,20 @@ package app.graphics.models.datas.data;
 
 import com.opencsv.bean.CsvBindByName;
 
-import app.annotations.CalculableField;
-
 public class IrisData extends Data {
 	@CsvBindByName(column = "sepal.length")
-	@CalculableField
 	protected double sepalLength;
 	
 	@CsvBindByName(column = "sepal.width")
-	@CalculableField
 	protected double sepalWidth;
 	
 	@CsvBindByName(column = "petal.length")
-	@CalculableField
 	protected double petalLength;
 	
 	@CsvBindByName(column = "petal.width")
-	@CalculableField
 	protected double petalWidth;
 	
 	@CsvBindByName(column = "variety")
-	@CalculableField
 	protected IrisVariety variety;
 	
 	public double getSepalLength() {

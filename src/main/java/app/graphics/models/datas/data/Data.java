@@ -5,12 +5,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.annotations.CalculableField;
 import app.exceptions.FieldNotDoubleException;
 
 public abstract class Data {
 	public static final String TO_DOUBLE = "ToDouble";
-	
+
 	public Field[] getFields() {
 		return this.getClass().getDeclaredFields();
 	}
@@ -33,7 +32,7 @@ public abstract class Data {
 	public List<Field> getCalculableFields() {
 		List<Field> res = new ArrayList<>();
 		for (Field field : this.getFields()) {
-			if (field.getAnnotation(CalculableField.class) != null) {
+			if (field.getType() == double.class || this.findMethodByName(field.getName() + Data.TO_DOUBLE) != null) {
 				res.add(field);
 			}
 		}
@@ -46,22 +45,25 @@ public abstract class Data {
 
 		try {
 			return field.getDouble(this);
-		} catch (Exception e) { e.printStackTrace(); }
-		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return -1;
 	}
-	
+
 	public double getValueFromFieldByMethod(String fieldName, Data other) {
-		Method fieldToDoubleMethod = this.findMethodByName(fieldName+Data.TO_DOUBLE);
-		if(fieldToDoubleMethod != null) {
+		Method fieldToDoubleMethod = this.findMethodByName(fieldName + Data.TO_DOUBLE);
+		if (fieldToDoubleMethod != null) {
 			fieldToDoubleMethod.setAccessible(true);
 			try {
 				return (double) fieldToDoubleMethod.invoke(this, other);
-			} catch (Exception e) { e.printStackTrace(); }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return Double.MIN_VALUE;
 	}
-
 
 	public double getValueFromFieldName(String name) throws FieldNotDoubleException {
 		for (Field field : this.getFields()) {
