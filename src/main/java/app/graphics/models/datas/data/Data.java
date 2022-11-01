@@ -9,6 +9,8 @@ import app.annotations.CalculableField;
 import app.exceptions.FieldNotDoubleException;
 
 public abstract class Data {
+	public static final String TO_DOUBLE = "ToDouble";
+	
 	public Field[] getFields() {
 		return this.getClass().getDeclaredFields();
 	}
@@ -50,7 +52,7 @@ public abstract class Data {
 	}
 	
 	public double getValueFromFieldByMethod(String fieldName, Data other) {
-		Method fieldToDoubleMethod = this.findMethodByName(fieldName+"ToDouble");
+		Method fieldToDoubleMethod = this.findMethodByName(fieldName+Data.TO_DOUBLE);
 		if(fieldToDoubleMethod != null) {
 			fieldToDoubleMethod.setAccessible(true);
 			try {
