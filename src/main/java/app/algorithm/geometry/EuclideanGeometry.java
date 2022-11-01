@@ -2,9 +2,10 @@ package app.algorithm.geometry;
 
 import java.util.List;
 
-import app.exceptions.FieldToDistanceException;
 import app.exceptions.FieldNotDoubleException;
+import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.data.Data;
+import app.utils.ClassUtils;
 
 public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 	public final int POWER = 2;
@@ -31,9 +32,9 @@ public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 
 	private double findDistanceForField(T workingData, T referenceData, String fieldName) {
 		try {
-			return workingData.getValueFromFieldName(fieldName) - referenceData.getValueFromFieldName(fieldName);
+			return ClassUtils.getValueFromFieldName(workingData,fieldName) - ClassUtils.getValueFromFieldName(referenceData, fieldName);
 		} catch (FieldNotDoubleException e1) {
-			return workingData.getValueFromFieldByMethod(fieldName, referenceData);
+			return ClassUtils.getValueFromFieldByMethod(workingData, fieldName, referenceData);
 		}
 	}
 }
