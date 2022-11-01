@@ -33,7 +33,7 @@ public abstract class ClassUtils {
 	}
 	
 	public static boolean hasMethodToDoubleForField(Object o, String fieldName) {
-		Method res = findMethodByName(o, fieldName);
+		Method res = findMethodByName(o, fieldName+Data.TO_DOUBLE);
 		return res != null && res.getReturnType() == double.class;
 	}
 
@@ -48,21 +48,8 @@ public abstract class ClassUtils {
 		return res;
 	}
 
-	public static double getValueFromField(Object object, Field field) throws FieldNotDoubleException {
-		if (field.getType() != double.class)
-			throw new FieldNotDoubleException();
 
-		try {
-			field.setAccessible(true);
-			return field.getDouble(object);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return -1;
-	}
-
-	public static double getValueFromFieldByMethod(Object object, String fieldName, Data other) {
+	public static double getValueFromFieldByMethod(Object object, String fieldName, Object other) {
 		Method fieldToDoubleMethod = findMethodByName(object, fieldName + Data.TO_DOUBLE);
 		if (fieldToDoubleMethod != null) {
 			fieldToDoubleMethod.setAccessible(true);
@@ -74,14 +61,28 @@ public abstract class ClassUtils {
 		}
 		return Double.MIN_VALUE;
 	}
+	
+	private static double getDoubleFromField(Object object, Field field) throws FieldNotDoubleException {
+		if (field.getType() != double.class)
+			throw new FieldNotDoubleException();
+		
+		try {
+			field.setAccessible(true);
+			return field.getDouble(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
+	}
 
-	public static double getValueFromFieldName(Object object, String name) throws FieldNotDoubleException {
+	public static double getDoubleFromField(Object object, String name) throws FieldNotDoubleException {
 		for (Field field : getFields(object)) {
 			field.setAccessible(true);
 			if (field.getName().equalsIgnoreCase(name)) {
-				return getValueFromField(object, field);
+				return getDoubleFromField(object, field);
 			}
 		}
-		return 0;
+		return -1;
 	}
 }

@@ -32,7 +32,7 @@ public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 
 	private double findDistanceForField(T workingData, T referenceData, String fieldName) {
 		try {
-			return ClassUtils.getValueFromFieldName(workingData,fieldName) - ClassUtils.getValueFromFieldName(referenceData, fieldName);
+			return ClassUtils.getDoubleFromField(workingData,fieldName) - ClassUtils.getDoubleFromField(referenceData, fieldName);
 		} catch (FieldNotDoubleException e1) {
 			return ClassUtils.getValueFromFieldByMethod(workingData, fieldName, referenceData);
 		}
