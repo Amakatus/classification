@@ -54,8 +54,13 @@ class KNNAlgorithmTest {
 	}
 	
 	@Test
+	void test_get_working_dataset() {
+		assertEquals(this.workingDS, this.knnAlgorithm.getWorkingDataset());
+	}
+	
+	@Test
 	void test_get_kneighbours() {
-		assertEquals(1,this.knnAlgorithm.getK());
+		assertEquals(1,this.knnAlgorithm.getkNeighbours());
 	}
 	
 	@Test
@@ -65,6 +70,10 @@ class KNNAlgorithmTest {
 		assertFalse(this.knnAlgorithm.getCalculator() == null);
 	}
 	
+	@Test
+	void test_to_string() {
+		assertEquals("1NNAlgorithm (72.0%)", this.knnAlgorithm.toString());
+	}
 	
 	@Test
 	void test_distance_with_length() {

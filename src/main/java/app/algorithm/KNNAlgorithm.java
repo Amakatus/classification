@@ -24,12 +24,8 @@ public class KNNAlgorithm<T extends Data> {
 	public KNNAlgorithm(WorkingDataset<T> workingDataset, int k) {
 		this.workingDataset = workingDataset;
 		this.kNeighbours = k;
-		this.strength = Math.round(Math.random() * 100);
+		this.strength = 72; // a changer
 		this.dataWithDistances = new ArrayList<>();
-	}
-
-	public int getK() {
-		return this.kNeighbours;
 	}
 
 	public IGeometryCalculator<T> getCalculator() {
