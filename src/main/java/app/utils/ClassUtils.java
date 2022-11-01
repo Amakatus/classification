@@ -73,7 +73,7 @@ public abstract class ClassUtils {
 			e.printStackTrace();
 		}
 		
-		return -1;
+		return Double.MIN_VALUE;
 	}
 
 	public static double getDoubleFromField(Object object, String name) throws FieldNotDoubleException {
@@ -83,6 +83,6 @@ public abstract class ClassUtils {
 				return getDoubleFromField(object, field);
 			}
 		}
-		return -1;
+		return Double.MIN_VALUE;
 	}
 }

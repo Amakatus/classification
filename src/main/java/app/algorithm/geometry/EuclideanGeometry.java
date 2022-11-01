@@ -2,10 +2,8 @@ package app.algorithm.geometry;
 
 import java.util.List;
 
-import app.exceptions.FieldNotDoubleException;
 import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.data.Data;
-import app.utils.ClassUtils;
 
 public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 	public final int POWER = 2;

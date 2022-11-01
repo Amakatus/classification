@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -79,7 +78,7 @@ class ClassUtilsTest {
 	void testGetDoubleFromFieldObjectString() {
 		try {
 			assertEquals(0, ClassUtils.getDoubleFromField(testClass, "size"));
-			assertEquals(-1, ClassUtils.getDoubleFromField(testClass, "sizee"));
+			assertEquals(Double.MIN_VALUE, ClassUtils.getDoubleFromField(testClass, "sizee"));
 		} catch (FieldNotDoubleException e) {
 			assertTrue(false);
 		}
