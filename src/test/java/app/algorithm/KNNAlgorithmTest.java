@@ -24,6 +24,7 @@ class KNNAlgorithmTest {
 	ReferenceDataset<IrisData> referenceDS;
 	WorkingDataset<IrisData> workingDS;
 	KNNAlgorithm<IrisData> knnAlgorithm;
+	KNNCalculator<IrisData> calculator;
 	
 	
 	@BeforeEach
@@ -37,6 +38,7 @@ class KNNAlgorithmTest {
 		workingDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo), referenceDS);
 		AlgorithmFactory.createAlgorithm(workingDS, kNeighbours);
 		knnAlgorithm = workingDS.getAlgorithms().get(0);
+		calculator = knnAlgorithm.getCalculator();
 		wIrisOne.setPetalLength(5);
 		rIrisOne.setPetalLength(6);
 		wIrisTwo.setPetalLength(10);
@@ -60,14 +62,13 @@ class KNNAlgorithmTest {
 	
 	@Test
 	void test_get_kneighbours() {
-		assertEquals(1,this.knnAlgorithm.getkNeighbours());
+		assertEquals(1,this.knnAlgorithm.getKNeighbours());
 	}
 	
 	@Test
-	void test_get_calculator() {
-		assertEquals(null, this.knnAlgorithm.getCalculator());
-		this.knnAlgorithm.getDatasKNN();
+	void test_calculator_auto_init() {
 		assertFalse(this.knnAlgorithm.getCalculator() == null);
+		assertEquals(this.knnAlgorithm, this.knnAlgorithm.getCalculator().getAlgorithm());
 	}
 	
 	@Test
@@ -77,10 +78,10 @@ class KNNAlgorithmTest {
 	
 	@Test
 	void test_distance_with_length() {
-		assertTrue(knnAlgorithm.getDataWithDistances().isEmpty());
+		assertTrue(calculator.getDatasWithDistances().isEmpty());
 		List<Entry<IrisData, List<IrisData>>> irisDatas = knnAlgorithm.getDatasKNN();
-		assertFalse(knnAlgorithm.getDataWithDistances().isEmpty());
-		assertEquals(2, knnAlgorithm.getDataWithDistances().size());
+		assertFalse(calculator.getDatasWithDistances().isEmpty());
+		assertEquals(2, calculator.getDatasWithDistances().size());
 		assertEquals(2, irisDatas.size());
 		assertEquals(kNeighbours, irisDatas.get(0).getValue().size());
 	}
@@ -104,8 +105,8 @@ class KNNAlgorithmTest {
 	@Test
 	void test_distance_with_width() {
 		List<Entry<IrisData, List<IrisData>>> irisDatas = knnAlgorithm.getDatasKNN();
-		assertFalse(knnAlgorithm.getDataWithDistances().isEmpty());
-		assertEquals(2, knnAlgorithm.getDataWithDistances().size());
+		assertFalse(calculator.getDatasWithDistances().isEmpty());
+		assertEquals(2, calculator.getDatasWithDistances().size());
 		assertEquals(2, irisDatas.size());
 		assertEquals(kNeighbours, irisDatas.get(0).getValue().size());
 	}

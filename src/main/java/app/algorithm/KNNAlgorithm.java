@@ -1,23 +1,19 @@
 package app.algorithm;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import app.algorithm.geometry.EuclideanGeometry;
-import app.algorithm.geometry.IGeometryCalculator;
-import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
 
 public class KNNAlgorithm<T extends Data> {
-	protected IGeometryCalculator<T> calculator;
 	protected WorkingDataset<T> workingDataset;
-	protected List<Map<T, Double>> dataWithDistances;
+	protected KNNCalculator<T> calculator;
 	protected double strength;
 	protected int kNeighbours;
 
@@ -25,10 +21,10 @@ public class KNNAlgorithm<T extends Data> {
 		this.workingDataset = workingDataset;
 		this.kNeighbours = k;
 		this.strength = 72; // a changer
-		this.dataWithDistances = new ArrayList<>();
+		this.calculator = new KNNCalculator<T>(this);
 	}
 
-	public IGeometryCalculator<T> getCalculator() {
+	public KNNCalculator<T> getCalculator() {
 		return calculator;
 	}
 
@@ -40,15 +36,11 @@ public class KNNAlgorithm<T extends Data> {
 		return workingDataset.getReferenceDataset();
 	}
 
-	public List<Map<T, Double>> getDataWithDistances() {
-		return dataWithDistances;
-	}
-
 	public double getStrength() {
 		return strength;
 	}
 
-	public int getkNeighbours() {
+	public int getKNeighbours() {
 		return kNeighbours;
 	}
 	
@@ -56,7 +48,6 @@ public class KNNAlgorithm<T extends Data> {
 		this.strength = strength;
 	}
 
-	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
 	/**
 	 * Return for each working datas an Entry
 	 * The key of this entry is the working data
@@ -64,47 +55,21 @@ public class KNNAlgorithm<T extends Data> {
 	 * @return List<Entry<T, List<T>>> knn
 	 */
 	public List<Entry<T, List<T>>> getDatasKNN() {
-		this.dataWithDistances.clear();
-		this.calculator = new EuclideanGeometry<T>(this.workingDataset.getDistanceFields());
-		this.setupDistances();
-		return this.generateKNNResults();
+		return generateKNNResults(this.calculator.launchCalcul(new EuclideanGeometry<T>(calculator)));
 	}
-
-	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
-	/**
-	 * Construct one map per working data
-	 * This map contains all the reference values and the working data for which
-	 * we are currently calculating the distances.
-	 */
-	private void setupDistances() {
-		Map<T, Double> dataDistancesMap;
-		for (T workingData : this.workingDataset.getDatas()) {
-			dataDistancesMap = new HashMap<T, Double>();
-			dataDistancesMap.put(workingData, -1.); // 600 IQ
-			for (T refData : this.getReferenceDataset().getDatas()) {
-				try {
-					dataDistancesMap.put(refData, this.calculator.distance(workingData, refData));
-				} catch (FieldToDistanceException e) {
-					e.printStackTrace();
-				}
-			}
-			this.dataWithDistances.add(dataDistancesMap);
-		}
-	}
-
-	// Peut être déplacer tout ça dans un objet Calculateur qui possède un Geometry et retourne ça
-	/**
-	 * 
-	 * @return
-	 */
-	private List<Entry<T, List<T>>> generateKNNResults() {
+	
+	private List<Entry<T, List<T>>> generateKNNResults(List<Map<T, Double>> dataWithDistances) {
 		List<Entry<T, List<T>>> res = new ArrayList<>();
-		for (Map<T, Double> dataDistMap : this.dataWithDistances) {
-			List<Entry<T, Double>> sortedDatasEntries = dataDistMap.entrySet().stream()
+		List<Entry<T, Double>> sortedDatasEntries;
+		for (Map<T, Double> dataDistMap : dataWithDistances) {
+			// Transform the map in a list of k+1 entries sorted by ascending value (distance)
+			sortedDatasEntries = dataDistMap.entrySet().stream()
 					.sorted(Map.Entry.comparingByValue())
-					.limit(kNeighbours+1)
+					.limit(this.kNeighbours+1)
 					.collect(Collectors.toList());
 			
+			// Using the sorted list to generate the Entry with as key the working data 
+			// and as value the list of knn for this working data.
 			List<T> neighbours = new ArrayList<>();
 			for (int i = 1; i < sortedDatasEntries.size(); i++)
 				neighbours.add(sortedDatasEntries.get(i).getKey());

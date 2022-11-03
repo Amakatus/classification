@@ -21,7 +21,7 @@ class AlgorithmFactoryTest {
 		WorkingDataset<IrisData> working = new WorkingDataset<IrisData>("WorkingDS", Arrays.asList(toClassify), reference);
 		AlgorithmFactory.createAlgorithm(working, 5);
 		assertEquals(1, working.getAlgorithms().size());
-		assertEquals(5, working.getAlgorithms().get(0).getkNeighbours());
+		assertEquals(5, working.getAlgorithms().get(0).getKNeighbours());
 	}
 
 }
