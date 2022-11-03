@@ -22,7 +22,7 @@ public class KNNCalculator<T extends Data> {
 	}
 
 	public KNNAlgorithm<T> getAlgorithm() {
-		return algorithm;
+		return this.algorithm;
 	}
 	
 	public IGeometryCalculator<T> getGeometry() {
@@ -30,11 +30,11 @@ public class KNNCalculator<T extends Data> {
 	}
 
 	public List<Map<T, Double>> getDatasWithDistances() {
-		return datasWithDistances;
+		return this.datasWithDistances;
 	}
 	
 	public List<String> getFieldsNames() {
-		return this.algorithm.getWorkingDataset().getDistanceFields();
+		return this.getWorkingDataset().getDistanceFields();
 	}
 	
 	public WorkingDataset<T> getWorkingDataset() {
