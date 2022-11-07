@@ -12,7 +12,8 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 	protected List<KNNAlgorithm<T>> algorithms;
 	protected ReferenceDataset<T> referenceDataset;
 
-	public WorkingDataset(String title, List<T> datas, ReferenceDataset<T> referenceDataset, String categoryField, List<String> distanceFields) {
+	public WorkingDataset(String title, List<T> datas, ReferenceDataset<T> referenceDataset, String categoryField,
+			List<String> distanceFields) {
 		super(title, datas);
 		this.categoryField = categoryField;
 		this.distanceFields = distanceFields;
@@ -25,7 +26,7 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 	}
 
 	public WorkingDataset(String title, List<T> datas, ReferenceDataset<T> referenceDataset) {
-		this(title, datas, referenceDataset,null);
+		this(title, datas, referenceDataset, null);
 	}
 
 	public WorkingDataset(String title, ReferenceDataset<T> referenceDataset) {
@@ -35,7 +36,7 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 	public List<KNNAlgorithm<T>> getAlgorithms() {
 		return this.algorithms;
 	}
-	
+
 	public String getCategoryField() {
 		return categoryField;
 	}
@@ -49,7 +50,10 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 	}
 
 	public void addDistanceFieldString(String distanceFieldName) {
-		this.distanceFields.add(distanceFieldName);
+		if (!this.distanceFields.contains(distanceFieldName)) {
+			this.distanceFields.add(distanceFieldName);
+		}
+
 	}
 
 	public void removeDistanceFieldString(String distanceFieldName) {

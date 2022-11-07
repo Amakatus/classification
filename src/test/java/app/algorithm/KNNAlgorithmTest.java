@@ -126,4 +126,11 @@ class KNNAlgorithmTest {
 		assertEquals(rIrisTwo, irisDatas.get(0).getValue().get(0));
 		assertEquals(rIrisOne, irisDatas.get(1).getValue().get(0));
 	}
+	
+	@Test
+	void test_only_one_distance_filed_name_was_add () {
+		workingDS.addDistanceFieldString("petalWidth");
+		workingDS.addDistanceFieldString("petalWidth");
+		assertEquals(1,workingDS.getDistanceFields().size());
+	}
 }
