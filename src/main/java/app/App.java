@@ -53,6 +53,6 @@ public class App {
 	}
 	
 	public void loadReferenceDatasets() {
-		this.addReferenceDataset(new ReferenceDataset<IrisData>("IrisReferenceDataset", CSVUtils.loadIrisCSV()));
+		this.addReferenceDataset(new ReferenceDataset<IrisData>("IrisReferenceDataset", CSVUtils.loadCSV("/data/iris.csv", IrisData.class)));
 	}
 }

@@ -13,7 +13,7 @@ class CSVUtilsTest {
 
 	@Test
 	void testLoadIrisCSV() {
-		List<IrisData> irisDatas = CSVUtils.loadIrisCSV();
+		List<IrisData> irisDatas = CSVUtils.loadCSV("/data/iris.csv", IrisData.class);
 		assertEquals(IrisVariety.SETOSA, irisDatas.get(0).getVariety());
 		assertEquals(150, irisDatas.size());
 	}

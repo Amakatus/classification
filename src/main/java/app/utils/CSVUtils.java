@@ -7,14 +7,12 @@ import java.util.List;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import app.graphics.models.datas.data.IrisData;
-
 public abstract class CSVUtils {
-	public static List<IrisData> loadIrisCSV() {
+	public static <T> List<T> loadCSV(String path, Class<T> tClass) {
 		try {
-			return new CsvToBeanBuilder<IrisData>(Files.newBufferedReader(ProjectUtils.getFilePath("/data/iris.csv")))
+			return new CsvToBeanBuilder<T>(Files.newBufferedReader(ProjectUtils.getFilePath(path)))
 					.withSeparator(',')
-					.withType(IrisData.class)
+					.withType(tClass)
 					.build()
 					.parse();
 		} catch (IllegalStateException e) {
@@ -22,6 +20,6 @@ public abstract class CSVUtils {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return new ArrayList<IrisData>();
+		return new ArrayList<T>();
 	}
 }

@@ -5,6 +5,6 @@ import app.utils.CSVUtils;
 
 public abstract class DatasetFactory {
 	public static ReferenceDataset<IrisData> irisReferenceDataset(String title) {
-		return new ReferenceDataset<IrisData>(title, CSVUtils.loadIrisCSV());
+		return new ReferenceDataset<IrisData>(title, CSVUtils.loadCSV("/data/iris.csv", IrisData.class));
 	}
 }
