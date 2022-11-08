@@ -8,8 +8,8 @@ class DataTypesTest {
 
 	@Test
 	void testDataTypes() {
-		assertEquals(IrisData.class, DataTypes.IRIS.getTypeClass());
-		assertEquals(TitanicPassengerData.class, DataTypes.PASSENGER.getTypeClass());
+		assertEquals(IrisData.class, DataType.IRIS.getTypeClass());
+		assertEquals(TitanicPassengerData.class, DataType.PASSENGER.getTypeClass());
 	}
 
 }

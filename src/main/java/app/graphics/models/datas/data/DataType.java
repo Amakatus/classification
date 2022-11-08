@@ -1,12 +1,12 @@
 package app.graphics.models.datas.data;
 
-public enum DataTypes {
+public enum DataType {
 	IRIS(IrisData.class),
 	PASSENGER(TitanicPassengerData.class);
 
 	Class<? extends Data> typeClass;
 	
-	DataTypes(Class<? extends Data> typeClass) {
+	DataType(Class<? extends Data> typeClass) {
 		this.typeClass = typeClass;
 	}
 	
