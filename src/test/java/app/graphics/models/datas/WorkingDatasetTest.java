@@ -2,18 +2,32 @@ package app.graphics.models.datas;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import app.graphics.models.datas.data.IrisData;
 
 class WorkingDatasetTest {
+	WorkingDataset<IrisData> workingDS;
 	
+	@BeforeEach
+	void init() {
+		workingDS = new WorkingDataset<IrisData>("wDS", null);
+	}
 	
 	@Test
-	void Test_setter_and_getter_categoriField() {
-		ReferenceDataset<IrisData> referenceDS = new ReferenceDataset<IrisData>("rDS");
-		WorkingDataset<IrisData> workingDS = new WorkingDataset<IrisData>("wDS", referenceDS);
-		workingDS.setCategoryField("petalLenght");
-		assertEquals("petalLenght", workingDS.getCategoryField());
+	void test_setter_and_getter_categoryField() {
+		workingDS.setCategoryField("petalLength");
+		assertEquals("petalLength", workingDS.getCategoryField());
+	}
+	
+	@Test
+	void test_create_algorithm() {
+		assertEquals(0, workingDS.getAlgorithms().size());
+		workingDS.createAlgorithm(5);
+		assertEquals(1, workingDS.getAlgorithms().size());
+		workingDS.createAlgorithm(5);
+		workingDS.createAlgorithm(3);
+		assertEquals(3, workingDS.getAlgorithms().size());
 	}
 }

@@ -1,6 +1,5 @@
 package app.utils;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +17,8 @@ public abstract class CSVUtils {
 					.withType((Class<T>) dataType.getTypeClass())
 					.build()
 					.parse();
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) { e.printStackTrace(); }
+		// Should throw an exception ?
 		return new ArrayList<T>();
 	}
 }

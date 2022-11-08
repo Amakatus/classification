@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import app.graphics.models.datas.Dataset;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
@@ -44,8 +43,8 @@ class AppTest {
 	@Test
 	void testAddReferenceDataset() {
 		assertTrue(app.getReferenceDatasets().isEmpty());
-		app.addWorkingDataset(new ReferenceDataset<IrisData>("RandomDataset"));
-		assertEquals(1, app.getWorkingDatasets().size());
+		app.addReferenceDataset(new ReferenceDataset<IrisData>("RandomDataset"));
+		assertEquals(1, app.getReferenceDatasets().size());
 	}
 	
 	@Test

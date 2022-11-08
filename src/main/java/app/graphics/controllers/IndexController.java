@@ -27,13 +27,15 @@ public class IndexController extends Controller {
 	@Override
 	public void initialize() {
 		App app = App.getInstance();
-		TreeItem<Object> rootItem = new TreeItem<>(new ReferenceDataset("Datasets"));
+		TreeItem<Object> rootItem = new TreeItem<>(new ReferenceDataset<Data>("Datasets"));
 		rootItem.setExpanded(true);
 		TreeItem<Object> childItem;
 		TreeItem<Object> childOfChild;
+		System.err.println("Trying to load datasets " + app.getWorkingDatasets().size());
 		for(Dataset<? extends Data> dataset : app.getWorkingDatasets()) {
 			childItem = new TreeItem<>(dataset);
 			rootItem.getChildren().add(childItem);
+			System.out.println("FOUND dataset : " + dataset.getTitle());
 			if(dataset instanceof WorkingDataset<?>) {
 				WorkingDataset<?> workingDataset = (WorkingDataset<?>) dataset;
 				for(KNNAlgorithm<? extends Data> algo : workingDataset.getAlgorithms()) {

@@ -3,6 +3,7 @@ package app.graphics.models.datas;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.algorithm.AlgorithmFactory;
 import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.data.Data;
 
@@ -43,6 +44,10 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 
 	public List<String> getDistanceFields() {
 		return distanceFields;
+	}
+	
+	public void createAlgorithm(int k) {
+		AlgorithmFactory.createAlgorithm(this, k);
 	}
 
 	public void addAlgorithm(KNNAlgorithm<T> algorithm) {

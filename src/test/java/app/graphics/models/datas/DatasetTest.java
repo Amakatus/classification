@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import app.algorithm.AlgorithmFactory;
-import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.data.IrisData;
 
 class DatasetTest {

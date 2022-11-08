@@ -1,14 +1,15 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
-import app.graphics.models.datas.data.DataType;
 import app.graphics.models.datas.data.IrisData;
-import app.utils.CSVUtils;
 
 public class App {
 	// Singleton
@@ -27,13 +28,14 @@ public class App {
 	private App() {
 		this.workingDatasets = new ArrayList<>();
 		this.referenceDatasets = new ArrayList<>();
+		this.loadReferenceDatasets();
 	}
 	
 	public List<Dataset<? extends Data>> getWorkingDatasets(){
 		return this.workingDatasets;
 	}
 	
-	public void addWorkingDataset(Dataset<? extends Data> dataset) {
+	public void addWorkingDataset(WorkingDataset<? extends Data> dataset) {
 		this.workingDatasets.add(dataset);
 	}
 	
@@ -41,7 +43,7 @@ public class App {
 		return this.referenceDatasets;
 	}
 	
-	public void addReferenceDataset(Dataset<? extends Data> dataset) {
+	public void addReferenceDataset(ReferenceDataset<? extends Data> dataset) {
 		this.referenceDatasets.add(dataset);
 	}
 	
@@ -53,7 +55,18 @@ public class App {
 		this.referenceDatasets.clear();
 	}
 	
+	// Only for dev purpose, should be modified soon.
 	public void loadReferenceDatasets() {
-		this.addReferenceDataset(new ReferenceDataset<IrisData>("IrisReferenceDataset", CSVUtils.loadCSV("/data/iris.csv", DataType.IRIS)));
+		ReferenceDataset<IrisData> rDS = DatasetFactory.irisReferenceDataset("rDSTest");
+		this.addReferenceDataset(rDS);
+		WorkingDataset<IrisData> wDS = new WorkingDataset<>("wDSTest", Arrays.asList(new IrisData()), rDS);
+		wDS.createAlgorithm(5);
+		wDS.createAlgorithm(3);
+		wDS.createAlgorithm(2);
+		WorkingDataset<IrisData> wDSTwo = new WorkingDataset<>("wDSTest2", Arrays.asList(new IrisData()), rDS);
+		wDSTwo.createAlgorithm(1);
+		wDSTwo.createAlgorithm(4);
+		this.addWorkingDataset(wDS);
+		this.addWorkingDataset(wDSTwo);
 	}
 }
