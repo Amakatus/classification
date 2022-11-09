@@ -59,11 +59,11 @@ public class App {
 	public void loadReferenceDatasets() {
 		ReferenceDataset<IrisData> rDS = DatasetFactory.irisReferenceDataset("rDSTest");
 		this.addReferenceDataset(rDS);
-		WorkingDataset<IrisData> wDS = new WorkingDataset<>("wDSTest", Arrays.asList(new IrisData()), rDS);
+		WorkingDataset<IrisData> wDS = new WorkingDataset<>("Iris", Arrays.asList(new IrisData()), rDS);
 		wDS.createAlgorithm(5);
 		wDS.createAlgorithm(3);
 		wDS.createAlgorithm(2);
-		WorkingDataset<IrisData> wDSTwo = new WorkingDataset<>("wDSTest2", Arrays.asList(new IrisData()), rDS);
+		WorkingDataset<IrisData> wDSTwo = new WorkingDataset<>("TitanicPassengers", Arrays.asList(new IrisData()), rDS);
 		wDSTwo.createAlgorithm(1);
 		wDSTwo.createAlgorithm(4);
 		this.addWorkingDataset(wDS);

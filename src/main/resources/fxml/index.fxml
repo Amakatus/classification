@@ -10,12 +10,12 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
-            <MFXButton fx:id="newTabButton" onMouseClicked="#createNewTab" text="New Tab" />
+            <MFXButton fx:id="newTabButton" text="COUCOU" />
          </items>
       </ToolBar>
    </top>
    <center>
-      <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+      <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" />
    </center>
    <left>
       <VBox fx:id="leftBox" prefHeight="680.0" prefWidth="250.0" BorderPane.alignment="CENTER" />
