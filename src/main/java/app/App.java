@@ -39,6 +39,12 @@ public class App {
 		this.workingDatasets.add(dataset);
 	}
 	
+	public void addWorkingDataset(WorkingDataset<?>... datasets) {
+		for(WorkingDataset<?> dataset : datasets) {
+			this.addWorkingDataset(dataset);
+		}
+	}
+	
 	public List<Dataset<? extends Data>> getReferenceDatasets() {
 		return this.referenceDatasets;
 	}
@@ -63,10 +69,12 @@ public class App {
 		wDS.createAlgorithm(5);
 		wDS.createAlgorithm(3);
 		wDS.createAlgorithm(2);
+		WorkingDataset<IrisData> woDS = new WorkingDataset<>("OtherIris", Arrays.asList(new IrisData()), rDS);
+		woDS.createAlgorithm(6);
+		woDS.createAlgorithm(4);
 		WorkingDataset<IrisData> wDSTwo = new WorkingDataset<>("TitanicPassengers", Arrays.asList(new IrisData()), rDS);
 		wDSTwo.createAlgorithm(1);
 		wDSTwo.createAlgorithm(4);
-		this.addWorkingDataset(wDS);
-		this.addWorkingDataset(wDSTwo);
+		this.addWorkingDataset(wDS, woDS, wDSTwo);
 	}
 }
