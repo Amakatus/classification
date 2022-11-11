@@ -1,15 +1,13 @@
 package app;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
 	App app = null;
@@ -24,7 +22,7 @@ class AppTest {
 	
 	@Test
 	void testGetInstance() {
-		assertTrue(app == App.getInstance());
+		assertSame(app, App.getInstance());
 	}
 	
 	@Test

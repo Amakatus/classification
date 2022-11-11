@@ -7,11 +7,11 @@ public abstract class Controller implements IFXController {
 	protected Model model;
 	protected View view;
 	
-	public Controller(View view) {
+	protected Controller(View view) {
 		this.view = view;
 	}
-	
-	public Controller() {
+
+	protected Controller() {
 		this(null);
 	}
 	

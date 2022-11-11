@@ -1,18 +1,18 @@
 package app.graphics.models.datas;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import app.graphics.models.Model;
 import app.graphics.models.datas.columns.Column;
 import app.graphics.models.datas.data.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Dataset<T extends Data> implements Model {
 	protected String title;
 	protected List<Column<T>> columns;
 	protected List<T> datas;
 	
-	public Dataset(String title, List<T> datas) {
+	protected Dataset(String title, List<T> datas) {
 		this.title = title;
 		this.datas = datas;
 		this.columns = new ArrayList<Column<T>>();

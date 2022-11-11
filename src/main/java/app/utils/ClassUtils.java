@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ClassUtils {
+	private ClassUtils(){}
+
 	public static Field[] getFields(Object object) {
 		return object.getClass().getDeclaredFields();
 	}

@@ -4,6 +4,8 @@ import java.io.File;
 import java.nio.file.Path;
 
 public abstract class ProjectUtils {
+	private ProjectUtils() {}
+
 	public static File getFile(String filePath) {
 		return new File(ProjectUtils.class.getResource(filePath).getFile());
 	}

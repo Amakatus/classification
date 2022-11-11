@@ -5,7 +5,7 @@ import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.data.Data;
 
 public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
-	public final int POWER = 2;
+	public static final int EUCLIDEAN_POWER = 2;
 	
 	public EuclideanGeometry(KNNCalculator<T> calculator) {
 		super(calculator);
@@ -18,7 +18,7 @@ public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 		for (String fieldName : this.calculator.getFieldsNames()) {
 			distance = this.findDistanceForField(workingData, referenceData, fieldName);
 			if(distance == Double.MIN_VALUE) throw new FieldToDistanceException(fieldName);
-			else sumPow += Math.pow(distance, POWER);
+			else sumPow += Math.pow(distance, EUCLIDEAN_POWER);
 		}
 		return Math.sqrt(sumPow);
 	}

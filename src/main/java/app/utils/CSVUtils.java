@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CSVUtils {
+	private CSVUtils() {}
+
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> loadCSV(String path, DataType dataType) {
 		try {

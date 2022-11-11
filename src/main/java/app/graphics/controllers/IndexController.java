@@ -10,7 +10,6 @@ import app.graphics.views.View;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeItem;
@@ -67,7 +66,7 @@ public class IndexController extends Controller {
 			}
 		}
 		View newDatasetView = new View("scatterChartView");
-		Tab newTab = new Tab(title, (Node) newDatasetView.getLoadedResource());
+		Tab newTab = new Tab(title, newDatasetView.getLoadedResource());
 		DatasetController dsController = (DatasetController) newDatasetView.getController();
 		dsController.setTitle(newTab.getText());
 		this.tabPane.getTabs().add(newTab);

@@ -1,19 +1,16 @@
 package app.algorithm;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.WorkingDataset;
+import app.graphics.models.datas.data.IrisData;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import app.graphics.models.datas.ReferenceDataset;
-import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.IrisData;
+import static org.junit.jupiter.api.Assertions.*;
 
 class KNNAlgorithmTest {
 	IrisData wIrisOne;
@@ -67,7 +64,7 @@ class KNNAlgorithmTest {
 	
 	@Test
 	void test_calculator_auto_init() {
-		assertFalse(this.knnAlgorithm.getCalculator() == null);
+		assertNotNull(this.knnAlgorithm.getCalculator());
 		assertEquals(this.knnAlgorithm, this.knnAlgorithm.getCalculator().getAlgorithm());
 	}
 	
