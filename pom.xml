@@ -6,6 +6,10 @@
 	<name>SAE302 - J5</name>
 	<description>School project (SAE) @IUT A Lille by group J5.</description>
 
+	<properties>
+		<sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+	</properties>
+
 	<dependencies>
 
 		<dependency>

@@ -1,12 +1,11 @@
 package app.utils;
 
+import app.graphics.models.datas.data.DataType;
+import com.opencsv.bean.CsvToBeanBuilder;
+
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.opencsv.bean.CsvToBeanBuilder;
-
-import app.graphics.models.datas.data.DataType;
 
 public abstract class CSVUtils {
 	@SuppressWarnings("unchecked")
@@ -17,7 +16,9 @@ public abstract class CSVUtils {
 					.withType((Class<T>) dataType.getTypeClass())
 					.build()
 					.parse();
-		} catch (Exception e) { e.printStackTrace(); }
+		} catch (Exception e) {
+			Logger.exception(e.getMessage());
+		}
 		// Should throw an exception ?
 		return new ArrayList<T>();
 	}

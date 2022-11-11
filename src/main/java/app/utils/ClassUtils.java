@@ -1,12 +1,12 @@
 package app.utils;
 
+import app.exceptions.FieldNotDoubleException;
+import app.graphics.models.datas.data.Data;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import app.exceptions.FieldNotDoubleException;
-import app.graphics.models.datas.data.Data;
 
 public abstract class ClassUtils {
 	public static Field[] getFields(Object object) {
@@ -55,7 +55,7 @@ public abstract class ClassUtils {
 		try {
 			return (double) fieldToDoubleMethod.invoke(object, other);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.exception(e.getMessage());
 		}
 		return Double.MIN_VALUE;
 	}
@@ -68,7 +68,7 @@ public abstract class ClassUtils {
 			field.setAccessible(true);
 			return field.getDouble(object);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.exception(e.getMessage());
 		}
 
 		return Double.MIN_VALUE;

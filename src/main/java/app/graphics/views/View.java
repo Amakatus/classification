@@ -1,13 +1,14 @@
 package app.graphics.views;
 
 
-import java.io.IOException;
-
 import app.graphics.controllers.Controller;
+import app.utils.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class View {
@@ -23,7 +24,9 @@ public class View {
 			if(this.setupController(loader)) {
 				setupStage(windowName, width, height, loadedResource);
 			}
-		} catch (IOException e) { e.printStackTrace();}
+		} catch (IOException e) {
+			Logger.exception(e.getMessage());
+		}
 	}
 
 	private void setupStage(String windowName, int width, int height, Parent root) {

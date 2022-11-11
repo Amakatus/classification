@@ -65,7 +65,7 @@ public class KNNAlgorithm<T extends Data> {
 			// Transform the map in a list of k+1 entries sorted by ascending value (distance)
 			sortedDatasEntries = dataDistMap.entrySet().stream()
 					.sorted(Map.Entry.comparingByValue())
-					.limit(this.kNeighbours+1)
+					.limit(this.kNeighbours+1L)
 					.collect(Collectors.toList());
 			
 			// Using the sorted list to generate the Entry with as key the working data 

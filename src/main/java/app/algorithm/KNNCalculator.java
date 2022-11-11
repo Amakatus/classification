@@ -10,6 +10,7 @@ import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
+import app.utils.Logger;
 
 public class KNNCalculator<T extends Data> {
 	protected IGeometryCalculator<T> geometry;
@@ -77,7 +78,7 @@ public class KNNCalculator<T extends Data> {
 			dataDistancesMap.put(refData, this.geometry.distance(workingData, refData));
 		} catch (FieldToDistanceException e) {
 			dataDistancesMap.put(refData, Double.MAX_VALUE);
-			e.printStackTrace();
+			Logger.exception(e.getMessage());
 		}
 	}
 }
