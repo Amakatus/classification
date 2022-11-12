@@ -52,12 +52,6 @@ class ClassUtilsTest {
 	}
 
 	@Test
-	void testGetCalculableFields() {
-		assertEquals(2, ClassUtils.getCalculableFields(this.testClass).size());
-		assertEquals(0, ClassUtils.getCalculableFields(this.testClassTwo).size());
-	}
-
-	@Test
 	void testGetValueFromFieldByMethod() {
 		TestClassUtils otherObject = new TestClassUtils();
 		otherObject.setVariety("test");
