@@ -26,6 +26,8 @@ class DatasetTest {
 		assertTrue(this.testDataset.getDatas().isEmpty());
 		this.testDataset.addData(new IrisData());
 		assertEquals(1, this.testDataset.getDatas().size());
+		this.testDataset.addData(new IrisData(), new IrisData());
+		assertEquals(3, this.testDataset.getDatas().size());
 	}
 
 	@Test

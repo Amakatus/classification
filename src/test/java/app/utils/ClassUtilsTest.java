@@ -1,12 +1,14 @@
 package app.utils;
 
 import app.exceptions.FieldNotNumberException;
+import app.graphics.models.datas.data.IrisData;
 import app.graphics.models.datas.data.TitanicPassengerData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,6 +29,12 @@ class ClassUtilsTest {
 		assertEquals(fields.length, fieldsByUtils.length);
 		assertArrayEquals(fields, fieldsByUtils);
 		assertEquals(0, ClassUtils.getFields(testClassTwo).length);
+	}
+
+	@Test
+	void testGetNumberFields() {
+		ArrayList<Field> fields = ClassUtils.getNumberFields(new IrisData());
+		assertEquals(4, fields.size());
 	}
 
 	@Test

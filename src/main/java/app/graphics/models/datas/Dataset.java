@@ -14,7 +14,7 @@ public abstract class Dataset<T extends Data> implements Model {
 	
 	protected Dataset(String title, List<T> datas) {
 		this.title = title;
-		this.datas = datas;
+		this.datas = datas == null ? new ArrayList<>() : datas;
 		this.columns = new ArrayList<>();
 	}
 
@@ -26,6 +26,12 @@ public abstract class Dataset<T extends Data> implements Model {
 	
 	public void addData(T data) {
 		this.datas.add(data);
+	}
+
+	public void addData(T... datas){
+		for(T data : datas){
+			this.addData(data);
+		}
 	}
 	
 	public String toString() {

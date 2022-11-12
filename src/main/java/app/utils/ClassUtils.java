@@ -5,6 +5,7 @@ import app.graphics.models.datas.data.Data;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public interface ClassUtils {
     /**
@@ -23,6 +24,24 @@ public interface ClassUtils {
      */
     public static Method[] getMethods(Object object) {
         return object.getClass().getDeclaredMethods();
+    }
+
+    /**
+     * Return all the fields that are numbers from the given object
+     * @param object
+     * @return
+     */
+    public static ArrayList<Field> getNumberFields(Object object){
+        Field[] fields = getFields(object);
+        ArrayList<Field> res = new ArrayList<>();
+        Class<?> type;
+        for(Field field : fields){
+            type = field.getType();
+            if(type == double.class || type == Integer.class){
+                res.add(field);
+            }
+        }
+        return res;
     }
 
     /**
