@@ -85,24 +85,18 @@ public interface ClassUtils {
     }
 
     public static double getDoubleFromField(Object object, String name) throws FieldNotNumberException {
-        for (Field field : getFields(object)) {
-            field.setAccessible(true);
-            if (field.getName().equalsIgnoreCase(name)) {
-                return getDoubleFromField(object, field);
-            }
-        }
-        return Double.MIN_VALUE;
+        Field field = getFieldByName(object,name);
+        return field == null ? Double.MIN_VALUE : getDoubleFromField(object, field);
     }
 
     public static Object getObjectFromField(Object object, String fieldName) {
         Field field = getFieldByName(object, fieldName);
-        System.out.println(field);
         if(field == null) return null;
         try {
             field.setAccessible(true);
             return field.get(object);
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger.exception(e.getMessage());
         }
         return null;
     }
