@@ -1,13 +1,12 @@
 package app.graphics.models.datas;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import app.algorithm.AlgorithmFactory;
+import app.graphics.models.datas.data.IrisData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import app.algorithm.AlgorithmFactory;
-import app.graphics.models.datas.data.IrisData;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DatasetTest {
 	WorkingDataset<IrisData> testDataset = null;

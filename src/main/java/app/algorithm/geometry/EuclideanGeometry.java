@@ -17,7 +17,7 @@ public class EuclideanGeometry<T extends Data> extends GeometryCalculator<T> {
 		double distance;
 		for (String fieldName : this.calculator.getFieldsNames()) {
 			distance = this.findDistanceForField(workingData, referenceData, fieldName);
-			if(distance == Double.MIN_VALUE) throw new FieldToDistanceException(fieldName);
+			if(distance == Double.MAX_VALUE) throw new FieldToDistanceException(fieldName);
 			else sumPow += Math.pow(distance, EUCLIDEAN_POWER);
 		}
 		return Math.sqrt(sumPow);

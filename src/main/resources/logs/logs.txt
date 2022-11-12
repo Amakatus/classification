@@ -1,0 +1,8 @@
+interface app.utils.ClassUtils cannot access a member of class app.graphics.models.datas.data.TitanicPassengerData with modifiers "protected"
+interface app.utils.ClassUtils cannot access a member of class app.graphics.models.datas.data.TitanicPassengerData with modifiers "protected"
+interface app.utils.ClassUtils cannot access a member of class app.graphics.models.datas.data.TitanicPassengerData with modifiers "protected"
+interface app.utils.ClassUtils cannot access a member of class app.graphics.models.datas.data.TitanicPassengerData with modifiers "protected"
+interface app.utils.ClassUtils cannot access a member of class app.graphics.models.datas.data.TitanicPassengerData with modifiers "protected"
+interface app.utils.ClassUtils cannot access a member of class app.graphics.models.datas.data.TitanicPassengerData with modifiers "protected"
+interface app.utils.ClassUtils cannot access a member of class app.graphics.models.datas.data.TitanicPassengerData with modifiers "protected"
+interface app.utils.ClassUtils cannot access a member of class app.graphics.models.datas.data.TitanicPassengerData with modifiers "protected"

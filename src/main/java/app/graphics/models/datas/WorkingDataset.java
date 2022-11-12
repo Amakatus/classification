@@ -1,11 +1,11 @@
 package app.graphics.models.datas;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import app.algorithm.AlgorithmFactory;
 import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.data.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorkingDataset<T extends Data> extends Dataset<T> {
 	protected String categoryField;
@@ -18,12 +18,12 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 		super(title, datas);
 		this.categoryField = categoryField;
 		this.distanceFields = distanceFields;
-		this.algorithms = new ArrayList<KNNAlgorithm<T>>();
+		this.algorithms = new ArrayList<>();
 		this.referenceDataset = referenceDataset;
 	}
 
 	public WorkingDataset(String title, List<T> datas, ReferenceDataset<T> referenceDataset, String categoryField) {
-		this(title, datas, referenceDataset, categoryField, new ArrayList<String>());
+		this(title, datas, referenceDataset, categoryField, new ArrayList<>());
 	}
 
 	public WorkingDataset(String title, List<T> datas, ReferenceDataset<T> referenceDataset) {
@@ -31,7 +31,7 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 	}
 
 	public WorkingDataset(String title, ReferenceDataset<T> referenceDataset) {
-		this(title, new ArrayList<T>(), referenceDataset);
+		this(title, new ArrayList<>(), referenceDataset);
 	}
 
 	public List<KNNAlgorithm<T>> getAlgorithms() {

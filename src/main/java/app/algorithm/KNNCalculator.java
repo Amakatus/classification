@@ -1,16 +1,16 @@
 package app.algorithm;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import app.algorithm.geometry.IGeometryCalculator;
 import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
 import app.utils.Logger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class KNNCalculator<T extends Data> {
 	protected IGeometryCalculator<T> geometry;
@@ -19,7 +19,7 @@ public class KNNCalculator<T extends Data> {
 	
 	public KNNCalculator(KNNAlgorithm<T> algorithm) {
 		this.algorithm = algorithm;
-		this.datasWithDistances = new ArrayList<Map<T, Double>>();
+		this.datasWithDistances = new ArrayList<>();
 	}
 
 	public KNNAlgorithm<T> getAlgorithm() {
@@ -65,7 +65,7 @@ public class KNNCalculator<T extends Data> {
 	}
 
 	private Map<T, Double> getDistancesForData(T workingData) {
-		Map<T, Double> dataDistancesMap = new HashMap<T, Double>();
+		Map<T, Double> dataDistancesMap = new HashMap<>();
 		dataDistancesMap.put(workingData, -1.); // 600 IQ
 		for (T refData : this.getReferenceDataset().getDatas()) {
 			getDistanceBetweenDatas(workingData, dataDistancesMap, refData);

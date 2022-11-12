@@ -1,7 +1,7 @@
 package app.algorithm.geometry;
 
 import app.algorithm.KNNCalculator;
-import app.exceptions.FieldNotDoubleException;
+import app.exceptions.FieldNotNumberException;
 import app.graphics.models.datas.data.Data;
 import app.utils.ClassUtils;
 
@@ -15,8 +15,16 @@ public abstract class GeometryCalculator<T extends Data> implements IGeometryCal
 	protected double findDistanceForField(T workingData, T referenceData, String fieldName) {
 		try {
 			return ClassUtils.getDoubleFromField(workingData,fieldName) - ClassUtils.getDoubleFromField(referenceData, fieldName);
-		} catch (FieldNotDoubleException exception) {
-			return ClassUtils.getValueFromFieldByMethod(workingData, fieldName, referenceData);
+		} catch (FieldNotNumberException exception) {
+			double fromMethod = ClassUtils.getValueFromFieldByMethod(workingData, fieldName, referenceData);
+			if(fromMethod != Double.MIN_VALUE){
+				return fromMethod;
+			} else {
+				Object wValue = ClassUtils.getObjectFromField(workingData, fieldName);
+				Object rValue = ClassUtils.getObjectFromField(referenceData, fieldName);
+				if(wValue == null || rValue == null) return Double.MAX_VALUE;
+				return GeneralToDouble.toDouble(wValue, rValue);
+			}
 		}
 	}
 }

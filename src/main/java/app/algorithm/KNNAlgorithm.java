@@ -1,15 +1,15 @@
 package app.algorithm;
 
+import app.algorithm.geometry.EuclideanGeometry;
+import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.WorkingDataset;
+import app.graphics.models.datas.data.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
-import app.algorithm.geometry.EuclideanGeometry;
-import app.graphics.models.datas.ReferenceDataset;
-import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.Data;
 
 public class KNNAlgorithm<T extends Data> {
 	protected WorkingDataset<T> workingDataset;
@@ -21,7 +21,7 @@ public class KNNAlgorithm<T extends Data> {
 		this.workingDataset = workingDataset;
 		this.kNeighbours = k;
 		this.strength = 72; // a changer
-		this.calculator = new KNNCalculator<T>(this);
+		this.calculator = new KNNCalculator<>(this);
 	}
 
 	public KNNCalculator<T> getCalculator() {
@@ -55,7 +55,7 @@ public class KNNAlgorithm<T extends Data> {
 	 * @return List<Entry<T, List<T>>> knn
 	 */
 	public List<Entry<T, List<T>>> getDatasKNN() {
-		return generateKNNResults(this.calculator.launchCalcul(new EuclideanGeometry<T>(calculator)));
+		return generateKNNResults(this.calculator.launchCalcul(new EuclideanGeometry<>(calculator)));
 	}
 	
 	private List<Entry<T, List<T>>> generateKNNResults(List<Map<T, Double>> dataWithDistances) {

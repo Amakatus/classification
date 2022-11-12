@@ -15,7 +15,7 @@ public abstract class Dataset<T extends Data> implements Model {
 	protected Dataset(String title, List<T> datas) {
 		this.title = title;
 		this.datas = datas;
-		this.columns = new ArrayList<Column<T>>();
+		this.columns = new ArrayList<>();
 	}
 
 	public String getTitle() { return this.title; }

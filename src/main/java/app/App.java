@@ -1,15 +1,15 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import app.graphics.models.datas.Dataset;
 import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
 import app.graphics.models.datas.data.IrisData;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class App {
 	// Singleton

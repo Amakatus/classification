@@ -1,18 +1,14 @@
 package app.utils;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-
+import app.exceptions.FieldNotNumberException;
+import app.graphics.models.datas.data.TitanicPassengerData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import app.exceptions.FieldNotDoubleException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class ClassUtilsTest {
 	TestClassUtils testClass;
@@ -29,7 +25,7 @@ class ClassUtilsTest {
 		Field[] fieldsByUtils = ClassUtils.getFields(this.testClass);
 		Field[] fields = this.testClass.getClass().getDeclaredFields();
 		assertEquals(fields.length, fieldsByUtils.length);
-		assertTrue(Arrays.equals(fields, fieldsByUtils));
+		assertArrayEquals(fields, fieldsByUtils);
 		assertEquals(0, ClassUtils.getFields(testClassTwo).length);
 	}
 
@@ -38,7 +34,7 @@ class ClassUtilsTest {
 		Method[] methodsByUtils = ClassUtils.getMethods(this.testClass);
 		Method[] methods = this.testClass.getClass().getDeclaredMethods();
 		assertEquals(methods.length, methodsByUtils.length);
-		assertTrue(Arrays.equals(methods, methodsByUtils));
+		assertArrayEquals(methods, methodsByUtils);
 	}
 
 	@Test
@@ -79,9 +75,20 @@ class ClassUtilsTest {
 		try {
 			assertEquals(0, ClassUtils.getDoubleFromField(testClass, "size"));
 			assertEquals(Double.MIN_VALUE, ClassUtils.getDoubleFromField(testClass, "sizee"));
-		} catch (FieldNotDoubleException e) {
-			assertTrue(false);
+		} catch (FieldNotNumberException e) {
+			fail();
 		}
 	}
 
+	@Test
+	void testGetObjectFromField() {
+		TitanicPassengerData passenger = new TitanicPassengerData();
+		passenger.setSurvived(true);
+		passenger.setEmbarked('a');
+		passenger.setTicket("Ticket");
+		assertEquals(true, ClassUtils.getObjectFromField(passenger, "survived"));
+		assertEquals('a', ClassUtils.getObjectFromField(passenger, "embarked"));
+		assertEquals("Ticket", ClassUtils.getObjectFromField(passenger, "ticket"));
+		assertNull(ClassUtils.getObjectFromField(passenger, "name"));
+	}
 }
