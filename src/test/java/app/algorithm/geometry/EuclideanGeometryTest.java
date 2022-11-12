@@ -1,11 +1,5 @@
 package app.algorithm.geometry;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import app.algorithm.KNNAlgorithm;
 import app.algorithm.KNNCalculator;
 import app.exceptions.FieldToDistanceException;
@@ -13,6 +7,11 @@ import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
 import app.graphics.models.datas.data.IrisVariety;
+import app.graphics.models.datas.data.TitanicPassengerData;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class EuclideanGeometryTest {
 	IrisData irisRef;
@@ -47,7 +46,7 @@ class EuclideanGeometryTest {
 			assertEquals(0, this.geometry.distance(irisRef, irisRef));
 			assertEquals(5.0, this.geometry.distance(irisWork, irisRef));
 		} catch (FieldToDistanceException e) {
-			assertTrue(false);
+			fail();
 		}
 	}
 
@@ -58,23 +57,34 @@ class EuclideanGeometryTest {
 		this.irisWork.setVariety(IrisVariety.VIRGINICA);
 		
 		try {
-			assertEquals(1.0, this.geometry.distance(irisWork, irisRef));
+			assertEquals(3.0, this.geometry.distance(irisWork, irisRef));
 			assertEquals(0, this.geometry.distance(irisWork, irisWork));
 			assertEquals(0, this.geometry.distance(irisRef, irisRef));
 		} catch (FieldToDistanceException e) {
-			assertTrue(false);
+			fail();
 		}
 	}
-	
-	/*@Test
-	void test_distance_with_not_originally_double_fields_exception() {
-		TitanicPassengerData passengerRef = new TitanicPassengerData();
-		TitanicPassengerData passengerWork = new TitanicPassengerData();
-		EuclideanGeometry<TitanicPassengerData> eucliGeometryPassenger = new EuclideanGeometry<TitanicPassengerData>();
-		eucliGeometryPassenger.addField("cabin");
-		passengerRef.setCabin("no");
-		passengerWork.setCabin("yes");
-		
-		assertThrows(FieldToDistanceException.class, () -> eucliGeometryPassenger.distance(passengerWork, passengerRef));
-	}*/
+
+	@Test
+	void test_distance_with_nor_double_or_method_fields() {
+		ReferenceDataset<TitanicPassengerData> rs = new ReferenceDataset<>("r");
+		WorkingDataset<TitanicPassengerData> ds = new WorkingDataset<>("w", rs);
+		KNNAlgorithm<TitanicPassengerData> algo = new KNNAlgorithm<>(ds, 3);
+		algo.getDatasKNN();
+		KNNCalculator<TitanicPassengerData> calc = algo.getCalculator();
+		TitanicPassengerData rPass = new TitanicPassengerData();
+		TitanicPassengerData wPass = new TitanicPassengerData();
+		rPass.setName("Jean");
+		wPass.setName("Paul");
+		EuclideanGeometry<TitanicPassengerData> geo = (EuclideanGeometry<TitanicPassengerData>) calc.getGeometry();
+		try {
+			ds.addDistanceFieldString("name");
+			assertEquals(1, geo.distance(wPass, rPass));
+			ds.addDistanceFieldString("cabin");
+			assertEquals(Double.MAX_VALUE, geo.findDistanceForField(wPass, rPass, "cabin"));
+			assertThrows(FieldToDistanceException.class, () -> geo.distance(wPass, rPass));
+		} catch (FieldToDistanceException e) {
+			fail();
+		}
+	}
 }

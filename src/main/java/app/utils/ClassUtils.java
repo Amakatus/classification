@@ -60,14 +60,14 @@ public interface ClassUtils {
 
     public static double getValueFromFieldByMethod(Object object, String fieldName, Object other) {
         Method fieldToDoubleMethod = findMethodByName(object, fieldName + Data.TO_DOUBLE);
-        if (fieldToDoubleMethod == null) return Double.MIN_VALUE;
+        if (fieldToDoubleMethod == null) return Double.MAX_VALUE;
         fieldToDoubleMethod.setAccessible(true);
         try {
             return (double) fieldToDoubleMethod.invoke(object, other);
         } catch (Exception e) {
             Logger.exception(e.getMessage());
         }
-        return Double.MIN_VALUE;
+        return Double.MAX_VALUE;
     }
 
     private static double getDoubleFromField(Object object, Field field) throws FieldNotNumberException {

@@ -17,7 +17,7 @@ public abstract class GeometryCalculator<T extends Data> implements IGeometryCal
 			return ClassUtils.getDoubleFromField(workingData,fieldName) - ClassUtils.getDoubleFromField(referenceData, fieldName);
 		} catch (FieldNotNumberException exception) {
 			double fromMethod = ClassUtils.getValueFromFieldByMethod(workingData, fieldName, referenceData);
-			if(fromMethod != Double.MIN_VALUE){
+			if(fromMethod != Double.MAX_VALUE){
 				return fromMethod;
 			} else {
 				Object wValue = ClassUtils.getObjectFromField(workingData, fieldName);
