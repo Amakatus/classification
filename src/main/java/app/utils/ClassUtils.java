@@ -6,6 +6,7 @@ import app.graphics.models.datas.data.Data;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ClassUtils {
     /**
@@ -31,7 +32,7 @@ public interface ClassUtils {
      * @param object
      * @return
      */
-    public static ArrayList<Field> getNumberFields(Object object){
+    public static List<Field> getNumberFields(Object object){
         Field[] fields = getFields(object);
         ArrayList<Field> res = new ArrayList<>();
         Class<?> type;
@@ -110,7 +111,7 @@ public interface ClassUtils {
         try {
             return (double) fieldToDoubleMethod.invoke(object, other);
         } catch (Exception e) {
-            Logger.exception(e.getMessage());
+            Logger.exception(e);
         }
         return Double.MAX_VALUE;
     }
@@ -130,7 +131,7 @@ public interface ClassUtils {
             field.setAccessible(true);
             return field.getDouble(object);
         } catch (Exception e) {
-            Logger.exception(e.getMessage());
+            Logger.exception(e);
         }
         // Should never be there.
         return Double.MIN_VALUE;
@@ -161,7 +162,7 @@ public interface ClassUtils {
             field.setAccessible(true);
             return field.get(object);
         } catch (Exception e) {
-            Logger.exception(e.getMessage());
+            Logger.exception(e);
         }
         // Should never be there.
         return null;

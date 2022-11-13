@@ -33,7 +33,7 @@ class ClassUtilsTest {
 
 	@Test
 	void testGetNumberFields() {
-		ArrayList<Field> fields = ClassUtils.getNumberFields(new IrisData());
+		ArrayList<Field> fields = (ArrayList<Field>) ClassUtils.getNumberFields(new IrisData());
 		assertEquals(4, fields.size());
 	}
 

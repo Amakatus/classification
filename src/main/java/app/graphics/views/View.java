@@ -25,7 +25,7 @@ public class View {
 				setupStage(windowName, width, height, loadedResource);
 			}
 		} catch (IOException e) {
-			Logger.exception(e.getMessage());
+			Logger.exception(e);
 		}
 	}
 
@@ -41,9 +41,9 @@ public class View {
 	}
 	
 	private boolean setupController(FXMLLoader loader) {
-		Controller controller = loader.getController();
-		if(controller == null) return false;
-		this.controller = controller;
+		Controller loaderController = loader.getController();
+		if(loaderController == null) return false;
+		this.controller = loaderController;
 		this.controller.setView(this);
 		return true;
 	}

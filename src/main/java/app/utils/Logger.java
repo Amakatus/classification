@@ -12,11 +12,12 @@ public class Logger {
             fileWriter.append(String.format("%s%n", log));
         }
         catch (Exception e) {
-            exception(e.getMessage());
+            exception(e);
         }
     }
 
-    public static void exception(String exceptionMessage){
-        Logger.writeInLogFile(exceptionMessage);
+    public static void exception(Exception exception){
+        Logger.writeInLogFile(exception.getMessage());
     }
+    public static  void log(String log) { Logger.writeInLogFile(log); }
 }

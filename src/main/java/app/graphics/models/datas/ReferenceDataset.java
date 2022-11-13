@@ -22,15 +22,15 @@ public class ReferenceDataset<T extends Data> extends Dataset<T> {
     }
 
     public void registerDeltas() {
-        if (this.datas.size() > 0) {
-            ArrayList<Field> numberFields = ClassUtils.getNumberFields(this.datas.get(0));
+        if (!this.datas.isEmpty()) {
+            ArrayList<Field> numberFields = (ArrayList<Field>) ClassUtils.getNumberFields(this.datas.get(0));
             ArrayList<Double> values = new ArrayList<>();
             for (Field field : numberFields) {
                 for (T data : this.datas) {
                     try {
                         values.add(ClassUtils.getDoubleFromField(data, field.getName()));
                     } catch (FieldNotNumberException e) {
-                        Logger.exception(e.getMessage());
+                        Logger.exception(e);
                     }
                 }
                 this.fieldsDeltas.put(field.getName(), new DataDeltas(Collections.min(values), Collections.max(values)));
