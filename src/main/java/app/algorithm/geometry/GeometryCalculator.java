@@ -20,8 +20,8 @@ public abstract class GeometryCalculator<T extends Data> implements IGeometryCal
 			if(fromMethod != Double.MAX_VALUE){
 				return fromMethod;
 			} else {
-				Object wValue = ClassUtils.getObjectFromField(workingData, fieldName);
-				Object rValue = ClassUtils.getObjectFromField(referenceData, fieldName);
+				Object wValue = ClassUtils.getValueObjectFromField(workingData, fieldName);
+				Object rValue = ClassUtils.getValueObjectFromField(referenceData, fieldName);
 				if(wValue == null || rValue == null) return Double.MAX_VALUE;
 				return GeneralToDouble.toDouble(wValue, rValue);
 			}

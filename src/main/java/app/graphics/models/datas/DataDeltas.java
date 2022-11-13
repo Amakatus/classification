@@ -11,4 +11,5 @@ public class DataDeltas {
 
     public double getMin() { return this.min; }
     public double getMax() { return this.max; }
+    public double getDelta() { return this.max - this.min; }
 }

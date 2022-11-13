@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CSVUtils {
     @SuppressWarnings("unchecked")
-    public static <T> List<T> loadCSV(String path, DataType dataType) {
+    static <T> List<T> loadCSV(String path, DataType dataType) {
         try {
             return new CsvToBeanBuilder<T>(Files.newBufferedReader(ProjectUtils.getFilePath(path)))
                     .withSeparator(',')

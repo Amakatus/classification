@@ -88,9 +88,9 @@ class ClassUtilsTest {
 		passenger.setSurvived(true);
 		passenger.setEmbarked('a');
 		passenger.setTicket("Ticket");
-		assertEquals(true, ClassUtils.getObjectFromField(passenger, "survived"));
-		assertEquals('a', ClassUtils.getObjectFromField(passenger, "embarked"));
-		assertEquals("Ticket", ClassUtils.getObjectFromField(passenger, "ticket"));
-		assertNull(ClassUtils.getObjectFromField(passenger, "name"));
+		assertEquals(true, ClassUtils.getValueObjectFromField(passenger, "survived"));
+		assertEquals('a', ClassUtils.getValueObjectFromField(passenger, "embarked"));
+		assertEquals("Ticket", ClassUtils.getValueObjectFromField(passenger, "ticket"));
+		assertNull(ClassUtils.getValueObjectFromField(passenger, "name"));
 	}
 }

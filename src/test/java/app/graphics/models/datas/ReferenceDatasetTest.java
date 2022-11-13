@@ -11,6 +11,7 @@ class ReferenceDatasetTest {
     IrisData iris1 = new IrisData();
     IrisData iris2 = new IrisData();
     IrisData iris3 = new IrisData();
+    DataDeltas deltasPetalLength;
 
     @BeforeEach
     void init() {
@@ -19,6 +20,7 @@ class ReferenceDatasetTest {
         iris3.setPetalLength(3.5);
         rds.addData(iris1, iris2, iris3);
         rds.registerDeltas();
+        deltasPetalLength = rds.getDeltas().get("petalLength");
     }
 
     @Test
@@ -28,9 +30,13 @@ class ReferenceDatasetTest {
 
     @Test
     void test_generate_deltas_should_have_min_and_max() {
-        DataDeltas deltasPetalLength = rds.getDeltas().get("petalLength");
         assertEquals(1.1, deltasPetalLength.getMin());
         assertEquals(3.5, deltasPetalLength.getMax());
+    }
+
+    @Test
+    void test_generate_deltas_should_have_delta() {
+        assertEquals(2.4, deltasPetalLength.getDelta());
     }
 
     @Test

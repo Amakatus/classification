@@ -68,12 +68,12 @@ public class KNNCalculator<T extends Data> {
 		Map<T, Double> dataDistancesMap = new HashMap<>();
 		dataDistancesMap.put(workingData, -1.); // 600 IQ
 		for (T refData : this.getReferenceDataset().getDatas()) {
-			getDistanceBetweenDatas(workingData, dataDistancesMap, refData);
+			getDistanceBetweenDatas(workingData, refData, dataDistancesMap);
 		}
 		return dataDistancesMap;
 	}
 
-	private void getDistanceBetweenDatas(T workingData, Map<T, Double> dataDistancesMap, T refData) {
+	private void getDistanceBetweenDatas(T workingData, T refData, Map<T, Double> dataDistancesMap) {
 		try {
 			dataDistancesMap.put(refData, this.geometry.distance(workingData, refData));
 		} catch (FieldToDistanceException e) {
