@@ -8,6 +8,7 @@ import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
 import app.graphics.views.View;
 import io.github.palexdev.materialfx.controls.MFXButton;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
@@ -54,6 +55,9 @@ public class IndexController extends Controller {
 		treeView.setMinHeight(this.leftBox.getPrefHeight());
 		this.leftBox.getChildren().add(treeView);	
 	}
+
+	@FXML
+	void exitApp() { Platform.exit(); }
 
 	@FXML
 	void createNewTab(KNNAlgorithm<?> algo) {

@@ -2,6 +2,7 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
 <?import io.github.palexdev.materialfx.controls.MFXProgressSpinner?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.graphics.controllers.DatasetController">
    <center>
@@ -24,17 +24,6 @@
         </yAxis>
       </ScatterChart>
    </center>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="75.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <children>
-            <MFXButton text="Ajouter un point" />
-            <MFXButton text="Recharger" />
-         </children>
-      </HBox>
-   </bottom>
    <top>
       <Label fx:id="datasetTitle" BorderPane.alignment="CENTER">
          <padding>
@@ -43,18 +32,56 @@
       </Label>
    </top>
    <right>
-      <VBox prefHeight="200.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox prefHeight="33.0" prefWidth="100.0">
+            <Label text="Algorithm options" />
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                     <children>
+                        <Label text="Axis X" />
+                        <MFXComboBox />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                     <children>
+                        <Label text="Axis Y" />
+                        <MFXComboBox />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="33.0" prefWidth="100.0">
                <children>
                   <MFXCheckbox />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Normaliser les données" wrappingWidth="145.13671875" />
+                  <Label text="Normalize datas" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="33.0" prefWidth="100.0">
+               <children>
+                  <MFXCheckbox />
+                  <Label text="Display reference datas" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
             <MFXProgressSpinner />
+            <HBox alignment="CENTER" prefHeight="33.0" prefWidth="100.0" spacing="10.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <children>
+                  <MFXButton text="Add new point" />
+                  <MFXButton text="Classify points" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </right>
