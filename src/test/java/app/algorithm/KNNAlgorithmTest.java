@@ -33,7 +33,7 @@ class KNNAlgorithmTest {
 		kNeighbours = 1;
 		referenceDS = new ReferenceDataset<IrisData>("rDS", Arrays.asList(rIrisOne, rIrisTwo));
 		workingDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo), referenceDS);
-		AlgorithmFactory.createAlgorithm(workingDS, kNeighbours);
+		AlgorithmFactory.createKNN(workingDS, kNeighbours);
 		knnAlgorithm = workingDS.getAlgorithms().get(0);
 		calculator = knnAlgorithm.getCalculator();
 		wIrisOne.setPetalLength(5);
