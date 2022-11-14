@@ -1,14 +1,13 @@
 package app.graphics.models.datas;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import org.junit.jupiter.api.Test;
-
 import app.algorithm.AlgorithmFactory;
 import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.data.IrisData;
 import app.graphics.models.datas.data.IrisVariety;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class DatasetClassifierTest {
 	protected ReferenceDataset<IrisData> rDS;
@@ -37,7 +36,7 @@ class DatasetClassifierTest {
 	}
 
 	@Test
-	void test_classify_datas() {
+	void test_should_classify_datas_for_given_category() {
 		assertNull(irisOne.getVariety());
 		assertNull(irisTwo.getVariety());
 		classifier.classifyDatas();
@@ -45,6 +44,8 @@ class DatasetClassifierTest {
 		assertEquals(IrisVariety.VIRGINICA, irisTwo.getVariety());
 		this.wDS.setCategoryField("petalWidth");
 		classifier.classifyDatas();
+		assertEquals(1.2, irisOne.getPetalWidth());
+		assertEquals(2.0, irisTwo.getPetalWidth());
 		assertEquals(IrisVariety.VERSICOLOR, irisOne.getVariety());
 		assertEquals(IrisVariety.VIRGINICA, irisTwo.getVariety());
 	}
