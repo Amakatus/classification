@@ -27,6 +27,12 @@ public abstract class Dataset<T extends Data> implements Model {
 	public void addData(T data) {
 		this.datas.add(data);
 	}
+	
+	
+
+	public void setDatas(List<T> datas) {
+		this.datas = datas;
+	}
 
 	public void addData(T... datas){
 		for(T data : datas){
