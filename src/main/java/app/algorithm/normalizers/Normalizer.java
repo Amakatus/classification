@@ -19,10 +19,10 @@ public class Normalizer implements IColumnNormalizer {
 			try {
 				double valueNotNormalized = field.getDouble(data);
 				double valueNormalized = 0;
-				DataDeltas delta = deltas.get(field.getName());
-				double min = delta.getMin();
-				double x = delta.getDelta();
-				valueNormalized = (valueNotNormalized - min)/x;
+				DataDeltas dataDelta = deltas.get(field.getName());
+				double min = dataDelta.getMin();
+				double delta = dataDelta.getDelta();
+				valueNormalized = (valueNotNormalized - min)/delta;
 				//normalizer la data
 				field.setDouble(data, valueNormalized);
 			} catch (Exception e) {
@@ -41,10 +41,10 @@ public class Normalizer implements IColumnNormalizer {
 			try {
 				double valueNotNormalized = field.getDouble(data);
 				double valueNormalized = 0;
-				DataDeltas delta = deltas.get(field.getName());
-				double min = delta.getMin();
-				double x = delta.getDelta();
-				valueNormalized = valueNotNormalized * x + min ;
+				DataDeltas dataDelta = deltas.get(field.getName());
+				double min = dataDelta.getMin();
+				double delta = dataDelta.getDelta();
+				valueNormalized = valueNotNormalized * delta + min ;
 				//normalizer la data
 				field.setDouble(data, valueNormalized);
 			} catch (Exception e) {
