@@ -23,10 +23,8 @@ public class Normalizer implements IColumnNormalizer {
 				double min = dataDelta.getMin();
 				double delta = dataDelta.getDelta();
 				valueNormalized = (valueNotNormalized - min)/delta;
-				//normalizer la data
 				field.setDouble(data, valueNormalized);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -45,10 +43,8 @@ public class Normalizer implements IColumnNormalizer {
 				double min = dataDelta.getMin();
 				double delta = dataDelta.getDelta();
 				valueNormalized = valueNotNormalized * delta + min ;
-				//normalizer la data
 				field.setDouble(data, valueNormalized);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
