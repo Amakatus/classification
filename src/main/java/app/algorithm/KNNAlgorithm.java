@@ -59,7 +59,6 @@ public class KNNAlgorithm<T extends Data> {
 	}
 	
 	private List<Entry<T, List<T>>> generateKNNResults(List<Map<T, Double>> dataWithDistances) {
-		System.out.println("DEBUG = " + dataWithDistances.size());
 		List<Entry<T, List<T>>> res = new ArrayList<>();
 		List<Entry<T, Double>> sortedDatasEntries;
 		for (Map<T, Double> dataDistMap : dataWithDistances) {
