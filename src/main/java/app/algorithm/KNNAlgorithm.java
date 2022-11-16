@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 public class KNNAlgorithm<T extends Data> {
 	protected WorkingDataset<T> workingDataset;
 	protected KNNCalculator<T> calculator;
-	protected double strength;
+	protected KNNStrength<T> strength;
 	protected int kNeighbours;
 
 	public KNNAlgorithm(WorkingDataset<T> workingDataset, int k) {
 		this.workingDataset = workingDataset;
 		this.kNeighbours = k;
-		this.strength = 72; // a changer
+		this.strength = new KNNStrength<>(this);
 		this.calculator = new KNNCalculator<>(this);
 	}
 
@@ -36,16 +36,12 @@ public class KNNAlgorithm<T extends Data> {
 		return workingDataset.getReferenceDataset();
 	}
 
-	public double getStrength() {
-		return strength;
-	}
+	public KNNStrength<T> getStrengthObject() { return this.strength; }
+
+	public double getStrength() { return this.strength.getStrength(); }
 
 	public int getKNeighbours() {
 		return kNeighbours;
-	}
-	
-	public void setStrength(int strength) {
-		this.strength = strength;
 	}
 
 	/**
@@ -79,6 +75,6 @@ public class KNNAlgorithm<T extends Data> {
 	}
 
 	public String toString() {
-		return this.kNeighbours + "NNAlgorithm (" + this.strength + "%)";
+		return this.kNeighbours + "NNAlgorithm (" + this.getStrength() + "%)";
 	}
 }
