@@ -1,6 +1,5 @@
 package app;
 
-import app.graphics.models.datas.Dataset;
 import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
@@ -22,8 +21,8 @@ public class App {
 	}
 	
 	// Classe
-	protected List<Dataset<? extends Data>> workingDatasets;
-	protected List<Dataset<? extends Data>> referenceDatasets;
+	protected List<WorkingDataset<? extends Data>> workingDatasets;
+	protected List<ReferenceDataset<? extends Data>> referenceDatasets;
 	
 	private App() {
 		this.workingDatasets = new ArrayList<>();
@@ -31,7 +30,7 @@ public class App {
 		this.loadReferenceDatasets();
 	}
 	
-	public List<Dataset<? extends Data>> getWorkingDatasets(){
+	public List<WorkingDataset<? extends Data>> getWorkingDatasets(){
 		return this.workingDatasets;
 	}
 	
@@ -45,7 +44,7 @@ public class App {
 		}
 	}
 	
-	public List<Dataset<? extends Data>> getReferenceDatasets() {
+	public List<ReferenceDataset<? extends Data>> getReferenceDatasets() {
 		return this.referenceDatasets;
 	}
 	
