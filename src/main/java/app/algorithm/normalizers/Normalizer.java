@@ -6,12 +6,13 @@ import java.util.Map;
 
 import app.graphics.models.datas.DataDeltas;
 import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.IrisData;
 import app.utils.ClassUtils;
 
 public class Normalizer implements IColumnNormalizer {
 
 	@Override
-	public void normalize(Data data, Map<String, DataDeltas> deltas) {
+	public List<Field> normalize(Data data, Map<String, DataDeltas> deltas) {
 		List<Field> fields = ClassUtils.getNumberFields(data);
 		for (Field field : fields) {
 			try {
@@ -26,6 +27,7 @@ public class Normalizer implements IColumnNormalizer {
 				e.printStackTrace();
 			}
 		}
+		return fields;
 	}
 
 	@Override
