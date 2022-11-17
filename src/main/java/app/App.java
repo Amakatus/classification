@@ -1,5 +1,6 @@
 package app;
 
+import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
@@ -59,18 +60,7 @@ public class App {
 	
 	// Only for dev purpose, should be modified soon.
 	public void loadReferenceDatasets() {
-		/*ReferenceDataset<IrisData> rDS = DatasetFactory.irisReferenceDataset("rDSTest");
-		this.addReferenceDataset(rDS);
-		WorkingDataset<IrisData> wDS = new WorkingDataset<>("Iris", Arrays.asList(new IrisData()), rDS);
-		wDS.createAlgorithm(5);
-		wDS.createAlgorithm(3);
-		wDS.createAlgorithm(2);
-		WorkingDataset<IrisData> woDS = new WorkingDataset<>("OtherIris", Arrays.asList(new IrisData()), rDS);
-		woDS.createAlgorithm(6);
-		woDS.createAlgorithm(4);
-		WorkingDataset<IrisData> wDSTwo = new WorkingDataset<>("TitanicPassengers", Arrays.asList(new IrisData()), rDS);
-		wDSTwo.createAlgorithm(1);
-		wDSTwo.createAlgorithm(4);
-		this.addWorkingDataset(wDS, woDS, wDSTwo);*/
+		this.addReferenceDataset(DatasetFactory.irisReferenceDataset("IrisRef"));
+		this.addReferenceDataset(DatasetFactory.titanicPassengerReferenceDataset("TitanicRef"));
 	}
 }
