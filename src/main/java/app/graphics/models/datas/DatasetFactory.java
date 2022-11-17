@@ -6,7 +6,9 @@ import app.graphics.models.datas.data.IrisData;
 import app.graphics.models.datas.data.TitanicPassengerData;
 import app.utils.CSVUtils;
 
-public interface ReferenceDatasetFactory {
+import java.io.File;
+
+public interface DatasetFactory {
     static <T extends Data> ReferenceDataset<T> createReferenceDataset(String title, String path, DataType type){
         return new ReferenceDataset<T>(title, CSVUtils.loadCSV(path, type));
     }
@@ -21,5 +23,9 @@ public interface ReferenceDatasetFactory {
 
     static <T extends Data> ReferenceDataset<T> createReferenceDataset(String title, DataType type) {
         return createReferenceDataset(title, type.getCsvPath(), type);
+    }
+
+    static <T extends Data> WorkingDataset<T> createWorkingDataset(String title, DataType type, File csvFile){
+        return new WorkingDataset<T>(title, CSVUtils.loadCSV(csvFile.toPath(), type), createReferenceDataset(String.format("Reference%s",title), type));
     }
 }

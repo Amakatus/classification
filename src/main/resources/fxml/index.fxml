@@ -22,7 +22,7 @@
                   <Menu mnemonicParsing="false" text="New...">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#newDataset" text="Dataset" />
-                        <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Algorithm" />
+                        <MenuItem mnemonicParsing="false" text="Algorithm" />
                      </items>
                   </Menu>
                   <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Exit" />

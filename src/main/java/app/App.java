@@ -1,9 +1,10 @@
 package app;
 
-import app.graphics.models.datas.ReferenceDatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.DataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,10 +58,10 @@ public class App {
 	public void clearReferenceDatasets() {
 		this.referenceDatasets.clear();
 	}
-	
-	// Only for dev purpose, should be modified soon.
+
 	public void loadReferenceDatasets() {
-		this.addReferenceDataset(ReferenceDatasetFactory.irisReferenceDataset("IrisRef"));
-		this.addReferenceDataset(ReferenceDatasetFactory.titanicPassengerReferenceDataset("TitanicRef"));
+		for(DataType type : DataType.values()){
+			this.addReferenceDataset(DatasetFactory.createReferenceDataset(String.format("ReferenceDataset%s", type), type));
+		}
 	}
 }

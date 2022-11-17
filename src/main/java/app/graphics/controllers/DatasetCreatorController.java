@@ -1,11 +1,10 @@
 package app.graphics.controllers;
 
 import app.graphics.components.AlertFactory;
-import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
 import app.graphics.models.datas.data.DataType;
-import app.graphics.models.datas.data.IrisData;
 import app.utils.Logger;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -110,7 +109,10 @@ public class DatasetCreatorController extends Controller {
             alert.show();
             return;
         }
-        this.indexController.addWorkingDataset(new WorkingDataset<IrisData>(this.inputName.getText(), new ReferenceDataset<IrisData>("rds")));
+        WorkingDataset<? extends Data> newDataset = DatasetFactory.createWorkingDataset(this.inputName.getText(), inputType.getValue(), fileToClassify);
+        newDataset.setCategoryField(inputCategory.getValue());
+        newDataset.addDistanceFieldString(inputDistance.getValue());
+        this.indexController.addWorkingDataset(newDataset);
         this.closeView();
     }
 

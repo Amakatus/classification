@@ -18,3 +18,6 @@ Erreur de parsing du CSV ligne: 298. [297,0,3,Hanna, Mr. Mansour,male,23.5,0,0,2
 Erreur de parsing du CSV ligne: 125. [124,1,2,Webber, Miss. Susan,female,32.5,0,0,27267,13,E101,S]
 Erreur de parsing du CSV ligne: 307. [306,1,1,Allison, Master. Hudson Trevor,male,0.92,1,2,113781,151.55,C22 C26,S]
 Erreur de parsing du CSV ligne: 80. [79,1,2,Caldwell, Master. Alden Gates,male,0.83,0,2,248738,29,,S]
+Cannot invoke "java.net.URL.getFile()" because the return value of "java.lang.Class.getResource(String)" is null
+Cannot invoke "java.net.URL.getFile()" because the return value of "java.lang.Class.getResource(String)" is null
+Cannot invoke "java.net.URL.getFile()" because the return value of "java.lang.Class.getResource(String)" is null

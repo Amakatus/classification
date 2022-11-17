@@ -1,6 +1,6 @@
 package app.algorithm;
 
-import app.graphics.models.datas.ReferenceDatasetFactory;
+import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
@@ -14,7 +14,7 @@ class AlgorithmFactoryTest {
 
 	@Test
 	void testCreateAlgorithm() {
-		ReferenceDataset<IrisData> reference = ReferenceDatasetFactory.irisReferenceDataset("test");
+		ReferenceDataset<IrisData> reference = DatasetFactory.irisReferenceDataset("test");
 		IrisData toClassify = new IrisData();
 		WorkingDataset<IrisData> working = new WorkingDataset<>("WorkingDS", Arrays.asList(toClassify), reference);
 		AlgorithmFactory.createKNN(working, 5);
