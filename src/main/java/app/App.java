@@ -1,6 +1,6 @@
 package app;
 
-import app.graphics.models.datas.DatasetFactory;
+import app.graphics.models.datas.ReferenceDatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
@@ -60,7 +60,7 @@ public class App {
 	
 	// Only for dev purpose, should be modified soon.
 	public void loadReferenceDatasets() {
-		this.addReferenceDataset(DatasetFactory.irisReferenceDataset("IrisRef"));
-		this.addReferenceDataset(DatasetFactory.titanicPassengerReferenceDataset("TitanicRef"));
+		this.addReferenceDataset(ReferenceDatasetFactory.irisReferenceDataset("IrisRef"));
+		this.addReferenceDataset(ReferenceDatasetFactory.titanicPassengerReferenceDataset("TitanicRef"));
 	}
 }

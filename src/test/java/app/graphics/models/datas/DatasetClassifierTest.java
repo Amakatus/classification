@@ -18,7 +18,7 @@ class DatasetClassifierTest {
 	protected DatasetClassifier<IrisData> classifier;
 	
 	public DatasetClassifierTest() {
-		rDS = DatasetFactory.irisReferenceDataset("rds");
+		rDS = ReferenceDatasetFactory.irisReferenceDataset("rds");
 		wDS = new WorkingDataset<>("wds", rDS);
 		wDS.setCategoryField("variety");
 		wDS.addDistanceFieldString("petalLength");
