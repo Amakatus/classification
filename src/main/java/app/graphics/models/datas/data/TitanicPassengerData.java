@@ -10,22 +10,22 @@ public class TitanicPassengerData extends Data {
 	public boolean survived;
 	
 	@CsvBindByName(column = "Pclass")
-	public int pClass;
+	public double pClass;
 	
 	@CsvBindByName(column = "Name")
 	public String name;
 	
 	@CsvBindByName(column = "Sex")
-	public boolean male;
+	public String sex;
 	
 	@CsvBindByName(column = "Age", required=false)
-	public int age;
+	public double age;
 	
 	@CsvBindByName(column = "SibSp")
-	public int sibSp;
+	public double sibSp;
 	
 	@CsvBindByName(column = "Parch")
-	public int parch;
+	public double parch;
 	
 	@CsvBindByName(column = "Ticket")
 	public String ticket;
@@ -55,11 +55,11 @@ public class TitanicPassengerData extends Data {
 		this.survived = survived;
 	}
 
-	public int getpClass() {
+	public double getpClass() {
 		return pClass;
 	}
 
-	public void setpClass(int pClass) {
+	public void setpClass(double pClass) {
 		this.pClass = pClass;
 	}
 
@@ -71,35 +71,35 @@ public class TitanicPassengerData extends Data {
 		this.name = name;
 	}
 
-	public boolean isMale() {
-		return male;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setMale(boolean male) {
-		this.male = male;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
-	public int getAge() {
+	public double getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(double age) {
 		this.age = age;
 	}
 
-	public int getSibSp() {
+	public double getSibSp() {
 		return sibSp;
 	}
 
-	public void setSibSp(int sibSp) {
+	public void setSibSp(double sibSp) {
 		this.sibSp = sibSp;
 	}
 
-	public int getParch() {
+	public double getParch() {
 		return parch;
 	}
 
-	public void setParch(int parch) {
+	public void setParch(double parch) {
 		this.parch = parch;
 	}
 
