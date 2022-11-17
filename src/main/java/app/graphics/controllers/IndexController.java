@@ -15,6 +15,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class IndexController extends Controller {
@@ -35,14 +36,26 @@ public class IndexController extends Controller {
 		TreeItem<Object> rootItem = new TreeItem<>(new ReferenceDataset<Data>("Datasets"));
 		rootItem.setExpanded(true);
 		this.treeView = new TreeView<>();
-		treeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			if(newValue.getValue().getClass().isAssignableFrom(KNNAlgorithm.class)) {
-				this.createNewTab((KNNAlgorithm<?>) newValue.getValue());
+		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			if(event.getClickCount() == 2){
+				this.handleDoubleClickEvent(event);
 			}
 		});
 		treeView.setMinHeight(this.leftBox.getPrefHeight());
 		treeView.setRoot(rootItem);
 		this.leftBox.getChildren().add(treeView);
+	}
+
+	private void handleDoubleClickEvent(MouseEvent event) {
+		Object selectedItem = treeView.getSelectionModel().getSelectedItem().getValue();
+		if(selectedItem == null) return;
+		if(selectedItem.getClass().isAssignableFrom(WorkingDataset.class)){
+			System.out.println("CLICKED A WORKING DATASET !!!");
+			// Show customisation of working dataset view
+		} else if(selectedItem.getClass().isAssignableFrom(KNNAlgorithm.class)){
+			System.out.println("CLICKED A KNN ALGO !!!");
+			// Create a new tab to show the working datas of its working dataset parent .
+		}
 	}
 
 	public void addWorkingDataset(WorkingDataset<? extends Data> dataset){
