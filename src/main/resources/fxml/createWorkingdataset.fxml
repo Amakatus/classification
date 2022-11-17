@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.graphics.controllers.DatasetCreatorController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="377.0" text="Create a new WorkingDataset">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label prefWidth="140.0" text="Name :">
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </Label>
+                  <MFXTextField fx:id="inputName" floatMode="BORDER" floatingText="Name" prefHeight="1.0" prefWidth="235.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label prefWidth="140.0" text="Datas type :" />
+                  <MFXComboBox fx:id="inputType" floatMode="BORDER" floatingText="Type" prefWidth="235.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="categoryWrapper" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label prefWidth="140.0" text="Classification field :" />
+                  <MFXComboBox fx:id="inputCategory" floatMode="BORDER" floatingText="Category" prefWidth="235.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="distanceWrapper" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Label prefHeight="17.0" prefWidth="140.0" text="Distance fields :" />
+                  <MFXComboBox fx:id="inputDistance" floatMode="BORDER" floatingText="Distance" prefWidth="235.0" />
+               </children>
+            </HBox>
+            <Label fx:id="distanceInputInfo" prefHeight="17.0" prefWidth="341.0" text="(You will be able to select more fields after the creation of the dataset.)" textFill="#7c7c7c">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <MFXButton fx:id="selectButton" onMouseClicked="#openDialogFile" prefHeight="50.0" prefWidth="120.0" text="Select a CSV file" />
+                  <Label fx:id="fileLabel" alignment="CENTER" prefHeight="17.0" prefWidth="210.0" text="Select a file..." />
+               </children>
+            </HBox>
+            <MFXButton alignment="CENTER" onMouseClicked="#createDataset" prefHeight="50.0" prefWidth="200.0" rippleColor="#33862a" text="Create dataset">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </MFXButton>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>

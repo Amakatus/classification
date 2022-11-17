@@ -1,13 +1,10 @@
 package app;
 
-import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.Data;
-import app.graphics.models.datas.data.IrisData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class App {
@@ -62,7 +59,7 @@ public class App {
 	
 	// Only for dev purpose, should be modified soon.
 	public void loadReferenceDatasets() {
-		ReferenceDataset<IrisData> rDS = DatasetFactory.irisReferenceDataset("rDSTest");
+		/*ReferenceDataset<IrisData> rDS = DatasetFactory.irisReferenceDataset("rDSTest");
 		this.addReferenceDataset(rDS);
 		WorkingDataset<IrisData> wDS = new WorkingDataset<>("Iris", Arrays.asList(new IrisData()), rDS);
 		wDS.createAlgorithm(5);
@@ -74,6 +71,6 @@ public class App {
 		WorkingDataset<IrisData> wDSTwo = new WorkingDataset<>("TitanicPassengers", Arrays.asList(new IrisData()), rDS);
 		wDSTwo.createAlgorithm(1);
 		wDSTwo.createAlgorithm(4);
-		this.addWorkingDataset(wDS, woDS, wDSTwo);
+		this.addWorkingDataset(wDS, woDS, wDSTwo);*/
 	}
 }

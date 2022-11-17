@@ -21,7 +21,7 @@
             <items>
                   <Menu mnemonicParsing="false" text="New...">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Dataset" />
+                        <MenuItem mnemonicParsing="false" onAction="#newDataset" text="Dataset" />
                         <MenuItem mnemonicParsing="false" onAction="#exitApp" text="Algorithm" />
                      </items>
                   </Menu>
