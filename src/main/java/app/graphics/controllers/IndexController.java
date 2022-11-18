@@ -19,12 +19,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class IndexController extends Controller {
-	int numberTabs = 1;
+	private int numberTabs = 1;
 	
-	@FXML MFXButton newTabButton;
-	@FXML TabPane tabPane;
-	@FXML VBox leftBox;
-	TreeView<Object> treeView;
+	@FXML protected MFXButton newTabButton;
+	@FXML protected TabPane tabPane;
+	@FXML protected VBox leftBox;
+	protected TreeView<Object> treeView;
 
 	@Override
 	public void initialize() {
