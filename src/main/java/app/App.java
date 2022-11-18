@@ -3,7 +3,7 @@ package app;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 import app.graphics.models.datas.data.DataType;
 
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ public class App {
 	}
 	
 	// Classe
-	protected List<WorkingDataset<? extends Data>> workingDatasets;
-	protected List<ReferenceDataset<? extends Data>> referenceDatasets;
+	protected List<WorkingDataset<? extends AbstractData>> workingDatasets;
+	protected List<ReferenceDataset<? extends AbstractData>> referenceDatasets;
 	
 	private App() {
 		this.workingDatasets = new ArrayList<>();
@@ -29,11 +29,11 @@ public class App {
 		this.loadReferenceDatasets();
 	}
 	
-	public List<WorkingDataset<? extends Data>> getWorkingDatasets(){
+	public List<WorkingDataset<? extends AbstractData>> getWorkingDatasets(){
 		return this.workingDatasets;
 	}
 	
-	public void addWorkingDataset(WorkingDataset<? extends Data> dataset) {
+	public void addWorkingDataset(WorkingDataset<? extends AbstractData> dataset) {
 		this.workingDatasets.add(dataset);
 	}
 	
@@ -43,11 +43,11 @@ public class App {
 		}
 	}
 	
-	public List<ReferenceDataset<? extends Data>> getReferenceDatasets() {
+	public List<ReferenceDataset<? extends AbstractData>> getReferenceDatasets() {
 		return this.referenceDatasets;
 	}
 	
-	public void addReferenceDataset(ReferenceDataset<? extends Data> dataset) {
+	public void addReferenceDataset(ReferenceDataset<? extends AbstractData> dataset) {
 		this.referenceDatasets.add(dataset);
 	}
 	

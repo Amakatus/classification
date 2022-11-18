@@ -4,15 +4,15 @@ public enum DataType {
 	IRIS(IrisData.class, "iris"),
 	PASSENGER(TitanicPassengerData.class, "titanic");
 
-	Class<? extends Data> typeClass;
+	Class<? extends AbstractData> typeClass;
 	String csvPath;
 	
-	DataType(Class<? extends Data> typeClass, String csvPath) {
+	DataType(Class<? extends AbstractData> typeClass, String csvPath) {
 		this.typeClass = typeClass;
 		this.csvPath = csvPath;
 	}
 	
-	public Class<? extends Data> getTypeClass() {
+	public Class<? extends AbstractData> getTypeClass() {
 		return this.typeClass;
 	}
 	public String getCsvPath() {

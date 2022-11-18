@@ -4,7 +4,7 @@ import app.algorithm.geometry.IGeometryCalculator;
 import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 import app.utils.Logger;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class KNNCalculator<T extends Data> {
+public class KNNCalculator<T extends AbstractData> {
 	protected IGeometryCalculator<T> geometry;
 	protected KNNAlgorithm<T> algorithm;
 	protected List<Map<T, Double>> datasWithDistances;

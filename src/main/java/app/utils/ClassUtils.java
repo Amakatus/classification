@@ -1,7 +1,7 @@
 package app.utils;
 
 import app.exceptions.FieldNotNumberException;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -90,7 +90,7 @@ public interface ClassUtils {
      * @return true if it has, false otherwise.
      */
     static boolean hasMethodToDoubleForField(Object o, String fieldName) {
-        return isToDoubleMethod(findMethodByName(o, fieldName + Data.TO_DOUBLE));
+        return isToDoubleMethod(findMethodByName(o, fieldName + AbstractData.TO_DOUBLE));
     }
 
     /**
@@ -113,7 +113,7 @@ public interface ClassUtils {
      */
     // This method should not be there ?
     static double getValueFromFieldByMethod(Object object, String fieldName, Object other) {
-        Method fieldToDoubleMethod = findMethodByName(object, fieldName + Data.TO_DOUBLE);
+        Method fieldToDoubleMethod = findMethodByName(object, fieldName + AbstractData.TO_DOUBLE);
         if (!isToDoubleMethod(fieldToDoubleMethod)) return Double.MAX_VALUE;
         try {
             return (double) fieldToDoubleMethod.invoke(object, other);

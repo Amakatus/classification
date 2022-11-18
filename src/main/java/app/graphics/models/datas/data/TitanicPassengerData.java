@@ -2,7 +2,7 @@ package app.graphics.models.datas.data;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class TitanicPassengerData extends Data {
+public class TitanicPassengerData extends AbstractData {
 	@CsvBindByName(column = "PassengerId")
 	public int id;
 	

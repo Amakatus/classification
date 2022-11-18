@@ -1,7 +1,7 @@
 package app.graphics.models.datas;
 
 import app.algorithm.KNNAlgorithm;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 import app.graphics.models.datas.data.IrisVariety;
 import app.utils.ClassUtils;
 import app.utils.Logger;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-public class DatasetClassifier<T extends Data> {
+public class DatasetClassifier<T extends AbstractData> {
     protected WorkingDataset<T> workingDS;
     protected KNNAlgorithm<T> algorithm;
     protected String categoryField;

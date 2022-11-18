@@ -3,7 +3,7 @@ package app.graphics.controllers;
 import app.graphics.components.AlertFactory;
 import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 import app.graphics.models.datas.data.DataType;
 import app.utils.Logger;
 import io.github.palexdev.materialfx.controls.MFXButton;
@@ -91,7 +91,7 @@ public class DatasetCreatorController extends AbstractController {
 
     private void changeFields(DataType dataType) {
         try {
-            Class<? extends Data> dataClass = dataType.getTypeClass();
+            Class<? extends AbstractData> dataClass = dataType.getTypeClass();
             Field[] fields = dataClass.getDeclaredFields();
             this.typeFields.clear();
             for (Field field : fields) {
@@ -109,7 +109,7 @@ public class DatasetCreatorController extends AbstractController {
             alert.show();
             return;
         }
-        WorkingDataset<? extends Data> newDataset = DatasetFactory.createWorkingDataset(this.inputName.getText(), inputType.getValue(), fileToClassify);
+        WorkingDataset<? extends AbstractData> newDataset = DatasetFactory.createWorkingDataset(this.inputName.getText(), inputType.getValue(), fileToClassify);
         newDataset.setCategoryField(inputCategory.getValue());
         newDataset.addDistanceFieldString(inputDistance.getValue());
         this.indexController.addWorkingDataset(newDataset);

@@ -1,8 +1,8 @@
 package app.graphics.models.datas.points;
 
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 
-public class Point<T extends Data> implements IPoint {
+public class Point<T extends AbstractData> implements IPoint {
 	protected double xPos;
 	protected double yPos;
 	protected T data;

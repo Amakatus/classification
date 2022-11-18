@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import app.graphics.models.datas.DataDeltas;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 
 public interface IColumnNormalizer {
-	List<Field> normalize(Data data, Map<String, DataDeltas> deltas);
-	void denormalize(Data data, Map<String, DataDeltas> deltas);
+	List<Field> normalize(AbstractData data, Map<String, DataDeltas> deltas);
+	void denormalize(AbstractData data, Map<String, DataDeltas> deltas);
 }

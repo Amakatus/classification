@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import app.graphics.models.datas.DataDeltas;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 import app.graphics.models.datas.data.IrisData;
 import app.utils.ClassUtils;
 import app.utils.Logger;
@@ -13,7 +13,7 @@ import app.utils.Logger;
 public class Normalizer implements IColumnNormalizer {
 
 	@Override
-	public List<Field> normalize(Data data, Map<String, DataDeltas> deltas) {
+	public List<Field> normalize(AbstractData data, Map<String, DataDeltas> deltas) {
 		List<Field> fields = ClassUtils.getNumberFields(data);
 		for (Field field : fields) {
 			try {
@@ -32,7 +32,7 @@ public class Normalizer implements IColumnNormalizer {
 	}
 
 	@Override
-	public void denormalize(Data data, Map<String, DataDeltas> deltas) {
+	public void denormalize(AbstractData data, Map<String, DataDeltas> deltas) {
 		List<Field> fields = ClassUtils.getNumberFields(data);
 		for (Field field : fields) {
 			try {
