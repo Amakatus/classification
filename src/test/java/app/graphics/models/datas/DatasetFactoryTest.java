@@ -3,11 +3,14 @@ package app.graphics.models.datas;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
 
 import app.graphics.models.datas.data.DataType;
 import app.graphics.models.datas.data.IrisData;
 import app.graphics.models.datas.data.TitanicPassengerData;
+import app.utils.ProjectUtils;
 
 class DatasetFactoryTest {
 	ReferenceDataset<IrisData> irisDataReferenceDS = DatasetFactory.irisReferenceDataset("iristest");
@@ -30,5 +33,13 @@ class DatasetFactoryTest {
         assertNotEquals(titanicPassengerDataDSSize, factoryIrisDataDSSize);
 	}
     
+	
+	@Test
+	void factory_should_create_working_dataset() {
+		WorkingDataset<IrisData> workingDS;
+		File csvFile = ProjectUtils.getFile("/data/iris.csv");
+		workingDS = DatasetFactory.createWorkingDataset("irisDataSet", DataType.IRIS, csvFile);
+		assertNotEquals(null,workingDS);
+	}
     
 }
