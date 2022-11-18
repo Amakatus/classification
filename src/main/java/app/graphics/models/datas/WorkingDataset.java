@@ -47,7 +47,7 @@ public class WorkingDataset<T extends Data> extends Dataset<T> {
 	}
 	
 	public void createAlgorithm(int k) {
-		AlgorithmFactory.createAlgorithm(this, k);
+		AlgorithmFactory.createKNN(this, k);
 	}
 
 	public void addAlgorithm(KNNAlgorithm<T> algorithm) {
