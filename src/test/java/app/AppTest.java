@@ -1,17 +1,22 @@
 package app;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
-
-import static org.junit.jupiter.api.Assertions.*;
+import app.graphics.models.datas.data.TitanicPassengerData;
 
 class AppTest {
 	App app = null;
 	ReferenceDataset<IrisData> referenceDS = new ReferenceDataset<>("refDS");
+	ReferenceDataset<TitanicPassengerData> refenceDS2 = new ReferenceDataset<>("refDS2");
 	
 	@BeforeEach
 	void initApp() {
@@ -30,6 +35,13 @@ class AppTest {
 		assertTrue(app.getWorkingDatasets().isEmpty());
 		app.addWorkingDataset(new WorkingDataset<IrisData>("RandomDataset", referenceDS));
 		assertEquals(1, app.getWorkingDatasets().size());
+	}
+	
+	@Test
+	void should_add_multiple_working_data_sets() {
+		assertTrue(app.getWorkingDatasets().isEmpty());
+		app.addWorkingDataset(new WorkingDataset<IrisData>("RandomDataset",referenceDS),new WorkingDataset<TitanicPassengerData>("TitanicDataset",refenceDS2));
+		assertEquals(2, app.getWorkingDatasets().size());
 	}
 
 	@Test
