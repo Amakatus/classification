@@ -1,13 +1,8 @@
 package app.graphics.models.datas.columns;
 
 import app.algorithm.normalizers.IColumnNormalizer;
-<<<<<<< HEAD
 import app.graphics.models.datas.AbstractDataset;
-import app.graphics.models.datas.data.Data;
-=======
-import app.graphics.models.datas.Dataset;
 import app.graphics.models.datas.data.AbstractData;
->>>>>>> benoit
 import app.graphics.models.datas.points.IPoint;
 
 public class Column<T extends AbstractData> implements IColumn {
