@@ -33,7 +33,7 @@ class KNNAlgorithmTest {
 		kNeighbours = 1;
 		referenceDS = new ReferenceDataset<IrisData>("rDS", Arrays.asList(rIrisOne, rIrisTwo));
 		workingDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo), referenceDS);
-		AlgorithmFactory.createAlgorithm(workingDS, kNeighbours);
+		AlgorithmFactory.createKNN(workingDS, kNeighbours);
 		knnAlgorithm = workingDS.getAlgorithms().get(0);
 		calculator = knnAlgorithm.getCalculator();
 		wIrisOne.setPetalLength(5);
@@ -45,11 +45,10 @@ class KNNAlgorithmTest {
 		wIrisTwo.setPetalWidth(25);
 		rIrisTwo.setPetalWidth(10);
 	}
-	
+
 	@Test
 	void test_get_strength() {
-		this.knnAlgorithm.setStrength(100);
-		assertEquals(100, this.knnAlgorithm.getStrength());
+		assertEquals(0, knnAlgorithm.getStrength());
 	}
 	
 	@Test
@@ -70,7 +69,7 @@ class KNNAlgorithmTest {
 	
 	@Test
 	void test_to_string() {
-		assertEquals("1NNAlgorithm (72.0%)", this.knnAlgorithm.toString());
+		assertEquals("1NNAlgorithm (0.0%)", this.knnAlgorithm.toString());
 	}
 	
 	@Test

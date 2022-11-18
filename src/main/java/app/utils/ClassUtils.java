@@ -115,7 +115,6 @@ public interface ClassUtils {
     static double getValueFromFieldByMethod(Object object, String fieldName, Object other) {
         Method fieldToDoubleMethod = findMethodByName(object, fieldName + Data.TO_DOUBLE);
         if (!isToDoubleMethod(fieldToDoubleMethod)) return Double.MAX_VALUE;
-        fieldToDoubleMethod.setAccessible(true);
         try {
             return (double) fieldToDoubleMethod.invoke(object, other);
         } catch (Exception e) {
@@ -137,7 +136,6 @@ public interface ClassUtils {
             throw new FieldNotNumberException();
 
         try {
-            field.setAccessible(true);
             return field.getDouble(object);
         } catch (Exception e) {
             Logger.exception(e);
@@ -170,7 +168,6 @@ public interface ClassUtils {
         Field field = getFieldByName(object, fieldName);
         if (field == null) return null;
         try {
-            field.setAccessible(true);
             return field.get(object);
         } catch (Exception e) {
             Logger.exception(e);

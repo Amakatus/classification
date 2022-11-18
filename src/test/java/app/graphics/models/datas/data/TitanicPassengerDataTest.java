@@ -1,8 +1,9 @@
 package app.graphics.models.datas.data;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TitanicPassengerDataTest {
 
@@ -37,8 +38,8 @@ class TitanicPassengerDataTest {
 	@Test
 	void should_get_passenger_sex() {
 		TitanicPassengerData passenger = new TitanicPassengerData();
-		passenger.setMale(true);
-		assertTrue(passenger.isMale());
+		passenger.setSex("male");
+		assertEquals("male", passenger.getSex());
 	}
 	
 	@Test
