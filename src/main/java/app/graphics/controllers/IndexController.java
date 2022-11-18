@@ -65,10 +65,10 @@ public class IndexController extends AbstractController {
 	}
 
 	@FXML
-	void exitApp() { Platform.exit(); }
+	private void exitApp() { Platform.exit(); }
 
 	@FXML
-	void createNewTab(KNNAlgorithm<?> algo) {
+	private void createNewTab(KNNAlgorithm<?> algo) {
 		String title = algo.getWorkingDataset().getTitle()+algo.getKNeighbours();
 		ObservableList<Tab> tabs = tabPane.getTabs();
 		for(Tab tab : tabs) {
