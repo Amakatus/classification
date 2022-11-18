@@ -40,7 +40,7 @@ class NormalizerTest {
 	}
 
 	@Test
-	void Normalizer_test() {
+	void test_values_of_iris_should_be_between_0_and_1_after_normalize() {
 		List<Field> fields = new ArrayList<>();
 		fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
 		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
@@ -54,6 +54,26 @@ class NormalizerTest {
 		assertEquals(0.0, rds.getDatas().get(0).getPetalWidth());
 		assertEquals(0.5, rds.getDatas().get(1).getPetalWidth());
 		assertEquals(1.0, rds.getDatas().get(2).getPetalWidth());
+	}
+	
+	@Test
+	void test_values_of_iris_should_be_return_to_initial_values() {
+		List<Field> fields = new ArrayList<>();
+		fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
+		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
+		Normalizer normalizer = new Normalizer();
+		for (IrisData data : rds.getDatas()) {
+			normalizer.normalize(data, deltaOfDataset);
+		}
+		for (IrisData data : rds.getDatas()) {
+			normalizer.denormalize(data, deltaOfDataset);
+		}
+		assertEquals(5.0, rds.getDatas().get(0).getPetalLength());
+		assertEquals(6.0, rds.getDatas().get(1).getPetalLength());
+		assertEquals(10.0, rds.getDatas().get(2).getPetalLength());
+		assertEquals(0.0, rds.getDatas().get(0).getPetalWidth());
+		assertEquals(5.0, rds.getDatas().get(1).getPetalWidth());
+		assertEquals(10.0, rds.getDatas().get(2).getPetalWidth());
 	}
 
 }
