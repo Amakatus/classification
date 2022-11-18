@@ -15,8 +15,8 @@ import app.graphics.models.datas.data.TitanicPassengerData;
 
 class AppTest {
 	App app = null;
-	ReferenceDataset<IrisData> referenceDS = new ReferenceDataset<>("refDS");
-	ReferenceDataset<TitanicPassengerData> refenceDS2 = new ReferenceDataset<>("refDS2");
+	ReferenceDataset<IrisData> irisDataReferenceDS = new ReferenceDataset<>("irisDataReference");
+	ReferenceDataset<TitanicPassengerData> titanicPassengerDataReferenceDS = new ReferenceDataset<>("titanicPassengerDataReference");
 	
 	@BeforeEach
 	void initApp() {
@@ -33,27 +33,27 @@ class AppTest {
 	@Test
 	void testAddWorkingDataset() {
 		assertTrue(app.getWorkingDatasets().isEmpty());
-		app.addWorkingDataset(new WorkingDataset<IrisData>("RandomDataset", referenceDS));
+		app.addWorkingDataset(new WorkingDataset<IrisData>("irisDataReference", irisDataReferenceDS));
 		assertEquals(1, app.getWorkingDatasets().size());
 	}
 	
 	@Test
 	void should_add_multiple_working_data_sets() {
 		assertTrue(app.getWorkingDatasets().isEmpty());
-		app.addWorkingDataset(new WorkingDataset<IrisData>("RandomDataset",referenceDS),new WorkingDataset<TitanicPassengerData>("TitanicDataset",refenceDS2));
+		app.addWorkingDataset(new WorkingDataset<IrisData>("irisDataReference",irisDataReferenceDS),new WorkingDataset<TitanicPassengerData>("TitanicDataset",titanicPassengerDataReferenceDS));
 		assertEquals(2, app.getWorkingDatasets().size());
 	}
 
 	@Test
 	void testGetWorkingDatasets() {
-		app.addWorkingDataset(new WorkingDataset<IrisData>("TestPurposeWorkingDataset", referenceDS));
+		app.addWorkingDataset(new WorkingDataset<IrisData>("TestPurposeWorkingDataset", irisDataReferenceDS));
 		assertEquals("TestPurposeWorkingDataset",app.getWorkingDatasets().get(0).getTitle());
 	}
 
 	@Test
 	void testAddReferenceDataset() {
 		assertTrue(app.getReferenceDatasets().isEmpty());
-		app.addReferenceDataset(new ReferenceDataset<IrisData>("RandomDataset"));
+		app.addReferenceDataset(new ReferenceDataset<IrisData>("IrisDataReference"));
 		assertEquals(1, app.getReferenceDatasets().size());
 	}
 	
