@@ -1,86 +1,59 @@
 package app.algorithm.normalizers;
 
-
-	import java.lang.reflect.Field;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-	import java.util.HashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.security.auth.Refreshable;
-
 import org.junit.jupiter.api.BeforeEach;
-	import org.junit.jupiter.api.Test;
-
-	import app.algorithm.AlgorithmFactory;
-	import app.algorithm.KNNAlgorithm;
-	import app.algorithm.KNNCalculator;
-	import app.graphics.models.datas.DataDeltas;
-	import app.graphics.models.datas.ReferenceDataset;
-	import app.graphics.models.datas.WorkingDataset;
-	import app.graphics.models.datas.data.Data;
-	import app.graphics.models.datas.data.IrisData;
+import org.junit.jupiter.api.Test;
+import app.graphics.models.datas.DataDeltas;
+import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.WorkingDataset;
+import app.graphics.models.datas.data.IrisData;
 import app.utils.ClassUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class NormalizerTest {	
-		IrisData wIrisOne;
-		IrisData wIrisTwo;
-		IrisData rIrisOne;
-		IrisData rIrisTwo;
-		int kNeighbours;
-		ReferenceDataset<IrisData> referenceDS;
-		WorkingDataset<IrisData> workingDS;
-		KNNAlgorithm<IrisData> knnAlgorithm;
-		KNNCalculator<IrisData> calculator;
+class NormalizerTest {
+	ReferenceDataset<IrisData> rds = new ReferenceDataset<>("rds");
+	IrisData iris1 = new IrisData();
+	IrisData iris2 = new IrisData();
+	IrisData iris3 = new IrisData();
+	int kNeighbours;
+	WorkingDataset<IrisData> workingDS;
+	DataDeltas deltasPetalLength;
 
-		@BeforeEach
-		void init() {
-			wIrisOne = new IrisData();
-			wIrisTwo = new IrisData();
-			rIrisOne = new IrisData();
-			rIrisTwo = new IrisData();
-			kNeighbours = 1;
-			referenceDS = new ReferenceDataset<IrisData>("rDS", Arrays.asList(rIrisOne, rIrisTwo, wIrisOne));
-			workingDS = new WorkingDataset<IrisData>("wDS", Arrays.asList(wIrisOne, wIrisTwo), referenceDS);
-			AlgorithmFactory.createAlgorithm(workingDS, kNeighbours);
-			knnAlgorithm = workingDS.getAlgorithms().get(0);
-			calculator = knnAlgorithm.getCalculator();
-			wIrisOne.setPetalLength(5.0);
-			rIrisOne.setPetalLength(6.0);
-			wIrisTwo.setPetalLength(10.0);
-			rIrisTwo.setPetalLength(9.0);
-			wIrisOne.setPetalWidth(10.0);
-			rIrisOne.setPetalWidth(25.0);
-			wIrisTwo.setPetalWidth(25.0);
-			rIrisTwo.setPetalWidth(10.0);
+	@BeforeEach
+	void init() {
+		kNeighbours = 1;
+		iris1.setPetalLength(5.0);
+		iris2.setPetalLength(6.0);
+		iris3.setPetalLength(10.0);
+		iris1.setPetalWidth(0.0);
+		iris2.setPetalWidth(5.0);
+		iris3.setPetalWidth(10.0);
+		rds.addData(iris1, iris2, iris3);
+		rds.registerDeltas();
+		deltasPetalLength = rds.getDeltas().get("petalLength");
+	}
+
+	@Test
+	void Normalizer_test() {
+		List<Field> fields = new ArrayList<>();
+		fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
+		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
+		Normalizer normalizer = new Normalizer();
+		for (IrisData data : rds.getDatas()) {
+			normalizer.normalize(data, deltaOfDataset);
 		}
-		
-		@Test
-		void Normalizer_test() throws IllegalArgumentException, IllegalAccessException {
-			List<Field> fields = new ArrayList<>();
-			fields.addAll(ClassUtils.getNumberFields(referenceDS.getDatas().get(0)));
-			
-			Map<String, DataDeltas> test = new HashMap<>();
-			test = referenceDS.getDeltas();
-			Normalizer normalizer = new Normalizer();
-			for(int cpt = 0 ; cpt < referenceDS.getDatas().size(); cpt++) {
-				fields.addAll(normalizer.normalize(referenceDS.getDatas().get(cpt),test));
-			}
-			
-				for (Field field : fields) {
-					System.out.println("test");
-					System.out.println(field.getDouble(referenceDS.getDatas().get(0)));
-					assertEquals(0,field.getDouble(referenceDS.getDatas()));
-				}
-			
-		}
-
-		
-
-	
-	
+		assertEquals(0.0, rds.getDatas().get(0).getPetalLength());
+		assertEquals(0.2, rds.getDatas().get(1).getPetalLength());
+		assertEquals(1.0, rds.getDatas().get(2).getPetalLength());
+		assertEquals(0.0, rds.getDatas().get(0).getPetalWidth());
+		assertEquals(0.5, rds.getDatas().get(1).getPetalWidth());
+		assertEquals(1.0, rds.getDatas().get(2).getPetalWidth());
+	}
 
 }
