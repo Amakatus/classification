@@ -25,7 +25,7 @@ import java.util.Collections;
 /**
  * @TODO : Change this to modal view
  */
-public class DatasetCreatorController extends Controller {
+public class DatasetCreatorController extends AbstractController {
     @FXML
     protected HBox distanceWrapper;
     @FXML

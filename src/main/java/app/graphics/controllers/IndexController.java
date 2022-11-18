@@ -18,7 +18,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class IndexController extends Controller {
+public class IndexController extends AbstractController {
 	private int numberTabs = 1;
 	
 	@FXML protected MFXButton newTabButton;

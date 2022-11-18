@@ -3,7 +3,7 @@ package app.graphics.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class ScatterChartController extends Controller {
+public class ScatterChartController extends AbstractController {
 	@FXML Label datasetTitle;
 	
 	@FXML

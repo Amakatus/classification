@@ -5,10 +5,10 @@ import app.exceptions.FieldNotNumberException;
 import app.graphics.models.datas.data.Data;
 import app.utils.ClassUtils;
 
-public abstract class GeometryCalculator<T extends Data> implements IGeometryCalculator<T> {
+public abstract class AbstractGeometryCalculator<T extends Data> implements IGeometryCalculator<T> {
 	protected KNNCalculator<T> calculator;
 
-	protected GeometryCalculator(KNNCalculator<T> calculator) {
+	protected AbstractGeometryCalculator(KNNCalculator<T> calculator) {
 		this.calculator = calculator;
 	}
 	

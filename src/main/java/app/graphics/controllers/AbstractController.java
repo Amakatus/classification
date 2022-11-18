@@ -3,15 +3,15 @@ package app.graphics.controllers;
 import app.graphics.models.Model;
 import app.graphics.views.View;
 
-public abstract class Controller implements IFXController {
+public abstract class AbstractController implements IFXController {
 	protected Model model;
 	protected View view;
 	
-	protected Controller(View view) {
+	protected AbstractController(View view) {
 		this.view = view;
 	}
 
-	protected Controller() {
+	protected AbstractController() {
 		this(null);
 	}
 	
