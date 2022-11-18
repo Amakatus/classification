@@ -30,18 +30,4 @@ public class Point<T extends Data> implements IPoint {
 	public void setyPos(double yPos) {
 		this.yPos = yPos;
 	}
-	/**
-	 * @return the data
-	 */
-	public T getData() {
-		return data;
-	}
-	/**
-	 * @param data the data to set
-	 */
-	public void setData(T data) {
-		this.data = data;
-	}
-	
-	
 }

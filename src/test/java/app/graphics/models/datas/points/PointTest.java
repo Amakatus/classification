@@ -14,5 +14,10 @@ class PointTest {
 		point.setxPos(12.5);
 		assertEquals(12.5, point.getxPos()); 
 	}
-
+	@Test
+	void Test_getter_and_setter_for_the_position_y_to_the_point() {
+		Point<Data> point = new Point<Data>();
+		point.setyPos(20.5);
+		assertEquals(20.5, point.getyPos()); 
+	}
 }
