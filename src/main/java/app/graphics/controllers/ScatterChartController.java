@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class ScatterChartController extends Controller {
-	@FXML Label datasetTitle;
+	@FXML protected Label datasetTitle;
 	
 	@FXML
     public void initialize() {
