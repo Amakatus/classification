@@ -1,7 +1,7 @@
 package app.graphics.models.datas.columns;
 
 import app.algorithm.normalizers.IColumnNormalizer;
-import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.AbstractDataset;
 import app.graphics.models.datas.points.IPoint;
 
 public interface IColumn {
@@ -9,6 +9,6 @@ public interface IColumn {
 	double getNormalizedValue(IPoint point);
 	Object getDenormalizedValue(double value);
 	String getName();
-	Dataset<?> getDataset();
+	AbstractDataset<?> getDataset();
 	boolean isNormalizable();
 }

@@ -8,7 +8,7 @@ import app.utils.Logger;
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class ReferenceDataset<T extends Data> extends Dataset<T> {
+public class ReferenceDataset<T extends Data> extends AbstractDataset<T> {
     protected Map<String, DataDeltas> fieldsDeltas;
 
     public ReferenceDataset(String title, List<T> datas) {

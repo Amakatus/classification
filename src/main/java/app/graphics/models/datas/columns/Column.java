@@ -1,14 +1,14 @@
 package app.graphics.models.datas.columns;
 
 import app.algorithm.normalizers.IColumnNormalizer;
-import app.graphics.models.datas.Dataset;
+import app.graphics.models.datas.AbstractDataset;
 import app.graphics.models.datas.data.Data;
 import app.graphics.models.datas.points.IPoint;
 
 public class Column<T extends Data> implements IColumn {
 	protected IColumnNormalizer normalizer;
 	protected String name;
-	protected Dataset<T> dataSet;
+	protected AbstractDataset<T> dataSet;
 	
 	@Override
 	public void setNormalizer(IColumnNormalizer valueNormalizer) {
@@ -34,7 +34,7 @@ public class Column<T extends Data> implements IColumn {
 	}
 
 	@Override
-	public Dataset<T> getDataset() {
+	public AbstractDataset<T> getDataset() {
 		// TODO Auto-generated method stub
 		return null;
 	}

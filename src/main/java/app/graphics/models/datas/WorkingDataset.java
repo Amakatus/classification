@@ -7,7 +7,7 @@ import app.graphics.models.datas.data.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkingDataset<T extends Data> extends Dataset<T> {
+public class WorkingDataset<T extends Data> extends AbstractDataset<T> {
 	protected String categoryField;
 	protected List<String> distanceFields;
 	protected List<KNNAlgorithm<T>> algorithms;

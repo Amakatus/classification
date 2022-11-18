@@ -7,12 +7,12 @@ import app.graphics.models.datas.data.Data;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Dataset<T extends Data> implements Model {
+public abstract class AbstractDataset<T extends Data> implements Model {
 	protected String title;
 	protected List<Column<T>> columns;
 	protected List<T> datas;
 	
-	protected Dataset(String title, List<T> datas) {
+	protected AbstractDataset(String title, List<T> datas) {
 		this.title = title;
 		this.datas = datas == null ? new ArrayList<>() : datas;
 		this.columns = new ArrayList<>();
