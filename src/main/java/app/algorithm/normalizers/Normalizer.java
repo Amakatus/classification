@@ -8,6 +8,7 @@ import app.graphics.models.datas.DataDeltas;
 import app.graphics.models.datas.data.Data;
 import app.graphics.models.datas.data.IrisData;
 import app.utils.ClassUtils;
+import app.utils.Logger;
 
 public class Normalizer implements IColumnNormalizer {
 
@@ -24,7 +25,7 @@ public class Normalizer implements IColumnNormalizer {
 				valueNormalized = (valueNotNormalized - min) / delta;
 				field.setDouble(data, valueNormalized);
 			} catch (Exception e) {
-				e.printStackTrace();
+				Logger.exception(e);
 			}
 		}
 		return fields;
@@ -43,7 +44,7 @@ public class Normalizer implements IColumnNormalizer {
 				valueNormalized = valueNotNormalized * delta + min;
 				field.setDouble(data, valueNormalized);
 			} catch (Exception e) {
-				e.printStackTrace();
+				Logger.exception(e);
 			}
 		}
 	}
