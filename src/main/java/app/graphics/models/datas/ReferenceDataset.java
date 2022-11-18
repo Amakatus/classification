@@ -1,14 +1,14 @@
 package app.graphics.models.datas;
 
 import app.exceptions.FieldNotNumberException;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
 import app.utils.Logger;
 
 import java.lang.reflect.Field;
 import java.util.*;
 
-public class ReferenceDataset<T extends Data> extends AbstractDataset<T> {
+public class ReferenceDataset<T extends AbstractData> extends AbstractDataset<T> {
     protected Map<String, DataDeltas> fieldsDeltas;
 
     public ReferenceDataset(String title, List<T> datas) {

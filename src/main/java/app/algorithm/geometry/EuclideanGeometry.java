@@ -2,9 +2,9 @@ package app.algorithm.geometry;
 
 import app.algorithm.KNNCalculator;
 import app.exceptions.FieldToDistanceException;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 
-public class EuclideanGeometry<T extends Data> extends AbstractGeometryCalculator<T> {
+public class EuclideanGeometry<T extends AbstractData> extends AbstractGeometryCalculator<T> {
 	public static final int EUCLIDEAN_POWER = 2;
 	
 	public EuclideanGeometry(KNNCalculator<T> calculator) {

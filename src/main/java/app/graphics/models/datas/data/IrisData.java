@@ -2,7 +2,7 @@ package app.graphics.models.datas.data;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class IrisData extends Data {
+public class IrisData extends AbstractData {
 	@CsvBindByName(column = "sepal.length")
 	public double sepalLength;
 	
@@ -58,7 +58,7 @@ public class IrisData extends Data {
 		return this.variety;
 	}
 	
-	public double varietyToDouble(Data other) {
+	public double varietyToDouble(AbstractData other) {
 		IrisData otherIris = (IrisData) other;
 		return (double) this.variety.toString().length() - otherIris.getVariety().toString().length();
 	}

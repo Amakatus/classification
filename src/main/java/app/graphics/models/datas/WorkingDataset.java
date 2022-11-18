@@ -2,12 +2,12 @@ package app.graphics.models.datas;
 
 import app.algorithm.AlgorithmFactory;
 import app.algorithm.KNNAlgorithm;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkingDataset<T extends Data> extends AbstractDataset<T> {
+public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
 	protected String categoryField;
 	protected List<String> distanceFields;
 	protected List<KNNAlgorithm<T>> algorithms;

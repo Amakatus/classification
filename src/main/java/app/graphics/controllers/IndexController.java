@@ -4,7 +4,7 @@ import app.App;
 import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 import app.graphics.views.View;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
@@ -18,7 +18,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
-public class IndexController extends Controller {
+public class IndexController extends AbstractController {
 	private int numberTabs = 1;
 	
 	@FXML protected MFXButton newTabButton;
@@ -33,7 +33,7 @@ public class IndexController extends Controller {
 	}
 
 	private void setupTreeView() {
-		TreeItem<Object> rootItem = new TreeItem<>(new ReferenceDataset<Data>("Datasets"));
+		TreeItem<Object> rootItem = new TreeItem<>(new ReferenceDataset<AbstractData>("Datasets"));
 		rootItem.setExpanded(true);
 		this.treeView = new TreeView<>();
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -58,7 +58,7 @@ public class IndexController extends Controller {
 		}
 	}
 
-	public void addWorkingDataset(WorkingDataset<? extends Data> dataset){
+	public void addWorkingDataset(WorkingDataset<? extends AbstractData> dataset){
 		TreeItem<Object> rootItem = treeView.getRoot();
 		TreeItem<Object> childItem = new TreeItem<>(dataset);
 		rootItem.getChildren().add(childItem);

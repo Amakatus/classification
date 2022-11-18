@@ -1,7 +1,7 @@
 package app.graphics.views;
 
 
-import app.graphics.controllers.Controller;
+import app.graphics.controllers.AbstractController;
 import app.utils.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +14,7 @@ import java.io.IOException;
 public class View {
 	
 	protected Stage stage;
-	protected Controller controller;
+	protected AbstractController controller;
 	protected Parent loadedResource;
 	
 	public View(String viewName, String windowName, int width, int height) {
@@ -41,7 +41,7 @@ public class View {
 	}
 	
 	private boolean setupController(FXMLLoader loader) {
-		Controller loaderController = loader.getController();
+		AbstractController loaderController = loader.getController();
 		if(loaderController == null) return false;
 		this.controller = loaderController;
 		this.controller.setView(this);
@@ -57,7 +57,7 @@ public class View {
 	}
 	
 	public Stage getStage() { return this.stage; }
-	public Controller getController() { return this.controller; }
+	public AbstractController getController() { return this.controller; }
 	public Parent getLoadedResource() { return this.loadedResource; }
 	
 	public void show() {

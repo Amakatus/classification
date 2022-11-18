@@ -2,10 +2,11 @@ package app.algorithm.geometry;
 
 import app.algorithm.KNNCalculator;
 import app.exceptions.FieldNotNumberException;
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
 
-public abstract class AbstractGeometryCalculator<T extends Data> implements IGeometryCalculator<T> {
+
+public abstract class AbstractGeometryCalculator<T extends AbstractData> implements IGeometryCalculator<T> {
 	protected KNNCalculator<T> calculator;
 
 	protected AbstractGeometryCalculator(KNNCalculator<T> calculator) {

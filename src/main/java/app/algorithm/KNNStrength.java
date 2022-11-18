@@ -1,8 +1,8 @@
 package app.algorithm;
 
-import app.graphics.models.datas.data.Data;
+import app.graphics.models.datas.data.AbstractData;
 
-public class KNNStrength<T extends Data> {
+public class KNNStrength<T extends AbstractData> {
 	protected KNNAlgorithm<T> algorithm;
 	protected double strength;
 
