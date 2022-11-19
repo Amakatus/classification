@@ -158,6 +158,16 @@ public interface ClassUtils {
     }
 
     /**
+     * Return if the field can be used as a Category field.
+     * @param field
+     * @return
+     */
+    static boolean canBeCategoryField(Field field){
+        Class<?> fieldType = field.getType();
+        return fieldType.isAssignableFrom(String.class) || fieldType.isEnum() || fieldType.isAssignableFrom(boolean.class);
+    }
+
+    /**
      * Return the value of a fieldName for a given object as an Object.
      *
      * @param object

@@ -1,5 +1,7 @@
 package app.graphics.models.datas.data;
 
+import java.lang.reflect.Field;
+
 public enum DataType {
 	IRIS(IrisData.class, "iris"),
 	PASSENGER(TitanicPassengerData.class, "titanic");
@@ -18,4 +20,5 @@ public enum DataType {
 	public String getCsvPath() {
 		return String.format("/data/%s.csv", this.csvPath);
 	}
+	public Field[] getFields() { return this.typeClass.getDeclaredFields(); }
 }

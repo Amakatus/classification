@@ -83,6 +83,17 @@ class ClassUtilsTest {
 	}
 
 	@Test
+	void test_field_can_be_used_as_category_field() {
+		IrisData irisData = new IrisData();
+		TitanicPassengerData passengerData = new TitanicPassengerData();
+		assertTrue(ClassUtils.canBeCategoryField(ClassUtils.getFieldByName(irisData, "variety")));
+		assertFalse(ClassUtils.canBeCategoryField(ClassUtils.getFieldByName(irisData, "petalLength")));
+		assertTrue(ClassUtils.canBeCategoryField(ClassUtils.getFieldByName(passengerData, "survived")));
+		assertTrue(ClassUtils.canBeCategoryField(ClassUtils.getFieldByName(passengerData, "sex")));
+		assertFalse(ClassUtils.canBeCategoryField(ClassUtils.getFieldByName(passengerData, "age")));
+	}
+
+	@Test
 	void testGetObjectFromField() {
 		TitanicPassengerData passenger = new TitanicPassengerData();
 		passenger.setSurvived(true);

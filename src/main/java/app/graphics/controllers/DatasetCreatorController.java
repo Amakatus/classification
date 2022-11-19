@@ -5,7 +5,7 @@ import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.AbstractData;
 import app.graphics.models.datas.data.DataType;
-import app.utils.Logger;
+import app.utils.ClassUtils;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
+import org.controlsfx.control.CheckComboBox;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -31,8 +32,6 @@ public class DatasetCreatorController extends AbstractController {
     @FXML
     protected HBox categoryWrapper;
     @FXML
-    protected Label distanceInputInfo;
-    @FXML
     protected Label fileLabel;
     @FXML
     protected MFXComboBox<DataType> inputType;
@@ -41,11 +40,11 @@ public class DatasetCreatorController extends AbstractController {
     @FXML
     protected MFXComboBox<String> inputCategory;
     @FXML
-    protected MFXComboBox<String> inputDistance;
+    protected CheckComboBox<String> inputDistance;
     @FXML
     protected MFXButton selectButton;
 
-    protected ObservableList<String> typeFields = FXCollections.observableArrayList();
+    protected ObservableList<String> categoryFields = FXCollections.observableArrayList();
     protected IndexController indexController;
     protected FileChooser fileChooser;
     protected File fileToClassify;
@@ -62,7 +61,6 @@ public class DatasetCreatorController extends AbstractController {
         this.initFields();
         this.distanceWrapper.setVisible(false);
         this.categoryWrapper.setVisible(false);
-        this.distanceInputInfo.setVisible(false);
     }
 
     private void initTypes() {
@@ -71,7 +69,7 @@ public class DatasetCreatorController extends AbstractController {
         Collections.addAll(typeList, DataType.values());
         this.inputType.setItems(typeList);
         this.inputType.valueProperty().addListener((obs, oldVal, newVal) -> {
-            resetComboDefaultValues();
+            this.resetComboDefaultValues();
             this.changeFields(newVal);
         });
     }
@@ -79,26 +77,27 @@ public class DatasetCreatorController extends AbstractController {
     private void resetComboDefaultValues() {
         this.distanceWrapper.setVisible(true);
         this.categoryWrapper.setVisible(true);
-        this.distanceInputInfo.setVisible(true);
         this.inputCategory.getSelectionModel().clearSelection();
-        this.inputDistance.getSelectionModel().clearSelection();
+        this.inputDistance.getCheckModel().clearChecks();
+        this.inputDistance.getItems().clear();
     }
 
     private void initFields() {
-        this.inputCategory.setItems(this.typeFields);
-        this.inputDistance.setItems(this.typeFields);
+        this.inputCategory.setItems(this.categoryFields);
+        this.inputDistance.setStyle(this.inputCategory.getStyle());
     }
 
     private void changeFields(DataType dataType) {
-        try {
-            Class<? extends AbstractData> dataClass = dataType.getTypeClass();
-            Field[] fields = dataClass.getDeclaredFields();
-            this.typeFields.clear();
-            for (Field field : fields) {
-                this.typeFields.add(field.getName());
+        Field[] fields = dataType.getFields();
+        this.categoryFields.clear();
+        ObservableList<String> inputDistanceItems = this.inputDistance.getItems();
+        inputDistanceItems.clear();
+        for (Field field : fields) {
+            String fieldName = field.getName();
+            if (ClassUtils.canBeCategoryField(field)) {
+                this.categoryFields.add(fieldName);
             }
-        } catch (Exception e) {
-            Logger.exception(e);
+            inputDistanceItems.add(fieldName);
         }
     }
 
@@ -111,14 +110,15 @@ public class DatasetCreatorController extends AbstractController {
         }
         WorkingDataset<? extends AbstractData> newDataset = DatasetFactory.createWorkingDataset(this.inputName.getText(), inputType.getValue(), fileToClassify);
         newDataset.setCategoryField(inputCategory.getValue());
-        newDataset.addDistanceFieldString(inputDistance.getValue());
+        inputDistance.getCheckModel().getCheckedItems().forEach(newDataset::addDistanceFieldString);
+        System.out.println(newDataset.getDistanceFields().size());
         this.indexController.addWorkingDataset(newDataset);
         this.closeView();
     }
 
     private boolean formIsComplete() {
-        return !this.inputName.getText().isEmpty() && this.inputType.getValue() != null && this.inputDistance.getValue() != null
-				&& this.inputCategory.getValue() != null && this.fileToClassify != null;
+        return !this.inputName.getText().isEmpty() && this.inputType.getValue() != null && this.inputDistance.getCheckModel().getCheckedItems().size() > 0
+                && this.inputCategory.getValue() != null && this.fileToClassify != null;
     }
 
     public void openDialogFile(MouseEvent mouseEvent) {
