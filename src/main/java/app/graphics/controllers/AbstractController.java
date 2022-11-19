@@ -1,9 +1,11 @@
 package app.graphics.controllers;
 
 import app.graphics.models.Model;
+import app.graphics.models.Observer;
 import app.graphics.views.View;
+import app.utils.Logger;
 
-public abstract class AbstractController implements IFXController {
+public abstract class AbstractController implements IFXController, Observer {
 	protected Model model;
 	protected View view;
 	
@@ -22,9 +24,14 @@ public abstract class AbstractController implements IFXController {
 	public void setView(View view) {
 		this.view = view;
 	}
-	
+
+	public void update() {
+		Logger.log("Controller " + this.getClass().getSimpleName() + " has received update but haven't done anything.");
+	}
+
 	public void setModel(Model model) {
 		this.model = model;
+		model.attach(this);
 	}
 	
 	public Model getModel() {

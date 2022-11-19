@@ -1,13 +1,12 @@
 package app.graphics.models.datas;
 
-import app.graphics.models.Model;
 import app.graphics.models.datas.columns.Column;
 import app.graphics.models.datas.data.AbstractData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDataset<T extends AbstractData> implements Model {
+public abstract class AbstractDataset<T extends AbstractData> {
 	protected String title;
 	protected List<Column<T>> columns;
 	protected List<T> datas;
@@ -27,8 +26,6 @@ public abstract class AbstractDataset<T extends AbstractData> implements Model {
 	public void addData(T data) {
 		this.datas.add(data);
 	}
-	
-	
 
 	public void setDatas(List<T> datas) {
 		this.datas = datas;

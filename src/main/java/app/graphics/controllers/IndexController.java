@@ -1,6 +1,5 @@
 package app.graphics.controllers;
 
-import app.App;
 import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
@@ -9,7 +8,6 @@ import app.graphics.views.View;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -28,7 +26,6 @@ public class IndexController extends AbstractController {
 
 	@Override
 	public void initialize() {
-		App app = App.getInstance();
 		this.setupTreeView();
 	}
 
@@ -38,7 +35,7 @@ public class IndexController extends AbstractController {
 		this.treeView = new TreeView<>();
 		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			if(event.getClickCount() == 2){
-				this.handleDoubleClickEvent(event);
+				this.handleDoubleClickEvent();
 			}
 		});
 		treeView.setMinHeight(this.leftBox.getPrefHeight());
@@ -46,7 +43,7 @@ public class IndexController extends AbstractController {
 		this.leftBox.getChildren().add(treeView);
 	}
 
-	private void handleDoubleClickEvent(MouseEvent event) {
+	private void handleDoubleClickEvent() {
 		Object selectedItem = treeView.getSelectionModel().getSelectedItem().getValue();
 		if(selectedItem == null) return;
 		if(selectedItem.getClass().isAssignableFrom(WorkingDataset.class)){
@@ -87,7 +84,7 @@ public class IndexController extends AbstractController {
 	}
 
 	@FXML
-	public void newDataset(ActionEvent actionEvent) {
+	public void newDataset() {
 		View datasetCreatorView = new View("createWorkingdataset", "Dataset creator");
 		DatasetCreatorController controller = (DatasetCreatorController) datasetCreatorView.getController();
 		controller.setIndexController(this);
