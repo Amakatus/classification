@@ -2,7 +2,6 @@ package app.algorithm.normalizers;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,13 +58,14 @@ class NormalizerTest {
 		assertEquals(0.5, rds.getDatas().get(1).getPetalWidth());
 		assertEquals(1.0, rds.getDatas().get(2).getPetalWidth());
 	}
-	
+
 	@Test
 	void test_reference_dataset_values_of_iris_should_be_return_to_initial_values() {
 		List<Field> fields = new ArrayList<>();
 		fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
 		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
 		Normalizer normalizer = new Normalizer();
+
 		for (IrisData data : rds.getDatas()) {
 			normalizer.normalize(data, deltaOfDataset);
 		}
@@ -79,12 +79,12 @@ class NormalizerTest {
 		assertEquals(5.0, rds.getDatas().get(1).getPetalWidth());
 		assertEquals(10.0, rds.getDatas().get(2).getPetalWidth());
 	}
-	
+
 	@Test
 	void test_working_dataset_values_of_iris_should_be_between_0_and_1_after_normalize() {
 		List<Field> fields = new ArrayList<>();
 		workingDS = new WorkingDataset<>("Iris", rds);
-		workingDS.addData(iris4,iris5);
+		workingDS.addData(iris4, iris5);
 		fields.addAll(ClassUtils.getNumberFields(workingDS.getDatas().get(0)));
 		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
 		Normalizer normalizer = new Normalizer();
@@ -94,11 +94,12 @@ class NormalizerTest {
 		assertEquals(0.6, workingDS.getDatas().get(0).getPetalLength());
 		assertEquals(0.4, workingDS.getDatas().get(1).getPetalLength());
 	}
+
 	@Test
 	void test_working_dataset_values_of_iris_should_be_return_to_initial_values() {
 		List<Field> fields = new ArrayList<>();
 		workingDS = new WorkingDataset<>("Iris", rds);
-		workingDS.addData(iris4,iris5);
+		workingDS.addData(iris4, iris5);
 		fields.addAll(ClassUtils.getNumberFields(workingDS.getDatas().get(0)));
 		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
 		Normalizer normalizer = new Normalizer();
