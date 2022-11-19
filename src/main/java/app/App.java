@@ -38,7 +38,7 @@ public class App extends Model {
 	
 	public void addWorkingDataset(WorkingDataset<? extends AbstractData> dataset) {
 		this.workingDatasets.add(dataset);
-		this.updateObservers();
+		this.updateObservers(dataset);
 	}
 	
 	public void addWorkingDataset(WorkingDataset<?>... datasets) {
@@ -53,7 +53,7 @@ public class App extends Model {
 	
 	public void addReferenceDataset(ReferenceDataset<? extends AbstractData> dataset) {
 		this.referenceDatasets.add(dataset);
-		this.updateObservers();
+		this.updateObservers(dataset);
 	}
 	
 	public void clearWorkingDatasets() {
@@ -81,7 +81,7 @@ public class App extends Model {
 	}
 
 	@Override
-	public void updateObservers() {
-		this.observers.forEach(Observer::update);
+	public void updateObservers(Object object) {
+		this.observers.forEach(observer -> observer.sendUpdate(object));
 	}
 }

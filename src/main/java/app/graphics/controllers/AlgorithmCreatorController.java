@@ -16,12 +16,7 @@ import javafx.scene.control.Alert;
 public class AlgorithmCreatorController extends AbstractController {
     public MFXSlider neighboursSlider;
     public MFXComboBox<WorkingDataset<?>> datasetComboBox;
-    protected IndexController indexController;
     protected ObservableList<WorkingDataset<?>> workingDatasets = FXCollections.observableArrayList();
-
-    public void setIndexController(IndexController controller) {
-        this.indexController = controller;
-    }
 
     @FXML
     public void initialize() {
@@ -41,7 +36,6 @@ public class AlgorithmCreatorController extends AbstractController {
         }
         WorkingDataset<?> workingDataset = this.datasetComboBox.getSelectionModel().getSelectedItem();
         workingDataset.createAlgorithm((int) this.neighboursSlider.getValue());
-        indexController.addAlgorithm(workingDataset, workingDataset.getLastAlgorithm());
         this.closeView();
     }
 

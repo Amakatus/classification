@@ -25,7 +25,11 @@ public abstract class AbstractController implements IFXController, Observer {
 		this.view = view;
 	}
 
-	public void update() {
+	public void sendUpdate() {
+		Logger.log("Controller " + this.getClass().getSimpleName() + " has received update but haven't done anything.");
+	}
+
+	public void sendUpdate(Object object) {
 		Logger.log("Controller " + this.getClass().getSimpleName() + " has received update but haven't done anything.");
 	}
 

@@ -1,17 +1,14 @@
 package app.algorithm;
 
-import java.lang.reflect.Field;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
 import app.graphics.models.datas.DatasetClassifier;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class KNNStrength<T extends AbstractData> {
 	protected KNNAlgorithm<T> algorithm;
@@ -31,7 +28,7 @@ public class KNNStrength<T extends AbstractData> {
 		WorkingDataset<T> wDS = this.algorithm.workingDataset;
 		wDS.clearData();
 		List<T> saveDatas = new ArrayList<>();
-		int size = rDS.getDatas().size()/3;
+		int size = 5;
 		for (int cpt = 0; cpt < size; cpt++) {
 			wDS.addData(this.algorithm.getReferenceDataset().getDatas().get(cpt));
 			rDS.removeData(this.algorithm.getReferenceDataset().getDatas().get(cpt));
