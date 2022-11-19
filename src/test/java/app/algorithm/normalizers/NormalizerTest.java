@@ -94,5 +94,22 @@ class NormalizerTest {
 		assertEquals(0.6, workingDS.getDatas().get(0).getPetalLength());
 		assertEquals(0.4, workingDS.getDatas().get(1).getPetalLength());
 	}
+	@Test
+	void test_working_dataset_values_of_iris_should_be_return_to_initial_values() {
+		List<Field> fields = new ArrayList<>();
+		workingDS = new WorkingDataset<>("Iris", rds);
+		workingDS.addData(iris4,iris5);
+		fields.addAll(ClassUtils.getNumberFields(workingDS.getDatas().get(0)));
+		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
+		Normalizer normalizer = new Normalizer();
+		for (IrisData data : workingDS.getDatas()) {
+			normalizer.normalize(data, deltaOfDataset);
+		}
+		for (IrisData data : workingDS.getDatas()) {
+			normalizer.denormalize(data, deltaOfDataset);
+		}
+		assertEquals(8.0, workingDS.getDatas().get(0).getPetalLength());
+		assertEquals(7.0, workingDS.getDatas().get(1).getPetalLength());
+	}
 
 }
