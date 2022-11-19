@@ -1,15 +1,16 @@
 package app.algorithm;
 
-import app.algorithm.geometry.EuclideanGeometry;
-import app.graphics.models.datas.ReferenceDataset;
-import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.AbstractData;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
+
+import app.algorithm.geometry.EuclideanGeometry;
+import app.algorithm.geometry.IGeometryCalculator;
+import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.WorkingDataset;
+import app.graphics.models.datas.data.AbstractData;
 
 public class KNNAlgorithm<T extends AbstractData> {
 	protected WorkingDataset<T> workingDataset;
@@ -50,8 +51,12 @@ public class KNNAlgorithm<T extends AbstractData> {
 	 * The value of this entry is a List containing is k nearest reference neighbours.
 	 * @return List<Entry<T, List<T>>> knn
 	 */
+	public List<Entry<T, List<T>>> getDatasKNN(IGeometryCalculator<T> geometry) {
+		return generateKNNResults(this.calculator.launchCalcul(geometry));
+	}
+	
 	public List<Entry<T, List<T>>> getDatasKNN() {
-		return generateKNNResults(this.calculator.launchCalcul(new EuclideanGeometry<>(calculator)));
+		return getDatasKNN(new EuclideanGeometry<>(calculator));
 	}
 	
 	private List<Entry<T, List<T>>> generateKNNResults(List<Map<T, Double>> dataWithDistances) {

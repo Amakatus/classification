@@ -4,9 +4,9 @@ import app.algorithm.KNNCalculator;
 import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.data.AbstractData;
 
-public class ManhatthanGeometry<T extends AbstractData> extends AbstractGeometryCalculator<T> {
+public class ManhattanGeometry<T extends AbstractData> extends AbstractGeometryCalculator<T> {
 	
-	public ManhatthanGeometry(KNNCalculator<T> calculator) {
+	public ManhattanGeometry(KNNCalculator<T> calculator) {
 		super(calculator);
 	}
 
