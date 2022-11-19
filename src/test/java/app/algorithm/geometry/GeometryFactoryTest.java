@@ -23,4 +23,13 @@ class GeometryFactoryTest {
 		 assertNotEquals(null,mg);
 	}
 
+	@Test
+	void should_create_a_manhatthangeometry_with_factory() {
+		WorkingDataset<IrisData> workingData = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
+		 workingData.createAlgorithm(2);
+		 KNNAlgorithm<IrisData> algorithm = workingData.getAlgorithms().get(0);
+		 ManhatthanGeometry<IrisData> mg;
+		 mg = GeometryFactory.createManhattanGeometry(algorithm.getCalculator());
+		 assertNotEquals(null,mg);
+	}
 }
