@@ -1,5 +1,6 @@
 package app.graphics.controllers;
 
+import app.App;
 import app.graphics.components.AlertFactory;
 import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.WorkingDataset;
@@ -45,18 +46,14 @@ public class DatasetCreatorController extends AbstractController {
     protected MFXButton selectButton;
 
     protected ObservableList<String> categoryFields = FXCollections.observableArrayList();
-    protected IndexController indexController;
     protected FileChooser fileChooser;
     protected File fileToClassify;
 
-    public void setIndexController(IndexController controller) {
-        this.indexController = controller;
-        this.fileChooser = new FileChooser();
-        this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
-    }
 
     @FXML
     public void initialize() {
+        this.fileChooser = new FileChooser();
+        this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
         this.initTypes();
         this.initFields();
         this.distanceWrapper.setVisible(false);
@@ -111,8 +108,7 @@ public class DatasetCreatorController extends AbstractController {
         WorkingDataset<? extends AbstractData> newDataset = DatasetFactory.createWorkingDataset(this.inputName.getText(), inputType.getValue(), fileToClassify);
         newDataset.setCategoryField(inputCategory.getValue());
         inputDistance.getCheckModel().getCheckedItems().forEach(newDataset::addDistanceFieldString);
-        System.out.println(newDataset.getDistanceFields().size());
-        this.indexController.addWorkingDataset(newDataset);
+        App.getInstance().addWorkingDataset(newDataset);
         this.closeView();
     }
 

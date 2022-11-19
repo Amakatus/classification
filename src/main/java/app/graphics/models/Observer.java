@@ -1,5 +1,6 @@
 package app.graphics.models;
 
 public interface Observer {
-    void update();
+    void sendUpdate();
+    void sendUpdate(Object object);
 }

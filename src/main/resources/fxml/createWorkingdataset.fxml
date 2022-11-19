@@ -62,7 +62,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <MFXComboBox fx:id="inputCategory" floatMode="BORDER" floatingText="Category" prefWidth="235.0" />
+                  <MFXComboBox fx:id="inputCategory" floatMode="BORDER" floatingText="Select a category" prefWidth="235.0" />
                </children>
             </HBox>
             <HBox fx:id="distanceWrapper" alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="5.0">

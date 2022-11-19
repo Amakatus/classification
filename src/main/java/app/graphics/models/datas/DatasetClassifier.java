@@ -18,12 +18,12 @@ public class DatasetClassifier<T extends AbstractData> {
     protected KNNAlgorithm<T> algorithm;
     protected String categoryField;
 
-    protected DatasetClassifier(KNNAlgorithm<T> algorithm) {
+    public DatasetClassifier(KNNAlgorithm<T> algorithm) {
         this.algorithm = algorithm;
         this.workingDS = algorithm.getWorkingDataset();
     }
 
-    protected void classifyDatas() {
+    public void classifyDatas() {
         this.categoryField = this.workingDS.getCategoryField();
         List<Entry<T, List<T>>> workingsAndNeighbours = this.algorithm.getDatasKNN();
         for (Entry<T, List<T>> entryToClassify : workingsAndNeighbours) {
