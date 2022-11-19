@@ -1,10 +1,15 @@
 package app.graphics.controllers;
 
+import app.App;
 import app.algorithm.KNNAlgorithm;
+import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.AbstractData;
+import app.graphics.models.datas.data.DataType;
+import app.graphics.models.datas.data.IrisData;
 import app.graphics.views.View;
+import app.utils.ProjectUtils;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -27,6 +32,9 @@ public class IndexController extends AbstractController {
 	@Override
 	public void initialize() {
 		this.setupTreeView();
+		WorkingDataset<IrisData> testWDS = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
+		this.addWorkingDataset(testWDS);
+		System.out.println(this.getTreeForDataset(testWDS));
 	}
 
 	private void setupTreeView() {
@@ -48,9 +56,9 @@ public class IndexController extends AbstractController {
 		if(selectedItem == null) return;
 		if(selectedItem.getClass().isAssignableFrom(WorkingDataset.class)){
 			System.out.println("CLICKED A WORKING DATASET !!!");
-			// Show customisation of working dataset view
 		} else if(selectedItem.getClass().isAssignableFrom(KNNAlgorithm.class)){
 			System.out.println("CLICKED A KNN ALGO !!!");
+			this.createNewTab((KNNAlgorithm<?>) selectedItem);
 			// Create a new tab to show the working datas of its working dataset parent .
 		}
 	}
@@ -59,6 +67,21 @@ public class IndexController extends AbstractController {
 		TreeItem<Object> rootItem = treeView.getRoot();
 		TreeItem<Object> childItem = new TreeItem<>(dataset);
 		rootItem.getChildren().add(childItem);
+		App.getInstance().addWorkingDataset(dataset);
+	}
+
+	private TreeItem<Object> getTreeForDataset(WorkingDataset<? extends AbstractData> dataset){
+		ObservableList<TreeItem<Object>> datasets = treeView.getRoot().getChildren();
+		for(TreeItem<Object> treeDataset : datasets){
+			if(treeDataset.getValue().equals(dataset)) {
+				return treeDataset;
+			}
+		}
+		return null;
+	}
+
+	public void addAlgorithm(WorkingDataset<? extends AbstractData> dataset, KNNAlgorithm<? extends AbstractData> algorithm){
+		getTreeForDataset(dataset).getChildren().add(new TreeItem<>(algorithm));
 	}
 
 	@FXML
@@ -84,10 +107,17 @@ public class IndexController extends AbstractController {
 	}
 
 	@FXML
-	public void newDataset() {
+	public void newDatasetButtonClicked() {
 		View datasetCreatorView = new View("createWorkingdataset", "Dataset creator");
 		DatasetCreatorController controller = (DatasetCreatorController) datasetCreatorView.getController();
 		controller.setIndexController(this);
 		datasetCreatorView.show();
+	}
+
+	public void newAlgorithmButtonClicked() {
+		View algorithmCreatorView = new View("createAlgorithm", "Algorithm creator");
+		AlgorithmCreatorController controller = (AlgorithmCreatorController) algorithmCreatorView.getController();
+		controller.setIndexController(this);
+		algorithmCreatorView.show();
 	}
 }

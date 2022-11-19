@@ -51,12 +51,12 @@ public class DatasetCreatorController extends AbstractController {
 
     public void setIndexController(IndexController controller) {
         this.indexController = controller;
-        this.fileChooser = new FileChooser();
-        this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
     }
 
     @FXML
     public void initialize() {
+        this.fileChooser = new FileChooser();
+        this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
         this.initTypes();
         this.initFields();
         this.distanceWrapper.setVisible(false);

@@ -50,6 +50,10 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
 		AlgorithmFactory.createKNN(this, k);
 	}
 
+	public KNNAlgorithm<T> getLastAlgorithm() {
+		return this.algorithms.get(this.algorithms.size()-1);
+	}
+
 	public void addAlgorithm(KNNAlgorithm<T> algorithm) {
 		this.algorithms.add(algorithm);
 	}
