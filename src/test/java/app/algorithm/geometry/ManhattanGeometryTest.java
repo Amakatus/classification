@@ -12,6 +12,7 @@ import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
+import app.graphics.models.datas.data.IrisVariety;
 
 class ManhattanGeometryTest {
 	IrisData irisRef;
@@ -50,4 +51,19 @@ class ManhattanGeometryTest {
 		}
 	}
 
+	@Test
+	void test_distance_with_not_originally_double_fields() {
+		this.wDS.addDistanceFieldString("variety");
+		this.irisRef.setVariety(IrisVariety.VERSICOLOR);
+		this.irisWork.setVariety(IrisVariety.VIRGINICA);
+		
+		try {
+			assertEquals(1.0, this.geometry.distance(irisWork, irisRef));
+			assertEquals(1.0, this.geometry.distance(irisRef, irisWork));
+			assertEquals(0, this.geometry.distance(irisWork, irisWork));
+			assertEquals(0, this.geometry.distance(irisRef, irisRef));
+		} catch (FieldToDistanceException e) {
+			fail();
+		}
+	}
 }
