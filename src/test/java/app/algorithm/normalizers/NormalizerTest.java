@@ -21,6 +21,8 @@ class NormalizerTest {
 	IrisData iris1 = new IrisData();
 	IrisData iris2 = new IrisData();
 	IrisData iris3 = new IrisData();
+	IrisData iris4 = new IrisData();
+	IrisData iris5 = new IrisData();
 	int kNeighbours;
 	WorkingDataset<IrisData> workingDS;
 	DataDeltas deltasPetalLength;
@@ -31,6 +33,8 @@ class NormalizerTest {
 		iris1.setPetalLength(5.0);
 		iris2.setPetalLength(6.0);
 		iris3.setPetalLength(10.0);
+		iris4.setPetalLength(8.0);
+		iris5.setPetalLength(7.0);
 		iris1.setPetalWidth(0.0);
 		iris2.setPetalWidth(5.0);
 		iris3.setPetalWidth(10.0);
@@ -40,7 +44,7 @@ class NormalizerTest {
 	}
 
 	@Test
-	void test_values_of_iris_should_be_between_0_and_1_after_normalize() {
+	void test_reference_dataset_values_of_iris_should_be_between_0_and_1_after_normalize() {
 		List<Field> fields = new ArrayList<>();
 		fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
 		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
@@ -57,7 +61,7 @@ class NormalizerTest {
 	}
 	
 	@Test
-	void test_values_of_iris_should_be_return_to_initial_values() {
+	void test_reference_dataset_values_of_iris_should_be_return_to_initial_values() {
 		List<Field> fields = new ArrayList<>();
 		fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
 		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
@@ -74,6 +78,21 @@ class NormalizerTest {
 		assertEquals(0.0, rds.getDatas().get(0).getPetalWidth());
 		assertEquals(5.0, rds.getDatas().get(1).getPetalWidth());
 		assertEquals(10.0, rds.getDatas().get(2).getPetalWidth());
+	}
+	
+	@Test
+	void test_working_dataset_values_of_iris_should_be_between_0_and_1_after_normalize() {
+		List<Field> fields = new ArrayList<>();
+		workingDS = new WorkingDataset<>("Iris", rds);
+		workingDS.addData(iris4,iris5);
+		fields.addAll(ClassUtils.getNumberFields(workingDS.getDatas().get(0)));
+		Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
+		Normalizer normalizer = new Normalizer();
+		for (IrisData data : workingDS.getDatas()) {
+			normalizer.normalize(data, deltaOfDataset);
+		}
+		assertEquals(0.6, workingDS.getDatas().get(0).getPetalLength());
+		assertEquals(0.4, workingDS.getDatas().get(1).getPetalLength());
 	}
 
 }
