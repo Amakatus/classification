@@ -46,6 +46,6 @@ public class AlgorithmCreatorController extends AbstractController {
     }
 
     private boolean formIsComplete() {
-        return !(this.datasetComboBox.getSelectionModel().getSelectedItem() == null);
+        return this.datasetComboBox.getSelectionModel().getSelectedItem() != null;
     }
 }
