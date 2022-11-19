@@ -12,24 +12,23 @@ import app.graphics.models.datas.data.IrisData;
 import app.utils.ProjectUtils;
 
 class GeometryFactoryTest {
+	WorkingDataset<IrisData> workingData = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
+	EuclideanGeometry<IrisData> euclideanGeometry;
+	ManhatthanGeometry<IrisData> manhatthanGeometry;
 
 	@Test
 	void should_create_a_euclideangeometry_with_factory() {
-		 WorkingDataset<IrisData> workingData = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
 		 workingData.createAlgorithm(2);
 		 KNNAlgorithm<IrisData> algorithm = workingData.getAlgorithms().get(0);
-		 EuclideanGeometry<IrisData> mg;
-		 mg = GeometryFactory.createEuclideanGeometry(algorithm.getCalculator());
-		 assertNotEquals(null,mg);
+		 euclideanGeometry = GeometryFactory.createEuclideanGeometry(algorithm.getCalculator());
+		 assertNotEquals(null,euclideanGeometry);
 	}
 
 	@Test
 	void should_create_a_manhatthangeometry_with_factory() {
-		WorkingDataset<IrisData> workingData = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
 		 workingData.createAlgorithm(2);
 		 KNNAlgorithm<IrisData> algorithm = workingData.getAlgorithms().get(0);
-		 ManhatthanGeometry<IrisData> mg;
-		 mg = GeometryFactory.createManhattanGeometry(algorithm.getCalculator());
-		 assertNotEquals(null,mg);
+		 manhatthanGeometry = GeometryFactory.createManhattanGeometry(algorithm.getCalculator());
+		 assertNotEquals(null,manhatthanGeometry);
 	}
 }
