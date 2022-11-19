@@ -1,6 +1,7 @@
 package app.algorithm.geometry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
 import app.graphics.models.datas.data.IrisVariety;
+import app.graphics.models.datas.data.TitanicPassengerData;
 
 class ManhattanGeometryTest {
 	IrisData irisRef;
@@ -62,6 +64,29 @@ class ManhattanGeometryTest {
 			assertEquals(1.0, this.geometry.distance(irisRef, irisWork));
 			assertEquals(0, this.geometry.distance(irisWork, irisWork));
 			assertEquals(0, this.geometry.distance(irisRef, irisRef));
+		} catch (FieldToDistanceException e) {
+			fail();
+		}
+	}
+
+	@Test
+	void test_distance_with_nor_double_or_method_fields() {
+		ReferenceDataset<TitanicPassengerData> referenceDataset = new ReferenceDataset<>("TitanicPassengerData");
+		WorkingDataset<TitanicPassengerData> workingDataset = new WorkingDataset<>("TitanicPassengerDataWorking", referenceDataset);
+		KNNAlgorithm<TitanicPassengerData> algo = new KNNAlgorithm<>(workingDataset, 3);
+		algo.getDatasKNN();
+		KNNCalculator<TitanicPassengerData> calc = algo.getCalculator();
+		TitanicPassengerData rPass = new TitanicPassengerData();
+		TitanicPassengerData wPass = new TitanicPassengerData();
+		rPass.setName("Pierre");
+		wPass.setName("Paul");
+		EuclideanGeometry<TitanicPassengerData> geo = (EuclideanGeometry<TitanicPassengerData>) calc.getGeometry();
+		try {
+			workingDataset.addDistanceFieldString("name");
+			assertEquals(1, geo.distance(wPass, rPass));
+			workingDataset.addDistanceFieldString("cabin");
+			assertEquals(Double.MAX_VALUE, geo.findDistanceForField(wPass, rPass, "cabin"));
+			assertThrows(FieldToDistanceException.class, () -> geo.distance(wPass, rPass));
 		} catch (FieldToDistanceException e) {
 			fail();
 		}
