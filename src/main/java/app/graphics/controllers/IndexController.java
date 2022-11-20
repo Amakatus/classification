@@ -23,8 +23,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class IndexController extends AbstractController implements Observer {
-	private int numberTabs = 1;
-	
 	@FXML protected MFXButton newTabButton;
 	@FXML protected TabPane tabPane;
 	@FXML protected VBox leftBox;
@@ -34,10 +32,12 @@ public class IndexController extends AbstractController implements Observer {
 	public void initialize() {
 		this.setupTreeView();
 		App.getInstance().attach(this);
-		WorkingDataset<IrisData> testWDS = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
+		WorkingDataset<IrisData> testWDS = DatasetFactory.createWorkingDataset("DefaultIris", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
 		testWDS.setCategoryField("variety");
-		testWDS.addDistanceFieldString("petalLength	");
+		testWDS.addDistanceFieldString("petalLength");
+		testWDS.addDistanceFieldString("petalWidth");
 		App.getInstance().addWorkingDataset(testWDS);
+		testWDS.createAlgorithm(2);
 	}
 
 	private void setupTreeView() {
@@ -98,16 +98,11 @@ public class IndexController extends AbstractController implements Observer {
 				return;
 			}
 		}
-		View scatterChartView = new View("scatterChartView");
+		View scatterChartView = new View("scatterChartView", "Scatter Chart");
 		Tab newTab = new Tab(title, scatterChartView.getLoadedResource());
-		ScatterChartController dsController = (ScatterChartController) scatterChartView.getController();
-		dsController.setAlgorithm(algo);
-		dsController.setTitle(newTab.getText());
-		dsController.initAxisSelectors();
-		dsController.addDatas();
-		this.tabPane.getTabs().add(newTab);
+		scatterChartView.getController().setModel(algo);
+		tabs.add(newTab);
 		this.tabPane.getSelectionModel().select(newTab);
-		this.numberTabs++;
 	}
 
 	@FXML

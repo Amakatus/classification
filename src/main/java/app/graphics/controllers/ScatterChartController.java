@@ -2,8 +2,10 @@ package app.graphics.controllers;
 
 import app.algorithm.KNNAlgorithm;
 import app.exceptions.FieldNotNumberException;
+import app.graphics.models.Model;
 import app.graphics.models.datas.WorkingDataset;
 import app.utils.ClassUtils;
+import app.utils.Logger;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,35 +25,52 @@ public class ScatterChartController extends AbstractController {
 	@FXML protected ScatterChart<Number,Number> scatterChart;
 	@FXML protected Label datasetTitle;
 	protected WorkingDataset<?> workingDataset;
-	protected KNNAlgorithm<?> algorithm;
 	protected String xLabelField;
 	protected String yLabelField;
 
+	private KNNAlgorithm<?> getAlgorithm() {
+		return (KNNAlgorithm<?>) this.model;
+	}
+
 	@FXML
     public void initialize() {
-
     }
 
-	public void setAlgorithm(KNNAlgorithm<?> algorithm) {
-		this.algorithm = algorithm;
-		this.workingDataset = algorithm.getWorkingDataset();
+	@Override
+	public void setModel(Model model){
+		this.model = model;
+		this.workingDataset = this.getAlgorithm().getWorkingDataset();
+		this.setTitle(String.format("%s\n%s points classified on %s", this.workingDataset.getTitle(), this.workingDataset.getDatas().size(), this.workingDataset.getCategoryField()));
+		this.initAxisSelectors();
 	}
 
 	public void initAxisSelectors() {
+		this.registerAxisFieldsNames();
+		this.setDefaultAxis();
+		this.handleSelectorsChanges();
+		this.classifyDatasButtonClicked();
+	}
+
+	private void registerAxisFieldsNames() {
 		ObservableList<String> fieldsNames = FXCollections.observableArrayList();
 		List<Field> fields = ClassUtils.getNumberFields(this.workingDataset.getDatas().get(0));
 		fields.forEach(field -> fieldsNames.add(field.getName()));
 		this.axisXSelector.setItems(fieldsNames);
 		this.axisYSelector.setItems(fieldsNames);
-		this.yLabelField = this.axisYSelector.getItems().get(0);
-		this.xLabelField = this.axisYSelector.getItems().get(1);
-		this.handleSelectorsChanges();
+	}
+
+	private void setDefaultAxis() {
+		this.xLabelField = this.axisYSelector.getItems().get(0);
+		this.axisXSelector.selectItem(xLabelField);
+		this.yLabelField = this.axisYSelector.getItems().get(1);
+		this.axisYSelector.selectItem(yLabelField);
 	}
 
 	private void handleSelectorsChanges() {
 		this.axisXSelector.valueProperty().addListener((obs, oldVal, newVal) -> {
 			if(!newVal.equals(yLabelField)) {
 				this.xLabelField = newVal;
+				this.scatterChart.getXAxis().setLabel(newVal);
 				this.addDatas();
 			}
 		});
@@ -59,6 +78,7 @@ public class ScatterChartController extends AbstractController {
 		this.axisYSelector.valueProperty().addListener((obs, oldVal, newVal) -> {
 			if(!newVal.equals(xLabelField)){
 				this.yLabelField = newVal;
+				this.scatterChart.getYAxis().setLabel(newVal);
 				this.addDatas();
 			}
 		});
@@ -66,10 +86,6 @@ public class ScatterChartController extends AbstractController {
 
 	public void setTitle(String title) {
 		this.datasetTitle.setText(title);
-	}
-
-	public void setWorkingDataset(WorkingDataset<?> workingDataset){
-		this.workingDataset = workingDataset;
 	}
 
 	public void addDatas() {
@@ -80,23 +96,29 @@ public class ScatterChartController extends AbstractController {
 			newSerie.setName(categoryName);
 			dataList.forEach(data -> {
 				try {
-					XYChart.Data<Number,Number> scatterPoint = new XYChart.Data<>(ClassUtils.getDoubleFromField(data, this.xLabelField),ClassUtils.getDoubleFromField(data, this.yLabelField));
+					double xValue = ClassUtils.getDoubleFromField(data, this.xLabelField);
+					double yValue = ClassUtils.getDoubleFromField(data, this.yLabelField);
+					XYChart.Data<Number,Number> scatterPoint = new XYChart.Data<>(xValue,yValue);
 					newSerie.getData().add(scatterPoint);
 				} catch (FieldNotNumberException e) {
-					e.printStackTrace();
+					Logger.exception(e);
 				}
 			});
 			this.scatterChart.getData().add(newSerie);
-			this.scatterChart.getData().forEach(series -> series.getData().forEach(data -> {
-				Tooltip tooltip = new Tooltip();
-				tooltip.setText(data.getYValue().toString());
-				Tooltip.install(data.getNode(), tooltip);
-			}));
+			this.registerDataTooltips(categoryName);
 		});
 	}
 
+	private void registerDataTooltips(String categoryName) {
+		this.scatterChart.getData().forEach(series -> series.getData().forEach(data -> {
+			Tooltip tooltip = new Tooltip();
+			tooltip.setText(String.format("Category : %s\n%s : %s\n%s : %s", categoryName, xLabelField, data.getXValue(), yLabelField, data.getYValue()));
+			Tooltip.install(data.getNode(), tooltip);
+		}));
+	}
+
 	public void classifyDatasButtonClicked() {
-		this.algorithm.classifyWorkingDataset();
+		this.getAlgorithm().classifyWorkingDataset();
 		this.addDatas();
 	}
 }
