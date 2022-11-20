@@ -3,136 +3,136 @@ package app.graphics.models.datas.data;
 import com.opencsv.bean.CsvBindByName;
 
 public class TitanicPassengerData extends AbstractData {
-	@CsvBindByName(column = "PassengerId")
-	public int id;
-	
-	@CsvBindByName(column = "Survived")
-	public boolean survived;
-	
-	@CsvBindByName(column = "Pclass")
-	public double pClass;
-	
-	@CsvBindByName(column = "Name")
-	public String name;
-	
-	@CsvBindByName(column = "Sex")
-	public String sex;
-	
-	@CsvBindByName(column = "Age", required=false)
-	public double age;
-	
-	@CsvBindByName(column = "SibSp")
-	public double sibSp;
-	
-	@CsvBindByName(column = "Parch")
-	public double parch;
-	
-	@CsvBindByName(column = "Ticket")
-	public String ticket;
-	
-	@CsvBindByName(column = "Fare")
-	public double fare;
-	
-	@CsvBindByName(column = "Cabin", required=false)
-	public String cabin;
-	
-	@CsvBindByName(column = "Embarked")
-	public char embarked;
+    @CsvBindByName(column = "PassengerId")
+    public int id;
 
-	public int getId() {
-		return id;
-	}
+    @CsvBindByName(column = "Survived")
+    public boolean survived;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @CsvBindByName(column = "Pclass")
+    public double pClass;
 
-	public boolean isSurvived() {
-		return survived;
-	}
+    @CsvBindByName(column = "Name")
+    public String name;
 
-	public void setSurvived(boolean survived) {
-		this.survived = survived;
-	}
+    @CsvBindByName(column = "Sex")
+    public String sex;
 
-	public double getpClass() {
-		return pClass;
-	}
+    @CsvBindByName(column = "Age", required = false)
+    public double age;
 
-	public void setpClass(double pClass) {
-		this.pClass = pClass;
-	}
+    @CsvBindByName(column = "SibSp")
+    public double sibSp;
 
-	public String getName() {
-		return name;
-	}
+    @CsvBindByName(column = "Parch")
+    public double parch;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @CsvBindByName(column = "Ticket")
+    public String ticket;
 
-	public String getSex() {
-		return sex;
-	}
+    @CsvBindByName(column = "Fare")
+    public double fare;
 
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
+    @CsvBindByName(column = "Cabin", required = false)
+    public String cabin;
 
-	public double getAge() {
-		return age;
-	}
+    @CsvBindByName(column = "Embarked")
+    public char embarked;
 
-	public void setAge(double age) {
-		this.age = age;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public double getSibSp() {
-		return sibSp;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setSibSp(double sibSp) {
-		this.sibSp = sibSp;
-	}
+    public boolean isSurvived() {
+        return survived;
+    }
 
-	public double getParch() {
-		return parch;
-	}
+    public void setSurvived(boolean survived) {
+        this.survived = survived;
+    }
 
-	public void setParch(double parch) {
-		this.parch = parch;
-	}
+    public double getpClass() {
+        return pClass;
+    }
 
-	public String getTicket() {
-		return ticket;
-	}
+    public void setpClass(double pClass) {
+        this.pClass = pClass;
+    }
 
-	public void setTicket(String ticket) {
-		this.ticket = ticket;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public double getFare() {
-		return fare;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setFare(double fare) {
-		this.fare = fare;
-	}
+    public String getSex() {
+        return sex;
+    }
 
-	public String getCabin() {
-		return cabin;
-	}
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
-	public void setCabin(String cabin) {
-		this.cabin = cabin;
-	}
+    public double getAge() {
+        return age;
+    }
 
-	public char getEmbarked() {
-		return embarked;
-	}
+    public void setAge(double age) {
+        this.age = age;
+    }
 
-	public void setEmbarked(char embarked) {
-		this.embarked = embarked;
-	}
-	
+    public double getSibSp() {
+        return sibSp;
+    }
+
+    public void setSibSp(double sibSp) {
+        this.sibSp = sibSp;
+    }
+
+    public double getParch() {
+        return parch;
+    }
+
+    public void setParch(double parch) {
+        this.parch = parch;
+    }
+
+    public String getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
+    }
+
+    public double getFare() {
+        return fare;
+    }
+
+    public void setFare(double fare) {
+        this.fare = fare;
+    }
+
+    public String getCabin() {
+        return cabin;
+    }
+
+    public void setCabin(String cabin) {
+        this.cabin = cabin;
+    }
+
+    public char getEmbarked() {
+        return embarked;
+    }
+
+    public void setEmbarked(char embarked) {
+        this.embarked = embarked;
+    }
+
 }

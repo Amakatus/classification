@@ -53,18 +53,18 @@ public class DatasetClassifier<T extends AbstractData> {
     private void setCategoryForData(T dataToClassify, String categoryOfWorking) {
         try {
             Field field = ClassUtils.getFieldByName(dataToClassify, categoryField);
-            if(field == null) return;
+            if (field == null) return;
             Class<?> fieldType = field.getType();
             if (fieldType.isAssignableFrom(IrisVariety.class)) {
                 field.set(dataToClassify, IrisVariety.valueOf(categoryOfWorking));
-            } else if(fieldType.isAssignableFrom(double.class)) {
+            } else if (fieldType.isAssignableFrom(double.class)) {
                 field.set(dataToClassify, Double.valueOf(categoryOfWorking));
-            } else if(fieldType.isAssignableFrom(String.class)){
-                field.set(dataToClassify, categoryOfWorking.toString());
-            } else if(fieldType.equals(boolean.class)){
-                field.set(dataToClassify, ProjectUtils.stringToDouble(categoryOfWorking.toString()));
+            } else if (fieldType.isAssignableFrom(String.class)) {
+                field.set(dataToClassify, categoryOfWorking);
+            } else if (fieldType.equals(boolean.class)) {
+                field.set(dataToClassify, ProjectUtils.stringToDouble(categoryOfWorking));
             } else {
-                System.err.println("Unsupported type : " + fieldType);
+                Logger.log("Unsupported type : " + fieldType);
             }
         } catch (Exception e) {
             Logger.exception(e);

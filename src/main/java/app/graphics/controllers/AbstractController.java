@@ -6,46 +6,51 @@ import app.graphics.views.View;
 import app.utils.Logger;
 
 public abstract class AbstractController implements IFXController, Observer {
-	protected Model model;
-	protected View view;
-	
-	protected AbstractController(View view) {
-		this.view = view;
-	}
+    protected Model model;
+    protected View view;
 
-	protected AbstractController() {
-		this(null);
-	}
-	
-	public View getView() {
-		return this.view;
-	}
-	
-	public void setView(View view) {
-		this.view = view;
-	}
+    protected AbstractController(View view) {
+        this.view = view;
+    }
 
-	public void sendUpdate() {
-		Logger.log("Controller " + this.getClass().getSimpleName() + " has received update but haven't done anything.");
-	}
+    protected AbstractController() {
+        this(null);
+    }
 
-	public void sendUpdate(Object object) {
-		Logger.log("Controller " + this.getClass().getSimpleName() + " has received update but haven't done anything.");
-	}
+    public View getView() {
+        return this.view;
+    }
 
-	public void setModel(Model model) {
-		this.model = model;
-		model.attach(this);
-	}
-	
-	public Model getModel() {
-		return this.model;
-	}
-	
-	public void closeView() {
-		if(this.view.getStage() != null) {			
-			this.view.closeStage();
-		}
-	}
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    @Override
+    public void initialize() {
+        // override this method to make operations during FXML init.
+    }
+
+    public void sendUpdate() {
+        Logger.log("Controller " + this.getClass().getSimpleName() + " has received update but haven't done anything.");
+    }
+
+    public void sendUpdate(Object object) {
+        Logger.log("Controller " + this.getClass().getSimpleName() + " has received update but haven't done anything.");
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.attach(this);
+    }
+
+    public Model getModel() {
+        return this.model;
+    }
+
+    public void closeView() {
+        if (this.view.getStage() != null) {
+            this.view.closeStage();
+        }
+    }
 }
 

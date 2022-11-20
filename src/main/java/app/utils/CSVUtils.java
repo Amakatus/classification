@@ -27,17 +27,5 @@ public interface CSVUtils {
     @SuppressWarnings("unchecked")
     static <T> List<T> loadCSV(String path, DataType dataType) {
         return loadCSV(ProjectUtils.getFilePath(path), dataType);
-//        System.out.println(path);
-//        try {
-//            return new CsvToBeanBuilder<T>(Files.newBufferedReader(ProjectUtils.getFilePath(path)))
-//                    .withSeparator(',')
-//                    .withType((Class<T>) dataType.getTypeClass())
-//                    .build()
-//                    .parse();
-//        } catch (Exception e) {
-//            Logger.exception(e);
-//        }
-//        // Should throw an exception ?
-//        return new ArrayList<>();
     }
 }

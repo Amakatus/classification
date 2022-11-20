@@ -49,8 +49,8 @@ public class DatasetCreatorController extends AbstractController {
     protected FileChooser fileChooser;
     protected File fileToClassify;
 
-
     @FXML
+    @Override
     public void initialize() {
         this.fileChooser = new FileChooser();
         this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
@@ -113,11 +113,11 @@ public class DatasetCreatorController extends AbstractController {
     }
 
     private boolean formIsComplete() {
-        return !this.inputName.getText().isEmpty() && this.inputType.getValue() != null && this.inputDistance.getCheckModel().getCheckedItems().size() > 0
+        return !this.inputName.getText().isEmpty() && this.inputType.getValue() != null && !this.inputDistance.getCheckModel().isEmpty()
                 && this.inputCategory.getValue() != null && this.fileToClassify != null;
     }
 
-    public void openDialogFile(MouseEvent mouseEvent) {
+    public void openDialogFile() {
         File selectedFile = this.fileChooser.showOpenDialog(this.view.getStage());
         if (selectedFile != null) {
             this.fileLabel.setText(selectedFile.getName());

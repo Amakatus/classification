@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class Model implements Observable {
     protected List<Observer> observers;
 
-    public Model() {
+    protected Model() {
         this.observers = new ArrayList<>();
     }
 
