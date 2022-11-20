@@ -2,10 +2,10 @@ package app.utils;
 
 import java.io.FileWriter;
 
-public class Logger {
+public class LoggerUtils {
     private static final String LOG_FILE_PATH = "src/main/resources/logs/logs.txt";
 
-    private Logger() {
+    private LoggerUtils() {
     }
 
     private static void writeInLogFile(String log) {
@@ -17,10 +17,10 @@ public class Logger {
     }
 
     public static void exception(Exception exception) {
-        Logger.writeInLogFile(exception.getMessage());
+        LoggerUtils.writeInLogFile(exception.getMessage());
     }
 
     public static void log(String log) {
-        Logger.writeInLogFile(log);
+        LoggerUtils.writeInLogFile(log);
     }
 }

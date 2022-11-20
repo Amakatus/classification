@@ -18,7 +18,7 @@ public interface CSVUtils {
                     .build()
                     .parse();
         } catch (Exception e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
         // Should throw an exception ?
         return new ArrayList<>();

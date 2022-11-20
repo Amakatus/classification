@@ -2,7 +2,7 @@ package app.algorithm;
 
 import app.algorithm.geometry.EuclideanGeometry;
 import app.algorithm.geometry.IGeometryCalculator;
-import app.graphics.models.Model;
+import app.graphics.models.AbstractModel;
 import app.graphics.models.datas.DatasetClassifier;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-public class KNNAlgorithm<T extends AbstractData> extends Model {
+public class KNNAlgorithm<T extends AbstractData> extends AbstractModel {
     protected WorkingDataset<T> workingDataset;
     protected KNNCalculator<T> calculator;
     protected KNNStrength<T> strength;

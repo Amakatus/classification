@@ -5,7 +5,7 @@ import app.exceptions.FieldToDistanceException;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.AbstractData;
-import app.utils.Logger;
+import app.utils.LoggerUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,7 +78,7 @@ public class KNNCalculator<T extends AbstractData> {
             dataDistancesMap.put(refData, this.geometry.distance(workingData, refData));
         } catch (FieldToDistanceException e) {
             dataDistancesMap.put(refData, Double.MAX_VALUE);
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
     }
 }

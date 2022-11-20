@@ -3,7 +3,7 @@ package app.algorithm.normalizers;
 import app.graphics.models.datas.DataDeltas;
 import app.graphics.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
-import app.utils.Logger;
+import app.utils.LoggerUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Normalizer implements IColumnNormalizer {
                 valueNormalized = (valueNotNormalized - min) / delta;
                 field.setDouble(data, valueNormalized);
             } catch (Exception e) {
-                Logger.exception(e);
+                LoggerUtils.exception(e);
             }
         }
         return fields;
@@ -43,7 +43,7 @@ public class Normalizer implements IColumnNormalizer {
                 valueNormalized = valueNotNormalized * delta + min;
                 field.setDouble(data, valueNormalized);
             } catch (Exception e) {
-                Logger.exception(e);
+                LoggerUtils.exception(e);
             }
         }
     }

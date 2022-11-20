@@ -4,7 +4,7 @@ import app.algorithm.KNNAlgorithm;
 import app.graphics.models.datas.data.AbstractData;
 import app.graphics.models.datas.data.IrisVariety;
 import app.utils.ClassUtils;
-import app.utils.Logger;
+import app.utils.LoggerUtils;
 import app.utils.ProjectUtils;
 
 import java.lang.reflect.Field;
@@ -64,10 +64,10 @@ public class DatasetClassifier<T extends AbstractData> {
             } else if (fieldType.equals(boolean.class)) {
                 field.set(dataToClassify, ProjectUtils.stringToDouble(categoryOfWorking));
             } else {
-                Logger.log("Unsupported type : " + fieldType);
+                LoggerUtils.log("Unsupported type : " + fieldType);
             }
         } catch (Exception e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
     }
 }

@@ -2,10 +2,10 @@ package app.graphics.controllers;
 
 import app.algorithm.KNNAlgorithm;
 import app.exceptions.FieldNotNumberException;
-import app.graphics.models.Model;
+import app.graphics.models.AbstractModel;
 import app.graphics.models.datas.WorkingDataset;
 import app.utils.ClassUtils;
-import app.utils.Logger;
+import app.utils.LoggerUtils;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,7 +35,7 @@ public class ScatterChartController extends AbstractController {
     }
 
     @Override
-    public void setModel(Model model) {
+    public void setModel(AbstractModel model) {
         this.model = model;
         this.workingDataset = this.getAlgorithm().getWorkingDataset();
         this.setTitle(String.format("%s%n%s points classified on %s", this.workingDataset.getTitle(), this.workingDataset.getDatas().size(), this.workingDataset.getCategoryField()));
@@ -99,7 +99,7 @@ public class ScatterChartController extends AbstractController {
                     XYChart.Data<Number, Number> scatterPoint = new XYChart.Data<>(xValue, yValue);
                     newSerie.getData().add(scatterPoint);
                 } catch (FieldNotNumberException e) {
-                    Logger.exception(e);
+                    LoggerUtils.exception(e);
                 }
             });
             this.scatterChart.getData().add(newSerie);

@@ -2,7 +2,7 @@ package app.graphics.views;
 
 
 import app.graphics.controllers.AbstractController;
-import app.utils.Logger;
+import app.utils.LoggerUtils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,7 +25,7 @@ public class View {
                 setupStage(windowName, width, height, loadedResource);
             }
         } catch (IOException e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
     }
 

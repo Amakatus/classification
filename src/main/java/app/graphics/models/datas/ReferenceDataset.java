@@ -3,7 +3,7 @@ package app.graphics.models.datas;
 import app.exceptions.FieldNotNumberException;
 import app.graphics.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
-import app.utils.Logger;
+import app.utils.LoggerUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -30,7 +30,7 @@ public class ReferenceDataset<T extends AbstractData> extends AbstractDataset<T>
                     try {
                         values.add(ClassUtils.getDoubleFromField(data, field.getName()));
                     } catch (FieldNotNumberException e) {
-                        Logger.exception(e);
+                        LoggerUtils.exception(e);
                     }
                 }
                 this.fieldsDeltas.put(field.getName(), new DataDeltas(Collections.min(values), Collections.max(values)));

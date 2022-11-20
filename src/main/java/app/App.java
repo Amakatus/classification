@@ -1,6 +1,6 @@
 package app;
 
-import app.graphics.models.Model;
+import app.graphics.models.AbstractModel;
 import app.graphics.models.Observer;
 import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.ReferenceDataset;
@@ -11,7 +11,7 @@ import app.graphics.models.datas.data.DataType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class App extends Model {
+public class App extends AbstractModel {
     // Singleton
     private static App instance = null;
 

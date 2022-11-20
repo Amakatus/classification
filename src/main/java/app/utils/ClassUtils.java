@@ -118,7 +118,7 @@ public interface ClassUtils {
         try {
             return (double) fieldToDoubleMethod.invoke(object, other);
         } catch (Exception e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
         return Double.MAX_VALUE;
     }
@@ -138,7 +138,7 @@ public interface ClassUtils {
         try {
             return field.getDouble(object);
         } catch (Exception e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
         // Should never be there.
         return Double.MIN_VALUE;
@@ -181,7 +181,7 @@ public interface ClassUtils {
         try {
             return field.get(object);
         } catch (Exception e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
         // Should never be there.
         return null;
