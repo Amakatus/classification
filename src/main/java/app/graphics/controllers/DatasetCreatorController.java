@@ -1,5 +1,6 @@
 package app.graphics.controllers;
 
+import app.App;
 import app.graphics.components.AlertFactory;
 import app.graphics.models.datas.DatasetFactory;
 import app.graphics.models.datas.WorkingDataset;
@@ -45,15 +46,11 @@ public class DatasetCreatorController extends AbstractController {
     protected MFXButton selectButton;
 
     protected ObservableList<String> categoryFields = FXCollections.observableArrayList();
-    protected IndexController indexController;
     protected FileChooser fileChooser;
     protected File fileToClassify;
 
-    public void setIndexController(IndexController controller) {
-        this.indexController = controller;
-    }
-
     @FXML
+    @Override
     public void initialize() {
         this.fileChooser = new FileChooser();
         this.fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV", "*.csv"));
@@ -111,17 +108,16 @@ public class DatasetCreatorController extends AbstractController {
         WorkingDataset<? extends AbstractData> newDataset = DatasetFactory.createWorkingDataset(this.inputName.getText(), inputType.getValue(), fileToClassify);
         newDataset.setCategoryField(inputCategory.getValue());
         inputDistance.getCheckModel().getCheckedItems().forEach(newDataset::addDistanceFieldString);
-        System.out.println(newDataset.getDistanceFields().size());
-        this.indexController.addWorkingDataset(newDataset);
+        App.getInstance().addWorkingDataset(newDataset);
         this.closeView();
     }
 
     private boolean formIsComplete() {
-        return !this.inputName.getText().isEmpty() && this.inputType.getValue() != null && this.inputDistance.getCheckModel().getCheckedItems().size() > 0
+        return !this.inputName.getText().isEmpty() && this.inputType.getValue() != null && !this.inputDistance.getCheckModel().isEmpty()
                 && this.inputCategory.getValue() != null && this.fileToClassify != null;
     }
 
-    public void openDialogFile(MouseEvent mouseEvent) {
+    public void openDialogFile() {
         File selectedFile = this.fileChooser.showOpenDialog(this.view.getStage());
         if (selectedFile != null) {
             this.fileLabel.setText(selectedFile.getName());

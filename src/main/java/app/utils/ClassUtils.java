@@ -118,7 +118,7 @@ public interface ClassUtils {
         try {
             return (double) fieldToDoubleMethod.invoke(object, other);
         } catch (Exception e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
         return Double.MAX_VALUE;
     }
@@ -138,7 +138,7 @@ public interface ClassUtils {
         try {
             return field.getDouble(object);
         } catch (Exception e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
         // Should never be there.
         return Double.MIN_VALUE;
@@ -159,10 +159,11 @@ public interface ClassUtils {
 
     /**
      * Return if the field can be used as a Category field.
+     *
      * @param field
      * @return
      */
-    static boolean canBeCategoryField(Field field){
+    static boolean canBeCategoryField(Field field) {
         Class<?> fieldType = field.getType();
         return fieldType.isAssignableFrom(String.class) || fieldType.isEnum() || fieldType.isAssignableFrom(boolean.class);
     }
@@ -180,7 +181,7 @@ public interface ClassUtils {
         try {
             return field.get(object);
         } catch (Exception e) {
-            Logger.exception(e);
+            LoggerUtils.exception(e);
         }
         // Should never be there.
         return null;

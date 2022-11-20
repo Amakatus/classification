@@ -11,4 +11,8 @@ public interface ProjectUtils {
     static Path getFilePath(String filePath) {
         return getFile(filePath).toPath();
     }
+
+    static boolean stringToDouble(String string) {
+        return string.equalsIgnoreCase("true");
+    }
 }

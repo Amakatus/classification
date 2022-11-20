@@ -9,8 +9,8 @@ import app.utils.CSVUtils;
 import java.io.File;
 
 public interface DatasetFactory {
-    static <T extends AbstractData> ReferenceDataset<T> createReferenceDataset(String title, String path, DataType type){
-        return new ReferenceDataset<T>(title, CSVUtils.loadCSV(path, type));
+    static <T extends AbstractData> ReferenceDataset<T> createReferenceDataset(String title, String path, DataType type) {
+        return new ReferenceDataset<>(title, CSVUtils.loadCSV(path, type));
     }
 
     static ReferenceDataset<IrisData> irisReferenceDataset(String title) {
@@ -25,7 +25,7 @@ public interface DatasetFactory {
         return createReferenceDataset(title, type.getCsvPath(), type);
     }
 
-    static <T extends AbstractData> WorkingDataset<T> createWorkingDataset(String title, DataType type, File csvFile){
-        return new WorkingDataset<T>(title, CSVUtils.loadCSV(csvFile.toPath(), type), createReferenceDataset(String.format("Reference%s",title), type));
+    static <T extends AbstractData> WorkingDataset<T> createWorkingDataset(String title, DataType type, File csvFile) {
+        return new WorkingDataset<>(title, CSVUtils.loadCSV(csvFile.toPath(), type), createReferenceDataset(String.format("Reference%s", title), type));
     }
 }
