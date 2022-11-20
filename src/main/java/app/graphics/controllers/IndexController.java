@@ -35,6 +35,8 @@ public class IndexController extends AbstractController implements Observer {
 		this.setupTreeView();
 		App.getInstance().attach(this);
 		WorkingDataset<IrisData> testWDS = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
+		testWDS.setCategoryField("variety");
+		testWDS.addDistanceFieldString("petalLength	");
 		App.getInstance().addWorkingDataset(testWDS);
 	}
 
@@ -56,11 +58,8 @@ public class IndexController extends AbstractController implements Observer {
 		Object selectedItem = treeView.getSelectionModel().getSelectedItem().getValue();
 		if(selectedItem == null) return;
 		if(selectedItem.getClass().isAssignableFrom(WorkingDataset.class)){
-			System.out.println("CLICKED A WORKING DATASET !!!");
 		} else if(selectedItem.getClass().isAssignableFrom(KNNAlgorithm.class)){
-			System.out.println("CLICKED A KNN ALGO !!!");
 			this.createNewTab((KNNAlgorithm<?>) selectedItem);
-			// Create a new tab to show the working datas of its working dataset parent .
 		}
 	}
 
@@ -102,7 +101,10 @@ public class IndexController extends AbstractController implements Observer {
 		View scatterChartView = new View("scatterChartView");
 		Tab newTab = new Tab(title, scatterChartView.getLoadedResource());
 		ScatterChartController dsController = (ScatterChartController) scatterChartView.getController();
+		dsController.setAlgorithm(algo);
 		dsController.setTitle(newTab.getText());
+		dsController.initAxisSelectors();
+		dsController.addDatas();
 		this.tabPane.getTabs().add(newTab);
 		this.tabPane.getSelectionModel().select(newTab);
 		this.numberTabs++;
@@ -117,11 +119,6 @@ public class IndexController extends AbstractController implements Observer {
 	public void newAlgorithmButtonClicked() {
 		View algorithmCreatorView = new View("createAlgorithm", "Algorithm creator");
 		algorithmCreatorView.show();
-	}
-
-	@Override
-	public void sendUpdate() {
-
 	}
 
 	@Override

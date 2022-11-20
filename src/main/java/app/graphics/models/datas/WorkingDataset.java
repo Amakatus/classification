@@ -5,9 +5,9 @@ import app.algorithm.KNNAlgorithm;
 import app.graphics.models.Observable;
 import app.graphics.models.Observer;
 import app.graphics.models.datas.data.AbstractData;
+import app.utils.ClassUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> implements Observable {
 	protected String categoryField;
@@ -67,7 +67,6 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
 		if (!this.distanceFields.contains(distanceFieldName)) {
 			this.distanceFields.add(distanceFieldName);
 		}
-
 	}
 
 	public void removeDistanceFieldString(String distanceFieldName) {
@@ -95,5 +94,15 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
 	@Override
 	public void updateObservers(Object object) {
 		this.observers.forEach(observer -> observer.sendUpdate(object));
+	}
+
+	public Map<String, List<T>> getDataByCategories() {
+		Map<String,List<T>> res = new HashMap<>();
+		this.getDatas().forEach(data -> {
+			Object category = ClassUtils.getValueObjectFromField(data, this.categoryField);
+			if(category != null)
+				res.computeIfAbsent(category.toString(), create -> new ArrayList<>()).add(data);
+		});
+		return res;
 	}
 }

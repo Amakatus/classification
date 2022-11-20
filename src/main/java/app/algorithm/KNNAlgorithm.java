@@ -1,21 +1,23 @@
 package app.algorithm;
 
+import app.algorithm.geometry.EuclideanGeometry;
+import app.algorithm.geometry.IGeometryCalculator;
+import app.graphics.models.datas.DatasetClassifier;
+import app.graphics.models.datas.ReferenceDataset;
+import app.graphics.models.datas.WorkingDataset;
+import app.graphics.models.datas.data.AbstractData;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import app.algorithm.geometry.EuclideanGeometry;
-import app.algorithm.geometry.IGeometryCalculator;
-import app.graphics.models.datas.ReferenceDataset;
-import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.AbstractData;
-
 public class KNNAlgorithm<T extends AbstractData> {
 	protected WorkingDataset<T> workingDataset;
 	protected KNNCalculator<T> calculator;
 	protected KNNStrength<T> strength;
+	protected DatasetClassifier<T> classifier;
 	protected int kNeighbours;
 
 	public KNNAlgorithm(WorkingDataset<T> workingDataset, int k) {
@@ -23,6 +25,7 @@ public class KNNAlgorithm<T extends AbstractData> {
 		this.kNeighbours = k;
 		this.strength = new KNNStrength<>(this);
 		this.calculator = new KNNCalculator<>(this);
+		this.classifier = new DatasetClassifier<>(this);
 	}
 
 	public KNNCalculator<T> getCalculator() {
@@ -43,6 +46,10 @@ public class KNNAlgorithm<T extends AbstractData> {
 
 	public int getKNeighbours() {
 		return kNeighbours;
+	}
+
+	public void classifyWorkingDataset() {
+		this.classifier.classifyDatas();
 	}
 
 	/**

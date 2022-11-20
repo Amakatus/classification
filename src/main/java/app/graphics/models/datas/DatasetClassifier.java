@@ -5,6 +5,7 @@ import app.graphics.models.datas.data.AbstractData;
 import app.graphics.models.datas.data.IrisVariety;
 import app.utils.ClassUtils;
 import app.utils.Logger;
+import app.utils.ProjectUtils;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -58,7 +59,9 @@ public class DatasetClassifier<T extends AbstractData> {
             } else if(fieldType.isAssignableFrom(double.class)) {
                 field.set(dataToClassify, Double.valueOf(categoryOfWorking));
             } else if(fieldType.isAssignableFrom(String.class)){
-                field.set(dataToClassify, (String) categoryOfWorking);
+                field.set(dataToClassify, categoryOfWorking.toString());
+            } else if(fieldType.isAssignableFrom(double.class)){
+                field.set(dataToClassify, ProjectUtils.stringToDouble(categoryOfWorking.toString()));
             } else {
                 System.err.println("Unsupported type : " + fieldType);
             }
