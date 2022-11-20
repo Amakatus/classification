@@ -14,15 +14,15 @@ import javafx.scene.control.Alert;
  * @TODO : Change this to modal view
  */
 public class AlgorithmCreatorController extends AbstractController {
-    protected MFXSlider neighboursSlider;
-    protected MFXComboBox<WorkingDataset<?>> datasetComboBox;
+    @FXML protected MFXSlider neighboursSlider;
+    @FXML protected MFXComboBox<WorkingDataset<?>> datasetComboBox;
     protected ObservableList<WorkingDataset<?>> workingDatasets = FXCollections.observableArrayList();
 
     @FXML
     @Override
     public void initialize() {
-        this.datasetComboBox.setItems(this.workingDatasets);
         this.setupDatasets();
+        this.datasetComboBox.setItems(this.workingDatasets);
     }
 
     private void setupDatasets() {

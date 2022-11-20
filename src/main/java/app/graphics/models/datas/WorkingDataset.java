@@ -5,10 +5,8 @@ import app.algorithm.KNNAlgorithm;
 import app.graphics.models.Observable;
 import app.graphics.models.Observer;
 import app.graphics.models.datas.data.AbstractData;
-import app.utils.ClassUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,13 +97,19 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
         this.observers.forEach(observer -> observer.sendUpdate(object));
     }
 
-    public Map<String, List<T>> getDataByCategories() {
-        Map<String, List<T>> res = new HashMap<>();
-        this.getDatas().forEach(data -> {
-            Object category = ClassUtils.getValueObjectFromField(data, this.categoryField);
-            if (category != null)
-                res.computeIfAbsent(category.toString(), create -> new ArrayList<>()).add(data);
+    public Map<String, List<T>> getWorkingDataByCategories() {
+        return super.getDataByCategories(this.categoryField);
+    }
+
+    public Map<String, List<T>> getBothDataByCategories() {
+        Map<String, List<T>> workingDataByCategories = this.getWorkingDataByCategories();
+        this.referenceDataset.getDataByCategories(this.categoryField).forEach((key, value) -> {
+            workingDataByCategories.merge(key, value, (list1, list2) -> {
+                List<T> mergedLists = new ArrayList<>(list1);
+                mergedLists.addAll(list2);
+                return mergedLists;
+            });
         });
-        return res;
+        return workingDataByCategories;
     }
 }

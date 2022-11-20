@@ -2,9 +2,12 @@ package app.graphics.models.datas;
 
 import app.graphics.models.datas.columns.Column;
 import app.graphics.models.datas.data.AbstractData;
+import app.utils.ClassUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractDataset<T extends AbstractData> {
     protected String title;
@@ -47,6 +50,16 @@ public abstract class AbstractDataset<T extends AbstractData> {
         for (T data : datas) {
             this.removeData(data);
         }
+    }
+
+    public Map<String, List<T>> getDataByCategories(String categoryField) {
+        Map<String, List<T>> res = new HashMap<>();
+        this.getDatas().forEach(data -> {
+            Object category = ClassUtils.getValueObjectFromField(data, categoryField);
+            if (category != null)
+                res.computeIfAbsent(category.toString(), create -> new ArrayList<>()).add(data);
+        });
+        return res;
     }
 
     public void clearData() {

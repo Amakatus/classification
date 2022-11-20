@@ -4,3 +4,24 @@
 
 /C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/scatterChartView.fxml
 
+
+/C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/createAlgorithm.fxml
+
+
+/C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/createAlgorithm.fxml
+
+
+/C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/createAlgorithm.fxml
+
+
+/C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/createAlgorithm.fxml
+
+
+/C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/createAlgorithm.fxml
+
+
+/C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/createAlgorithm.fxml
+
+
+/C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/createAlgorithm.fxml
+

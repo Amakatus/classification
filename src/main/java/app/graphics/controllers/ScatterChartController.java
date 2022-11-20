@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ScatterChartController extends AbstractController {
-    protected MFXComboBox<String> axisXSelector;
-    protected MFXComboBox<String> axisYSelector;
+    @FXML protected MFXComboBox<String> axisXSelector;
+    @FXML protected MFXComboBox<String> axisYSelector;
     @FXML
     protected ScatterChart<Number, Number> scatterChart;
     @FXML
@@ -33,6 +33,7 @@ public class ScatterChartController extends AbstractController {
     private KNNAlgorithm<?> getAlgorithm() {
         return (KNNAlgorithm<?>) this.model;
     }
+    private boolean showReferencesDatas = false;
 
     @Override
     public void setModel(AbstractModel model) {
@@ -69,7 +70,7 @@ public class ScatterChartController extends AbstractController {
             if (!newVal.equals(yLabelField)) {
                 this.xLabelField = newVal;
                 this.scatterChart.getXAxis().setLabel(newVal);
-                this.addDatas();
+                this.showDatas();
             }
         });
 
@@ -77,7 +78,7 @@ public class ScatterChartController extends AbstractController {
             if (!newVal.equals(xLabelField)) {
                 this.yLabelField = newVal;
                 this.scatterChart.getYAxis().setLabel(newVal);
-                this.addDatas();
+                this.showDatas();
             }
         });
     }
@@ -86,9 +87,15 @@ public class ScatterChartController extends AbstractController {
         this.datasetTitle.setText(title);
     }
 
-    public void addDatas() {
+    public void showDatas() {
+        if(showReferencesDatas)
+            this.addDatas(this.workingDataset.getBothDataByCategories());
+        else
+            this.addDatas(this.workingDataset.getWorkingDataByCategories());
+    }
+
+    public void addDatas(Map<String, ? extends List<?>> dataByCategories) {
         this.scatterChart.getData().clear();
-        Map<String, ? extends List<?>> dataByCategories = this.workingDataset.getDataByCategories();
         dataByCategories.forEach((categoryName, dataList) -> {
             XYChart.Series<Number, Number> newSerie = new XYChart.Series<>();
             newSerie.setName(categoryName);
@@ -108,15 +115,22 @@ public class ScatterChartController extends AbstractController {
     }
 
     private void registerDataTooltips(String categoryName) {
+        String categoryFieldName = this.workingDataset.getCategoryField();
         this.scatterChart.getData().forEach(series -> series.getData().forEach(data -> {
             Tooltip tooltip = new Tooltip();
-            tooltip.setText(String.format("Category : %s%n%s : %s%n%s : %s", categoryName, xLabelField, data.getXValue(), yLabelField, data.getYValue()));
+            tooltip.setText(String.format("%s : %s%n%s : %s%n%s : %s", categoryFieldName, categoryName, xLabelField, data.getXValue(), yLabelField, data.getYValue()));
             Tooltip.install(data.getNode(), tooltip);
         }));
     }
 
     public void classifyDatasButtonClicked() {
         this.getAlgorithm().classifyWorkingDataset();
-        this.addDatas();
+        this.showDatas();
+    }
+
+    @FXML
+    public void toggleDisplayReferences() {
+        this.showReferencesDatas = !this.showReferencesDatas;
+        this.showDatas();
     }
 }
