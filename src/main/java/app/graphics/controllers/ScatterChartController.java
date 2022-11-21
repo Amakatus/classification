@@ -1,9 +1,5 @@
 package app.graphics.controllers;
 
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Map;
-
 import app.algorithm.KNNAlgorithm;
 import app.exceptions.FieldNotNumberException;
 import app.graphics.models.AbstractModel;
@@ -18,6 +14,10 @@ import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
 
 public class ScatterChartController extends AbstractController {
     @FXML protected MFXComboBox<String> axisXSelector;

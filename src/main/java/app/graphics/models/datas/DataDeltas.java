@@ -20,4 +20,12 @@ public class DataDeltas {
     public double getDelta() {
         return this.max - this.min;
     }
+
+    public double getNormalizedValue(double initialValue){
+        return (initialValue - this.min) / this.getDelta();
+    }
+
+    public double getUnormalizedValue(double initalValue) {
+        return initalValue * this.getDelta() + this.min;
+    }
 }

@@ -12,22 +12,17 @@ import java.util.Map;
 public class Normalizer implements IColumnNormalizer {
 
     @Override
-    public List<Field> normalize(AbstractData data, Map<String, DataDeltas> deltas) {
+    public void normalize(AbstractData data, Map<String, DataDeltas> deltas) {
         List<Field> fields = ClassUtils.getNumberFields(data);
         for (Field field : fields) {
             try {
-                double valueNotNormalized = field.getDouble(data);
-                double valueNormalized = 0;
+                double value = field.getDouble(data);
                 DataDeltas dataDelta = deltas.get(field.getName());
-                double min = dataDelta.getMin();
-                double delta = dataDelta.getDelta();
-                valueNormalized = (valueNotNormalized - min) / delta;
-                field.setDouble(data, valueNormalized);
+                field.setDouble(data, dataDelta.getNormalizedValue(value));
             } catch (Exception e) {
                 LoggerUtils.exception(e);
             }
         }
-        return fields;
     }
 
     @Override
@@ -35,13 +30,9 @@ public class Normalizer implements IColumnNormalizer {
         List<Field> fields = ClassUtils.getNumberFields(data);
         for (Field field : fields) {
             try {
-                double valueNotNormalized = field.getDouble(data);
-                double valueNormalized = 0;
+                double value = field.getDouble(data);
                 DataDeltas dataDelta = deltas.get(field.getName());
-                double min = dataDelta.getMin();
-                double delta = dataDelta.getDelta();
-                valueNormalized = valueNotNormalized * delta + min;
-                field.setDouble(data, valueNormalized);
+                field.setDouble(data, dataDelta.getUnormalizedValue(value));
             } catch (Exception e) {
                 LoggerUtils.exception(e);
             }
