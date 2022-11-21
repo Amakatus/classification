@@ -47,9 +47,8 @@ class NormalizerTest {
         List<Field> fields = new ArrayList<>();
         fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
         Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
-        Normalizer normalizer = new Normalizer();
         for (IrisData data : rds.getDatas()) {
-            normalizer.normalize(data, deltaOfDataset);
+            IDataNormalizer.normalize(data, deltaOfDataset);
         }
         assertEquals(0.0, rds.getDatas().get(0).getPetalLength());
         assertEquals(0.2, rds.getDatas().get(1).getPetalLength());
@@ -64,13 +63,12 @@ class NormalizerTest {
         List<Field> fields = new ArrayList<>();
         fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
         Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
-        Normalizer normalizer = new Normalizer();
 
         for (IrisData data : rds.getDatas()) {
-            normalizer.normalize(data, deltaOfDataset);
+            IDataNormalizer.normalize(data, deltaOfDataset);
         }
         for (IrisData data : rds.getDatas()) {
-            normalizer.denormalize(data, deltaOfDataset);
+            IDataNormalizer.denormalize(data, deltaOfDataset);
         }
         assertEquals(5.0, rds.getDatas().get(0).getPetalLength());
         assertEquals(6.0, rds.getDatas().get(1).getPetalLength());
@@ -87,9 +85,9 @@ class NormalizerTest {
         workingDS.addData(iris4, iris5);
         fields.addAll(ClassUtils.getNumberFields(workingDS.getDatas().get(0)));
         Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
-        Normalizer normalizer = new Normalizer();
+
         for (IrisData data : workingDS.getDatas()) {
-            normalizer.normalize(data, deltaOfDataset);
+            IDataNormalizer.normalize(data, deltaOfDataset);
         }
         assertEquals(0.6, workingDS.getDatas().get(0).getPetalLength());
         assertEquals(0.4, workingDS.getDatas().get(1).getPetalLength());
@@ -102,12 +100,12 @@ class NormalizerTest {
         workingDS.addData(iris4, iris5);
         fields.addAll(ClassUtils.getNumberFields(workingDS.getDatas().get(0)));
         Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
-        Normalizer normalizer = new Normalizer();
+
         for (IrisData data : workingDS.getDatas()) {
-            normalizer.normalize(data, deltaOfDataset);
+            IDataNormalizer.normalize(data, deltaOfDataset);
         }
         for (IrisData data : workingDS.getDatas()) {
-            normalizer.denormalize(data, deltaOfDataset);
+            IDataNormalizer.denormalize(data, deltaOfDataset);
         }
         assertEquals(8.0, workingDS.getDatas().get(0).getPetalLength());
         assertEquals(7.0, workingDS.getDatas().get(1).getPetalLength());

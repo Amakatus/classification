@@ -1,17 +1,17 @@
 package app.graphics.models.datas.columns;
 
-import app.algorithm.normalizers.IColumnNormalizer;
+import app.algorithm.normalizers.IDataNormalizer;
 import app.graphics.models.datas.AbstractDataset;
 import app.graphics.models.datas.data.AbstractData;
 import app.graphics.models.datas.points.IPoint;
 
 public class Column<T extends AbstractData> implements IColumn {
-    protected IColumnNormalizer normalizer;
+    protected IDataNormalizer normalizer;
     protected String name;
     protected AbstractDataset<T> dataSet;
 
     @Override
-    public void setNormalizer(IColumnNormalizer valueNormalizer) {
+    public void setNormalizer(IDataNormalizer valueNormalizer) {
         // TODO Auto-generated method stub
     }
 

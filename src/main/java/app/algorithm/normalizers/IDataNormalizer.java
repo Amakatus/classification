@@ -9,10 +9,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 
-public class Normalizer implements IColumnNormalizer {
-
-    @Override
-    public void normalize(AbstractData data, Map<String, DataDeltas> deltas) {
+public interface IDataNormalizer {
+    static void normalize(AbstractData data, Map<String, DataDeltas> deltas) {
         List<Field> fields = ClassUtils.getNumberFields(data);
         for (Field field : fields) {
             try {
@@ -25,8 +23,7 @@ public class Normalizer implements IColumnNormalizer {
         }
     }
 
-    @Override
-    public void denormalize(AbstractData data, Map<String, DataDeltas> deltas) {
+    static void denormalize(AbstractData data, Map<String, DataDeltas> deltas) {
         List<Field> fields = ClassUtils.getNumberFields(data);
         for (Field field : fields) {
             try {
@@ -38,5 +35,4 @@ public class Normalizer implements IColumnNormalizer {
             }
         }
     }
-
 }
