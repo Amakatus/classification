@@ -56,13 +56,6 @@ class DatasetTest<T> {
     }
 
     @Test
-    void testClearData() {
-        this.testDataset.addData(new IrisData());
-        this.testDataset.clearData();
-        assertEquals(0, this.testDataset.getDatas().size());
-    }
-
-    @Test
     void testGetAlgorithms() {
         assertTrue(this.testDataset.getAlgorithms().isEmpty());
     }

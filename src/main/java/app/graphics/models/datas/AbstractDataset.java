@@ -62,10 +62,6 @@ public abstract class AbstractDataset<T extends AbstractData> {
         return res;
     }
 
-    public void clearData() {
-        this.datas.clear();
-    }
-
     public String toString() {
         return String.format("%s", this.title);
     }

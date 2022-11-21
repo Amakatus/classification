@@ -43,6 +43,7 @@ public class DatasetClassifier<T extends AbstractData> {
         setCategoryForData(dataToClassify, categoryOfWorking);
     }
 
+    // Retrieve the most common category from the k neighbours.
     private String getCategoryFromNeighbours(Map<String, Integer> rates) {
         return rates.entrySet().stream()
                 .sorted(Entry.comparingByValue())

@@ -24,23 +24,23 @@ class KNNStrengthTest {
         wDS = DatasetFactory.createWorkingDataset("wDS", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
         wDS.setCategoryField("variety");
         wDS.addDistanceFieldString("petalLength");
-        //wDS.addDistanceFieldString("sepalLength");
-        //wDS.addDistanceFieldString("sepalWidth");
         wDS.addDistanceFieldString("petalWidth");
-        AlgorithmFactory.createKNN(wDS, 5);
-        algo = wDS.getAlgorithms().get(0);
-        strength = new KNNStrength<>(algo);
+        AlgorithmFactory.createKNN(wDS, 1);
+        algo = wDS.getLastAlgorithm();
+        strength = algo.getStrengthObject();
         strength.calculStrenght();
     }
 
     @Test
-    void test_get_algorithm() {
-
-        assertEquals(this.algo, this.strength.getAlgorithm());
+    void test_get_groups_size() {
+        assertEquals(30, this.strength.getGroupsToTest().size());
     }
 
     @Test
-    void test_get_strength() {
-        assertTrue(this.strength.getStrength() >= 0 && this.strength.getStrength() <= 100);
+    void test_strength_is_consistent() {
+        for(int i = 0; i < 10; i++){
+            strength.calculStrenght();
+            assertTrue(strength.getStrength() >= 0 && strength.getStrength() <= 100);
+        }
     }
 }

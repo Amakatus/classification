@@ -1,6 +1,5 @@
 package app.algorithm;
 
-import app.graphics.models.datas.DatasetClassifier;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.AbstractData;
@@ -11,7 +10,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class KNNStrength<T extends AbstractData> {
+    private static final int GROUP_SIZE = 5;
+
     protected KNNAlgorithm<T> algorithm;
+    protected WorkingDataset<T> initialWorkingDataset;
+    protected ReferenceDataset<T> initialReferenceDataset;
+    protected List<WorkingDataset<T>> groupsToTest;
     protected double strength;
 
     public KNNStrength(KNNAlgorithm<T> algorithm) {
@@ -23,34 +27,62 @@ public class KNNStrength<T extends AbstractData> {
     }
 
     public void calculStrenght() {
-        ReferenceDataset<T> rDS = this.algorithm.getReferenceDataset();
-        Collections.shuffle(rDS.getDatas());
-        WorkingDataset<T> wDS = this.algorithm.workingDataset;
-        wDS.clearData();
-        List<T> saveDatas = new ArrayList<>();
-        int size = 5;
-        for (int cpt = 0; cpt < size; cpt++) {
-            wDS.addData(this.algorithm.getReferenceDataset().getDatas().get(cpt));
-            rDS.removeData(this.algorithm.getReferenceDataset().getDatas().get(cpt));
-            saveDatas.add(this.algorithm.getReferenceDataset().getDatas().get(cpt));
-        }
-        DatasetClassifier<T> dC = new DatasetClassifier<>(this.algorithm);
-        dC.classifyDatas();
+        initialWorkingDataset = algorithm.getWorkingDataset();
+        initialReferenceDataset = algorithm.getReferenceDataset();
+        this.groupsToTest = this.generateGroups();
+        List<Double> groupStrengths = new ArrayList<>();
+        this.groupsToTest.forEach(tWorkingDataset -> {
+            List<String> savedDataCategories = this.saveDataCategories(tWorkingDataset);
+            Collections.shuffle(tWorkingDataset.getReferenceDataset().getDatas());
+            tWorkingDataset.createAlgorithm(this.algorithm.getKNeighbours());
+            tWorkingDataset.getLastAlgorithm().classifyWorkingDataset();
+            groupStrengths.add(generateGroupStrength(tWorkingDataset, savedDataCategories));
+        });
+       this.strength = Math.round(groupStrengths.stream().mapToDouble(score -> score).average().orElse(0));
+    }
+
+    private double generateGroupStrength(WorkingDataset<T> tWorkingDataset, List<String> savedDataCategories) {
         int goodClassify = 0;
-        for (int cpt = 0; cpt < wDS.getDatas().size(); cpt++) {
-            T data = saveDatas.get(cpt);
-            T realData = wDS.getDatas().get(cpt);
-            Object category = ClassUtils.getValueObjectFromField(data, wDS.getCategoryField());
-            Object realCategory = ClassUtils.getValueObjectFromField(realData, wDS.getCategoryField());
-            if (category.toString().equals(realCategory.toString())) {
+        for(int i = 0; i < savedDataCategories.size(); i++){
+            Object classifiedCategory = ClassUtils.getValueObjectFromField(tWorkingDataset.getDatas().get(i), tWorkingDataset.getCategoryField());
+            String realCategory = savedDataCategories.get(i);
+            if (classifiedCategory.toString().equals(realCategory.toString())) {
                 goodClassify++;
             }
         }
-        this.strength = ((double) goodClassify / wDS.getDatas().size()) * 100.0;
+        return ((double) (goodClassify / tWorkingDataset.getDatas().size()) * 100.0);
+    }
+
+    private List<String> saveDataCategories(WorkingDataset<T> tWorkingDataset) {
+        List<String> savedCategories = new ArrayList<>();
+        tWorkingDataset.getDatas().forEach(data -> {
+            savedCategories.add(ClassUtils.getValueObjectFromField(data, tWorkingDataset.getCategoryField()).toString());
+        });
+        return savedCategories;
+    }
+
+    private List<WorkingDataset<T>> generateGroups() {
+        List<WorkingDataset<T>> res = new ArrayList<>();
+        String categoryField = this.initialWorkingDataset.getCategoryField();
+        List<String> distanceFields = this.initialWorkingDataset.getDistanceFields();
+        int sizeToTest = this.initialReferenceDataset.getDatas().size();
+        int groupSize = KNNStrength.GROUP_SIZE;
+        int offset = 0;
+        while(sizeToTest != 0){
+            WorkingDataset<T> newGroup = new WorkingDataset<>("GroupToTest", new ArrayList<>(), this.initialReferenceDataset, categoryField, distanceFields);
+            if(sizeToTest < groupSize) groupSize = sizeToTest;
+            for(int i = 0; i < groupSize; i++){
+                newGroup.addData(this.initialReferenceDataset.getDatas().get(offset));
+                offset++;
+                sizeToTest--;
+            }
+            res.add(newGroup);
+        }
+        return res;
     }
 
     public double getStrength() {
         return this.strength;
     }
-
+    public List<WorkingDataset<T>> getGroupsToTest() { return this.groupsToTest; }
 }

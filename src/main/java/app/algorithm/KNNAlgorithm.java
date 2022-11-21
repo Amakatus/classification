@@ -27,6 +27,7 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractModel {
         this.strength = new KNNStrength<>(this);
         this.calculator = new KNNCalculator<>(this);
         this.classifier = new DatasetClassifier<>(this);
+
     }
 
     public KNNCalculator<T> getCalculator() {
@@ -90,6 +91,11 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractModel {
             res.add(Map.entry(sortedDatasEntries.get(0).getKey(), neighbours));
         }
         return res;
+    }
+
+    public void generateStrength() {
+        this.getDatasKNN();
+        this.strength.calculStrenght();
     }
 
     public String toString() {
