@@ -34,6 +34,7 @@ public class ScatterChartController extends AbstractController {
         return (KNNAlgorithm<?>) this.model;
     }
     private boolean showReferencesDatas = false;
+    private boolean valueNormalized = false;
 
     @Override
     public void setModel(AbstractModel model) {
@@ -131,6 +132,15 @@ public class ScatterChartController extends AbstractController {
     @FXML
     public void toggleDisplayReferences() {
         this.showReferencesDatas = !this.showReferencesDatas;
+        this.showDatas();
+    }
+
+    public void toggleNormalizeDatas() {
+        this.valueNormalized = !this.valueNormalized;
+        if(valueNormalized)
+            this.workingDataset.normalizeDatas();
+        else
+            this.workingDataset.unNormalizeDatas();
         this.showDatas();
     }
 }

@@ -62,7 +62,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="33.0" prefWidth="100.0">
                     <children>
-                        <MFXCheckbox />
+                        <MFXCheckbox onMouseClicked="#toggleNormalizeDatas" />
                         <Label text="Normalize datas" />
                     </children>
                     <padding>

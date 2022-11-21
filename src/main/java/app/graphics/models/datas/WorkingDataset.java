@@ -2,6 +2,7 @@ package app.graphics.models.datas;
 
 import app.algorithm.AlgorithmFactory;
 import app.algorithm.KNNAlgorithm;
+import app.algorithm.normalizers.IDataNormalizer;
 import app.graphics.models.Observable;
 import app.graphics.models.Observer;
 import app.graphics.models.datas.data.AbstractData;
@@ -111,5 +112,15 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
             });
         });
         return workingDataByCategories;
+    }
+
+    public void normalizeDatas() {
+        this.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
+        this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
+    }
+
+    public void unNormalizeDatas() {
+        this.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
+        this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
     }
 }
