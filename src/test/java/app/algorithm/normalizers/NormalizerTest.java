@@ -4,19 +4,15 @@ import app.graphics.models.datas.DataDeltas;
 import app.graphics.models.datas.ReferenceDataset;
 import app.graphics.models.datas.WorkingDataset;
 import app.graphics.models.datas.data.IrisData;
-import app.utils.ClassUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NormalizerTest {
-    ReferenceDataset<IrisData> rds = new ReferenceDataset<>("rds");
+    ReferenceDataset<IrisData> rds;
     IrisData iris1 = new IrisData();
     IrisData iris2 = new IrisData();
     IrisData iris3 = new IrisData();
@@ -28,6 +24,7 @@ class NormalizerTest {
 
     @BeforeEach
     void init() {
+        rds = new ReferenceDataset<>("rds");
         kNeighbours = 1;
         iris1.setPetalLength(5.0);
         iris2.setPetalLength(6.0);
@@ -44,8 +41,6 @@ class NormalizerTest {
 
     @Test
     void test_reference_dataset_values_of_iris_should_be_between_0_and_1_after_normalize() {
-        List<Field> fields = new ArrayList<>();
-        fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
         Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
         for (IrisData data : rds.getDatas()) {
             IDataNormalizer.normalize(data, deltaOfDataset);
@@ -60,8 +55,6 @@ class NormalizerTest {
 
     @Test
     void test_reference_dataset_values_of_iris_should_be_return_to_initial_values() {
-        List<Field> fields = new ArrayList<>();
-        fields.addAll(ClassUtils.getNumberFields(rds.getDatas().get(0)));
         Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
 
         for (IrisData data : rds.getDatas()) {
@@ -80,33 +73,21 @@ class NormalizerTest {
 
     @Test
     void test_working_dataset_values_of_iris_should_be_between_0_and_1_after_normalize() {
-        List<Field> fields = new ArrayList<>();
         workingDS = new WorkingDataset<>("Iris", rds);
         workingDS.addData(iris4, iris5);
-        fields.addAll(ClassUtils.getNumberFields(workingDS.getDatas().get(0)));
-        Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
-
-        for (IrisData data : workingDS.getDatas()) {
-            IDataNormalizer.normalize(data, deltaOfDataset);
-        }
+        workingDS.unNormalizeDatas();
+        workingDS.normalizeDatas();
         assertEquals(0.6, workingDS.getDatas().get(0).getPetalLength());
         assertEquals(0.4, workingDS.getDatas().get(1).getPetalLength());
     }
 
     @Test
     void test_working_dataset_values_of_iris_should_be_return_to_initial_values() {
-        List<Field> fields = new ArrayList<>();
         workingDS = new WorkingDataset<>("Iris", rds);
         workingDS.addData(iris4, iris5);
-        fields.addAll(ClassUtils.getNumberFields(workingDS.getDatas().get(0)));
-        Map<String, DataDeltas> deltaOfDataset = rds.getDeltas();
-
-        for (IrisData data : workingDS.getDatas()) {
-            IDataNormalizer.normalize(data, deltaOfDataset);
-        }
-        for (IrisData data : workingDS.getDatas()) {
-            IDataNormalizer.denormalize(data, deltaOfDataset);
-        }
+        workingDS.unNormalizeDatas();
+        workingDS.normalizeDatas();
+        workingDS.unNormalizeDatas();
         assertEquals(8.0, workingDS.getDatas().get(0).getPetalLength());
         assertEquals(7.0, workingDS.getDatas().get(1).getPetalLength());
     }

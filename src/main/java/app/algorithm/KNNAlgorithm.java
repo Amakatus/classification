@@ -27,8 +27,9 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractModel {
         this.strength = new KNNStrength<>(this);
         this.calculator = new KNNCalculator<>(this);
         this.classifier = new DatasetClassifier<>(this);
-
     }
+
+    public DatasetClassifier<T> getClassifier() { return this.classifier; }
 
     public KNNCalculator<T> getCalculator() {
         return calculator;

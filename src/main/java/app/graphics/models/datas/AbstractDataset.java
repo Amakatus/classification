@@ -1,6 +1,5 @@
 package app.graphics.models.datas;
 
-import app.graphics.models.datas.columns.Column;
 import app.graphics.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
 
@@ -11,13 +10,11 @@ import java.util.Map;
 
 public abstract class AbstractDataset<T extends AbstractData> {
     protected String title;
-    protected List<Column<T>> columns;
     protected List<T> datas;
 
     protected AbstractDataset(String title, List<T> datas) {
         this.title = title;
         this.datas = datas == null ? new ArrayList<>() : datas;
-        this.columns = new ArrayList<>();
     }
 
     public String getTitle() {
@@ -61,6 +58,9 @@ public abstract class AbstractDataset<T extends AbstractData> {
         });
         return res;
     }
+
+    public double getDataSize() { return this.datas.size(); }
+    public boolean hasData() { return !this.datas.isEmpty(); }
 
     public String toString() {
         return String.format("%s", this.title);

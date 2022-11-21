@@ -14,18 +14,17 @@ import java.util.Map;
 public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> implements Observable {
     protected String categoryField;
     protected List<String> distanceFields;
-    protected List<KNNAlgorithm<T>> algorithms;
+    protected List<KNNAlgorithm<T>> algorithms = new ArrayList<>();
     protected ReferenceDataset<T> referenceDataset;
-    protected List<Observer> observers;
+    protected List<Observer> observers = new ArrayList<>();
+    private boolean normalized = false;
 
     public WorkingDataset(String title, List<T> datas, ReferenceDataset<T> referenceDataset, String categoryField,
                           List<String> distanceFields) {
         super(title, datas);
         this.categoryField = categoryField;
         this.distanceFields = distanceFields;
-        this.algorithms = new ArrayList<>();
         this.referenceDataset = referenceDataset;
-        this.observers = new ArrayList<>();
     }
 
     public WorkingDataset(String title, List<T> datas, ReferenceDataset<T> referenceDataset, String categoryField) {
@@ -39,6 +38,8 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
     public WorkingDataset(String title, ReferenceDataset<T> referenceDataset) {
         this(title, new ArrayList<>(), referenceDataset);
     }
+
+    public boolean isNormalized() { return this.normalized; }
 
     public List<KNNAlgorithm<T>> getAlgorithms() {
         return this.algorithms;
@@ -114,13 +115,21 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
         return workingDataByCategories;
     }
 
+    public boolean canChangeNormalize() { return this.referenceDataset != null && this.referenceDataset.hasData(); }
+
     public void normalizeDatas() {
-        this.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
-        this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
+        if(!this.normalized && this.canChangeNormalize()){
+            this.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
+            this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
+            this.normalized = true;
+        }
     }
 
     public void unNormalizeDatas() {
-        this.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
-        this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
+        if(this.normalized && this.canChangeNormalize()){
+            this.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
+            this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
+            this.normalized = false;
+        }
     }
 }

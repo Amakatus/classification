@@ -6,6 +6,7 @@ import app.graphics.models.AbstractModel;
 import app.graphics.models.datas.WorkingDataset;
 import app.utils.ClassUtils;
 import app.utils.LoggerUtils;
+import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ScatterChartController extends AbstractController {
+    @FXML protected MFXCheckbox normalizeCheckbox;
     @FXML protected MFXComboBox<String> axisXSelector;
     @FXML protected MFXComboBox<String> axisYSelector;
     @FXML
@@ -34,7 +36,7 @@ public class ScatterChartController extends AbstractController {
         return (KNNAlgorithm<?>) this.model;
     }
     private boolean showReferencesDatas = false;
-    private boolean valueNormalized = false;
+    private boolean valueNormalized;
 
     @Override
     public void setModel(AbstractModel model) {
@@ -49,6 +51,12 @@ public class ScatterChartController extends AbstractController {
         this.setDefaultAxis();
         this.handleSelectorsChanges();
         this.classifyDatasButtonClicked();
+        this.initNormalized();
+    }
+
+    private void initNormalized() {
+        this.valueNormalized = this.workingDataset.isNormalized();
+        if(this.valueNormalized) this.normalizeCheckbox.setSelected(true);
     }
 
     private void registerAxisFieldsNames() {

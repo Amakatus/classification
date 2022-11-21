@@ -39,8 +39,11 @@ public class IndexController extends AbstractController implements Observer {
         testWDS.setCategoryField("variety");
         testWDS.addDistanceFieldString("petalLength");
         testWDS.addDistanceFieldString("petalWidth");
+        testWDS.normalizeDatas();
         App.getInstance().addWorkingDataset(testWDS);
         testWDS.createAlgorithm(2);
+        testWDS.getLastAlgorithm().classifyWorkingDataset();
+        testWDS.getLastAlgorithm().generateStrength();
     }
 
     private void setupTreeView() {
