@@ -59,8 +59,13 @@ public abstract class AbstractDataset<T extends AbstractData> {
         return res;
     }
 
-    public double getDataSize() { return this.datas.size(); }
-    public boolean hasData() { return !this.datas.isEmpty(); }
+    public double getDataSize() {
+        return this.datas.size();
+    }
+
+    public boolean hasData() {
+        return !this.datas.isEmpty();
+    }
 
     public String toString() {
         return String.format("%s", this.title);

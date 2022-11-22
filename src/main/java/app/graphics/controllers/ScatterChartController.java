@@ -21,11 +21,16 @@ import java.util.List;
 import java.util.Map;
 
 public class ScatterChartController extends AbstractController {
-    @FXML protected MFXCheckbox normalizeCheckbox;
-    @FXML protected MFXComboBox<String> axisXSelector;
-    @FXML protected MFXComboBox<String> axisYSelector;
-    @FXML protected ScatterChart<Number, Number> scatterChart;
-    @FXML protected Label datasetTitle;
+    @FXML
+    protected MFXCheckbox normalizeCheckbox;
+    @FXML
+    protected MFXComboBox<String> axisXSelector;
+    @FXML
+    protected MFXComboBox<String> axisYSelector;
+    @FXML
+    protected ScatterChart<Number, Number> scatterChart;
+    @FXML
+    protected Label datasetTitle;
     protected WorkingDataset<?> workingDataset;
     protected String xLabelField;
     protected String yLabelField;
@@ -33,6 +38,7 @@ public class ScatterChartController extends AbstractController {
     private KNNAlgorithm<?> getAlgorithm() {
         return (KNNAlgorithm<?>) this.model;
     }
+
     private boolean showReferencesDatas = false;
     private boolean valueNormalized;
 
@@ -54,7 +60,7 @@ public class ScatterChartController extends AbstractController {
 
     private void initNormalized() {
         this.valueNormalized = this.workingDataset.isNormalized();
-        if(this.valueNormalized) this.normalizeCheckbox.setSelected(true);
+        if (this.valueNormalized) this.normalizeCheckbox.setSelected(true);
     }
 
     private void registerAxisFieldsNames() {
@@ -95,7 +101,7 @@ public class ScatterChartController extends AbstractController {
     }
 
     public void showDatas() {
-        if(showReferencesDatas)
+        if (showReferencesDatas)
             this.addDatas(this.workingDataset.getBothDataByCategories());
         else
             this.addDatas(this.workingDataset.getWorkingDataByCategories());
@@ -144,7 +150,7 @@ public class ScatterChartController extends AbstractController {
 
     public void toggleNormalizeDatas() {
         this.valueNormalized = !this.valueNormalized;
-        if(valueNormalized)
+        if (valueNormalized)
             this.workingDataset.normalizeDatas();
         else
             this.workingDataset.unNormalizeDatas();

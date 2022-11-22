@@ -43,10 +43,12 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
     @Override
     public void addData(T data) {
         super.addData(data);
-        if(normalized) IDataNormalizer.normalize(data, this.referenceDataset.getDeltas());
+        if (normalized) IDataNormalizer.normalize(data, this.referenceDataset.getDeltas());
     }
 
-    public boolean isNormalized() { return this.normalized; }
+    public boolean isNormalized() {
+        return this.normalized;
+    }
 
     public List<KNNAlgorithm<T>> getAlgorithms() {
         return this.algorithms;
@@ -126,10 +128,12 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
         return workingDataByCategories;
     }
 
-    public boolean canChangeNormalize() { return this.referenceDataset != null && this.hasData() && this.referenceDataset.hasData(); }
+    public boolean canChangeNormalize() {
+        return this.referenceDataset != null && this.hasData() && this.referenceDataset.hasData();
+    }
 
     public boolean normalizeDatas() {
-        if(this.normalized || !this.canChangeNormalize()) return false;
+        if (this.normalized || !this.canChangeNormalize()) return false;
         this.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
         this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
         this.normalized = true;
@@ -137,7 +141,7 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
     }
 
     public boolean unNormalizeDatas() {
-        if(!this.normalized || !this.canChangeNormalize()) return false;
+        if (!this.normalized || !this.canChangeNormalize()) return false;
         this.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
         this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
         this.normalized = false;

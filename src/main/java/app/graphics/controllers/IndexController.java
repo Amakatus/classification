@@ -67,7 +67,7 @@ public class IndexController extends AbstractController implements Observer {
     }
 
     public void addWorkingDataset(WorkingDataset<? extends AbstractData> dataset) {
-        if(this.getTreeOfDataset(dataset) != null) return;
+        if (this.getTreeOfDataset(dataset) != null) return;
         TreeItem<Object> rootItem = treeView.getRoot();
         TreeItem<Object> childItem = new TreeItem<>(dataset);
         rootItem.getChildren().add(childItem);
@@ -86,10 +86,10 @@ public class IndexController extends AbstractController implements Observer {
 
     private TreeItem<Object> getTreeOfAlgorithm(KNNAlgorithm<? extends AbstractData> algorithm) {
         TreeItem<Object> treeOfDataset = this.getTreeOfDataset(algorithm.getWorkingDataset());
-        if(treeOfDataset == null) return null;
+        if (treeOfDataset == null) return null;
         ObservableList<TreeItem<Object>> algorithms = treeOfDataset.getChildren();
-        for(TreeItem<Object> treeAlgo : algorithms){
-            if(treeAlgo.getValue().equals(algorithm))
+        for (TreeItem<Object> treeAlgo : algorithms) {
+            if (treeAlgo.getValue().equals(algorithm))
                 return treeAlgo;
         }
         return null;
