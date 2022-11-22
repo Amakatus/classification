@@ -36,9 +36,7 @@ public class AlgorithmCreatorController extends AbstractController {
             return;
         }
         WorkingDataset<?> workingDataset = this.datasetComboBox.getSelectionModel().getSelectedItem();
-        workingDataset.createAlgorithm((int) this.neighboursSlider.getValue());
-        workingDataset.getLastAlgorithm().classifyWorkingDataset();
-        workingDataset.getLastAlgorithm().generateStrength();
+        workingDataset.createAlgorithm((int) this.neighboursSlider.getValue(), true);
         this.closeView();
     }
 

@@ -21,12 +21,16 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractModel {
     protected DatasetClassifier<T> classifier;
     protected int kNeighbours;
 
-    public KNNAlgorithm(WorkingDataset<T> workingDataset, int k) {
+    public KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify) {
         this.workingDataset = workingDataset;
         this.kNeighbours = k;
         this.strength = new KNNStrength<>(this);
         this.calculator = new KNNCalculator<>(this);
         this.classifier = new DatasetClassifier<>(this);
+        if(autoClassify) {
+            this.classifyWorkingDataset();
+            this.generateStrength();
+        }
     }
 
     public DatasetClassifier<T> getClassifier() { return this.classifier; }
@@ -95,7 +99,6 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractModel {
     }
 
     public void generateStrength() {
-        this.getDatasKNN();
         this.strength.calculStrenght();
     }
 

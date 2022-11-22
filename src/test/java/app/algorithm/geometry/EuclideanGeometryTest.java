@@ -28,7 +28,7 @@ class EuclideanGeometryTest {
         this.irisWork = new IrisData();
         this.rDS = new ReferenceDataset<>("rds");
         this.wDS = new WorkingDataset<>("wds", rDS);
-        this.algo = new KNNAlgorithm<>(wDS, 5);
+        this.algo = new KNNAlgorithm<>(wDS, 5, false);
         this.algo.getDatasKNN();
         this.calculator = algo.getCalculator();
         this.geometry = (EuclideanGeometry<IrisData>) this.calculator.getGeometry();
@@ -69,7 +69,7 @@ class EuclideanGeometryTest {
     void test_distance_with_nor_double_or_method_fields() {
         ReferenceDataset<TitanicPassengerData> rs = new ReferenceDataset<>("r");
         WorkingDataset<TitanicPassengerData> ds = new WorkingDataset<>("w", rs);
-        KNNAlgorithm<TitanicPassengerData> algo = new KNNAlgorithm<>(ds, 3);
+        KNNAlgorithm<TitanicPassengerData> algo = new KNNAlgorithm<>(ds, 3, false);
         algo.getDatasKNN();
         KNNCalculator<TitanicPassengerData> calc = algo.getCalculator();
         TitanicPassengerData rPass = new TitanicPassengerData();

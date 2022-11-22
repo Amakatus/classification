@@ -34,7 +34,7 @@ public class KNNStrength<T extends AbstractData> {
         this.groupsToTest.forEach(tWorkingDataset -> {
             List<String> savedDataCategories = this.saveDataCategories(tWorkingDataset);
             Collections.shuffle(tWorkingDataset.getReferenceDataset().getDatas());
-            tWorkingDataset.createAlgorithm(this.algorithm.getKNeighbours());
+            tWorkingDataset.createAlgorithm(this.algorithm.getKNeighbours(), false);
             tWorkingDataset.getLastAlgorithm().classifyWorkingDataset();
             groupStrengths.add(generateGroupStrength(tWorkingDataset, savedDataCategories));
         });
