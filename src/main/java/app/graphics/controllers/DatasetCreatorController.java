@@ -106,6 +106,7 @@ public class DatasetCreatorController extends AbstractController {
             return;
         }
         WorkingDataset<? extends AbstractData> newDataset = DatasetFactory.createWorkingDataset(this.inputName.getText(), inputType.getValue(), fileToClassify);
+        // On ne devrait pas avoir à faire ça -_-
         newDataset.normalizeDatas();
         newDataset.setCategoryField(inputCategory.getValue());
         inputDistance.getCheckModel().getCheckedItems().forEach(newDataset::addDistanceFieldString);

@@ -41,10 +41,10 @@ public class ScatterChartController extends AbstractController {
         this.model = model;
         this.workingDataset = this.getAlgorithm().getWorkingDataset();
         this.setTitle(String.format("%s%n%s points classified on %s", this.workingDataset.getTitle(), this.workingDataset.getDatas().size(), this.workingDataset.getCategoryField()));
-        this.initAxisSelectors();
+        this.initScatterChart();
     }
 
-    public void initAxisSelectors() {
+    public void initScatterChart() {
         this.registerAxisFieldsNames();
         this.setDefaultAxis();
         this.handleSelectorsChanges();

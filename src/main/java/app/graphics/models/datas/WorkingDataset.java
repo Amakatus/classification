@@ -39,6 +39,12 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
         this(title, new ArrayList<>(), referenceDataset);
     }
 
+    @Override
+    public void addData(T data) {
+        super.addData(data);
+        if(normalized) IDataNormalizer.normalize(data, this.referenceDataset.getDeltas());
+    }
+
     public boolean isNormalized() { return this.normalized; }
 
     public List<KNNAlgorithm<T>> getAlgorithms() {
@@ -115,7 +121,7 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> i
         return workingDataByCategories;
     }
 
-    public boolean canChangeNormalize() { return this.referenceDataset != null && this.referenceDataset.hasData(); }
+    public boolean canChangeNormalize() { return this.referenceDataset != null && this.hasData() && this.referenceDataset.hasData(); }
 
     public void normalizeDatas() {
         if(!this.normalized && this.canChangeNormalize()){
