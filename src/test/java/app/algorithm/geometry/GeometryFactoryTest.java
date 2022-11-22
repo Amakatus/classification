@@ -12,22 +12,37 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class GeometryFactoryTest {
     WorkingDataset<IrisData> workingData = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
-    EuclideanGeometry<IrisData> euclideanGeometry;
-    ManhattanGeometry<IrisData> manhattanGeometry;
+    AbstractGeometryCalculator<IrisData> geometry;
 
     @Test
     void should_create_a_euclideangeometry_with_factory() {
         workingData.createAlgorithm(2);
         KNNAlgorithm<IrisData> algorithm = workingData.getAlgorithms().get(0);
-        euclideanGeometry = GeometryFactory.createEuclideanGeometry(algorithm.getCalculator());
-        assertNotEquals(null, euclideanGeometry);
+        geometry = GeometryFactory.createEuclideanGeometry(algorithm.getCalculator());
+        assertNotEquals(null, geometry);
     }
 
     @Test
     void should_create_a_manhatthangeometry_with_factory() {
         workingData.createAlgorithm(2);
         KNNAlgorithm<IrisData> algorithm = workingData.getAlgorithms().get(0);
-        manhattanGeometry = GeometryFactory.createManhattanGeometry(algorithm.getCalculator());
-        assertNotEquals(null, manhattanGeometry);
+        geometry = GeometryFactory.createManhattanGeometry(algorithm.getCalculator());
+        assertNotEquals(null, geometry);
+    }
+    
+    @Test
+    void should_create_a_manhattangeometry_with_factory_and_name() {
+        workingData.createAlgorithm(2);
+        KNNAlgorithm<IrisData> algorithm = workingData.getAlgorithms().get(0);
+        geometry = GeometryFactory.createGeometryAlgorithm("Manhattan",algorithm.getCalculator());
+        assertNotEquals(null, geometry);
+    }
+    
+    @Test
+    void should_create_a_euclideangeometry_with_factory_and_name() {
+    	workingData.createAlgorithm(2);
+        KNNAlgorithm<IrisData> algorithm = workingData.getAlgorithms().get(0);
+        geometry = GeometryFactory.createGeometryAlgorithm("Euclidean",algorithm.getCalculator());
+        assertNotEquals(null, geometry);
     }
 }

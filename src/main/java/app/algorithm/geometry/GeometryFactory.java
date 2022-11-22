@@ -14,9 +14,9 @@ public interface GeometryFactory {
     
     static <T extends AbstractData> AbstractGeometryCalculator<T> createGeometryAlgorithm(String name, KNNCalculator<T> calculator){
     	if(name.equalsIgnoreCase("Euclidean")) {
-    		createEuclideanGeometry(calculator);
+    		return createEuclideanGeometry(calculator);
     	} else if (name.equalsIgnoreCase("Manhattan")){
-    		createManhattanGeometry(calculator);
+    		return createManhattanGeometry(calculator);
     	}
     	return null;
     }
