@@ -24,10 +24,8 @@ public class ScatterChartController extends AbstractController {
     @FXML protected MFXCheckbox normalizeCheckbox;
     @FXML protected MFXComboBox<String> axisXSelector;
     @FXML protected MFXComboBox<String> axisYSelector;
-    @FXML
-    protected ScatterChart<Number, Number> scatterChart;
-    @FXML
-    protected Label datasetTitle;
+    @FXML protected ScatterChart<Number, Number> scatterChart;
+    @FXML protected Label datasetTitle;
     protected WorkingDataset<?> workingDataset;
     protected String xLabelField;
     protected String yLabelField;
@@ -118,6 +116,7 @@ public class ScatterChartController extends AbstractController {
                     LoggerUtils.exception(e);
                 }
             });
+            newSerie.setName(newSerie.getName() + String.format(" (%s)", newSerie.getData().size()));
             this.scatterChart.getData().add(newSerie);
             this.registerDataTooltips(categoryName);
         });
@@ -151,4 +150,5 @@ public class ScatterChartController extends AbstractController {
             this.workingDataset.unNormalizeDatas();
         this.showDatas();
     }
+
 }
