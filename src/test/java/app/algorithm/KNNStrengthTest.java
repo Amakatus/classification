@@ -38,7 +38,7 @@ class KNNStrengthTest {
 
     @Test
     void test_strength_is_consistent() {
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             strength.calculStrenght();
             assertTrue(strength.getStrength() >= 0 && strength.getStrength() <= 100);
         }

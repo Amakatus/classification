@@ -21,9 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ScatterChartController extends AbstractController {
-    @FXML protected MFXCheckbox normalizeCheckbox;
-    @FXML protected MFXComboBox<String> axisXSelector;
-    @FXML protected MFXComboBox<String> axisYSelector;
+    @FXML
+    protected MFXCheckbox normalizeCheckbox;
+    @FXML
+    protected MFXComboBox<String> axisXSelector;
+    @FXML
+    protected MFXComboBox<String> axisYSelector;
     @FXML
     protected ScatterChart<Number, Number> scatterChart;
     @FXML
@@ -35,6 +38,7 @@ public class ScatterChartController extends AbstractController {
     private KNNAlgorithm<?> getAlgorithm() {
         return (KNNAlgorithm<?>) this.model;
     }
+
     private boolean showReferencesDatas = false;
     private boolean valueNormalized;
 
@@ -43,10 +47,10 @@ public class ScatterChartController extends AbstractController {
         this.model = model;
         this.workingDataset = this.getAlgorithm().getWorkingDataset();
         this.setTitle(String.format("%s%n%s points classified on %s", this.workingDataset.getTitle(), this.workingDataset.getDatas().size(), this.workingDataset.getCategoryField()));
-        this.initAxisSelectors();
+        this.initScatterChart();
     }
 
-    public void initAxisSelectors() {
+    public void initScatterChart() {
         this.registerAxisFieldsNames();
         this.setDefaultAxis();
         this.handleSelectorsChanges();
@@ -56,7 +60,7 @@ public class ScatterChartController extends AbstractController {
 
     private void initNormalized() {
         this.valueNormalized = this.workingDataset.isNormalized();
-        if(this.valueNormalized) this.normalizeCheckbox.setSelected(true);
+        if (this.valueNormalized) this.normalizeCheckbox.setSelected(true);
     }
 
     private void registerAxisFieldsNames() {
@@ -92,12 +96,10 @@ public class ScatterChartController extends AbstractController {
         });
     }
 
-    public void setTitle(String title) {
-        this.datasetTitle.setText(title);
-    }
+    public void setTitle(String title) { this.datasetTitle.setText(title); }
 
     public void showDatas() {
-        if(showReferencesDatas)
+        if (showReferencesDatas)
             this.addDatas(this.workingDataset.getBothDataByCategories());
         else
             this.addDatas(this.workingDataset.getWorkingDataByCategories());
@@ -118,6 +120,7 @@ public class ScatterChartController extends AbstractController {
                     LoggerUtils.exception(e);
                 }
             });
+            newSerie.setName(newSerie.getName() + String.format(" (%s)", newSerie.getData().size()));
             this.scatterChart.getData().add(newSerie);
             this.registerDataTooltips(categoryName);
         });
@@ -145,10 +148,11 @@ public class ScatterChartController extends AbstractController {
 
     public void toggleNormalizeDatas() {
         this.valueNormalized = !this.valueNormalized;
-        if(valueNormalized)
+        if (valueNormalized)
             this.workingDataset.normalizeDatas();
         else
             this.workingDataset.unNormalizeDatas();
         this.showDatas();
     }
+
 }

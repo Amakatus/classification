@@ -39,11 +39,8 @@ public class IndexController extends AbstractController implements Observer {
         testWDS.setCategoryField("variety");
         testWDS.addDistanceFieldString("petalLength");
         testWDS.addDistanceFieldString("petalWidth");
-        testWDS.normalizeDatas();
         App.getInstance().addWorkingDataset(testWDS);
-        testWDS.createAlgorithm(2);
-        testWDS.getLastAlgorithm().classifyWorkingDataset();
-        testWDS.getLastAlgorithm().generateStrength();
+        testWDS.createAlgorithm(2, true);
     }
 
     private void setupTreeView() {
@@ -70,12 +67,14 @@ public class IndexController extends AbstractController implements Observer {
     }
 
     public void addWorkingDataset(WorkingDataset<? extends AbstractData> dataset) {
+        if (this.getTreeOfDataset(dataset) != null) return;
         TreeItem<Object> rootItem = treeView.getRoot();
         TreeItem<Object> childItem = new TreeItem<>(dataset);
         rootItem.getChildren().add(childItem);
+        dataset.attach(this);
     }
 
-    private TreeItem<Object> getTreeForDataset(WorkingDataset<? extends AbstractData> dataset) {
+    private TreeItem<Object> getTreeOfDataset(WorkingDataset<? extends AbstractData> dataset) {
         ObservableList<TreeItem<Object>> datasets = treeView.getRoot().getChildren();
         for (TreeItem<Object> treeDataset : datasets) {
             if (treeDataset.getValue().equals(dataset)) {
@@ -85,9 +84,20 @@ public class IndexController extends AbstractController implements Observer {
         return null;
     }
 
+    private TreeItem<Object> getTreeOfAlgorithm(KNNAlgorithm<? extends AbstractData> algorithm) {
+        TreeItem<Object> treeOfDataset = this.getTreeOfDataset(algorithm.getWorkingDataset());
+        if (treeOfDataset == null) return null;
+        ObservableList<TreeItem<Object>> algorithms = treeOfDataset.getChildren();
+        for (TreeItem<Object> treeAlgo : algorithms) {
+            if (treeAlgo.getValue().equals(algorithm))
+                return treeAlgo;
+        }
+        return null;
+    }
+
     public void addAlgorithm(WorkingDataset<? extends AbstractData> dataset, KNNAlgorithm<? extends AbstractData> algorithm) {
-        TreeItem<Object> datasetItem = this.getTreeForDataset(dataset);
-        if (datasetItem != null)
+        TreeItem<Object> datasetItem = this.getTreeOfDataset(dataset);
+        if (datasetItem != null && this.getTreeOfAlgorithm(algorithm) == null)
             datasetItem.getChildren().add(new TreeItem<>(algorithm));
     }
 
@@ -127,9 +137,8 @@ public class IndexController extends AbstractController implements Observer {
     @Override
     public void sendUpdate(Object object) {
         if (object.getClass().isAssignableFrom(WorkingDataset.class)) {
-            WorkingDataset<?> workingDataset = (WorkingDataset<? extends AbstractData>) object;
+            WorkingDataset<?> workingDataset = (WorkingDataset<?>) object;
             this.addWorkingDataset(workingDataset);
-            workingDataset.attach(this);
         } else if (object.getClass().isAssignableFrom(KNNAlgorithm.class)) {
             KNNAlgorithm<?> algorithm = (KNNAlgorithm<?>) object;
             this.addAlgorithm(algorithm.getWorkingDataset(), algorithm);

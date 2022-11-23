@@ -21,7 +21,7 @@ class GeometryCalculatorTest {
     void init() {
         rDS = new ReferenceDataset<>("rds");
         wDS = new WorkingDataset<>("wds", rDS);
-        algo = new KNNAlgorithm<>(wDS, 5);
+        algo = new KNNAlgorithm<>(wDS, 5, false);
         calculator = algo.getCalculator();
     }
 

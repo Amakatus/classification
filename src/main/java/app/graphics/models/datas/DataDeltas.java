@@ -21,8 +21,11 @@ public class DataDeltas {
         return this.max - this.min;
     }
 
-    public double getNormalizedValue(double initialValue){
-        return (initialValue - this.min) / this.getDelta();
+    public double getNormalizedValue(double initialValue) {
+        double newValue = (initialValue - this.min) / this.getDelta();
+        if (newValue > 1) newValue = 1;
+        else if (newValue < 0) newValue = 0;
+        return newValue;
     }
 
     public double getUnormalizedValue(double initalValue) {

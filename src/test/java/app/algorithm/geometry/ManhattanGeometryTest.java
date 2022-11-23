@@ -28,7 +28,7 @@ class ManhattanGeometryTest {
         this.irisWork = new IrisData();
         this.rDS = new ReferenceDataset<>("rds");
         this.wDS = new WorkingDataset<>("wds", rDS);
-        this.algo = new KNNAlgorithm<>(wDS, 5);
+        this.algo = new KNNAlgorithm<>(wDS, 5, false);
         this.calculator = algo.getCalculator();
         this.algo.getDatasKNN(GeometryFactory.createManhattanGeometry(calculator));
         this.geometry = (ManhattanGeometry<IrisData>) this.calculator.getGeometry();
@@ -70,7 +70,7 @@ class ManhattanGeometryTest {
     void test_distance_with_nor_double_or_method_fields() {
         ReferenceDataset<TitanicPassengerData> referenceDataset = new ReferenceDataset<>("TitanicPassengerData");
         WorkingDataset<TitanicPassengerData> workingDataset = new WorkingDataset<>("TitanicPassengerDataWorking", referenceDataset);
-        KNNAlgorithm<TitanicPassengerData> algo = new KNNAlgorithm<>(workingDataset, 3);
+        KNNAlgorithm<TitanicPassengerData> algo = new KNNAlgorithm<>(workingDataset, 3, false);
         algo.getDatasKNN();
         KNNCalculator<TitanicPassengerData> calc = algo.getCalculator();
         TitanicPassengerData rPass = new TitanicPassengerData();
