@@ -1,7 +1,7 @@
 package app.utils;
 
 import app.exceptions.FieldNotNumberException;
-import app.graphics.models.datas.data.AbstractData;
+import app.models.datas.data.AbstractData;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

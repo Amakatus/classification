@@ -1,6 +1,6 @@
 package app.exceptions;
 
-import app.graphics.models.datas.data.AbstractData;
+import app.models.datas.data.AbstractData;
 
 public class FieldToDistanceException extends Exception {
 

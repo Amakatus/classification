@@ -1,6 +1,6 @@
 package app;
 
-import app.graphics.views.View;
+import app.views.View;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

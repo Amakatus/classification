@@ -1,12 +1,12 @@
 package app;
 
-import app.graphics.models.AbstractModel;
-import app.graphics.models.Observer;
-import app.graphics.models.datas.DatasetFactory;
-import app.graphics.models.datas.ReferenceDataset;
-import app.graphics.models.datas.WorkingDataset;
-import app.graphics.models.datas.data.AbstractData;
-import app.graphics.models.datas.data.DataType;
+import app.models.AbstractModel;
+import app.models.Observer;
+import app.models.datas.DatasetFactory;
+import app.models.datas.ReferenceDataset;
+import app.models.datas.WorkingDataset;
+import app.models.datas.data.AbstractData;
+import app.models.datas.data.DataType;
 
 import java.util.ArrayList;
 import java.util.List;

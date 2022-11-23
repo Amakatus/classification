@@ -1,6 +1,6 @@
 package app.utils;
 
-import app.graphics.models.datas.data.DataType;
+import app.models.datas.data.DataType;
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import java.nio.file.Files;
