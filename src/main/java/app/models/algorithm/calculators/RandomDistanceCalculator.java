@@ -16,7 +16,7 @@ public class RandomDistanceCalculator<T extends AbstractData> extends AbstractCa
     public Map<T, Double> getDistances(T workingData) {
         Map<T, Double> dataDistancesMap = new HashMap<>();
         dataDistancesMap.put(workingData, -1.); // 600 IQ
-        for (T refData : this.getReferenceDataset().getDatas()) {
+        for (T refData : this.getReferenceDataset().getData()) {
             dataDistancesMap.put(refData, Math.random());
         }
         return dataDistancesMap;

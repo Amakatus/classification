@@ -12,4 +12,14 @@ public interface GeometryFactory {
     static <T extends AbstractData> EuclideanGeometry<T> createEuclideanGeometry(List<String> fieldNames) {
         return new EuclideanGeometry<>(fieldNames);
     }
+
+    static <T extends AbstractData> AbstractGeometryCalculator<T> createGeometryAlgorithm(String name, List<String> fieldNames){
+        if(name.equalsIgnoreCase("Euclidean")) {
+            return createEuclideanGeometry(fieldNames);
+        } else if (name.equalsIgnoreCase("Manhattan")){
+            return createManhattanGeometry(fieldNames);
+        }
+        // Should use a NullGeometry instead...
+        return null;
+    }
 }

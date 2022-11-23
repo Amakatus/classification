@@ -16,23 +16,19 @@ import java.util.stream.Collectors;
 public class KNNAlgorithm<T extends AbstractData> extends Algorithm<T> {
     protected int kNeighbours;
 
-    public KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, IGeometryCalculator<T> geometry){
-        super(workingDataset, autoClassify, geometry);
+    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, IGeometryCalculator<T> geometry){
+        super(workingDataset, geometry);
         this.kNeighbours = k;
-        this.strength = new StrengthCalculator<>(this);
+        this.strengthCalculator = new StrengthCalculator<>(this);
         this.classifier = new KNNDistanceClassifier<>(this);
+        if (autoClassify) {
+            this.classifyWorkingDataset();
+            this.generateStrength();
+        }
     }
 
-    public KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify) {
+    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify) {
         this(workingDataset, k, autoClassify, new EuclideanGeometry<>(workingDataset.getDistanceFields()));
-    }
-
-    public StrengthCalculator<T> getStrengthObject() {
-        return this.strength;
-    }
-
-    public double getStrength() {
-        return this.strength.getStrength();
     }
 
     public int getKNeighbours() {
@@ -63,6 +59,6 @@ public class KNNAlgorithm<T extends AbstractData> extends Algorithm<T> {
     }
 
     public String toString() {
-        return this.kNeighbours + "NNAlgorithm (" + this.getStrength() + "%)";
+        return this.kNeighbours + "NNAlgorithm "+this.calculator.getGeometry()+"(" + this.getStrength() + "%)";
     }
 }

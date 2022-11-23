@@ -28,4 +28,8 @@ public interface DatasetFactory {
     static <T extends AbstractData> WorkingDataset<T> createWorkingDataset(String title, DataType type, File csvFile) {
         return new WorkingDataset<>(title, CSVUtils.loadCSV(csvFile.toPath(), type), createReferenceDataset(String.format("Reference%s", title), type));
     }
+
+    static <T extends AbstractData> WorkingDataset<T> createWorkingDataset(DataType type, File csvFile) {
+        return createWorkingDataset("DefaultTitle", type, csvFile);
+    }
 }

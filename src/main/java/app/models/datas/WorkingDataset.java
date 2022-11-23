@@ -3,6 +3,8 @@ package app.models.datas;
 import app.models.algorithm.Algorithm;
 import app.models.algorithm.AlgorithmFactory;
 import app.models.algorithm.KNNAlgorithm;
+import app.models.algorithm.geometry.EuclideanGeometry;
+import app.models.algorithm.geometry.IGeometryCalculator;
 import app.models.datas.data.normalizers.IDataNormalizer;
 import app.models.datas.data.AbstractData;
 
@@ -30,8 +32,12 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         this(title, datas, referenceDataset, null, new ArrayList<>());
     }
 
-    public WorkingDataset(String title, ReferenceDataset<T> referenceDataset) {
-        this(title, new ArrayList<>(), referenceDataset);
+    public WorkingDataset(List<T> datas, ReferenceDataset<T> referenceDataset) {
+        this("title", datas, referenceDataset);
+    }
+
+    public WorkingDataset(ReferenceDataset<T> referenceDataset) {
+        this("title", new ArrayList<>(), referenceDataset);
     }
 
     @Override
@@ -56,13 +62,22 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         return distanceFields;
     }
 
-    public void createAlgorithm(int k, boolean autoClassify) {
-        AlgorithmFactory.createKNN(this, k, autoClassify);
+    public KNNAlgorithm<T> createKNN(int k, boolean autoClassify, IGeometryCalculator<T> geometryCalculator) {
+        AlgorithmFactory.createKNN(this, k, autoClassify, geometryCalculator);
         this.updateObservers(this.getLastAlgorithm());
+        return (KNNAlgorithm<T>) this.getLastAlgorithm();
     }
 
-    public void createAlgorithm(int k) {
-        this.createAlgorithm(k, false);
+    public KNNAlgorithm<T> createKNN(int k, boolean autoClassify) {
+        return createKNN(k, autoClassify, new EuclideanGeometry<>(this.distanceFields));
+    }
+
+    public KNNAlgorithm<T> createKNN(int k, IGeometryCalculator<T> geometryCalculator) {
+        return createKNN(k, false, geometryCalculator);
+    }
+
+    public KNNAlgorithm<T> createKNN(int k) {
+        return this.createKNN(k, false);
     }
 
     public Algorithm<T> getLastAlgorithm() {
@@ -77,10 +92,6 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         if (!this.distanceFields.contains(distanceFieldName)) {
             this.distanceFields.add(distanceFieldName);
         }
-    }
-
-    public void removeDistanceFieldString(String distanceFieldName) {
-        this.distanceFields.remove(distanceFieldName);
     }
 
     public void setCategoryField(String categoryFieldName) {
@@ -108,21 +119,21 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
     }
 
     public boolean canChangeNormalize() {
-        return this.referenceDataset != null && this.hasData() && this.referenceDataset.hasData();
+        return this.referenceDataset == null || !this.hasData() || !this.referenceDataset.hasData();
     }
 
     public boolean normalizeDatas() {
-        if (this.normalized || !this.canChangeNormalize()) return false;
-        this.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
-        this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
+        if (this.normalized || this.canChangeNormalize()) return false;
+        this.getData().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
+        this.referenceDataset.getData().forEach(data -> IDataNormalizer.normalize(data, this.referenceDataset.getDeltas()));
         this.normalized = true;
         return true;
     }
 
     public boolean unNormalizeDatas() {
-        if (!this.normalized || !this.canChangeNormalize()) return false;
-        this.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
-        this.referenceDataset.getDatas().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
+        if (!this.normalized || this.canChangeNormalize()) return false;
+        this.getData().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
+        this.referenceDataset.getData().forEach(data -> IDataNormalizer.denormalize(data, this.referenceDataset.getDeltas()));
         this.normalized = false;
         return true;
     }

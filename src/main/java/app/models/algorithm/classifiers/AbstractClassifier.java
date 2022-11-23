@@ -24,9 +24,13 @@ public abstract class AbstractClassifier<T extends AbstractData> implements ICla
         this.categoryField = this.workingDataset.getCategoryField();
     }
 
+    public void setCategoryField(String categoryField){
+        this.categoryField = categoryField;
+    }
+
     @Override
     public void classifyAllData() {
-        this.workingDataset.getDatas().forEach(this::classifyData);
+        this.workingDataset.getData().forEach(this::classifyData);
     }
 
     @Override

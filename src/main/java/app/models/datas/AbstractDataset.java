@@ -12,49 +12,37 @@ import java.util.Map;
 
 public abstract class AbstractDataset<T extends AbstractData> implements Observable {
     protected String title;
-    protected List<T> datas;
+    protected List<T> data;
     protected List<Observer> observers = new ArrayList<>();
 
-    protected AbstractDataset(String title, List<T> datas) {
+    protected AbstractDataset(String title, List<T> data) {
         this.title = title;
-        this.datas = datas == null ? new ArrayList<>() : datas;
+        this.data = data == null ? new ArrayList<>() : data;
     }
 
     public String getTitle() {
         return this.title;
     }
 
-    public List<T> getDatas() {
-        return this.datas;
+    public List<T> getData() {
+        return this.data;
     }
 
     public void addData(T data) {
-        this.datas.add(data);
+        this.data.add(data);
     }
 
     public void removeData(T data) {
-        this.datas.remove(data);
+        this.data.remove(data);
     }
 
-    public void setDatas(List<T> datas) {
-        this.datas = datas;
-    }
-
-    public void addData(T... datas) {
-        for (T data : datas) {
-            this.addData(data);
-        }
-    }
-
-    public void removeData(T... datas) {
-        for (T data : datas) {
-            this.removeData(data);
-        }
+    public void setData(List<T> data) {
+        this.data = data;
     }
 
     public Map<String, List<T>> getDataByCategories(String categoryField) {
         Map<String, List<T>> res = new HashMap<>();
-        this.getDatas().forEach(data -> {
+        this.getData().forEach(data -> {
             Object category = ClassUtils.getValueObjectFromField(data, categoryField);
             if (category != null)
                 res.computeIfAbsent(category.toString(), create -> new ArrayList<>()).add(data);
@@ -78,11 +66,11 @@ public abstract class AbstractDataset<T extends AbstractData> implements Observa
     }
 
     public double getDataSize() {
-        return this.datas.size();
+        return this.data.size();
     }
 
     public boolean hasData() {
-        return !this.datas.isEmpty();
+        return !this.data.isEmpty();
     }
 
     public String toString() {

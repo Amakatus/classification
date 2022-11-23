@@ -22,11 +22,11 @@ public class ReferenceDataset<T extends AbstractData> extends AbstractDataset<T>
     }
 
     public void registerDeltas() {
-        if (!this.datas.isEmpty()) {
-            ArrayList<Field> numberFields = (ArrayList<Field>) ClassUtils.getNumberFields(this.datas.get(0));
+        if (!this.data.isEmpty()) {
+            ArrayList<Field> numberFields = (ArrayList<Field>) ClassUtils.getNumberFields(this.data.get(0));
             ArrayList<Double> values = new ArrayList<>();
             for (Field field : numberFields) {
-                for (T data : this.datas) {
+                for (T data : this.data) {
                     try {
                         values.add(ClassUtils.getDoubleFromField(data, field.getName()));
                     } catch (FieldNotNumberException e) {

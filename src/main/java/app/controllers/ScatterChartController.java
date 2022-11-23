@@ -46,7 +46,7 @@ public class ScatterChartController extends AbstractController {
     public void setModel(AbstractModel model) {
         this.model = model;
         this.workingDataset = this.getAlgorithm().getWorkingDataset();
-        this.setTitle(String.format("%s%n%s points classified on %s", this.workingDataset.getTitle(), this.workingDataset.getDatas().size(), this.workingDataset.getCategoryField()));
+        this.setTitle(String.format("%s%n%s points classified on %s", this.workingDataset.getTitle(), this.workingDataset.getData().size(), this.workingDataset.getCategoryField()));
         this.initScatterChart();
     }
 
@@ -65,7 +65,7 @@ public class ScatterChartController extends AbstractController {
 
     private void registerAxisFieldsNames() {
         ObservableList<String> fieldsNames = FXCollections.observableArrayList();
-        List<Field> fields = ClassUtils.getNumberFields(this.workingDataset.getDatas().get(0));
+        List<Field> fields = ClassUtils.getNumberFields(this.workingDataset.getData().get(0));
         fields.forEach(field -> fieldsNames.add(field.getName()));
         this.axisXSelector.setItems(fieldsNames);
         this.axisYSelector.setItems(fieldsNames);
@@ -101,6 +101,7 @@ public class ScatterChartController extends AbstractController {
     }
 
     public void showDatas() {
+        this.getAlgorithm().classifyWorkingDataset();
         if (showReferencesDatas)
             this.addDatas(this.workingDataset.getBothDataByCategories());
         else
@@ -109,7 +110,6 @@ public class ScatterChartController extends AbstractController {
 
     public void addDatas(Map<String, ? extends List<?>> dataByCategories) {
         this.scatterChart.setData(FXCollections.observableArrayList());
-        this.getAlgorithm().classifyWorkingDataset();
         dataByCategories.forEach((categoryName, dataList) -> {
             XYChart.Series<Number, Number> newSerie = new XYChart.Series<>();
             newSerie.setName(categoryName);

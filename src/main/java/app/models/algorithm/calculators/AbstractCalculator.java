@@ -17,19 +17,10 @@ public abstract class AbstractCalculator<T extends AbstractData> implements ICal
         this.geometry = geometry;
     }
 
-    public IGeometryCalculator<T> getGeometry() {
-        return this.geometry;
-    }
-
-    public List<String> getFieldsNames() {
-        return this.getWorkingDataset().getDistanceFields();
-    }
-
-    public WorkingDataset<T> getWorkingDataset() {
-        return this.algorithm.getWorkingDataset();
-    }
-
     public ReferenceDataset<T> getReferenceDataset() {
         return this.algorithm.getReferenceDataset();
+    }
+    public IGeometryCalculator<T> getGeometry() {
+        return this.geometry;
     }
 }
