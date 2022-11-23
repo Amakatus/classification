@@ -137,7 +137,7 @@ public class IndexController extends AbstractController implements Observer {
     @Override
     public void sendUpdate(Object object) {
         if (object.getClass().isAssignableFrom(WorkingDataset.class)) {
-            WorkingDataset<?> workingDataset = (WorkingDataset<? extends AbstractData>) object;
+            WorkingDataset<?> workingDataset = (WorkingDataset<?>) object;
             this.addWorkingDataset(workingDataset);
         } else if (object.getClass().isAssignableFrom(KNNAlgorithm.class)) {
             KNNAlgorithm<?> algorithm = (KNNAlgorithm<?>) object;

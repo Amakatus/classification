@@ -96,9 +96,7 @@ public class ScatterChartController extends AbstractController {
         });
     }
 
-    public void setTitle(String title) {
-        this.datasetTitle.setText(title);
-    }
+    public void setTitle(String title) { this.datasetTitle.setText(title); }
 
     public void showDatas() {
         if (showReferencesDatas)
