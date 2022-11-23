@@ -14,17 +14,17 @@ public abstract class AbstractClassifier<T extends AbstractData> implements ICla
     protected WorkingDataset<T> workingDataset;
     protected String categoryField;
 
-    public AbstractClassifier(WorkingDataset<T> workingDataset){
+    public AbstractClassifier(WorkingDataset<T> workingDataset) {
         this.workingDataset = workingDataset;
         this.categoryField = workingDataset.getCategoryField();
     }
 
-    public AbstractClassifier(KNNAlgorithm<T> algorithm){
+    public AbstractClassifier(KNNAlgorithm<T> algorithm) {
         this.workingDataset = algorithm.getWorkingDataset();
         this.categoryField = this.workingDataset.getCategoryField();
     }
 
-    public void setCategoryField(String categoryField){
+    public void setCategoryField(String categoryField) {
         this.categoryField = categoryField;
     }
 

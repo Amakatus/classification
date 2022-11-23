@@ -43,7 +43,7 @@ class DatasetFactoryTest {
     void factory_should_create_working_dataset_without_title() {
         WorkingDataset<IrisData> workingDS;
         File csvFile = ProjectUtils.getFile("/data/iris.csv");
-        workingDS = DatasetFactory.createWorkingDataset( DataType.IRIS, csvFile);
+        workingDS = DatasetFactory.createWorkingDataset(DataType.IRIS, csvFile);
         assertNotNull(workingDS);
         assertEquals("DefaultTitle", workingDS.getTitle());
     }

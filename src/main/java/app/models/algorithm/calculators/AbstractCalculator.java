@@ -12,7 +12,7 @@ public abstract class AbstractCalculator<T extends AbstractData> implements ICal
     protected Algorithm<T> algorithm;
     protected IGeometryCalculator<T> geometry;
 
-    protected AbstractCalculator(Algorithm<T> algorithm, IGeometryCalculator<T> geometry){
+    protected AbstractCalculator(Algorithm<T> algorithm, IGeometryCalculator<T> geometry) {
         this.algorithm = algorithm;
         this.geometry = geometry;
     }
@@ -20,6 +20,7 @@ public abstract class AbstractCalculator<T extends AbstractData> implements ICal
     public ReferenceDataset<T> getReferenceDataset() {
         return this.algorithm.getReferenceDataset();
     }
+
     public IGeometryCalculator<T> getGeometry() {
         return this.geometry;
     }

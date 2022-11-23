@@ -17,7 +17,7 @@ public abstract class Algorithm<T extends AbstractData> extends AbstractModel {
     protected AbstractClassifier<T> classifier;
     protected AbstractCalculator<T> calculator;
 
-    protected Algorithm(WorkingDataset<T> workingDataset, IGeometryCalculator<T> geometry){
+    protected Algorithm(WorkingDataset<T> workingDataset, IGeometryCalculator<T> geometry) {
         this.workingDataset = workingDataset;
         this.calculator = new DistanceCalculator<>(this, geometry);
     }
@@ -50,5 +50,7 @@ public abstract class Algorithm<T extends AbstractData> extends AbstractModel {
         return this.classifier;
     }
 
-    public AbstractCalculator<T> getCalculator() { return calculator; }
+    public AbstractCalculator<T> getCalculator() {
+        return calculator;
+    }
 }

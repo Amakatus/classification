@@ -45,13 +45,13 @@ class WorkingDatasetTest {
     }
 
     @Test
-    void test_dataset_cant_change_normalize(){
+    void test_dataset_cant_change_normalize() {
         workingDS.normalizeDatas();
         assertFalse(workingDS.isNormalized());
     }
 
     @Test
-    void test_dataset_can_change_normalize(){
+    void test_dataset_can_change_normalize() {
         WorkingDataset<IrisData> workingDataset2 = new WorkingDataset<>(List.of(new IrisData()), DatasetFactory.irisReferenceDataset("Test"));
         assertTrue(workingDataset2.isNormalized());
         workingDataset2.unNormalizeDatas();
@@ -59,7 +59,7 @@ class WorkingDatasetTest {
     }
 
     @Test
-    void test_dataset_auto_normalize_data_if_normalized(){
+    void test_dataset_auto_normalize_data_if_normalized() {
         WorkingDataset<IrisData> workingDataset2 = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
         IrisData irisTest = new IrisData();
         irisTest.setPetalLength(2);
@@ -69,7 +69,7 @@ class WorkingDatasetTest {
     }
 
     @Test
-    void test_dataset_not_auto_normalize_data_if_normalized(){
+    void test_dataset_not_auto_normalize_data_if_normalized() {
         WorkingDataset<IrisData> workingDataset2 = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
         workingDataset2.unNormalizeDatas();
         IrisData irisTest = new IrisData();

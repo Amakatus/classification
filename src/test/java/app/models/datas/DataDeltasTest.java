@@ -8,7 +8,7 @@ class DataDeltasTest {
     DataDeltas dataDeltas;
 
     public DataDeltasTest() {
-        dataDeltas = new DataDeltas(1.2,2.3);
+        dataDeltas = new DataDeltas(1.2, 2.3);
     }
 
     @Test
@@ -23,7 +23,7 @@ class DataDeltasTest {
 
     @Test
     void should_get_delta() {
-        assertEquals(2.3-1.2, dataDeltas.getDelta());
+        assertEquals(2.3 - 1.2, dataDeltas.getDelta());
     }
 
     @Test

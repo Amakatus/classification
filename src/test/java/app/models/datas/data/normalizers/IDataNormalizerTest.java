@@ -25,7 +25,7 @@ class IDataNormalizerTest {
     }
 
     @Test
-    void test_normalizer_should_normalize_data(){
+    void test_normalizer_should_normalize_data() {
         assertEquals(3, irisOne.getPetalLength());
         assertEquals(1.2, irisOne.getPetalWidth());
         IDataNormalizer.normalize(irisOne, referenceDataset.getDeltas());
@@ -34,7 +34,7 @@ class IDataNormalizerTest {
     }
 
     @Test
-    void test_normalizer_should_denormalize_data(){
+    void test_normalizer_should_denormalize_data() {
         assertEquals(3, irisOne.getPetalLength());
         assertEquals(1.2, irisOne.getPetalWidth());
         IDataNormalizer.normalize(irisOne, referenceDataset.getDeltas());

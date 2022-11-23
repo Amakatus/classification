@@ -32,6 +32,6 @@ class KNNAlgorithmTest {
 
     @Test
     void test_to_string_should_have_k_geo_and_strength() {
-        assertEquals("3NNAlgorithm E ("+knnAlgorithm.getStrength()+"%)", knnAlgorithm.toString());
+        assertEquals("3NNAlgorithm E (" + knnAlgorithm.getStrength() + "%)", knnAlgorithm.toString());
     }
 }

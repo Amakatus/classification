@@ -31,6 +31,6 @@ public abstract class AbstractGeometryCalculator<T extends AbstractData> impleme
     }
 
     public String toString() {
-        return this.getClass().getSimpleName().charAt(0)+" ";
+        return this.getClass().getSimpleName().charAt(0) + " ";
     }
 }
