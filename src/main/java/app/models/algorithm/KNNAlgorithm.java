@@ -8,6 +8,7 @@ import app.models.datas.WorkingDataset;
 import app.models.datas.data.AbstractData;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,17 +36,10 @@ public class KNNAlgorithm<T extends AbstractData> extends Algorithm<T> {
         return kNeighbours;
     }
 
-    public Entry<T, List<T>> getKNNOfData(IGeometryCalculator<T> geometry, T data) {
-        return getKNNOfDataByDistances(this.calculator.getDistances(data));
-    }
-
     public Entry<T, List<T>> getKNNOfData(T data) {
-        return getKNNOfData(new EuclideanGeometry<>(this.workingDataset.getDistanceFields()), data);
-    }
-
-    private Entry<T, List<T>> getKNNOfDataByDistances(Map<T, Double> dataWithDistances) {
+        Map<T, Double> dataWithDistances = this.calculator.getDistances(data);
         List<Entry<T, Double>> sortedDataEntries = dataWithDistances.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue())
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(this.kNeighbours + 1L)
                 .collect(Collectors.toList());
 

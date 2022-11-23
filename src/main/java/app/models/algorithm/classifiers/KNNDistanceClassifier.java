@@ -4,6 +4,7 @@ import app.models.algorithm.KNNAlgorithm;
 import app.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,16 +29,21 @@ public class KNNDistanceClassifier<T extends AbstractData> extends AbstractClass
         T dataToClassify = entryToClassify.getKey();
         List<T> neighbours = entryToClassify.getValue();
         for (T neighbour : neighbours) {
+            System.out.println("Found :" + ClassUtils.getValueObjectFromField(neighbour, this.categoryField).toString());
             rates.merge(ClassUtils.getValueObjectFromField(neighbour, this.categoryField).toString(), 1, Integer::sum);
         }
         String categoryOfWorking = getCategoryFromNeighbours(rates);
+        System.out.println("He got " + categoryOfWorking);
         setCategoryForData(dataToClassify, categoryOfWorking);
     }
 
     // Retrieve the most common category from the k neighbours.
     private String getCategoryFromNeighbours(Map<String, Integer> rates) {
+        for(Entry<String, Integer> entry : rates.entrySet()){
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
         return rates.entrySet().stream()
-                .sorted(Entry.comparingByValue())
+                .sorted(Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(1)
                 .collect(Collectors.toList()).get(0).getKey();
     }

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RandomDistanceCalculator<T extends AbstractData> extends AbstractCalculator<T> {
-    protected RandomDistanceCalculator(Algorithm<T> algorithm, IGeometryCalculator<T> geometry) {
+    public RandomDistanceCalculator(Algorithm<T> algorithm, IGeometryCalculator<T> geometry) {
         super(algorithm, geometry);
     }
 
@@ -17,7 +17,7 @@ public class RandomDistanceCalculator<T extends AbstractData> extends AbstractCa
         Map<T, Double> dataDistancesMap = new HashMap<>();
         dataDistancesMap.put(workingData, -1.); // 600 IQ
         for (T refData : this.getReferenceDataset().getData()) {
-            dataDistancesMap.put(refData, Math.random());
+            dataDistancesMap.put(refData, Math.random()*100);
         }
         return dataDistancesMap;
     }

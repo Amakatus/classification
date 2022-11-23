@@ -3,6 +3,7 @@ package app.models.algorithm;
 import app.models.AbstractModel;
 import app.models.algorithm.calculators.AbstractCalculator;
 import app.models.algorithm.calculators.DistanceCalculator;
+import app.models.algorithm.calculators.RandomDistanceCalculator;
 import app.models.algorithm.classifiers.AbstractClassifier;
 import app.models.algorithm.geometry.EuclideanGeometry;
 import app.models.algorithm.geometry.IGeometryCalculator;
