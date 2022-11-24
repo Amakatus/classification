@@ -5,7 +5,7 @@ import app.models.datas.data.AbstractData;
 
 import java.util.List;
 
-public class ManhattanGeometry<T extends AbstractData> extends AbstractGeometryCalculator<T> {
+public class ManhattanGeometry<T extends AbstractData> extends AbstractGeometry<T> {
 
     public ManhattanGeometry(List<String> fieldNames) {
         super(fieldNames);

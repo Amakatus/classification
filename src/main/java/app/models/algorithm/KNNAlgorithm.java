@@ -1,32 +1,40 @@
 package app.models.algorithm;
 
+import app.models.algorithm.calculators.DistanceCalculator;
+import app.models.algorithm.calculators.ICalculator;
+import app.models.algorithm.calculators.StrengthCalculator;
+import app.models.algorithm.classifiers.KNNDistanceClassifier;
+import app.models.algorithm.geometry.EuclideanGeometry;
+import app.models.algorithm.geometry.IGeometry;
+import app.models.datas.WorkingDataset;
+import app.models.datas.data.AbstractData;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import app.models.algorithm.calculators.StrengthCalculator;
-import app.models.algorithm.classifiers.KNNDistanceClassifier;
-import app.models.algorithm.geometry.EuclideanGeometry;
-import app.models.algorithm.geometry.IGeometryCalculator;
-import app.models.datas.WorkingDataset;
-import app.models.datas.data.AbstractData;
-import app.models.datas.data.IrisData;
-
-public class KNNAlgorithm<T extends AbstractData> extends Algorithm<T> {
+public class KNNAlgorithm<T extends AbstractData> extends AbstractAlgorithm<T> {
     protected int kNeighbours;
 
-    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, IGeometryCalculator<T> geometry) {
-        super(workingDataset, geometry);
+    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, IGeometry<T> geometry, ICalculator<T> calculator) {
+        super(workingDataset, geometry, calculator);
         this.kNeighbours = k;
         this.strengthCalculator = new StrengthCalculator<>(this);
         this.classifier = new KNNDistanceClassifier<>(this);
         if (autoClassify) {
             this.classifyWorkingDataset();
-            //this.generateStrength();
+            this.generateStrength();
         }
+    }
+
+    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, ICalculator<T> calculator) {
+        this(workingDataset, k, autoClassify, new EuclideanGeometry<>(workingDataset.getDistanceFields()), calculator);
+    }
+
+    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, IGeometry<T> geometry) {
+        this(workingDataset, k, autoClassify, geometry, new DistanceCalculator<>(workingDataset.getReferenceDataset(), geometry));
     }
 
     protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify) {
@@ -38,7 +46,7 @@ public class KNNAlgorithm<T extends AbstractData> extends Algorithm<T> {
     }
 
     public Entry<T, List<T>> getKNNOfData(T data) {
-    	// Construct a map, with as key the reference data and as value its distance with the given working data.
+        // Construct a map, with as key the reference data and as value its distance with the given working data.
         Map<T, Double> dataWithDistances = this.calculator.getDistances(data);
         List<Entry<T, Double>> sortedDataEntries = dataWithDistances.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())

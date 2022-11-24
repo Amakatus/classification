@@ -2,8 +2,8 @@ package app.controllers;
 
 import app.models.AbstractModel;
 import app.models.Observer;
-import app.views.View;
 import app.utils.LoggerUtils;
+import app.views.View;
 
 public abstract class AbstractController implements IFXController, Observer {
     protected AbstractModel model;

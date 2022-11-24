@@ -35,8 +35,8 @@ public class StrengthCalculator<T extends AbstractData> {
         this.groupsToTest.forEach(tWorkingDataset -> {
             List<String> savedDataCategories = this.saveDataCategories(tWorkingDataset);
             Collections.shuffle(tWorkingDataset.getReferenceDataset().getData());
-            tWorkingDataset.createKNN(this.algorithm.getKNeighbors(), false);
-            tWorkingDataset.getLastAlgorithm().classifyWorkingDataset();
+            KNNAlgorithm<T> createdAlgorithm = tWorkingDataset.createKNN(this.algorithm.getKNeighbors(), false, this.algorithm.getCalculator().getGeometry());
+            createdAlgorithm.classifyWorkingDataset();
             groupStrengths.add(generateGroupStrength(tWorkingDataset, savedDataCategories));
         });
         this.strength = Math.round(groupStrengths.stream().mapToDouble(score -> score).average().orElse(0));
@@ -45,11 +45,13 @@ public class StrengthCalculator<T extends AbstractData> {
     private double generateGroupStrength(WorkingDataset<T> tWorkingDataset, List<String> savedDataCategories) {
         int goodClassify = 0;
         for (int i = 0; i < savedDataCategories.size(); i++) {
-            Object classifiedCategory = ClassUtils.getValueObjectFromField(tWorkingDataset.getData().get(i), tWorkingDataset.getCategoryField());
+            T currentData = tWorkingDataset.getData().get(i);
+            Object classifiedCategory = ClassUtils.getValueObjectFromField(currentData, tWorkingDataset.getCategoryField());
             String realCategory = savedDataCategories.get(i);
             if (classifiedCategory.toString().equals(realCategory)) {
                 goodClassify++;
             }
+            algorithm.getClassifier().setCategoryForData(currentData, realCategory);
         }
         return ((double) (goodClassify / tWorkingDataset.getData().size()) * 100.0);
     }

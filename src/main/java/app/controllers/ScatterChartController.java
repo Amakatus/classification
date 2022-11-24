@@ -1,8 +1,8 @@
 package app.controllers;
 
-import app.models.algorithm.KNNAlgorithm;
 import app.exceptions.FieldNotNumberException;
 import app.models.AbstractModel;
+import app.models.algorithm.KNNAlgorithm;
 import app.models.datas.WorkingDataset;
 import app.utils.ClassUtils;
 import app.utils.LoggerUtils;

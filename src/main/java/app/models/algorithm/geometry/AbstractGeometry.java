@@ -7,10 +7,10 @@ import app.utils.ClassUtils;
 import java.util.List;
 
 
-public abstract class AbstractGeometryCalculator<T extends AbstractData> implements IGeometryCalculator<T> {
+public abstract class AbstractGeometry<T extends AbstractData> implements IGeometry<T> {
     protected List<String> fieldNames;
 
-    protected AbstractGeometryCalculator(List<String> fieldNames) {
+    protected AbstractGeometry(List<String> fieldNames) {
         this.fieldNames = fieldNames;
     }
 

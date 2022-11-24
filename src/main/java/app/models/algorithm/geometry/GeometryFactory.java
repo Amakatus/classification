@@ -13,7 +13,7 @@ public interface GeometryFactory {
         return new EuclideanGeometry<>(fieldNames);
     }
 
-    static <T extends AbstractData> AbstractGeometryCalculator<T> createGeometryAlgorithm(String name, List<String> fieldNames) {
+    static <T extends AbstractData> AbstractGeometry<T> createGeometryAlgorithm(String name, List<String> fieldNames) {
         if (name.equalsIgnoreCase("Euclidean")) {
             return createEuclideanGeometry(fieldNames);
         } else if (name.equalsIgnoreCase("Manhattan")) {

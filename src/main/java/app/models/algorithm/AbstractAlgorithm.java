@@ -1,25 +1,23 @@
 package app.models.algorithm;
 
 import app.models.AbstractModel;
-import app.models.algorithm.calculators.AbstractCalculator;
-import app.models.algorithm.calculators.DistanceCalculator;
-import app.models.algorithm.calculators.RandomDistanceCalculator;
+import app.models.algorithm.calculators.ICalculator;
 import app.models.algorithm.calculators.StrengthCalculator;
 import app.models.algorithm.classifiers.AbstractClassifier;
-import app.models.algorithm.geometry.IGeometryCalculator;
+import app.models.algorithm.geometry.IGeometry;
 import app.models.datas.ReferenceDataset;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.AbstractData;
 
-public abstract class Algorithm<T extends AbstractData> extends AbstractModel {
+public abstract class AbstractAlgorithm<T extends AbstractData> extends AbstractModel {
     protected WorkingDataset<T> workingDataset;
     protected StrengthCalculator<T> strengthCalculator;
     protected AbstractClassifier<T> classifier;
-    protected AbstractCalculator<T> calculator;
+    protected ICalculator<T> calculator;
 
-    protected Algorithm(WorkingDataset<T> workingDataset, IGeometryCalculator<T> geometry) {
+    protected AbstractAlgorithm(WorkingDataset<T> workingDataset, IGeometry<T> geometry, ICalculator<T> calculator) {
         this.workingDataset = workingDataset;
-        this.calculator = new RandomDistanceCalculator<>(this, geometry);
+        this.calculator = calculator;
     }
 
     public StrengthCalculator<T> getStrengthCalculator() {
@@ -50,7 +48,7 @@ public abstract class Algorithm<T extends AbstractData> extends AbstractModel {
         return this.classifier;
     }
 
-    public AbstractCalculator<T> getCalculator() {
+    public ICalculator<T> getCalculator() {
         return calculator;
     }
 }

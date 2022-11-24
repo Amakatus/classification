@@ -1,12 +1,14 @@
 package app.models.datas;
 
-import app.models.algorithm.Algorithm;
+import app.models.algorithm.AbstractAlgorithm;
 import app.models.algorithm.AlgorithmFactory;
 import app.models.algorithm.KNNAlgorithm;
+import app.models.algorithm.calculators.AbstractCalculator;
+import app.models.algorithm.calculators.DistanceCalculator;
 import app.models.algorithm.geometry.EuclideanGeometry;
-import app.models.algorithm.geometry.IGeometryCalculator;
-import app.models.datas.data.normalizers.IDataNormalizer;
+import app.models.algorithm.geometry.IGeometry;
 import app.models.datas.data.AbstractData;
+import app.models.datas.data.normalizers.IDataNormalizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.Map;
 public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
     protected String categoryField;
     protected List<String> distanceFields;
-    protected List<Algorithm<T>> algorithms = new ArrayList<>();
+    protected List<AbstractAlgorithm<T>> algorithms = new ArrayList<>();
     protected ReferenceDataset<T> referenceDataset;
     private boolean normalized = false;
 
@@ -50,7 +52,7 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         return this.normalized;
     }
 
-    public List<Algorithm<T>> getAlgorithms() {
+    public List<AbstractAlgorithm<T>> getAlgorithms() {
         return this.algorithms;
     }
 
@@ -62,17 +64,25 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         return distanceFields;
     }
 
-    public KNNAlgorithm<T> createKNN(int k, boolean autoClassify, IGeometryCalculator<T> geometryCalculator) {
-        AlgorithmFactory.createKNN(this, k, autoClassify, geometryCalculator);
+    public KNNAlgorithm<T> createKNN(int k, boolean autoClassify, IGeometry<T> geometryCalculator, AbstractCalculator<T> calculator) {
+        AlgorithmFactory.createKNN(this, k, autoClassify, geometryCalculator, calculator);
         this.updateObservers(this.getLastAlgorithm());
         return (KNNAlgorithm<T>) this.getLastAlgorithm();
+    }
+
+    public KNNAlgorithm<T> createKNN(int k, boolean autoClassify, AbstractCalculator<T> calculator) {
+        return createKNN(k, autoClassify, new EuclideanGeometry<>(this.distanceFields), calculator);
+    }
+
+    public KNNAlgorithm<T> createKNN(int k, boolean autoClassify, IGeometry<T> geometryCalculator) {
+        return createKNN(k, autoClassify, geometryCalculator, new DistanceCalculator<>(this.referenceDataset, geometryCalculator));
     }
 
     public KNNAlgorithm<T> createKNN(int k, boolean autoClassify) {
         return createKNN(k, autoClassify, new EuclideanGeometry<>(this.distanceFields));
     }
 
-    public KNNAlgorithm<T> createKNN(int k, IGeometryCalculator<T> geometryCalculator) {
+    public KNNAlgorithm<T> createKNN(int k, IGeometry<T> geometryCalculator) {
         return createKNN(k, false, geometryCalculator);
     }
 
@@ -80,7 +90,7 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         return this.createKNN(k, false);
     }
 
-    public Algorithm<T> getLastAlgorithm() {
+    public AbstractAlgorithm<T> getLastAlgorithm() {
         return this.algorithms.get(this.algorithms.size() - 1);
     }
 

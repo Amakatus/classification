@@ -5,7 +5,7 @@ import app.models.datas.data.AbstractData;
 
 import java.util.List;
 
-public class EuclideanGeometry<T extends AbstractData> extends AbstractGeometryCalculator<T> {
+public class EuclideanGeometry<T extends AbstractData> extends AbstractGeometry<T> {
     public static final int EUCLIDEAN_POWER = 2;
 
     public EuclideanGeometry(List<String> fieldNames) {

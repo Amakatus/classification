@@ -1,23 +1,17 @@
 package app.models.algorithm.calculators;
 
 import app.exceptions.FieldToDistanceException;
-import app.models.algorithm.Algorithm;
-import app.models.algorithm.geometry.IGeometryCalculator;
-import app.models.datas.DatasetFactory;
+import app.models.algorithm.geometry.IGeometry;
 import app.models.datas.ReferenceDataset;
-import app.models.datas.WorkingDataset;
 import app.models.datas.data.AbstractData;
-import app.models.datas.data.DataType;
-import app.models.datas.data.IrisData;
 import app.utils.LoggerUtils;
-import app.utils.ProjectUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class DistanceCalculator<T extends AbstractData> extends AbstractCalculator<T> {
-    public DistanceCalculator(Algorithm<T> algorithm, IGeometryCalculator<T> geometry) {
-        super(algorithm, geometry);
+    public DistanceCalculator(ReferenceDataset<T> referenceDataset, IGeometry<T> geometry) {
+        super(referenceDataset, geometry);
     }
 
     // Construct a map, with as key the reference data and as value its distance with the given working data.

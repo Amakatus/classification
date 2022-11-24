@@ -3,6 +3,7 @@ package app.models.algorithm.geometry;
 import app.exceptions.FieldToDistanceException;
 import app.models.algorithm.KNNAlgorithm;
 import app.models.algorithm.calculators.AbstractCalculator;
+import app.models.algorithm.calculators.ICalculator;
 import app.models.datas.ReferenceDataset;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.IrisData;
@@ -19,7 +20,7 @@ class ManhattanGeometryTest {
     WorkingDataset<IrisData> wDS;
     ReferenceDataset<IrisData> rDS;
     KNNAlgorithm<IrisData> algo;
-    AbstractCalculator<IrisData> calculator;
+    ICalculator<IrisData> calculator;
     ManhattanGeometry<IrisData> geometry;
 
     @BeforeEach

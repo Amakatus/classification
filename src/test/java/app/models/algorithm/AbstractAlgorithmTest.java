@@ -2,23 +2,19 @@ package app.models.algorithm;
 
 import app.models.datas.DatasetFactory;
 import app.models.datas.WorkingDataset;
-import app.models.datas.data.DataType;
 import app.models.datas.data.IrisData;
-import app.utils.ProjectUtils;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AlgorithmTest {
-    Algorithm<IrisData> algorithm;
+class AbstractAlgorithmTest {
+    AbstractAlgorithm<IrisData> algorithm;
     IrisData irisOne = new IrisData();
     IrisData irisTwo = new IrisData();
 
-    public AlgorithmTest() {
+    public AbstractAlgorithmTest() {
         WorkingDataset<IrisData> workingDataset = new WorkingDataset<>(Arrays.asList(irisOne, irisTwo), DatasetFactory.irisReferenceDataset("Test"));
         workingDataset.addDistanceFieldString("petalLength");
         irisOne.setPetalLength(2);

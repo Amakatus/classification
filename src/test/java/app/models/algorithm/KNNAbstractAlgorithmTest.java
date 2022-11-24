@@ -10,12 +10,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class KNNAlgorithmTest {
+class KNNAbstractAlgorithmTest {
     KNNAlgorithm<IrisData> knnAlgorithm;
     IrisData irisOne = new IrisData();
     IrisData irisTwo = new IrisData();
 
-    public KNNAlgorithmTest() {
+    public KNNAbstractAlgorithmTest() {
         WorkingDataset<IrisData> workingDataset = new WorkingDataset<>(Arrays.asList(irisOne, irisTwo), DatasetFactory.irisReferenceDataset("Test"));
         workingDataset.addDistanceFieldString("petalLength");
         irisOne.setPetalLength(2);

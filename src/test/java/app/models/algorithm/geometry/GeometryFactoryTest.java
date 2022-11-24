@@ -1,6 +1,5 @@
 package app.models.algorithm.geometry;
 
-import app.models.algorithm.KNNAlgorithm;
 import app.models.datas.DatasetFactory;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.DataType;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GeometryFactoryTest {
     WorkingDataset<IrisData> workingData;
-    AbstractGeometryCalculator<IrisData> geometry;
+    AbstractGeometry<IrisData> geometry;
 
     public GeometryFactoryTest() {
         workingData = DatasetFactory.createWorkingDataset("test", DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
