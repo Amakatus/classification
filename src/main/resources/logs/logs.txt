@@ -16,3 +16,9 @@
 
 /C:/Users/Hido/eclipse-workspace/equipe-J5/target/classes/fxml/index.fxml
 
+
+/home/infoetu/mehdi.zaidi.etu/BUT3/equipe-J5/target/classes/fxml/index.fxml
+
+
+/home/infoetu/mehdi.zaidi.etu/BUT3/equipe-J5/target/classes/fxml/index.fxml
+

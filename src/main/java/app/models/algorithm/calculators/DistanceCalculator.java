@@ -3,8 +3,14 @@ package app.models.algorithm.calculators;
 import app.exceptions.FieldToDistanceException;
 import app.models.algorithm.Algorithm;
 import app.models.algorithm.geometry.IGeometryCalculator;
+import app.models.datas.DatasetFactory;
+import app.models.datas.ReferenceDataset;
+import app.models.datas.WorkingDataset;
 import app.models.datas.data.AbstractData;
+import app.models.datas.data.DataType;
+import app.models.datas.data.IrisData;
 import app.utils.LoggerUtils;
+import app.utils.ProjectUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +20,7 @@ public class DistanceCalculator<T extends AbstractData> extends AbstractCalculat
         super(algorithm, geometry);
     }
 
+    // Construct a map, with as key the reference data and as value its distance with the given working data.
     public Map<T, Double> getDistances(T workingData) {
         Map<T, Double> dataDistancesMap = new HashMap<>();
         dataDistancesMap.put(workingData, -1.); // 600 IQ
@@ -23,6 +30,8 @@ public class DistanceCalculator<T extends AbstractData> extends AbstractCalculat
         return dataDistancesMap;
     }
 
+    // Add an entry in the map with as key the refData and as value the distance between 
+    // the ref data and the working data.
     private void setDistanceBetweenDatas(T workingData, T refData, Map<T, Double> dataDistancesMap) {
         try {
             dataDistancesMap.put(refData, this.geometry.distance(workingData, refData));

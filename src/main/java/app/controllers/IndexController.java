@@ -1,16 +1,16 @@
 package app.controllers;
 
 import app.App;
-import app.models.algorithm.KNNAlgorithm;
 import app.models.Observer;
+import app.models.algorithm.KNNAlgorithm;
 import app.models.datas.DatasetFactory;
 import app.models.datas.ReferenceDataset;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.AbstractData;
 import app.models.datas.data.DataType;
 import app.models.datas.data.IrisData;
-import app.views.View;
 import app.utils.ProjectUtils;
+import app.views.View;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -39,8 +39,10 @@ public class IndexController extends AbstractController implements Observer {
         testWDS.setCategoryField("variety");
         testWDS.addDistanceFieldString("petalLength");
         testWDS.addDistanceFieldString("petalWidth");
+        testWDS.addDistanceFieldString("sepalLength");
+        testWDS.addDistanceFieldString("sepalWidth");
         App.getInstance().addWorkingDataset(testWDS);
-        testWDS.createKNN(2, true);
+        testWDS.createKNN(6, true);
     }
 
     private void setupTreeView() {
@@ -108,7 +110,7 @@ public class IndexController extends AbstractController implements Observer {
 
     @FXML
     private void createNewTab(KNNAlgorithm<?> algo) {
-        String title = algo.getWorkingDataset().getTitle() + algo.getKNeighbours();
+        String title = algo.getWorkingDataset().getTitle() + algo.getKNeighbors();
         ObservableList<Tab> tabs = tabPane.getTabs();
         for (Tab tab : tabs) {
             if (tab.getText().equalsIgnoreCase(title)) {

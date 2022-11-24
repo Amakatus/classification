@@ -21,31 +21,27 @@ public class KNNDistanceClassifier<T extends AbstractData> extends AbstractClass
 
     @Override
     public void classifyData(T data) {
-        this.classifyData(this.algorithm.getKNNOfData(data));
+        this.classifyDataByEntry(this.algorithm.getKNNOfData(data));
     }
 
-    protected void classifyData(Entry<T, List<T>> entryToClassify) {
+    // Get an entry with as key the data to classify and as value the list of its nearest neighbors.
+    private void classifyDataByEntry(Entry<T, List<T>> entryToClassify) {
         Map<String, Integer> rates = new HashMap<>();
         T dataToClassify = entryToClassify.getKey();
         List<T> neighbours = entryToClassify.getValue();
+        // For each neighbours, increment in a map its category.
         for (T neighbour : neighbours) {
-            System.out.println("Found :" + ClassUtils.getValueObjectFromField(neighbour, this.categoryField).toString());
             rates.merge(ClassUtils.getValueObjectFromField(neighbour, this.categoryField).toString(), 1, Integer::sum);
         }
         String categoryOfWorking = getCategoryFromNeighbours(rates);
-        System.out.println("He got " + categoryOfWorking);
         setCategoryForData(dataToClassify, categoryOfWorking);
     }
 
-    // Retrieve the most common category from the k neighbours.
+    // Retrieve the most common category from map constructed from nearest neighbors.
     private String getCategoryFromNeighbours(Map<String, Integer> rates) {
-        for(Entry<String, Integer> entry : rates.entrySet()){
-            System.out.println(entry.getKey() + " " + entry.getValue());
-        }
         return rates.entrySet().stream()
                 .sorted(Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(1)
                 .collect(Collectors.toList()).get(0).getKey();
     }
-
 }

@@ -35,7 +35,7 @@ public class StrengthCalculator<T extends AbstractData> {
         this.groupsToTest.forEach(tWorkingDataset -> {
             List<String> savedDataCategories = this.saveDataCategories(tWorkingDataset);
             Collections.shuffle(tWorkingDataset.getReferenceDataset().getData());
-            tWorkingDataset.createKNN(this.algorithm.getKNeighbours(), false);
+            tWorkingDataset.createKNN(this.algorithm.getKNeighbors(), false);
             tWorkingDataset.getLastAlgorithm().classifyWorkingDataset();
             groupStrengths.add(generateGroupStrength(tWorkingDataset, savedDataCategories));
         });

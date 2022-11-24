@@ -4,10 +4,9 @@ import app.models.AbstractModel;
 import app.models.algorithm.calculators.AbstractCalculator;
 import app.models.algorithm.calculators.DistanceCalculator;
 import app.models.algorithm.calculators.RandomDistanceCalculator;
-import app.models.algorithm.classifiers.AbstractClassifier;
-import app.models.algorithm.geometry.EuclideanGeometry;
-import app.models.algorithm.geometry.IGeometryCalculator;
 import app.models.algorithm.calculators.StrengthCalculator;
+import app.models.algorithm.classifiers.AbstractClassifier;
+import app.models.algorithm.geometry.IGeometryCalculator;
 import app.models.datas.ReferenceDataset;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.AbstractData;
@@ -20,7 +19,7 @@ public abstract class Algorithm<T extends AbstractData> extends AbstractModel {
 
     protected Algorithm(WorkingDataset<T> workingDataset, IGeometryCalculator<T> geometry) {
         this.workingDataset = workingDataset;
-        this.calculator = new DistanceCalculator<>(this, geometry);
+        this.calculator = new RandomDistanceCalculator<>(this, geometry);
     }
 
     public StrengthCalculator<T> getStrengthCalculator() {
