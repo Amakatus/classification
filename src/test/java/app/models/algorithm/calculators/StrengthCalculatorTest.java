@@ -41,5 +41,10 @@ class StrengthCalculatorTest {
             assertTrue(strength.getStrength() >= 0 && strength.getStrength() <= 100);
         }
     }
+    
+    @Test
+    void test_get_Algorith() {
+    	assertEquals(algo, strength.getAlgorithm());
+    }
 
 }
