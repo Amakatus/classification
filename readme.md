@@ -36,7 +36,6 @@ Cette SAÉ permet, après avoir collecté et formalisé les besoins d'un client,
 # 🔥 Technologies
 <p align="center">
     <img alt="Java"       src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white"/>
-    <img alt="PostgreSQL" src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"/>
     <img alt="Debian"     src="https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white"/>
 </p>
 
