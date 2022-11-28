@@ -61,6 +61,18 @@ class WorkingDatasetTest {
     	workingDS.setData(listIris);
     	assertEquals(listIris,workingDS.getData());
     }
+    
+    @Test
+    void should_return_data_by_categorie() {
+    	IrisData irisTest = new IrisData();
+    	IrisData irisTest2 = new IrisData();
+    	irisTest.setPetalLength(5);
+    	irisTest2.setPetalLength(6);
+    	workingDS.addData(irisTest);
+    	workingDS.addData(irisTest2);
+    	workingDS.setCategoryField("petalLength");
+    	assertEquals(workingDS.getDataSize(),workingDS.getWorkingDataByCategories().size());
+    }
 
     @Test
     void test_setter_and_getter_categoryField() {
