@@ -1,23 +1,37 @@
 package app.models.datas;
 
+import app.controllers.IndexController;
+import app.models.algorithm.KNNAlgorithm;
 import app.models.datas.data.DataType;
 import app.models.datas.data.IrisData;
 import app.utils.ProjectUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WorkingDatasetTest {
     WorkingDataset<IrisData> workingDS;
-
+   
+    
     @BeforeEach
     void init() {
         workingDS = new WorkingDataset<IrisData>(null);
     }
+    
+    @Test
+    void test_workingDataset_should_be_able_to_attach_observer() {
+        assertTrue(workingDS.observers.isEmpty());
+        workingDS.attach(new IndexController());
+        assertEquals(1, workingDS.observers.size());
+    }
+    
 
     @Test
     void test_setter_and_getter_categoryField() {

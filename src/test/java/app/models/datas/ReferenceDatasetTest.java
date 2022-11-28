@@ -1,16 +1,23 @@
 package app.models.datas;
 
-import app.models.datas.data.IrisData;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import app.exceptions.FieldNotNumberException;
+import app.models.datas.data.IrisData;
 
 class ReferenceDatasetTest {
     ReferenceDataset<IrisData> rds = new ReferenceDataset<>("rds");
     IrisData iris1 = new IrisData();
     IrisData iris2 = new IrisData();
     IrisData iris3 = new IrisData();
+    IrisData iris4 = new IrisData();
     DataDeltas deltasPetalLength;
 
     @BeforeEach
@@ -24,6 +31,7 @@ class ReferenceDatasetTest {
         rds.registerDeltas();
         deltasPetalLength = rds.getDeltas().get("petalLength");
     }
+    
 
     @Test
     void test_generate_deltas_should_have_entries() {
