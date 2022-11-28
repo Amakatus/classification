@@ -41,6 +41,15 @@ class WorkingDatasetTest {
         workingDS.detach(ic);
         assertEquals(0, workingDS.observers.size());
     }
+    
+    @Test
+    void should_remove_data() {
+    	 IrisData irisTest = new IrisData();
+         workingDS.addData(irisTest);
+         assertEquals(1,workingDS.getDataSize());
+         workingDS.removeData(irisTest);
+         assertEquals(0,workingDS.getDataSize());
+    }
 
     @Test
     void test_setter_and_getter_categoryField() {
