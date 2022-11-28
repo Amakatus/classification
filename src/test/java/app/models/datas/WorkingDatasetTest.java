@@ -84,6 +84,12 @@ class WorkingDatasetTest {
     	workingDS.addData(irisTest2);
     	assertEquals(0,workingDS.getDataByCategories("").size());
     }
+    
+    @Test
+    void test_to_string() {
+    	WorkingDataset wd = new WorkingDataset<>("Cartes Graphiques", null, null);
+    	assertEquals("Cartes Graphiques",wd.toString());
+    }
 
     @Test
     void test_setter_and_getter_categoryField() {
