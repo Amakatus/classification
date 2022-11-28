@@ -32,6 +32,15 @@ class WorkingDatasetTest {
         assertEquals(1, workingDS.observers.size());
     }
     
+    @Test
+    void test_workingDataset_should_be_able_to_detach_observer() {
+        assertTrue(workingDS.observers.isEmpty());
+        IndexController ic = new IndexController();
+        workingDS.attach(ic);
+        assertEquals(1, workingDS.observers.size());
+        workingDS.detach(ic);
+        assertEquals(0, workingDS.observers.size());
+    }
 
     @Test
     void test_setter_and_getter_categoryField() {
