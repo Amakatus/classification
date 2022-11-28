@@ -2,6 +2,8 @@ package app.models.datas;
 
 import app.models.Observable;
 import app.models.Observer;
+import app.models.algorithm.KNNAlgorithm;
+import app.models.algorithm.calculators.ICalculator;
 import app.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
 
@@ -76,4 +78,5 @@ public abstract class AbstractDataset<T extends AbstractData> implements Observa
     public String toString() {
         return String.format("%s", this.title);
     }
+
 }

@@ -110,16 +110,15 @@ public class IndexController extends AbstractController implements Observer {
 
     @FXML
     private void createNewTab(KNNAlgorithm<?> algo) {
-        String title = algo.getWorkingDataset().getTitle() + algo.getKNeighbors();
         ObservableList<Tab> tabs = tabPane.getTabs();
         for (Tab tab : tabs) {
-            if (tab.getText().equalsIgnoreCase(title)) {
+            if (tab.getText().equals(algo.toString())) {
                 this.tabPane.getSelectionModel().select(tab);
                 return;
             }
         }
         View scatterChartView = new View("scatterChartView", "Scatter Chart");
-        Tab newTab = new Tab(title, scatterChartView.getLoadedResource());
+        Tab newTab = new Tab(algo.toString(), scatterChartView.getLoadedResource());
         scatterChartView.getController().setModel(algo);
         tabs.add(newTab);
         this.tabPane.getSelectionModel().select(newTab);

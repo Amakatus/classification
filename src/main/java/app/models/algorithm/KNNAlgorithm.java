@@ -63,6 +63,6 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractAlgorithm<T> {
     }
 
     public String toString() {
-        return this.kNeighbours + "NNAlgorithm " + this.calculator.getGeometry() + "(" + this.getStrength() + "%)";
+        return this.kNeighbours + "NNAlgorithm " + this.calculator + "(" + this.getStrength() + "%)";
     }
 }

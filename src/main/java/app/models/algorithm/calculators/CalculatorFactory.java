@@ -1,0 +1,20 @@
+package app.models.algorithm.calculators;
+
+import app.models.algorithm.geometry.AbstractGeometry;
+import app.models.algorithm.geometry.IGeometry;
+import app.models.datas.ReferenceDataset;
+import app.models.datas.data.AbstractData;
+
+import java.util.List;
+
+public interface CalculatorFactory {
+    static <T extends AbstractData> ICalculator<T> createCalculator(String name, ReferenceDataset<T> referenceDataset, IGeometry<T> geometry) {
+        if (name.equalsIgnoreCase("Distance")) {
+            return new DistanceCalculator<>(referenceDataset, geometry);
+        } else if (name.equalsIgnoreCase("Random")) {
+            return new RandomDistanceCalculator<>(referenceDataset, geometry);
+        }
+        // Should use a NullGeometry instead...
+        return null;
+    }
+}
