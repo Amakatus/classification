@@ -50,6 +50,17 @@ class WorkingDatasetTest {
          workingDS.removeData(irisTest);
          assertEquals(0,workingDS.getDataSize());
     }
+    
+    @Test
+    void should_add_list_of_data() {
+    	IrisData irisTest = new IrisData();
+    	IrisData irisTest2 = new IrisData();
+    	List<IrisData> listIris = new ArrayList<>();
+    	listIris.add(irisTest);
+    	listIris.add(irisTest2);
+    	workingDS.setData(listIris);
+    	assertEquals(listIris,workingDS.getData());
+    }
 
     @Test
     void test_setter_and_getter_categoryField() {
