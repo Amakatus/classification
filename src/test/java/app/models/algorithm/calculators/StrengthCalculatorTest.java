@@ -1,6 +1,11 @@
 package app.models.algorithm.calculators;
 
-import app.models.algorithm.AlgorithmFactory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import app.models.algorithm.KNNAlgorithm;
 import app.models.datas.DatasetFactory;
 import app.models.datas.ReferenceDataset;
@@ -8,9 +13,6 @@ import app.models.datas.WorkingDataset;
 import app.models.datas.data.DataType;
 import app.models.datas.data.IrisData;
 import app.utils.ProjectUtils;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class StrengthCalculatorTest {
     protected StrengthCalculator<IrisData> strength;
@@ -32,6 +34,11 @@ class StrengthCalculatorTest {
     @Test
     void test_get_groups_size() {
         assertEquals(50, this.strength.getGroupsToTest().size());
+    }
+    
+    @Test
+    void should_return_algorithm() {
+    	assertEquals(algo,strength.getAlgorithm());
     }
 
     @Test

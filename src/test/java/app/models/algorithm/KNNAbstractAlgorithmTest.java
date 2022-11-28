@@ -14,6 +14,7 @@ class KNNAbstractAlgorithmTest {
     KNNAlgorithm<IrisData> knnAlgorithm;
     IrisData irisOne = new IrisData();
     IrisData irisTwo = new IrisData();
+    WorkingDataset<IrisData> workingDataset;
 
     public KNNAbstractAlgorithmTest() {
         WorkingDataset<IrisData> workingDataset = new WorkingDataset<>(Arrays.asList(irisOne, irisTwo), DatasetFactory.irisReferenceDataset("Test"));
@@ -24,8 +25,10 @@ class KNNAbstractAlgorithmTest {
         this.knnAlgorithm = workingDataset.createKNN(3, true);
     }
 
+   
     @Test
     void test_algorithm_auto_classified_itself() {
+    	
         assertNotNull(irisOne.getVariety());
         assertNotNull(irisTwo.getVariety());
     }
