@@ -42,7 +42,7 @@ public class IndexController extends AbstractController implements Observer {
         testWDS.addDistanceFieldString("sepalLength");
         testWDS.addDistanceFieldString("sepalWidth");
         App.getInstance().addWorkingDataset(testWDS);
-        testWDS.createKNN(6, true);
+        testWDS.createKNN(10, true);
     }
 
     private void setupTreeView() {

@@ -44,4 +44,4 @@ local.properties
 ##############################
 ## Logs
 ##############################
-*.txt
+src/main/resources/logs/logs.txt

@@ -31,7 +31,7 @@ class StrengthCalculatorTest {
 
     @Test
     void test_get_groups_size() {
-        assertEquals(30, this.strength.getGroupsToTest().size());
+        assertEquals(50, this.strength.getGroupsToTest().size());
     }
 
     @Test
