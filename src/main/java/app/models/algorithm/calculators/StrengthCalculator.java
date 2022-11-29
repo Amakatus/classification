@@ -32,7 +32,7 @@ public class StrengthCalculator<T extends AbstractData> {
         this.groupsToTest = this.generateGroups();
         List<Double> groupStrengths = new ArrayList<>();
         for(WorkingDataset<T> tWorkingDataset : groupsToTest){
-            KNNAlgorithm<T> createdAlgorithm = tWorkingDataset.createKNN(this.algorithm.getKNeighbors(), false, this.algorithm.getCalculator().getGeometry());
+            KNNAlgorithm<T> createdAlgorithm = tWorkingDataset.createKNN(this.algorithm.getKNeighbors(), false, this.algorithm.getCalculator());
             List<String> savedDataCategories = this.saveDataCategories(tWorkingDataset);
             createdAlgorithm.classifyWorkingDataset();
             groupStrengths.add(generateGroupStrength(tWorkingDataset, savedDataCategories));
@@ -69,7 +69,7 @@ public class StrengthCalculator<T extends AbstractData> {
         int sizeToTest = this.initialReferenceDataset.getData().size();
         int groupSize = this.algorithm.getKNeighbors();
         int offset = 0;
-        Collections.shuffle(initialReferenceDataset.getData()); 
+        Collections.shuffle(initialReferenceDataset.getData());
         while (sizeToTest != 0) {
             WorkingDataset<T> newGroup = new WorkingDataset<>("GroupToTest", new ArrayList<>(), this.initialReferenceDataset, categoryField, distanceFields);
             if (sizeToTest < groupSize) groupSize = sizeToTest;

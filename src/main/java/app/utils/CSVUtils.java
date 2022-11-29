@@ -1,12 +1,13 @@
 package app.utils;
 
-import app.models.datas.data.DataType;
-import com.opencsv.bean.CsvToBeanBuilder;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.opencsv.bean.CsvToBeanBuilder;
+
+import app.models.datas.data.DataType;
 
 public interface CSVUtils {
     @SuppressWarnings("unchecked")

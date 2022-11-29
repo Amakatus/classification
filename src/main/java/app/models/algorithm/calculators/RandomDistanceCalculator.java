@@ -21,4 +21,8 @@ public class RandomDistanceCalculator<T extends AbstractData> extends AbstractCa
         dataDistancesMap.put(workingData, -1.); // 600 IQ
         return dataDistancesMap;
     }
+    
+    public String simpleName() {
+    	return "Random";
+    }
 }

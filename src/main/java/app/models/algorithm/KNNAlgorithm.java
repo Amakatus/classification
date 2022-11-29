@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 public class KNNAlgorithm<T extends AbstractData> extends AbstractAlgorithm<T> {
     protected int kNeighbours;
 
-    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, IGeometry<T> geometry, ICalculator<T> calculator) {
-        super(workingDataset, geometry, calculator);
+    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, ICalculator<T> calculator) {
+        super(workingDataset, calculator);
         this.kNeighbours = k;
         this.strengthCalculator = new StrengthCalculator<>(this);
         this.classifier = new KNNDistanceClassifier<>(this);
@@ -29,12 +29,8 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractAlgorithm<T> {
         }
     }
 
-    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, ICalculator<T> calculator) {
-        this(workingDataset, k, autoClassify, new EuclideanGeometry<>(workingDataset.getDistanceFields()), calculator);
-    }
-
     protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, IGeometry<T> geometry) {
-        this(workingDataset, k, autoClassify, geometry, new DistanceCalculator<>(workingDataset.getReferenceDataset(), geometry));
+        this(workingDataset, k, autoClassify, new DistanceCalculator<>(workingDataset.getReferenceDataset(), geometry));
     }
 
     protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify) {
@@ -63,6 +59,6 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractAlgorithm<T> {
     }
 
     public String toString() {
-        return this.kNeighbours + "NNAlgorithm " + this.calculator.getGeometry() + "(" + this.getStrength() + "%)";
+        return this.kNeighbours + "NNAlgorithm " + this.calculator + "(" + this.getStrength() + "%)";
     }
 }

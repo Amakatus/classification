@@ -1,14 +1,14 @@
 package app.models.datas;
 
-import app.models.Observable;
-import app.models.Observer;
-import app.models.datas.data.AbstractData;
-import app.utils.ClassUtils;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import app.models.Observable;
+import app.models.Observer;
+import app.models.datas.data.AbstractData;
+import app.utils.ClassUtils;
 
 public abstract class AbstractDataset<T extends AbstractData> implements Observable {
     protected String title;
@@ -76,4 +76,5 @@ public abstract class AbstractDataset<T extends AbstractData> implements Observa
     public String toString() {
         return String.format("%s", this.title);
     }
+
 }
