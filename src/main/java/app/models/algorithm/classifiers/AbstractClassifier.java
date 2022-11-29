@@ -47,8 +47,6 @@ public abstract class AbstractClassifier<T extends AbstractData> implements ICla
                 field.set(dataToClassify, categoryOfWorking);
             } else if (fieldType.equals(boolean.class)) {
                 field.set(dataToClassify, ProjectUtils.stringToDouble(categoryOfWorking));
-            } else {
-                LoggerUtils.log("Unsupported type : " + fieldType);
             }
         } catch (Exception e) {
             LoggerUtils.exception(e);

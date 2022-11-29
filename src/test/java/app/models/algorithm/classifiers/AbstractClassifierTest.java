@@ -64,4 +64,11 @@ class AbstractClassifierTest {
         classifier.setCategoryForData(testData, "12.1");
         assertEquals(12.1, testData.aDouble);
     }
+
+    @Test
+    void test_classifier_should_not_classify() {
+        classifier.setCategoryField("stringg");
+        classifier.setCategoryForData(testData, "21");
+        assertNull(testData.string);
+    }
 }
