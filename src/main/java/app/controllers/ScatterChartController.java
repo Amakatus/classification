@@ -1,5 +1,9 @@
 package app.controllers;
 
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Map;
+
 import app.exceptions.FieldNotNumberException;
 import app.models.AbstractModel;
 import app.models.algorithm.KNNAlgorithm;
@@ -8,6 +12,7 @@ import app.utils.ClassUtils;
 import app.utils.LoggerUtils;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
+import io.github.palexdev.materialfx.controls.MFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,10 +20,6 @@ import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Map;
 
 public class ScatterChartController extends AbstractController {
     @FXML
@@ -31,6 +32,8 @@ public class ScatterChartController extends AbstractController {
     protected ScatterChart<Number, Number> scatterChart;
     @FXML
     protected Label datasetTitle;
+    @FXML protected Label classifierName;
+    @FXML protected MFXListView<String> fieldListView;
     protected WorkingDataset<?> workingDataset;
     protected String xLabelField;
     protected String yLabelField;
@@ -56,9 +59,20 @@ public class ScatterChartController extends AbstractController {
         this.handleSelectorsChanges();
         this.classifyDatasButtonClicked();
         this.initNormalized();
+        this.initExtraInfos();
     }
 
-    private void initNormalized() {
+    private void initExtraInfos() {
+		this.classifierName.setText(this.getAlgorithm().getCalculator().simpleName());
+		ObservableList<String> fieldsList = FXCollections.observableArrayList();
+		fieldsList.add("Category : "+this.workingDataset.getCategoryField());
+		for(String field : this.workingDataset.getDistanceFields()) {
+			fieldsList.add("Distance : " + field);
+		}
+		this.fieldListView.setItems(fieldsList);
+	}
+
+	private void initNormalized() {
         this.valueNormalized = this.workingDataset.isNormalized();
         if (this.valueNormalized) this.normalizeCheckbox.setSelected(true);
     }
