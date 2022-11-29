@@ -5,7 +5,6 @@ import app.models.algorithm.calculators.CalculatorFactory;
 import app.models.algorithm.calculators.ICalculator;
 import app.models.algorithm.calculators.StrengthCalculator;
 import app.models.algorithm.classifiers.AbstractClassifier;
-import app.models.algorithm.geometry.IGeometry;
 import app.models.datas.ReferenceDataset;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.AbstractData;
@@ -16,7 +15,7 @@ public abstract class AbstractAlgorithm<T extends AbstractData> extends Abstract
     protected AbstractClassifier<T> classifier;
     protected ICalculator<T> calculator;
 
-    protected AbstractAlgorithm(WorkingDataset<T> workingDataset, IGeometry<T> geometry, ICalculator<T> calculator) {
+    protected AbstractAlgorithm(WorkingDataset<T> workingDataset, ICalculator<T> calculator) {
         this.workingDataset = workingDataset;
         this.calculator = calculator;
     }
