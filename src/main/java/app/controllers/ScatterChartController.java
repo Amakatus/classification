@@ -63,7 +63,7 @@ public class ScatterChartController extends AbstractController {
     }
 
     private void initExtraInfos() {
-		this.classifierName.setText(this.getAlgorithm().getCalculator().toString());
+		this.classifierName.setText(this.getAlgorithm().getCalculator().simpleName());
 		ObservableList<String> fieldsList = FXCollections.observableArrayList();
 		fieldsList.add("Category : "+this.workingDataset.getCategoryField());
 		for(String field : this.workingDataset.getDistanceFields()) {

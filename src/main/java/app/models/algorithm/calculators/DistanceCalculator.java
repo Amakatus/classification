@@ -35,7 +35,7 @@ public class DistanceCalculator<T extends AbstractData> extends AbstractCalculat
         }
     }
     
-    public String toString() {
+    public String simpleName() {
     	return "Distance";
     }
 }

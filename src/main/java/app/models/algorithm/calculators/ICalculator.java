@@ -9,4 +9,6 @@ public interface ICalculator<T extends AbstractData> {
     Map<T, Double> getDistances(T workingData);
 
     IGeometry<T> getGeometry();
+
+	String simpleName();
 }

@@ -22,7 +22,7 @@ public class RandomDistanceCalculator<T extends AbstractData> extends AbstractCa
         return dataDistancesMap;
     }
     
-    public String toString() {
+    public String simpleName() {
     	return "Random";
     }
 }
