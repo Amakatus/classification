@@ -34,4 +34,8 @@ public class DistanceCalculator<T extends AbstractData> extends AbstractCalculat
             LoggerUtils.exception(e);
         }
     }
+    
+    public String toString() {
+    	return "Distance";
+    }
 }
