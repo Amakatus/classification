@@ -52,6 +52,10 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         return this.normalized;
     }
 
+    public void setReferenceDataset(ReferenceDataset<T> referenceDataset){
+        this.referenceDataset = referenceDataset;
+    }
+
     public List<AbstractAlgorithm<T>> getAlgorithms() {
         return this.algorithms;
     }

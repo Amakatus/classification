@@ -1,5 +1,7 @@
 package app.models.algorithm;
 
+import app.models.algorithm.calculators.DistanceCalculator;
+import app.models.algorithm.calculators.RandomDistanceCalculator;
 import app.models.datas.DatasetFactory;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.IrisData;
@@ -69,5 +71,16 @@ class AbstractAlgorithmTest {
     @Test
     void test_algorithm_calculator_should_not_be_null() {
         assertNotNull(algorithm.getCalculator());
+    }
+
+    @Test
+    void test_algorithm_should_set_new_calculator() {
+        this.algorithm.setCalculator("");
+        assertFalse(this.algorithm.getCalculator().getClass().isAssignableFrom(RandomDistanceCalculator.class));
+        assertTrue(this.algorithm.getCalculator().getClass().isAssignableFrom(DistanceCalculator.class));
+        this.algorithm.setCalculator("Random");
+        assertTrue(this.algorithm.getCalculator().getClass().isAssignableFrom(RandomDistanceCalculator.class));
+        this.algorithm.setCalculator("Distance");
+        assertTrue(this.algorithm.getCalculator().getClass().isAssignableFrom(DistanceCalculator.class));
     }
 }

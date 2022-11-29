@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import app.models.datas.data.IrisVariety;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -127,8 +129,17 @@ class WorkingDatasetTest {
 
 	@Test
 	void test_dataset_cant_change_normalize() {
-		workingDS.normalizeDatas();
+		assertFalse(workingDS.normalizeDatas());
 		assertFalse(workingDS.isNormalized());
+		assertFalse(workingDS.unNormalizeDatas());
+		workingDS.addData(new IrisData());
+		workingDS.setReferenceDataset(DatasetFactory.irisReferenceDataset("test"));
+		assertTrue(workingDS.normalizeDatas());
+		assertTrue(workingDS.isNormalized());
+		assertFalse(workingDS.normalizeDatas());
+		assertTrue(workingDS.unNormalizeDatas());
+		assertFalse(workingDS.isNormalized());
+		assertFalse(workingDS.unNormalizeDatas());
 	}
 
 	@Test
@@ -161,5 +172,16 @@ class WorkingDatasetTest {
 		assertEquals(2, irisTest.getPetalLength());
 		workingDataset2.addData(irisTest);
 		assertEquals(2, irisTest.getPetalLength());
+	}
+
+	@Test
+	void test_get_data_by_categories() {
+		WorkingDataset<IrisData> workingDataset2 = DatasetFactory.createWorkingDataset("test", DataType.IRIS,
+				ProjectUtils.getFile("/data/iris.csv"));
+		Map<String, List<IrisData>> dataByCategories = workingDataset2.getBothDataByCategories();
+		for(Map.Entry<String, List<IrisData>> dataCatEntry : dataByCategories.entrySet()){
+			assertEquals(100, dataCatEntry.getValue().size());
+			assertTrue(List.of(IrisVariety.values()).contains(dataCatEntry.getKey()));
+		}
 	}
 }

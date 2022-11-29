@@ -10,5 +10,5 @@ public interface ICalculator<T extends AbstractData> {
 
     IGeometry<T> getGeometry();
 
-	String simpleName();
+	String getSimpleName();
 }

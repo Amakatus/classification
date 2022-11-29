@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class StrengthCalculator<T extends AbstractData> {
+    private static final int MAX_GROUPS = 50;
 
     protected KNNAlgorithm<T> algorithm;
     protected WorkingDataset<T> initialWorkingDataset;
@@ -68,9 +69,10 @@ public class StrengthCalculator<T extends AbstractData> {
         List<String> distanceFields = this.initialWorkingDataset.getDistanceFields();
         int sizeToTest = this.initialReferenceDataset.getData().size();
         int groupSize = this.algorithm.getKNeighbors();
+        int groupAmount = 0;
         int offset = 0;
         Collections.shuffle(initialReferenceDataset.getData());
-        while (sizeToTest != 0) {
+        while (sizeToTest != 0 & groupAmount < StrengthCalculator.MAX_GROUPS) {
             WorkingDataset<T> newGroup = new WorkingDataset<>("GroupToTest", new ArrayList<>(), this.initialReferenceDataset, categoryField, distanceFields);
             if (sizeToTest < groupSize) groupSize = sizeToTest;
             for (int i = 0; i < groupSize; i++) {
@@ -78,6 +80,7 @@ public class StrengthCalculator<T extends AbstractData> {
                 offset++;
                 sizeToTest--;
             }
+            groupAmount++;
             res.add(newGroup);
         }
         return res;

@@ -10,6 +10,7 @@ import app.models.algorithm.KNNAlgorithm;
 import app.models.datas.WorkingDataset;
 import app.utils.ClassUtils;
 import app.utils.LoggerUtils;
+import app.utils.ProjectUtils;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXListView;
@@ -63,16 +64,16 @@ public class ScatterChartController extends AbstractController {
     }
 
     private void initExtraInfos() {
-		this.classifierName.setText(this.getAlgorithm().getCalculator().simpleName());
-		ObservableList<String> fieldsList = FXCollections.observableArrayList();
-		fieldsList.add("Category : "+this.workingDataset.getCategoryField());
-		for(String field : this.workingDataset.getDistanceFields()) {
-			fieldsList.add("Distance : " + field);
-		}
-		this.fieldListView.setItems(fieldsList);
-	}
+        this.classifierName.setText(this.getAlgorithm().getCalculator().getSimpleName());
+        ObservableList<String> fieldsList = FXCollections.observableArrayList();
+        fieldsList.add("Category : "+this.workingDataset.getCategoryField());
+        for(String field : this.workingDataset.getDistanceFields()) {
+            fieldsList.add("Distance : " + field);
+        }
+        this.fieldListView.setItems(fieldsList);
+    }
 
-	private void initNormalized() {
+    private void initNormalized() {
         this.valueNormalized = this.workingDataset.isNormalized();
         if (this.valueNormalized) this.normalizeCheckbox.setSelected(true);
     }
@@ -147,7 +148,7 @@ public class ScatterChartController extends AbstractController {
         String categoryFieldName = this.workingDataset.getCategoryField();
         this.scatterChart.getData().forEach(series -> series.getData().forEach(data -> {
             Tooltip tooltip = new Tooltip();
-            tooltip.setText(String.format("%s : %s%n%s : %s%n%s : %s", categoryFieldName, categoryName, xLabelField, data.getXValue(), yLabelField, data.getYValue()));
+            tooltip.setText(String.format("%s : %s%n%s : %s%n%s : %s", categoryFieldName, categoryName, xLabelField, ProjectUtils.roundToTwoDecimal((Double) data.getXValue()), yLabelField, ProjectUtils.roundToTwoDecimal((Double) data.getYValue())));
             Tooltip.install(data.getNode(), tooltip);
         }));
     }

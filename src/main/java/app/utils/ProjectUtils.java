@@ -15,4 +15,8 @@ public interface ProjectUtils {
     static boolean stringToDouble(String string) {
         return string.equalsIgnoreCase("true");
     }
+
+    static double roundToTwoDecimal(double value) {
+        return Math.round(value * 100.0) / 100.0;
+    }
 }
