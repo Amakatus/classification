@@ -4,40 +4,40 @@ import com.opencsv.bean.CsvBindByName;
 
 public class TitanicPassengerData extends AbstractData {
     @CsvBindByName(column = "PassengerId")
-    public int id;
+    protected int id;
 
     @CsvBindByName(column = "Survived")
-    public boolean survived;
+    protected boolean survived;
 
     @CsvBindByName(column = "Pclass")
-    public double pClass;
+    protected double pClass;
 
     @CsvBindByName(column = "Name")
-    public String name;
+    protected String name;
 
     @CsvBindByName(column = "Sex")
-    public String sex;
+    protected String sex;
 
     @CsvBindByName(column = "Age", required = false)
-    public double age;
+    protected double age;
 
     @CsvBindByName(column = "SibSp")
-    public double sibSp;
+    protected double sibSp;
 
     @CsvBindByName(column = "Parch")
-    public double parch;
+    protected double parch;
 
     @CsvBindByName(column = "Ticket")
-    public String ticket;
+    protected String ticket;
 
     @CsvBindByName(column = "Fare")
-    public double fare;
+    protected double fare;
 
     @CsvBindByName(column = "Cabin", required = false)
-    public String cabin;
+    protected String cabin;
 
     @CsvBindByName(column = "Embarked")
-    public char embarked;
+    protected char embarked;
 
     public int getId() {
         return id;

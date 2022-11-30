@@ -4,19 +4,19 @@ import com.opencsv.bean.CsvBindByName;
 
 public class IrisData extends AbstractData {
     @CsvBindByName(column = "sepal.length")
-    public double sepalLength;
+    protected double sepalLength;
 
     @CsvBindByName(column = "sepal.width")
-    public double sepalWidth;
+    protected double sepalWidth;
 
     @CsvBindByName(column = "petal.length")
-    public double petalLength;
+    protected double petalLength;
 
     @CsvBindByName(column = "petal.width")
-    public double petalWidth;
+    protected double petalWidth;
 
     @CsvBindByName(column = "variety")
-    public IrisVariety variety;
+    protected IrisVariety variety;
 
     public double getSepalLength() {
         return sepalLength;

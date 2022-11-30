@@ -40,6 +40,7 @@ public interface ClassUtils {
         ArrayList<Field> res = new ArrayList<>();
         Class<?> type;
         for (Field field : fields) {
+            field.setAccessible(true);
             type = field.getType();
             if (type == double.class || type == Integer.class) {
                 res.add(field);
@@ -58,6 +59,7 @@ public interface ClassUtils {
     static Method findMethodByName(Object object, String methodName) {
         Method[] methods = getMethods(object);
         for (Method method : methods) {
+            method.setAccessible(true);
             if (method.getName().equalsIgnoreCase(methodName)) {
                 return method;
             }
@@ -75,6 +77,7 @@ public interface ClassUtils {
     static Field getFieldByName(Object object, String fieldName) {
         Field[] fields = getFields(object);
         for (Field field : fields) {
+            field.setAccessible(true);
             if (field.getName().equalsIgnoreCase(fieldName)) {
                 return field;
             }
@@ -116,6 +119,7 @@ public interface ClassUtils {
         Method fieldToDoubleMethod = findMethodByName(object, fieldName + AbstractData.TO_DOUBLE);
         if (!isToDoubleMethod(fieldToDoubleMethod)) return Double.MAX_VALUE;
         try {
+            fieldToDoubleMethod.setAccessible(true);
             return (double) fieldToDoubleMethod.invoke(object, other);
         } catch (Exception e) {
             LoggerUtils.exception(e);
@@ -134,8 +138,8 @@ public interface ClassUtils {
     private static double getDoubleFromField(Object object, Field field) throws FieldNotNumberException {
         if (field.getType() != double.class && field.getType() != Integer.class)
             throw new FieldNotNumberException();
-
         try {
+            field.setAccessible(true);
             return field.getDouble(object);
         } catch (Exception e) {
             LoggerUtils.exception(e);
@@ -154,6 +158,7 @@ public interface ClassUtils {
      */
     static double getDoubleFromField(Object object, String name) throws FieldNotNumberException {
         Field field = getFieldByName(object, name);
+        field.setAccessible(true);
         return field == null ? Double.MIN_VALUE : getDoubleFromField(object, field);
     }
 
@@ -164,6 +169,7 @@ public interface ClassUtils {
      * @return
      */
     static boolean canBeCategoryField(Field field) {
+        field.setAccessible(true);
         Class<?> fieldType = field.getType();
         return fieldType.isAssignableFrom(String.class) || fieldType.isEnum() || fieldType.isAssignableFrom(boolean.class);
     }
@@ -179,6 +185,7 @@ public interface ClassUtils {
         Field field = getFieldByName(object, fieldName);
         if (field == null) return null;
         try {
+            field.setAccessible(true);
             return field.get(object);
         } catch (Exception e) {
             LoggerUtils.exception(e);
