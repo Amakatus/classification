@@ -29,14 +29,6 @@ public class KNNAlgorithm<T extends AbstractData> extends AbstractAlgorithm<T> {
         }
     }
 
-    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify, IGeometry<T> geometry) {
-        this(workingDataset, k, autoClassify, new DistanceCalculator<>(workingDataset.getReferenceDataset(), geometry));
-    }
-
-    protected KNNAlgorithm(WorkingDataset<T> workingDataset, int k, boolean autoClassify) {
-        this(workingDataset, k, autoClassify, new EuclideanGeometry<>(workingDataset.getDistanceFields()));
-    }
-
     public int getKNeighbors() {
         return kNeighbours;
     }
