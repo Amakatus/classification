@@ -20,9 +20,9 @@ import javafx.scene.control.TextArea;
  * @TODO : Change this to modal view
  */
 public class AddPointsController extends AbstractController {
-    @FXML Label dataTypeLabel;
-    @FXML Label formatLabel;
-    @FXML TextArea textAreaPoints;
+    @FXML protected Label dataTypeLabel;
+    @FXML protected Label formatLabel;
+    @FXML protected TextArea textAreaPoints;
     protected File dynamicFile;
     protected DataType dataType;
 
@@ -65,7 +65,7 @@ public class AddPointsController extends AbstractController {
 		
 	}
 
-	@FXML void addPointsClicked() {
+	@FXML public void addPointsClicked() {
 		try {
 			BufferedReader bReader = new BufferedReader(new FileReader(dynamicFile));
 			String save = bReader.ready() ? bReader.readLine() : "";
