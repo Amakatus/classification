@@ -11,6 +11,20 @@
 1. `wget https//hidoyat.fr/projects/equipe-J5.jar`
 2. `java -jar equipe-J5.jar`
 
+# 📖 Procédures
+> Que faut-il faire pour ajouter à votre projet un nouveau problème de classification ?
+1. Ajouter un CSV de référence pour ce nouveau type.
+2. Ajouter une classe héritant de "AbstractData" ayant pour attributs chaque colonnes du CSV avec son bon type (double,
+String, enum).
+3. Ajouter ce type de données dans l'énumération DataType.
+
+Optionnel :
+
+4. En cas d'enum, mettre à jour la méthode setCategoryForData dans AbstractClassifier afin d'y expliciter son
+comportement.
+5. Ajouter une nouvelle condition dans la classe "AddPointsController" afin de pouvoir ajouter des points dynamiquement dans l'IHM.
+6. Créer le "dynamic csv" dans les ressources ayant pour seul ligne l'en tête du fichier csv de référence.
+
 # ❓ Problématique
 La problématique professionnelle est de mettre en place l'organisation du projet et de créer, en équipe, une application en suivant une démarche de développement itérative et incrémentale. En partant d'un besoin décrit de manière imprécise ou incomplète par un client, l'objectif est de clarifier, compléter, collecter et formaliser le besoin, puis de développer une application communicante intégrant la manipulation des données et respectant les paradigmes de qualité (ergonomie des IHM, qualité logicielle…).
 
