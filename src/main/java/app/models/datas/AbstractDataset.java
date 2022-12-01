@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import app.models.Observable;
+import app.models.AbstractModel;
 import app.models.Observer;
 import app.models.datas.data.AbstractData;
 import app.utils.ClassUtils;
 
-public abstract class AbstractDataset<T extends AbstractData> implements Observable {
+public abstract class AbstractDataset<T extends AbstractData> extends AbstractModel {
     protected String title;
     protected List<T> data;
     protected List<Observer> observers = new ArrayList<>();

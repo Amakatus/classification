@@ -65,7 +65,7 @@
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="100.0" spacing="10.0">
                     <children>
-                        <MFXButton onMousePressed="#addNewPointButtonClicked" text="Add new point" />
+                        <MFXButton onMousePressed="#addNewPointButtonClicked" text="Add new points" />
                         <MFXButton onMouseClicked="#classifyDatasButtonClicked" text="Classify points" />
                     </children>
                 </HBox>

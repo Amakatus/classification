@@ -17,9 +17,13 @@ public enum DataType {
     public Class<? extends AbstractData> getTypeClass() {
         return this.typeClass;
     }
+    
+    public String getCsvName() {
+    	return this.csvPath;
+    }
 
     public String getCsvPath() {
-        return String.format("/data/%s.csv", this.csvPath);
+        return String.format("/data/%s.csv", this.getCsvName());
     }
 
     public Field[] getFields() {

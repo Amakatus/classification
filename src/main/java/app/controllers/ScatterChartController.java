@@ -11,6 +11,7 @@ import app.models.datas.WorkingDataset;
 import app.utils.ClassUtils;
 import app.utils.LoggerUtils;
 import app.utils.ProjectUtils;
+import app.views.View;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXListView;
@@ -173,4 +174,10 @@ public class ScatterChartController extends AbstractController {
         this.showDatas();
     }
 
+    @FXML
+    public void addNewPointButtonClicked() {
+    	View addPointsView = new View("addPointView", "Add a new point");
+    	addPointsView.getController().setModel(workingDataset);
+    	addPointsView.show();
+    }
 }
