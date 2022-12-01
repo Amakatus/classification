@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class StrengthCalculator<T extends AbstractData> {
-    private static final int MAX_GROUPS = 50;
+    private static final int MAX_GROUPS = 999;
 
     protected KNNAlgorithm<T> algorithm;
     protected WorkingDataset<T> initialWorkingDataset;
