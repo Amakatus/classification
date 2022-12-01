@@ -5,8 +5,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
+import app.components.AlertFactory;
 import app.models.AbstractModel;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.DataType;
@@ -21,12 +21,14 @@ import javafx.scene.control.TextArea;
  */
 public class AddPointsController extends AbstractController {
     @FXML Label dataTypeLabel;
+    @FXML Label formatLabel;
     @FXML TextArea textAreaPoints;
+    protected File dynamicFile;
+    protected DataType dataType;
 
     @FXML
     @Override
     public void initialize() {
-        System.out.println("good");
     }
     
     @Override
@@ -35,32 +37,49 @@ public class AddPointsController extends AbstractController {
     	this.updateInfos();
     }
     
-    public WorkingDataset<?> getWorkingDataset() {
+    private void setupFile() {
+    	this.dataType = DataType.PASSENGER;
+		if(dataTypeLabel.getText().equalsIgnoreCase("irisdata")) {
+			this.dataType = DataType.IRIS;
+		}
+		this.dynamicFile = ProjectUtils.getFile(String.format("/data/dynamic%s.csv", this.dataType.getCsvName()));
+	}
+
+	public WorkingDataset<?> getWorkingDataset() {
     	return (WorkingDataset<?>) this.model;
     }
     
     private void updateInfos() {
     	String dataType = this.getWorkingDataset().getData().get(0).getClass().getSimpleName();
 		this.dataTypeLabel.setText(dataType);
-		this.textAreaPoints.setPromptText("test");
+		this.setupFile();
+		try {
+			BufferedReader bReader = new BufferedReader(new FileReader(dynamicFile));
+			if(bReader.ready()) {
+				this.formatLabel.setText(bReader.readLine());
+			}
+			bReader.close();
+		} catch (Exception e) {
+			LoggerUtils.exception(e);
+		}
+		
 	}
 
 	@FXML void addPointsClicked() {
-		String csvName = DataType.PASSENGER.getCsvName();
-		if(dataTypeLabel.getText().equalsIgnoreCase("irisdata")) {
-			csvName = DataType.IRIS.getCsvName();
-		}
-		File dynamicFile = ProjectUtils.getFile(String.format("/data/dynamic%s.csv", csvName));
 		try {
-			BufferedWriter bWriter = new BufferedWriter(new FileWriter(dynamicFile, true));
-			bWriter.append(textAreaPoints.getText());
-			bWriter.close();
 			BufferedReader bReader = new BufferedReader(new FileReader(dynamicFile));
-			while(bReader.ready()) {
-				System.out.println(bReader.readLine());
-			}
+			String save = bReader.ready() ? bReader.readLine() : "";
 			bReader.close();
-		} catch (IOException e) {
+			BufferedWriter appendBWriter = new BufferedWriter(new FileWriter(dynamicFile, true));
+			appendBWriter.append("\n"+textAreaPoints.getText());
+			appendBWriter.close();
+			this.getWorkingDataset().addDataFromCsv(this.dataType, this.dynamicFile);
+			FileWriter removeWriter = new FileWriter(dynamicFile);
+			removeWriter.write(save);
+			removeWriter.close();
+			AlertFactory.createSuccessAlert("Points have been added.\nPress classify to see them appear classified.").show();
+			this.closeView();
+		} catch (Exception e) {
 			LoggerUtils.exception(e);
 		}
     }

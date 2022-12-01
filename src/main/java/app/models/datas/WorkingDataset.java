@@ -1,5 +1,10 @@
 package app.models.datas;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import app.models.algorithm.AbstractAlgorithm;
 import app.models.algorithm.AlgorithmFactory;
 import app.models.algorithm.KNNAlgorithm;
@@ -8,11 +13,9 @@ import app.models.algorithm.calculators.ICalculator;
 import app.models.algorithm.geometry.EuclideanGeometry;
 import app.models.algorithm.geometry.IGeometry;
 import app.models.datas.data.AbstractData;
+import app.models.datas.data.DataType;
+import app.models.datas.data.IrisData;
 import app.models.datas.data.normalizers.IDataNormalizer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
     protected String categoryField;
@@ -27,7 +30,6 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         this.categoryField = categoryField;
         this.distanceFields = distanceFields;
         this.referenceDataset = referenceDataset;
-        this.normalizeDatas();
     }
 
     public WorkingDataset(String title, List<T> datas, ReferenceDataset<T> referenceDataset) {
@@ -147,4 +149,11 @@ public class WorkingDataset<T extends AbstractData> extends AbstractDataset<T> {
         this.normalized = false;
         return true;
     }
+
+	public void addDataFromCsv(DataType dataType, File dynamicFile) {
+		WorkingDataset<T> newWorkingDataset = DatasetFactory.createWorkingDataset(dataType, dynamicFile);
+		for(T data : newWorkingDataset.getData()) {
+			this.addData(data);
+		}
+	}
 }

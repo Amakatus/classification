@@ -1,16 +1,18 @@
 package app.models.algorithm.classifiers;
 
-import app.models.datas.DatasetFactory;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import app.models.datas.ReferenceDataset;
 import app.models.datas.WorkingDataset;
 import app.models.datas.data.IrisVariety;
 import app.models.datas.data.TestData;
-import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AbstractClassifierTest {
     AbstractClassifier<TestData> classifier;

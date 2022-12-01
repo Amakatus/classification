@@ -1,0 +1,16 @@
+Error parsing CSV line: 2. [1.2,2.0,1.5,2.7,sepal.length,sepal.width,petal.length,petal.width,variety]
+Error parsing CSV line: 3. [1.2,2.0,1.5,2.7,sepal.length,sepal.width,petal.length,petal.width,variety]
+Error parsing CSV line: 2. [1.2,2.0,1.5,2.7,sepal.length,sepal.width,petal.length,petal.width,variety]
+Error parsing CSV line: 2. [1.2,2.4,5.4,3.4,sepal.length,sepal.width,petal.length,petal.width,variety]
+Error parsing CSV line: 2. [1.2,2.4,4.5,7.1,sepal.length,sepal.width,petal.length,petal.width,variety]
+Error parsing CSV line: 2. [1,15.6,1.8,Virginica]
+Error parsing CSV line: 2. [5.6,3,4.5,1.5]
+Index 0 out of bounds for length 0
+Error parsing CSV line: 2. [5.6,3,4.5,1.5]
+Index 0 out of bounds for length 0
+Error parsing CSV line: 2. [5.6,3,4.5,1.5]
+Index 0 out of bounds for length 0
+Error parsing CSV line: 2. [5.6,3,4.5,1.5]
+Index 0 out of bounds for length 0
+Error parsing CSV line: 2. [5.6,3,4.5,1.5]
+Index 0 out of bounds for length 0

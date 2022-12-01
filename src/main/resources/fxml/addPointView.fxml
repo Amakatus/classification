@@ -28,7 +28,7 @@
                   </Label>
                </children>
             </HBox>
-            <Label text="Format : Unknown">
+            <Label fx:id="formatLabel" text="Format : Unknown">
                <font>
                   <Font size="10.0" />
                </font>

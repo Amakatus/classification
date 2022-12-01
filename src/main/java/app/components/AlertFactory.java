@@ -10,4 +10,12 @@ public interface AlertFactory {
         alert.setContentText(message);
         return alert;
     }
+    
+    static Alert createSuccessAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Everything is ok");
+        alert.setHeaderText("Yea ! All went good.");
+        alert.setContentText(message);
+        return alert;
+    }
 }

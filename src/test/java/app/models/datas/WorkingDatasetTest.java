@@ -146,9 +146,9 @@ class WorkingDatasetTest {
 	void test_dataset_can_change_normalize() {
 		WorkingDataset<IrisData> workingDataset2 = new WorkingDataset<>(List.of(new IrisData()),
 				DatasetFactory.irisReferenceDataset("Test"));
-		assertTrue(workingDataset2.isNormalized());
-		workingDataset2.unNormalizeDatas();
 		assertFalse(workingDataset2.isNormalized());
+		workingDataset2.normalizeDatas();
+		assertTrue(workingDataset2.isNormalized());
 	}
 
 	@Test
@@ -158,6 +158,7 @@ class WorkingDatasetTest {
 		IrisData irisTest = new IrisData();
 		irisTest.setPetalLength(2);
 		assertEquals(2, irisTest.getPetalLength());
+		workingDataset2.normalizeDatas();
 		workingDataset2.addData(irisTest);
 		assertTrue(irisTest.getPetalLength() >= 0 && irisTest.getPetalLength() <= 1);
 	}
