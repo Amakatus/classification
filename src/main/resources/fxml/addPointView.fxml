@@ -28,6 +28,11 @@
                   </Label>
                </children>
             </HBox>
+            <Label text="Format : Unknown">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
             <TextArea fx:id="textAreaPoints" prefHeight="80.0" prefWidth="150.0" />
             <MFXButton onMouseClicked="#addPointsClicked" text="Add points" />
          </children>
