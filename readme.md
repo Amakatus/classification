@@ -18,7 +18,7 @@
 String, enum).
 3. Ajouter ce type de données dans l'énumération DataType.
 
-Optionnel :
+Optionnel:
 
 4. En cas d'enum, mettre à jour la méthode setCategoryForData dans AbstractClassifier afin d'y expliciter son
 comportement.
