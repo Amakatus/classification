@@ -185,4 +185,11 @@ class WorkingDatasetTest {
 			assertTrue(List.of(IrisVariety.values()).contains(dataCatEntry.getKey()));
 		}
 	}
+	
+	@Test
+	void test_add_data_from_csv() {
+		assertEquals(0, this.workingDS.getDataSize());
+		this.workingDS.addDataFromCsv(DataType.IRIS, ProjectUtils.getFile("/data/iris.csv"));
+		assertEquals(150, this.workingDS.getDataSize());;
+	}
 }
