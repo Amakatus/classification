@@ -72,7 +72,7 @@ public class StrengthCalculator<T extends AbstractData> {
         int groupAmount = 0;
         int offset = 0;
         Collections.shuffle(initialReferenceDataset.getData());
-        while (sizeToTest != 0 & groupAmount < StrengthCalculator.MAX_GROUPS) {
+        while (sizeToTest != 0 && groupAmount < StrengthCalculator.MAX_GROUPS) {
             WorkingDataset<T> newGroup = new WorkingDataset<>("GroupToTest", new ArrayList<>(), this.initialReferenceDataset, categoryField, distanceFields);
             if (sizeToTest < groupSize) groupSize = sizeToTest;
             for (int i = 0; i < groupSize; i++) {
